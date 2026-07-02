@@ -1,0 +1,71 @@
+# Flutter
+med_id_app/.dart_tool/
+med_id_app/.packages
+med_id_app/build/
+med_id_app/.flutter-plugins
+med_id_app/.flutter-plugins-dependencies
+med_id_app/.pub/
+med_id_app/.metadata
+med_id_app/pubspec.lock
+med_id_app/coverage/
+med_id_app/ios/Pods/
+med_id_app/ios/.symlinks/
+med_id_app/ios/Flutter/Flutter.framework
+med_id_app/ios/Flutter/Flutter.podspec
+med_id_app/ios/Runner.xcworkspace/
+med_id_app/ios/Runner/GeneratedPluginRegistrant.*
+med_id_app/android/.gradle/
+med_id_app/android/local.properties
+med_id_app/android/key.properties
+med_id_app/android/app/google-services.json
+med_id_app/android/captures/
+med_id_app/web/manifest.json
+med_id_app/web/service_worker.js
+
+# Node
+admin-panel/node_modules/
+admin-panel/.next/
+admin-panel/out/
+admin-panel/build/
+admin-panel/.turbo/
+admin-panel/coverage/
+admin-panel/next-env.d.ts
+
+# Java/Backend
+backend/.gradle/
+backend/build/
+backend/bin/
+backend/out/
+backend/.settings/
+backend/.project
+backend/.classpath
+backend/*.iml
+backend/.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+.idea/
+.vscode/
+*.iml
+.project
+.classpath
+.settings/
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+/logs/
+
+# Temp
+tmp/
+temp/
