@@ -6,19 +6,45 @@ import { cn } from '@/lib/utils';
 import {
   LayoutDashboard, Users, Building2, Stethoscope,
   BarChart3, ScrollText, Bell, Settings, LogOut, X,
-  Activity
+  Activity, AlertTriangle
 } from 'lucide-react';
 import { useState } from 'react';
 
-const navItems = [
-  { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { path: '/users', label: 'Users', icon: Users },
-  { path: '/clinics', label: 'Clinics', icon: Building2 },
-  { path: '/doctors', label: 'Doctors', icon: Stethoscope },
-  { path: '/analytics', label: 'Analytics', icon: BarChart3 },
-  { path: '/access-logs', label: 'Access Logs', icon: ScrollText },
-  { path: '/notifications', label: 'Notifications', icon: Bell },
-  { path: '/settings', label: 'Settings', icon: Settings },
+const navSections = [
+  {
+    title: 'Main',
+    items: [
+      { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    ],
+  },
+  {
+    title: 'Management',
+    items: [
+      { path: '/users', label: 'Users', icon: Users },
+      { path: '/doctors', label: 'Doctors', icon: Stethoscope },
+      { path: '/clinics', label: 'Clinics', icon: Building2 },
+    ],
+  },
+  {
+    title: 'Monitoring',
+    items: [
+      { path: '/analytics', label: 'Analytics', icon: BarChart3 },
+      { path: '/access-logs', label: 'Access Logs', icon: ScrollText },
+      { path: '/emergency', label: 'Emergency', icon: AlertTriangle },
+    ],
+  },
+  {
+    title: 'Communication',
+    items: [
+      { path: '/notifications', label: 'Notifications', icon: Bell },
+    ],
+  },
+  {
+    title: 'System',
+    items: [
+      { path: '/settings', label: 'Settings', icon: Settings },
+    ],
+  },
 ];
 
 interface SidebarProps {
@@ -50,32 +76,41 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         </button>
       </div>
 
-      <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
-        {navItems.map((item) => {
-          const isActive = pathname.startsWith(item.path);
-          const Icon = item.icon;
-          return (
-            <button
-              key={item.path}
-              onClick={() => { router.push(item.path); onClose(); }}
-              className={cn(
-                'w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200',
-                isActive
-                  ? 'bg-primary text-white shadow-lg shadow-primary/20'
-                  : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-white'
-              )}
-            >
-              <Icon className="w-5 h-5 flex-shrink-0" />
-              <span>{item.label}</span>
-              {isActive && (
-                <motion.div
-                  layoutId="activeTab"
-                  className="ml-auto w-1.5 h-1.5 rounded-full bg-white"
-                />
-              )}
-            </button>
-          );
-        })}
+      <nav className="flex-1 px-3 py-4 overflow-y-auto">
+        {navSections.map((section) => (
+          <div key={section.title} className="mb-4 last:mb-0">
+            <p className="px-4 mb-1 text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
+              {section.title}
+            </p>
+            <div className="space-y-0.5">
+              {section.items.map((item) => {
+                const isActive = pathname.startsWith(item.path);
+                const Icon = item.icon;
+                return (
+                  <button
+                    key={item.path}
+                    onClick={() => { router.push(item.path); onClose(); }}
+                    className={cn(
+                      'w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200',
+                      isActive
+                        ? 'bg-primary text-white shadow-lg shadow-primary/20'
+                        : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-white'
+                    )}
+                  >
+                    <Icon className="w-5 h-5 flex-shrink-0" />
+                    <span>{item.label}</span>
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeTab"
+                        className="ml-auto w-1.5 h-1.5 rounded-full bg-white"
+                      />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        ))}
       </nav>
 
       <div className="px-3 py-4 border-t border-gray-100 dark:border-gray-800/50">

@@ -21,6 +21,15 @@ class MockApiService {
   List<AccessLogModel> _accessLogs = [];
   List<Map<String, dynamic>> _clinics = [];
   List<Map<String, dynamic>> _doctors = [];
+  List<Map<String, dynamic>> _doctorPatients = [];
+  List<Map<String, dynamic>> _clinicAppointments = [];
+  List<Map<String, dynamic>> _diagnoses = [];
+  List<Map<String, dynamic>> _prescriptions = [];
+  List<Map<String, dynamic>> _clinicQueueList = [];
+  List<Map<String, dynamic>> _clinicStaffList = [];
+  List<Map<String, dynamic>> _clinicTransactions = [];
+  List<Map<String, dynamic>> _emergencyAlerts = [];
+  List<Map<String, dynamic>> _activeEmergencies = [];
 
   Future<void> _delay() => Future.delayed(Duration(milliseconds: 300 + _random.nextInt(500)));
 
@@ -71,6 +80,52 @@ class MockApiService {
       'clinicId': 'clinic${(i % 5) + 1}',
       'status': i < 6 ? 'active' : 'inactive',
     });
+    _doctorPatients = [
+      {'id': 'user1', 'fullName': 'Aziz Karimov', 'phone': '+998901234567', 'bloodType': 'A+', 'allergies': ['Penicillin', 'Latex'], 'chronicDiseases': ['Asthma'], 'currentMedications': ['Salbutamol', 'Vitamin D'], 'diagnoses': [{'title': 'Asthma Diagnosis', 'date': '2026-05-15', 'icdCode': 'J45'}, {'title': 'Seasonal Allergies', 'date': '2026-03-20', 'icdCode': 'J30.1'}], 'prescriptions': [{'medicationName': 'Salbutamol', 'dosage': '100mcg', 'duration': '30 days'}]},
+      {'id': 'user2', 'fullName': 'Dilnoza Rahimova', 'phone': '+998907654321', 'bloodType': 'O-', 'allergies': ['Sulfa'], 'chronicDiseases': [], 'currentMedications': [], 'diagnoses': [], 'prescriptions': []},
+      {'id': 'user3', 'fullName': 'Botir Tursunov', 'phone': '+998909876543', 'bloodType': 'B+', 'allergies': [], 'chronicDiseases': ['Diabetes Type 2'], 'currentMedications': ['Metformin'], 'diagnoses': [{'title': 'Diabetes Diagnosis', 'date': '2026-01-10', 'icdCode': 'E11'}], 'prescriptions': [{'medicationName': 'Metformin', 'dosage': '500mg', 'duration': '90 days'}]},
+      {'id': 'user4', 'fullName': 'Malika Azimova', 'phone': '+998937771122', 'bloodType': 'AB+', 'allergies': ['Ibuprofen'], 'chronicDiseases': ['Hypertension'], 'currentMedications': ['Lisinopril'], 'diagnoses': [], 'prescriptions': []},
+    ];
+    _clinicAppointments = [
+      {'id': 'apt1', 'patientName': 'Aziz Karimov', 'patientId': 'user1', 'date': '2026-07-10', 'time': '09:00', 'status': 'upcoming'},
+      {'id': 'apt2', 'patientName': 'Dilnoza Rahimova', 'patientId': 'user2', 'date': '2026-07-10', 'time': '10:00', 'status': 'upcoming'},
+      {'id': 'apt3', 'patientName': 'Botir Tursunov', 'patientId': 'user3', 'date': '2026-07-09', 'time': '14:00', 'status': 'completed'},
+      {'id': 'apt4', 'patientName': 'Malika Azimova', 'patientId': 'user4', 'date': '2026-07-08', 'time': '11:00', 'status': 'cancelled'},
+      {'id': 'apt5', 'patientName': 'Ravshan Xodjayev', 'patientId': 'user5', 'date': '2026-07-11', 'time': '15:00', 'status': 'upcoming'},
+    ];
+    _diagnoses = [];
+    _prescriptions = [];
+    _clinicQueueList = [
+      {'patientId': 'P-1001', 'patientName': 'Ravshan Xodjayev', 'priority': 'critical', 'waitTime': '5 min'},
+      {'patientId': 'P-1002', 'patientName': 'Zarnigor Ismoilova', 'priority': 'high', 'waitTime': '12 min'},
+      {'patientId': 'P-1003', 'patientName': 'Farrux Rahimov', 'priority': 'medium', 'waitTime': '20 min'},
+      {'patientId': 'P-1004', 'patientName': 'Sabina Komilova', 'priority': 'low', 'waitTime': '35 min'},
+      {'patientId': 'P-1005', 'patientName': 'Gulnora Karimova', 'priority': 'medium', 'waitTime': '25 min'},
+    ];
+    _clinicStaffList = [
+      {'id': 'stf1', 'fullName': 'Dr. Alisher Tursunov', 'role': 'doctor', 'phone': '+998901111111'},
+      {'id': 'stf2', 'fullName': 'Dr. Malika Azimova', 'role': 'doctor', 'phone': '+998902222222'},
+      {'id': 'stf3', 'fullName': 'Nurse Nigora', 'role': 'nurse', 'phone': '+998903333333'},
+      {'id': 'stf4', 'fullName': 'Nurse Zebo', 'role': 'nurse', 'phone': '+998904444444'},
+      {'id': 'stf5', 'fullName': 'Receptionist Lola', 'role': 'receptionist', 'phone': '+998905555555'},
+      {'id': 'stf6', 'fullName': 'Dr. Jahongir Sodiqov', 'role': 'doctor', 'phone': '+998906666666'},
+    ];
+    _clinicTransactions = [
+      {'type': 'payment', 'description': 'Consultation - Aziz Karimov', 'amount': '120,000', 'date': '2026-07-10'},
+      {'type': 'payment', 'description': 'Lab Tests - Dilnoza Rahimova', 'amount': '250,000', 'date': '2026-07-10'},
+      {'type': 'refund', 'description': 'Canceled Appointment - Botir', 'amount': '50,000', 'date': '2026-07-09'},
+      {'type': 'payment', 'description': 'Checkup - Malika Azimova', 'amount': '180,000', 'date': '2026-07-09'},
+      {'type': 'payment', 'description': 'Prescription - Ravshan', 'amount': '75,000', 'date': '2026-07-08'},
+    ];
+    _emergencyAlerts = [
+      {'patientId': 'user3', 'patientName': 'Botir Tursunov', 'priority': 'CRITICAL', 'time': '2 min ago', 'bloodType': 'B+', 'allergies': 'None', 'medications': 'Metformin'},
+      {'patientId': 'user4', 'patientName': 'Malika Azimova', 'priority': 'HIGH', 'time': '15 min ago', 'bloodType': 'AB+', 'allergies': 'Ibuprofen', 'medications': 'Lisinopril'},
+      {'patientId': 'P-1004', 'patientName': 'Unknown Patient', 'priority': 'MEDIUM', 'time': '45 min ago', 'bloodType': 'A+', 'allergies': 'Penicillin', 'medications': 'None'},
+    ];
+    _activeEmergencies = [
+      {'patientId': 'user3', 'patientName': 'Botir Tursunov', 'priority': 'CRITICAL', 'time': '2 min ago', 'bloodType': 'B+', 'allergies': 'None', 'medications': 'Metformin'},
+      {'patientId': 'user4', 'patientName': 'Malika Azimova', 'priority': 'HIGH', 'time': '15 min ago', 'bloodType': 'AB+', 'allergies': 'Ibuprofen', 'medications': 'Lisinopril'},
+    ];
   }
 
   // Auth
@@ -244,5 +299,83 @@ class MockApiService {
   Future<List<AccessLogModel>> getAllAccessLogs() async {
     await _delay();
     return _accessLogs;
+  }
+
+  // Doctor
+  Future<List<Map<String, dynamic>>> getDoctorPatients(String doctorId) async {
+    await _delay();
+    return _doctorPatients;
+  }
+
+  Future<List<Map<String, dynamic>>> getDoctorAppointments(String doctorId) async {
+    await _delay();
+    return _clinicAppointments;
+  }
+
+  Future<Map<String, dynamic>> addDiagnosis(Map<String, dynamic> diagnosis) async {
+    await _delay();
+    _diagnoses.add(diagnosis);
+    return diagnosis;
+  }
+
+  Future<Map<String, dynamic>> addPrescription(Map<String, dynamic> prescription) async {
+    await _delay();
+    _prescriptions.add(prescription);
+    return prescription;
+  }
+
+  // Clinic
+  Future<List<Map<String, dynamic>>> getClinicQueue(String clinicId) async {
+    await _delay();
+    return _clinicQueueList;
+  }
+
+  Future<Map<String, dynamic>> addToQueue(Map<String, dynamic> entry) async {
+    await _delay();
+    _clinicQueueList.add(entry);
+    return entry;
+  }
+
+  Future<Map<String, dynamic>> callNextPatient(String clinicId) async {
+    await _delay();
+    if (_clinicQueueList.isEmpty) throw Exception('Queue is empty');
+    final next = _clinicQueueList.removeAt(0);
+    return next;
+  }
+
+  Future<List<Map<String, dynamic>>> getClinicStaff(String clinicId) async {
+    await _delay();
+    return _clinicStaffList;
+  }
+
+  Future<List<Map<String, dynamic>>> getClinicFinance(String clinicId) async {
+    await _delay();
+    return _clinicTransactions;
+  }
+
+  // Emergency
+  Future<List<Map<String, dynamic>>> getEmergencyAlerts() async {
+    await _delay();
+    return _emergencyAlerts;
+  }
+
+  Future<Map<String, dynamic>> logEmergencyAccess(String patientId, String staffId) async {
+    await _delay();
+    final log = AccessLogModel(
+      id: 'al_${DateTime.now().millisecondsSinceEpoch}',
+      patientId: patientId,
+      accessedBy: 'Emergency Staff #$staffId',
+      accessorRole: 'Emergency Staff',
+      action: AccessAction.view,
+      dataType: 'Emergency Profile',
+      timestamp: DateTime.now(),
+    );
+    _accessLogs.insert(0, log);
+    return log.toJson();
+  }
+
+  Future<List<Map<String, dynamic>>> getActiveEmergencies() async {
+    await _delay();
+    return _activeEmergencies;
   }
 }

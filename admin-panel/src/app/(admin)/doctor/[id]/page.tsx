@@ -1,0 +1,251 @@
+'use client';
+
+import { useState, useEffect, useCallback } from 'react';
+import { useParams } from 'next/navigation';
+import { motion } from 'framer-motion';
+import { ArrowLeft, Stethoscope, Calendar, Users, Activity, FileText, Pill, AlertCircle } from 'lucide-react';
+import Link from 'next/link';
+import StatusBadge from '@/components/StatusBadge';
+import StatCard from '@/components/StatCard';
+import LoadingSkeleton from '@/components/LoadingSkeleton';
+import ErrorState from '@/components/ErrorState';
+import EmptyState from '@/components/EmptyState';
+import PatientCard from '@/components/PatientCard';
+import AppointmentCard from '@/components/AppointmentCard';
+import { getDoctorDetail, getDoctorById } from '@/lib/mockData';
+import type { DoctorDetail } from '@/lib/types';
+import { formatDate } from '@/lib/utils';
+
+export default function DoctorDetailPage() {
+  const params = useParams();
+  const [data, setData] = useState<DoctorDetail | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [activeTab, setActiveTab] = useState<'patients' | 'appointments' | 'diagnoses' | 'prescriptions'>('patients');
+
+  const load = useCallback(async () => {
+    setLoading(true);
+    setError(false);
+    try {
+      const result = await getDoctorDetail(params.id as string);
+      setData(result);
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  }, [params.id]);
+
+  useEffect(() => { load(); }, [load]);
+
+  if (error) return <ErrorState onRetry={load} />;
+  if (loading) {
+    return (
+      <div className="space-y-6">
+        <LoadingSkeleton type="card" />
+        <LoadingSkeleton type="chart" />
+        <LoadingSkeleton type="table" />
+      </div>
+    );
+  }
+  if (!data) {
+    return (
+      <div className="space-y-6">
+        <Link href="/doctor" className="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-primary transition-colors">
+          <ArrowLeft className="w-4 h-4" /> Back to Doctors
+        </Link>
+        <EmptyState title="Doctor not found" description="The requested doctor profile could not be found." />
+      </div>
+    );
+  }
+
+  const tabs = [
+    { key: 'patients' as const, label: 'Patients', count: data.patients.length, icon: Users },
+    { key: 'appointments' as const, label: 'Appointments', count: data.appointments.length, icon: Calendar },
+    { key: 'diagnoses' as const, label: 'Diagnoses', count: data.diagnoses.length, icon: FileText },
+    { key: 'prescriptions' as const, label: 'Prescriptions', count: data.prescriptions.length, icon: Pill },
+  ];
+
+  const activeAppointments = data.appointments.filter(a => a.status === 'scheduled' || a.status === 'in-progress');
+  const completedAppointments = data.appointments.filter(a => a.status === 'completed');
+
+  return (
+    <div className="space-y-6">
+      <Link href="/doctor" className="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-primary transition-colors">
+        <ArrowLeft className="w-4 h-4" /> Back to Doctors
+      </Link>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="doctor-card-gradient glass-card rounded-2xl p-6"
+          >
+            <div className="flex items-start gap-5">
+              <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <Stethoscope className="w-10 h-10 text-primary" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <h2 className="text-xl font-bold text-gray-900 dark:text-white">{data.name}</h2>
+                    <p className="text-sm text-primary font-medium mt-0.5">{data.specialization}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{data.clinic} · {data.id}</p>
+                  </div>
+                  <StatusBadge status={data.status} size="md" />
+                </div>
+                <div className="mt-4 flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+                  <span className="flex items-center gap-1.5"><Users className="w-4 h-4" /> {data.patients.length} Patients</span>
+                  <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4" /> {activeAppointments.length} Upcoming</span>
+                  <span className="flex items-center gap-1.5"><Activity className="w-4 h-4" /> {completedAppointments.length} Completed</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+            <StatCard title="Patients" value={data.patients.length} icon={<Users className="w-5 h-5" />} color="primary" subtitle="Assigned" />
+            <StatCard title="Appointments" value={data.appointments.length} icon={<Calendar className="w-5 h-5" />} color="secondary" subtitle="Total" />
+            <StatCard title="Diagnoses" value={data.diagnoses.length} icon={<FileText className="w-5 h-5" />} color="amber" subtitle="Made" />
+            <StatCard title="Prescriptions" value={data.prescriptions.length} icon={<Pill className="w-5 h-5" />} color="emergency" subtitle="Written" />
+          </div>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="glass-card rounded-2xl p-5"
+        >
+          <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-4">Upcoming Appointments</h3>
+          {activeAppointments.length === 0 ? (
+            <p className="text-xs text-gray-500 dark:text-gray-400 text-center py-6">No upcoming appointments</p>
+          ) : (
+            <div className="space-y-2">
+              {activeAppointments.slice(0, 5).map((a, i) => (
+                <AppointmentCard key={a.id} appointment={a} delay={i * 0.05} />
+              ))}
+            </div>
+          )}
+          {data.appointments.length > 5 && (
+            <p className="text-xs text-primary font-medium text-center mt-3 cursor-pointer hover:underline">{data.appointments.length - 5} more appointments</p>
+          )}
+        </motion.div>
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+        className="glass-card rounded-2xl overflow-hidden"
+      >
+        <div className="flex border-b border-gray-100 dark:border-gray-800/50">
+          {tabs.map(tab => {
+            const Icon = tab.icon;
+            const isActive = activeTab === tab.key;
+            return (
+              <button
+                key={tab.key}
+                onClick={() => setActiveTab(tab.key)}
+                className={`flex items-center gap-2 px-5 py-3.5 text-sm font-medium transition-all relative ${
+                  isActive ? 'text-primary' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                }`}
+              >
+                <Icon className="w-4 h-4" />
+                {tab.label}
+                <span className={`px-1.5 py-0.5 text-[10px] rounded-full font-semibold ${
+                  isActive ? 'bg-primary/10 text-primary' : 'bg-gray-100 dark:bg-gray-800/50 text-gray-500'
+                }`}>{tab.count}</span>
+                {isActive && <motion.div layoutId="doctorTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="p-5">
+          {activeTab === 'patients' && (
+            data.patients.length === 0 ? (
+              <EmptyState title="No patients" description="This doctor has no assigned patients." />
+            ) : (
+              <div className="space-y-1">
+                {data.patients.map((p, i) => (
+                  <PatientCard key={p.id} patient={p} delay={i * 0.03} />
+                ))}
+              </div>
+            )
+          )}
+
+          {activeTab === 'appointments' && (
+            data.appointments.length === 0 ? (
+              <EmptyState title="No appointments" description="No appointments found for this doctor." />
+            ) : (
+              <div className="space-y-1">
+                {data.appointments.map((a, i) => (
+                  <AppointmentCard key={a.id} appointment={a} delay={i * 0.03} />
+                ))}
+              </div>
+            )
+          )}
+
+          {activeTab === 'diagnoses' && (
+            data.diagnoses.length === 0 ? (
+              <EmptyState title="No diagnoses" description="No diagnoses recorded for this doctor." />
+            ) : (
+              <div className="space-y-2">
+                {data.diagnoses.map((d, i) => (
+                  <motion.div
+                    key={d.id}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.03 }}
+                    className="flex items-start gap-3 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors"
+                  >
+                    <div className="w-9 h-9 rounded-lg bg-amber-50 dark:bg-amber-500/10 flex items-center justify-center flex-shrink-0">
+                      <AlertCircle className="w-4 h-4 text-amber-500" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-gray-900 dark:text-white">{d.condition}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{d.patientName} · {formatDate(d.date)}</p>
+                      <p className="text-xs text-gray-400 dark:text-gray-500 mt-1 line-clamp-2">{d.notes}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            )
+          )}
+
+          {activeTab === 'prescriptions' && (
+            data.prescriptions.length === 0 ? (
+              <EmptyState title="No prescriptions" description="No prescriptions written by this doctor." />
+            ) : (
+              <div className="space-y-2">
+                {data.prescriptions.map((p, i) => (
+                  <motion.div
+                    key={p.id}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.03 }}
+                    className="flex items-start gap-3 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors"
+                  >
+                    <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <Pill className="w-4 h-4 text-primary" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <p className="text-sm font-medium text-gray-900 dark:text-white">{p.medication}</p>
+                        <StatusBadge status={p.status} />
+                      </div>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{p.patientName} · {p.dosage} · {p.frequency}</p>
+                      <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{formatDate(p.startDate)} - {formatDate(p.endDate)}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            )
+          )}
+        </div>
+      </motion.div>
+    </div>
+  );
+}

@@ -75,12 +75,13 @@ class SettingsScreen extends ConsumerWidget {
                         onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Security settings (demo)'))),
                       ),
                       const Divider(height: 1),
-                      ListTile(
-                        leading: const Icon(Icons.notifications, color: ColorConstants.primary),
-                        title: Text('Notifications', style: GoogleFonts.inter(fontSize: 15, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
-                        subtitle: Text('Manage notification preferences', style: GoogleFonts.inter(fontSize: 12, color: isDark ? Colors.grey[400] : Colors.grey[500])),
-                        trailing: const Icon(Icons.chevron_right, size: 20),
-                        onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Notification settings (demo)'))),
+                      SwitchListTile(
+                        title: Text('Offline Mode', style: GoogleFonts.inter(fontSize: 15, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                        subtitle: Text('Cache data for offline access', style: GoogleFonts.inter(fontSize: 12, color: isDark ? Colors.grey[400] : Colors.grey[500])),
+                        value: false,
+                        onChanged: (_) => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Offline mode (demo)'))),
+                        activeColor: ColorConstants.primary,
+                        secondary: const Icon(Icons.wifi_off, color: ColorConstants.primary),
                       ),
                     ],
                   ),
@@ -88,7 +89,99 @@ class SettingsScreen extends ConsumerWidget {
                 const SizedBox(height: 16),
                 GlassCard(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Text('Notification Preferences', style: GoogleFonts.inter(fontSize: 15, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                      ),
+                      SwitchListTile(
+                        title: Text('Appointments', style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                        value: true, onChanged: (_) {},
+                        activeColor: ColorConstants.primary,
+                        secondary: const Icon(Icons.calendar_today, size: 20, color: ColorConstants.primary),
+                      ),
+                      const Divider(height: 1),
+                      SwitchListTile(
+                        title: Text('Emergency Alerts', style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                        value: true, onChanged: (_) {},
+                        activeColor: ColorConstants.emergency,
+                        secondary: const Icon(Icons.warning, size: 20, color: ColorConstants.emergency),
+                      ),
+                      const Divider(height: 1),
+                      SwitchListTile(
+                        title: Text('Insurance Reminders', style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                        value: true, onChanged: (_) {},
+                        activeColor: ColorConstants.warning,
+                        secondary: const Icon(Icons.verified_user, size: 20, color: ColorConstants.warning),
+                      ),
+                      const Divider(height: 1),
+                      SwitchListTile(
+                        title: Text('Document Updates', style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                        value: false, onChanged: (_) {},
+                        activeColor: ColorConstants.primary,
+                        secondary: const Icon(Icons.description, size: 20, color: ColorConstants.primary),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+                GlassCard(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Text('Coming Soon', style: GoogleFonts.inter(fontSize: 15, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                      ),
+                      ...() {
+                        final features = _comingSoonFeatures(context, isDark);
+                        return features.map((f) => Column(
+                          children: [
+                            ListTile(
+                              leading: Container(
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(color: f.color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(10)),
+                                child: Icon(f.icon, color: f.color, size: 22),
+                              ),
+                              title: Text(f.title, style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                              subtitle: Text(f.subtitle, style: GoogleFonts.inter(fontSize: 11, color: isDark ? Colors.grey[400] : Colors.grey[500])),
+                              trailing: Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                decoration: BoxDecoration(color: ColorConstants.warning.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(10)),
+                                child: Text('Soon', style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w600, color: ColorConstants.warning)),
+                              ),
+                              onTap: () => context.go(f.route),
+                            ),
+                            if (f != features.last) const Divider(height: 1),
+                          ],
+                        ));
+                      }(),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+                GlassCard(
+                  child: Column(
+                    children: [
+                      ListTile(
+                        leading: const Icon(Icons.cleaning_services, color: ColorConstants.primary),
+                        title: Text('Cache Management', style: GoogleFonts.inter(fontSize: 15, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                        subtitle: Text('Clear cached data: 12.5 MB', style: GoogleFonts.inter(fontSize: 12, color: isDark ? Colors.grey[400] : Colors.grey[500])),
+                        trailing: const Icon(Icons.chevron_right, size: 20),
+                        onTap: () => showDialog(
+                          context: context,
+                          builder: (ctx) => AlertDialog(
+                            title: const Text('Clear Cache'),
+                            content: const Text('Are you sure you want to clear all cached data?'),
+                            actions: [
+                              TextButton(onPressed: () => Navigator.of(ctx).pop(), child: const Text('Cancel')),
+                              ElevatedButton(onPressed: () { Navigator.of(ctx).pop(); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Cache cleared'))); }, child: const Text('Clear')),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const Divider(height: 1),
                       ListTile(
                         leading: const Icon(Icons.info_outline, color: ColorConstants.primary),
                         title: Text('About', style: GoogleFonts.inter(fontSize: 15, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
@@ -131,4 +224,22 @@ class SettingsScreen extends ConsumerWidget {
       ),
     );
   }
+
+  List<_ComingSoonFeature> _comingSoonFeatures(BuildContext context, bool isDark) {
+    return [
+      _ComingSoonFeature(Icons.auto_awesome, 'AI Health Summary', 'Intelligent health insights', const Color(0xFF7C3AED), '/coming-soon/ai-health'),
+      _ComingSoonFeature(Icons.fingerprint, 'OneID Integration', 'Unified digital identity', const Color(0xFF0F6FFF), '/coming-soon/oneid'),
+      _ComingSoonFeature(Icons.description, 'Digital Prescription', 'QR-verified prescriptions', const Color(0xFF00C896), '/coming-soon/digital-prescription'),
+      _ComingSoonFeature(Icons.nfc, 'NFC MED-ID', 'Contactless data sharing', const Color(0xFF0891B2), '/coming-soon/nfc'),
+    ];
+  }
+}
+
+class _ComingSoonFeature {
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final Color color;
+  final String route;
+  _ComingSoonFeature(this.icon, this.title, this.subtitle, this.color, this.route);
 }

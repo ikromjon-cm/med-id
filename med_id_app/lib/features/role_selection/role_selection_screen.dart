@@ -52,10 +52,12 @@ class RoleSelectionScreen extends ConsumerWidget {
                     child: GlassCard(
                       onTap: () {
                         ref.read(roleProvider.notifier).switchRole(role.role);
-                        if (role.role == Role.admin) {
-                          context.go('/admin/dashboard');
-                        } else {
-                          context.go('/patient/dashboard');
+                        switch (role.role) {
+                          case Role.admin: context.go('/admin/dashboard');
+                          case Role.doctor: context.go('/doctor/dashboard');
+                          case Role.clinic: context.go('/clinic/dashboard');
+                          case Role.emergencyStaff: context.go('/emergency/dashboard');
+                          case Role.patient: context.go('/patient/dashboard');
                         }
                       },
                       child: Container(

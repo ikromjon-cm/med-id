@@ -36,6 +36,9 @@ public class SecurityConfig {
                 .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers("/api/qr/scan/**").permitAll()
                 .requestMatchers("/api/admin/**").hasAuthority("ROLE_ADMIN")
+                .requestMatchers("/api/emergency/**").hasAnyAuthority("ROLE_EMERGENCY_RESPONDER", "ROLE_ADMIN", "ROLE_DOCTOR")
+                .requestMatchers("/api/doctor/**").hasAnyAuthority("ROLE_DOCTOR", "ROLE_ADMIN")
+                .requestMatchers("/api/clinic/**").hasAnyAuthority("ROLE_CLINIC", "ROLE_ADMIN", "ROLE_DOCTOR")
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);

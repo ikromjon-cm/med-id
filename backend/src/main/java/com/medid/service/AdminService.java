@@ -1,7 +1,9 @@
 package com.medid.service;
 
 import com.medid.dto.DashboardStatsDto;
+import com.medid.dto.UserDto;
 import com.medid.model.Role;
+import com.medid.model.User;
 import com.medid.repository.*;
 import org.springframework.stereotype.Service;
 
@@ -16,17 +18,20 @@ public class AdminService {
     private final EmergencyContactRepository emergencyContactRepository;
     private final NotificationRepository notificationRepository;
     private final AccessLogRepository accessLogRepository;
+    private final MedicalProfileRepository medicalProfileRepository;
 
     public AdminService(UserRepository userRepository,
                         DocumentRepository documentRepository,
                         EmergencyContactRepository emergencyContactRepository,
                         NotificationRepository notificationRepository,
-                        AccessLogRepository accessLogRepository) {
+                        AccessLogRepository accessLogRepository,
+                        MedicalProfileRepository medicalProfileRepository) {
         this.userRepository = userRepository;
         this.documentRepository = documentRepository;
         this.emergencyContactRepository = emergencyContactRepository;
         this.notificationRepository = notificationRepository;
         this.accessLogRepository = accessLogRepository;
+        this.medicalProfileRepository = medicalProfileRepository;
     }
 
     public DashboardStatsDto getDashboardStats() {
@@ -82,6 +87,39 @@ public class AdminService {
             Map.of("role", "Clinics", "count", userRepository.countByRole(Role.CLINIC)),
             Map.of("role", "Admins", "count", userRepository.countByRole(Role.ADMIN)),
             Map.of("role", "Emergency", "count", userRepository.countByRole(Role.EMERGENCY_RESPONDER))
+        );
+    }
+
+    public List<Map<String, Object>> getInsuranceExpiry() {
+        return userRepository.findByRole(Role.PATIENT).stream()
+            .map(u -> {
+                var profile = medicalProfileRepository.findByUserId(u.getId());
+                var daysRemaining = 30;
+                var expired = false;
+                return Map.<String, Object>of(
+                    "userId", u.getId(),
+                    "name", u.getName(),
+                    "phone", u.getPhone(),
+                    "insuranceProvider", profile.map(p -> p.getInsuranceProvider()).orElse("N/A"),
+                    "insuranceNumber", profile.map(p -> p.getInsuranceNumber()).orElse("N/A"),
+                    "daysRemaining", daysRemaining,
+                    "expired", expired
+                );
+            })
+            .toList();
+    }
+
+    public Map<String, Object> getAccessStats() {
+        var totalAccessLogs = accessLogRepository.count();
+        var logs = accessLogRepository.findAll();
+        var emergencyActions = logs.stream().filter(l -> "EMERGENCY_ACCESS".equals(l.getAction())).count();
+        var biometricLogins = logs.stream().filter(l -> "BIOMETRIC_LOGIN".equals(l.getAction())).count();
+        var profileViews = logs.stream().filter(l -> "Medical profile viewed".equals(l.getAction())).count();
+        return Map.of(
+            "totalAccessLogs", totalAccessLogs,
+            "emergencyAccesses", emergencyActions,
+            "biometricLogins", biometricLogins,
+            "profileViews", profileViews
         );
     }
 }

@@ -66,3 +66,99 @@ export interface TableColumn<T> {
   sortable?: boolean;
   render?: (item: T) => React.ReactNode;
 }
+
+export interface Patient {
+  id: string;
+  name: string;
+  age: number;
+  gender: string;
+  bloodType: string;
+  phone: string;
+  lastVisit: string;
+  status: 'active' | 'inactive';
+}
+
+export interface Appointment {
+  id: string;
+  patientId: string;
+  patientName: string;
+  doctorId: string;
+  doctorName: string;
+  clinicId: string;
+  clinicName: string;
+  date: string;
+  time: string;
+  type: string;
+  status: 'scheduled' | 'in-progress' | 'completed' | 'cancelled';
+}
+
+export interface Diagnosis {
+  id: string;
+  patientId: string;
+  patientName: string;
+  doctorId: string;
+  doctorName: string;
+  condition: string;
+  notes: string;
+  date: string;
+}
+
+export interface Prescription {
+  id: string;
+  patientId: string;
+  patientName: string;
+  doctorId: string;
+  medication: string;
+  dosage: string;
+  frequency: string;
+  startDate: string;
+  endDate: string;
+  status: 'active' | 'completed' | 'cancelled';
+}
+
+export interface DoctorDetail extends Omit<Doctor, 'patients'> {
+  patients: Patient[];
+  appointments: Appointment[];
+  diagnoses: Diagnosis[];
+  prescriptions: Prescription[];
+}
+
+export interface EmergencyAlert {
+  id: string;
+  patientId: string;
+  patientName: string;
+  triggeredBy: string;
+  status: 'ACTIVE' | 'RESOLVED';
+  accessedAt: string;
+  resolvedAt?: string;
+  staffId?: string;
+  bloodType: string;
+  allergies: string[];
+}
+
+export interface QueueEntry {
+  id: string;
+  clinicId: string;
+  patientId: string;
+  patientName: string;
+  priority: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
+  status: 'WAITING' | 'WITH_DOCTOR' | 'COMPLETED';
+  waitTimeMinutes: number;
+  joinedAt: string;
+}
+
+export interface ClinicFinance {
+  date: string;
+  revenue: number;
+  expenses: number;
+  appointments: number;
+}
+
+export interface EmergencyAccessLog {
+  id: string;
+  patientName: string;
+  accessedBy: string;
+  accessType: string;
+  timestamp: string;
+  status: 'GRANTED' | 'DENIED' | 'PENDING';
+}

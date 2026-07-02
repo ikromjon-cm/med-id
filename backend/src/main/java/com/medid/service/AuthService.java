@@ -4,18 +4,31 @@ import com.medid.config.JwtUtil;
 import com.medid.dto.LoginRequest;
 import com.medid.dto.LoginResponse;
 import com.medid.dto.UserDto;
+import com.medid.model.AccessLog;
+import com.medid.model.Role;
+import com.medid.repository.AccessLogRepository;
+import com.medid.repository.MedicalProfileRepository;
 import com.medid.repository.UserRepository;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class AuthService {
 
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
+    private final AccessLogRepository accessLogRepository;
+    private final MedicalProfileRepository medicalProfileRepository;
 
-    public AuthService(UserRepository userRepository, JwtUtil jwtUtil) {
+    public AuthService(UserRepository userRepository, JwtUtil jwtUtil,
+                       AccessLogRepository accessLogRepository,
+                       MedicalProfileRepository medicalProfileRepository) {
         this.userRepository = userRepository;
         this.jwtUtil = jwtUtil;
+        this.accessLogRepository = accessLogRepository;
+        this.medicalProfileRepository = medicalProfileRepository;
     }
 
     public LoginResponse login(LoginRequest request) {
@@ -50,5 +63,29 @@ public class AuthService {
             .orElseThrow(() -> new IllegalArgumentException("User not found"));
         var newToken = jwtUtil.generateToken(user.getId(), role);
         return new LoginResponse(newToken, UserDto.from(user));
+    }
+
+    public void handleBiometricSuccess(String userId) {
+        var log = new AccessLog();
+        log.setUserId(userId);
+        log.setAccessedByUserId(userId);
+        log.setAction("BIOMETRIC_LOGIN");
+        log.setTimestamp(LocalDateTime.now());
+        log.setIpAddress("biometric-device");
+        accessLogRepository.save(log);
+    }
+
+    public long checkInsuranceExpiry(String userId) {
+        var profile = medicalProfileRepository.findByUserId(userId);
+        if (profile.isEmpty() || profile.get().getInsuranceNumber() == null) {
+            return -1;
+        }
+        return 30;
+    }
+
+    public List<UserDto> getUserByRole(Role role) {
+        return userRepository.findByRole(role).stream()
+            .map(UserDto::from)
+            .toList();
     }
 }

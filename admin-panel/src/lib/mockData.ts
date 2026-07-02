@@ -1,4 +1,4 @@
-import { User, Clinic, Doctor, AccessLog, Notification, DashboardStats, ChartDataPoint } from './types';
+import { User, Clinic, Doctor, AccessLog, Notification, DashboardStats, ChartDataPoint, Patient, Appointment, Diagnosis, Prescription, EmergencyAlert, QueueEntry, ClinicFinance, EmergencyAccessLog, DoctorDetail } from './types';
 import { delay, generateId } from './utils';
 
 const SPECIALIZATIONS = ['Cardiology', 'Neurology', 'Pediatrics', 'Orthopedics', 'Dermatology', 'Oncology', 'Radiology', 'Anesthesiology', 'Emergency Medicine', 'Family Medicine', 'Internal Medicine', 'Obstetrics', 'Ophthalmology', 'Pathology', 'Psychiatry', 'Surgery', 'Urology', 'Endocrinology', 'Gastroenterology', 'Pulmonology'];
@@ -182,6 +182,177 @@ export let notifications: Notification[] = [
     createdAt: new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000).toISOString(),
   },
 ];
+
+const PATIENT_FIRST_NAMES = ['John', 'Jane', 'Alice', 'Bob', 'Charlie', 'Diana', 'Eve', 'Frank', 'Grace', 'Henry', 'Ivy', 'Jack', 'Kate', 'Leo', 'Mia', 'Noah', 'Olivia', 'Paul', 'Quinn', 'Rose', 'Sam', 'Tina', 'Uma', 'Victor', 'Wendy', 'Xander', 'Yara', 'Zack', 'Amy', 'Brian'];
+const PATIENT_LAST_NAMES = ['Anderson', 'Baker', 'Clark', 'Davis', 'Evans', 'Foster', 'Garcia', 'Hill', 'Irwin', 'Jenkins', 'King', 'Long', 'Miller', 'Nelson', 'Owen', 'Parker', 'Quinn', 'Reed', 'Stone', 'Taylor', 'Underwood', 'Vance', 'Wallace', 'Xu', 'Young', 'Zimmerman', 'Brooks', 'Carter', 'Dixon', 'Ellis'];
+const BLOOD_TYPES = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
+const GENDERS = ['Male', 'Female'];
+const CONDITIONS = ['Hypertension', 'Type 2 Diabetes', 'Asthma', 'Lower Back Pain', 'Migraine', 'Anxiety Disorder', 'Hypothyroidism', 'GERD', 'Seasonal Allergies', 'Osteoarthritis', 'Depression', 'Insomnia', 'High Cholesterol', 'Sinusitis', 'Eczema', 'Anemia', 'UTI', 'Bronchitis', 'Gastritis', 'Tendonitis'];
+const MEDICATIONS = ['Lisinopril', 'Metformin', 'Albuterol', 'Ibuprofen', 'Sumatriptan', 'Sertraline', 'Levothyroxine', 'Omeprazole', 'Cetirizine', 'Acetaminophen', 'Amoxicillin', 'Atorvastatin', 'Metoprolol', 'Losartan', 'Gabapentin'];
+const APPOINTMENT_TYPES = ['Checkup', 'Follow-up', 'Consultation', 'Emergency', 'Routine', 'Surgery Prep', 'Test Results', 'Vaccination'];
+const ACCESS_TYPES = ['Emergency Grant', 'Admin Override', 'Routine Access', 'System Access', 'Staff Access', 'Doctor Access'];
+
+export const patients: Patient[] = Array.from({ length: 30 }, (_, i) => ({
+  id: `PAT-${String(i + 1).padStart(3, '0')}`,
+  name: `${randomFrom(PATIENT_FIRST_NAMES)} ${randomFrom(PATIENT_LAST_NAMES)}`,
+  age: Math.floor(Math.random() * 60) + 18,
+  gender: randomFrom(GENDERS),
+  bloodType: randomFrom(BLOOD_TYPES),
+  phone: randomPhone(),
+  lastVisit: randomDate(sixMonthsAgo, now),
+  status: randomFrom(['active', 'active', 'active', 'inactive'] as const),
+}));
+
+const nowDate = new Date();
+const todayStr = nowDate.toISOString().slice(0, 10);
+
+export const appointments: Appointment[] = Array.from({ length: 50 }, (_, i) => {
+  const doc = randomFrom(doctors);
+  const pat = randomFrom(patients);
+  const clinicMatch = clinics.find(c => c.name === doc.clinic) || clinics[0];
+  const daysOffset = Math.floor(Math.random() * 30) - 15;
+  const apptDate = new Date(nowDate.getTime() + daysOffset * 24 * 60 * 60 * 1000);
+  return {
+    id: `APT-${String(i + 1).padStart(3, '0')}`,
+    patientId: pat.id,
+    patientName: pat.name,
+    doctorId: doc.id,
+    doctorName: doc.name,
+    clinicId: clinicMatch.id,
+    clinicName: doc.clinic,
+    date: apptDate.toISOString().slice(0, 10),
+    time: `${String(Math.floor(Math.random() * 12) + 8).padStart(2, '0')}:${String(Math.floor(Math.random() * 60)).padStart(2, '0')}`,
+    type: randomFrom(APPOINTMENT_TYPES),
+    status: randomFrom(['scheduled', 'scheduled', 'completed', 'completed', 'in-progress', 'cancelled'] as const),
+  };
+});
+
+export const diagnoses: Diagnosis[] = Array.from({ length: 40 }, (_, i) => {
+  const doc = randomFrom(doctors);
+  const pat = randomFrom(patients);
+  return {
+    id: `DIA-${String(i + 1).padStart(3, '0')}`,
+    patientId: pat.id,
+    patientName: pat.name,
+    doctorId: doc.id,
+    doctorName: doc.name,
+    condition: randomFrom(CONDITIONS),
+    notes: `Patient presents with symptoms consistent with ${randomFrom(CONDITIONS).toLowerCase()}. Recommended follow-up in ${Math.floor(Math.random() * 4) + 2} weeks.`,
+    date: randomDate(sixMonthsAgo, now),
+  };
+});
+
+export const prescriptions: Prescription[] = Array.from({ length: 40 }, (_, i) => {
+  const doc = randomFrom(doctors);
+  const pat = randomFrom(patients);
+  const start = randomDate(sixMonthsAgo, now);
+  const end = new Date(new Date(start).getTime() + (Math.floor(Math.random() * 90) + 30) * 24 * 60 * 60 * 1000);
+  return {
+    id: `PRE-${String(i + 1).padStart(3, '0')}`,
+    patientId: pat.id,
+    patientName: pat.name,
+    doctorId: doc.id,
+    medication: randomFrom(MEDICATIONS),
+    dosage: `${Math.floor(Math.random() * 500) + 5}mg`,
+    frequency: randomFrom(['Once daily', 'Twice daily', 'Three times daily', 'As needed', 'Every 6 hours']),
+    startDate: start,
+    endDate: end.toISOString(),
+    status: randomFrom(['active', 'active', 'completed', 'completed', 'cancelled'] as const),
+  };
+});
+
+export const emergencyAlerts: EmergencyAlert[] = [
+  { id: 'EMG-001', patientId: 'PAT-001', patientName: 'John Anderson', triggeredBy: 'Dr. James Wilson', status: 'ACTIVE', accessedAt: new Date(now.getTime() - 5 * 60 * 1000).toISOString(), bloodType: 'O-', allergies: ['Penicillin', 'Sulfa'] },
+  { id: 'EMG-002', patientId: 'PAT-005', patientName: 'Diana Foster', triggeredBy: 'Nurse Sarah Johnson', status: 'ACTIVE', accessedAt: new Date(now.getTime() - 15 * 60 * 1000).toISOString(), bloodType: 'A+', allergies: ['Latex'] },
+  { id: 'EMG-003', patientId: 'PAT-012', patientName: 'Leo Quinn', triggeredBy: 'Dr. Robert Miller', status: 'ACTIVE', accessedAt: new Date(now.getTime() - 32 * 60 * 1000).toISOString(), bloodType: 'B-', allergies: ['Aspirin', 'Ibuprofen'] },
+  { id: 'EMG-004', patientId: 'PAT-008', patientName: 'Grace Garcia', triggeredBy: 'Dr. Emily Chen', status: 'RESOLVED', accessedAt: new Date(now.getTime() - 120 * 60 * 1000).toISOString(), resolvedAt: new Date(now.getTime() - 60 * 60 * 1000).toISOString(), staffId: 'USR-0002', bloodType: 'AB+', allergies: [] },
+  { id: 'EMG-005', patientId: 'PAT-015', patientName: 'Mia Parker', triggeredBy: 'Dr. David Thompson', status: 'RESOLVED', accessedAt: new Date(now.getTime() - 240 * 60 * 1000).toISOString(), resolvedAt: new Date(now.getTime() - 180 * 60 * 1000).toISOString(), staffId: 'USR-0005', bloodType: 'O+', allergies: ['Codeine'] },
+  { id: 'EMG-006', patientId: 'PAT-003', patientName: 'Alice Clark', triggeredBy: 'Dr. Mary Johnson', status: 'ACTIVE', accessedAt: new Date(now.getTime() - 8 * 60 * 1000).toISOString(), bloodType: 'A-', allergies: ['Peanuts', 'Sulfa'] },
+  { id: 'EMG-007', patientId: 'PAT-020', patientName: 'Amy Young', triggeredBy: 'Dr. William Brown', status: 'RESOLVED', accessedAt: new Date(now.getTime() - 360 * 60 * 1000).toISOString(), resolvedAt: new Date(now.getTime() - 300 * 60 * 1000).toISOString(), staffId: 'USR-0010', bloodType: 'B+', allergies: [] },
+  { id: 'EMG-008', patientId: 'PAT-018', patientName: 'Wendy Underwood', triggeredBy: 'Nurse Linda Davis', status: 'ACTIVE', accessedAt: new Date(now.getTime() - 3 * 60 * 1000).toISOString(), bloodType: 'AB-', allergies: ['Penicillin', 'Aspirin', 'Latex'] },
+  { id: 'EMG-009', patientId: 'PAT-010', patientName: 'Jack Long', triggeredBy: 'Dr. Richard Taylor', status: 'ACTIVE', accessedAt: new Date(now.getTime() - 25 * 60 * 1000).toISOString(), bloodType: 'O+', allergies: ['Sulfa'] },
+  { id: 'EMG-010', patientId: 'PAT-025', patientName: 'Brian Ellis', triggeredBy: 'Dr. Kenneth Moore', status: 'RESOLVED', accessedAt: new Date(now.getTime() - 480 * 60 * 1000).toISOString(), resolvedAt: new Date(now.getTime() - 420 * 60 * 1000).toISOString(), staffId: 'USR-0015', bloodType: 'A+', allergies: [] },
+];
+
+export const queueEntries: QueueEntry[] = clinics.slice(0, 6).flatMap((clinic, ci) =>
+  Array.from({ length: Math.floor(Math.random() * 4) + 2 }, (_, i) => {
+    const pat = randomFrom(patients);
+    return {
+      id: `QUE-${String(ci * 10 + i + 1).padStart(3, '0')}`,
+      clinicId: clinic.id,
+      patientId: pat.id,
+      patientName: pat.name,
+      priority: randomFrom(['LOW', 'MEDIUM', 'MEDIUM', 'HIGH', 'CRITICAL'] as const),
+      status: randomFrom(['WAITING', 'WAITING', 'WITH_DOCTOR', 'COMPLETED'] as const),
+      waitTimeMinutes: Math.floor(Math.random() * 60) + 5,
+      joinedAt: new Date(now.getTime() - Math.floor(Math.random() * 120) * 60 * 1000).toISOString(),
+    };
+  })
+);
+
+export const clinicFinance: Record<string, ClinicFinance[]> = {};
+clinics.forEach(clinic => {
+  clinicFinance[clinic.id] = Array.from({ length: 12 }, (_, i) => {
+    const month = new Date(now.getFullYear(), i, 1);
+    const baseRevenue = Math.floor(Math.random() * 50000) + 30000;
+    const baseExpenses = Math.floor(baseRevenue * (0.4 + Math.random() * 0.3));
+    return {
+      date: month.toISOString().slice(0, 7),
+      revenue: baseRevenue,
+      expenses: baseExpenses,
+      appointments: Math.floor(Math.random() * 200) + 100 + i * 10,
+    };
+  });
+});
+
+export const emergencyAccessLogs: EmergencyAccessLog[] = Array.from({ length: 25 }, (_, i) => ({
+  id: `EAL-${String(i + 1).padStart(3, '0')}`,
+  patientName: `${randomFrom(PATIENT_FIRST_NAMES)} ${randomFrom(PATIENT_LAST_NAMES)}`,
+  accessedBy: `${randomFrom(FIRST_NAMES)} ${randomFrom(LAST_NAMES)}`,
+  accessType: randomFrom(ACCESS_TYPES),
+  timestamp: randomDate(new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000), now),
+  status: randomFrom(['GRANTED', 'GRANTED', 'GRANTED', 'DENIED', 'PENDING'] as const),
+}));
+
+export const getDoctorById = (id: string): Doctor | undefined => doctors.find(d => d.id === id);
+export const getClinicById = (id: string): Clinic | undefined => clinics.find(c => c.id === id);
+export const getEmergencyAlerts = (): EmergencyAlert[] => [...emergencyAlerts];
+export const resolveEmergencyAlert = (id: string): void => {
+  const alert = emergencyAlerts.find(a => a.id === id);
+  if (alert) { alert.status = 'RESOLVED'; alert.resolvedAt = new Date().toISOString(); }
+};
+export const getClinicQueue = (clinicId: string): QueueEntry[] => queueEntries.filter(q => q.clinicId === clinicId);
+export const getDoctorPatients = (doctorId: string): Patient[] => {
+  const doctorAppts = appointments.filter(a => a.doctorId === doctorId);
+  return patients.filter(p => doctorAppts.some(a => a.patientId === p.id));
+};
+export const getDoctorAppointments = (doctorId: string): Appointment[] => appointments.filter(a => a.doctorId === doctorId);
+export const getDoctorDiagnoses = (doctorId: string): Diagnosis[] => diagnoses.filter(d => d.doctorId === doctorId);
+export const getDoctorPrescriptions = (doctorId: string): Prescription[] => prescriptions.filter(p => p.doctorId === doctorId);
+
+export async function getDoctorDetail(id: string): Promise<DoctorDetail | null> {
+  await delay(300);
+  const doctor = doctors.find(d => d.id === id);
+  if (!doctor) return null;
+  const docAppts = appointments.filter(a => a.doctorId === id);
+  const docPatients = patients.filter(p => docAppts.some(a => a.patientId === p.id));
+  const docDiagnoses = diagnoses.filter(d => d.doctorId === id);
+  const docPrescriptions = prescriptions.filter(p => p.doctorId === id);
+  return { ...doctor, patients: docPatients, appointments: docAppts, diagnoses: docDiagnoses, prescriptions: docPrescriptions };
+}
+
+export async function getClinicDetail(id: string): Promise<{ clinic: Clinic; doctors: Doctor[]; queue: QueueEntry[]; appointments: Appointment[]; finance: ClinicFinance[] } | null> {
+  await delay(300);
+  const clinic = clinics.find(c => c.id === id);
+  if (!clinic) return null;
+  return {
+    clinic,
+    doctors: doctors.filter(d => d.clinic === clinic.name),
+    queue: queueEntries.filter(q => q.clinicId === id),
+    appointments: appointments.filter(a => a.clinicId === id),
+    finance: clinicFinance[id] || [],
+  };
+}
 
 export async function getDashboardStats(): Promise<DashboardStats> {
   await delay(600);

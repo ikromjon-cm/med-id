@@ -43,4 +43,14 @@ public class AdminController {
     public ResponseEntity<ApiResponse<List<Map<String, Object>>>> getRoles() {
         return ResponseEntity.ok(ApiResponse.ok(adminService.getRoles()));
     }
+
+    @GetMapping("/business-logic/insurance-expiry")
+    public ResponseEntity<ApiResponse<List<Map<String, Object>>>> getInsuranceExpiry() {
+        return ResponseEntity.ok(ApiResponse.ok(adminService.getInsuranceExpiry()));
+    }
+
+    @GetMapping("/business-logic/access-stats")
+    public ResponseEntity<ApiResponse<Map<String, Object>>> getAccessStats() {
+        return ResponseEntity.ok(ApiResponse.ok(adminService.getAccessStats()));
+    }
 }

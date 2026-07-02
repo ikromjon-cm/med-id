@@ -13,12 +13,15 @@ interface HeaderProps {
 const pageTitles: Record<string, string> = {
   '/dashboard': 'Dashboard',
   '/users': 'Users Management',
-  '/clinics': 'Clinics Management',
   '/doctors': 'Doctors Management',
+  '/clinics': 'Clinics Management',
+  '/doctor': 'Doctors',
+  '/clinic': 'Clinics',
   '/analytics': 'Analytics',
   '/access-logs': 'Access Logs',
   '/notifications': 'Notifications',
   '/settings': 'Settings',
+  '/emergency': 'Emergency Management',
 };
 
 export default function Header({ onMenuToggle }: HeaderProps) {
