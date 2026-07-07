@@ -16,6 +16,8 @@ import {
 } from '@/lib/mockData';
 import type { Testimonial, Partner, BlogPost, Feature } from '@/lib/types';
 import { t } from '@/lib/i18n';
+import PublicNavbar from '@/components/PublicNavbar';
+import PublicFooter from '@/components/PublicFooter';
 
 const featureIcons: Record<string, React.ReactNode> = {
   shield: <Shield className="w-6 h-6" />,
@@ -105,7 +107,9 @@ export default function HomePage() {
   };
 
   return (
-    <div className="bg-bg-main dark:bg-[#0F0F15]">
+    <>
+      <PublicNavbar />
+      <div className="bg-bg-main dark:bg-[#0F0F15]">
       {/* HERO */}
       <section className="relative min-h-screen flex items-center pt-20 pb-16 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -630,6 +634,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+      <PublicFooter />
+    </>
   );
 }
