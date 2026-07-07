@@ -50,7 +50,7 @@ export default function EmergencyLogsPage() {
     }
   }, [search, statusFilter, startDate, endDate]);
 
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => { queueMicrotask(() => load()); }, [load]);
 
   if (error) return <ErrorState onRetry={load} />;
 

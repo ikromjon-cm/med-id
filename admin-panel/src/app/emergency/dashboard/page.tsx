@@ -4,13 +4,12 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import {
   AlertTriangle, Activity, Clock, CheckCircle2,
-  User, Zap, ShieldAlert, ArrowRight
+  Zap, ShieldAlert, ArrowRight
 } from 'lucide-react';
 import StatCard from '@/components/StatCard';
 import ChartCard from '@/components/ChartCard';
 import LoadingSkeleton from '@/components/LoadingSkeleton';
 import ErrorState from '@/components/ErrorState';
-import EmptyState from '@/components/EmptyState';
 import { getEmergencyStats, getActiveEmergencyAlerts, getRecentActivity } from '@/lib/mockData';
 import type { EmergencyAlert } from '@/lib/types';
 import { formatDateTime } from '@/lib/utils';
@@ -47,7 +46,7 @@ export default function EmergencyDashboardPage() {
     }
   }, []);
 
-  useEffect(() => { loadData(); }, [loadData]);
+  useEffect(() => { queueMicrotask(() => loadData()); }, [loadData]);
 
   if (error) return <ErrorState onRetry={loadData} />;
 
@@ -86,7 +85,7 @@ export default function EmergencyDashboardPage() {
                     FAOL
                   </span>
                 ) : (
-                  <span className="text-xs text-gray-400 font-medium">O'CHIQ</span>
+                  <span className="text-xs text-gray-400 font-medium">O&apos;CHIQ</span>
                 )}
               </div>
             </div>

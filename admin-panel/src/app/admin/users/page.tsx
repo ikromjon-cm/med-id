@@ -45,7 +45,7 @@ export default function UsersPage() {
     setLoading(false);
   }, []);
 
-  useEffect(() => { loadUsers(); }, [loadUsers]);
+  useEffect(() => { queueMicrotask(() => loadUsers()); }, [loadUsers]);
 
   const openCreate = () => {
     setEditingUser(null);

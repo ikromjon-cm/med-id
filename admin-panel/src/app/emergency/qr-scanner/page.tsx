@@ -4,7 +4,7 @@ import { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import {
-  Scan, Search, User, Droplets, ShieldAlert, AlertTriangle,
+  Scan, Search, User, AlertTriangle,
   Loader2, Zap, Camera, ArrowRight
 } from 'lucide-react';
 import { searchPatients } from '@/lib/mockData';

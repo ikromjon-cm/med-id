@@ -53,7 +53,6 @@ export default function ClinicFinanceChart({ data, className }: ClinicFinanceCha
               borderRadius: '12px',
               border: '1px solid rgba(255,255,255,0.2)',
             }}
-            formatter={(value: any) => [`$${Number(value).toLocaleString()}`, undefined]}
           />
           <Legend />
           <Bar dataKey="revenue" name={t('Revenue')} fill="#0F6FFF" radius={[4, 4, 0, 0]} maxBarSize={30} />

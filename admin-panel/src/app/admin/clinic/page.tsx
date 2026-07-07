@@ -44,7 +44,7 @@ export default function ClinicDashboardPage() {
     }
   }, []);
 
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => { queueMicrotask(() => load()); }, [load]);
 
   const activeClinics = clinics.filter(c => c.status === 'active').length;
   const totalDoctors = clinics.reduce((sum, c) => sum + c.doctorsCount, 0);
@@ -134,7 +134,7 @@ export default function ClinicDashboardPage() {
           <StatCard title={t('Total Clinics')} value={clinics.length} icon={<Building2 className="w-6 h-6" />} color="primary" delay={0} subtitle={t('All registered clinics')} />
           <StatCard title={t('Active Clinics')} value={activeClinics} icon={<Activity className="w-6 h-6" />} color="secondary" delay={0.1} subtitle={t('Currently operational')} />
           <StatCard title={t('Total Doctors')} value={totalDoctors} icon={<Users className="w-6 h-6" />} color="amber" delay={0.2} subtitle={t('Across all clinics')} />
-          <StatCard title={t('Today Revenue')} value={`$${(Math.random() * 50000 + 20000).toFixed(0)}`} icon={<DollarSign className="w-6 h-6" />} color="emergency" delay={0.3} subtitle={t('Estimated')} />
+          <StatCard title={t('Today Revenue')} value={'$35,000'} icon={<DollarSign className="w-6 h-6" />} color="emergency" delay={0.3} subtitle={t('Estimated')} />
         </div>
       )}
 

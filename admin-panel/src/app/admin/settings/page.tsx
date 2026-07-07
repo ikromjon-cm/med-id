@@ -7,6 +7,37 @@ import FormInput from '@/components/FormInput';
 import { useTheme } from '@/components/ThemeProvider';
 import { t } from '@/lib/i18n';
 
+const ToggleSwitch = ({ checked, onChange, label }: { checked: boolean; onChange: (v: boolean) => void; label?: string }) => (
+  <div className="flex items-center gap-3">
+    {label && <span className="text-sm text-gray-700 dark:text-gray-300">{label}</span>}
+    <button
+      onClick={() => onChange(!checked)}
+      className={`relative w-11 h-6 rounded-full transition-all duration-200 ${checked ? 'bg-primary' : 'bg-gray-200 dark:bg-gray-700'}`}
+    >
+      <span className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow-sm transition-transform duration-200 ${checked ? 'translate-x-5' : ''}`} />
+    </button>
+  </div>
+);
+
+const SectionCard = ({ icon, title, description, children }: { icon: React.ReactNode; title: string; description: string; children: React.ReactNode }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 10 }}
+    animate={{ opacity: 1, y: 0 }}
+    className="glass-card rounded-2xl p-6"
+  >
+    <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-100 dark:border-gray-800/50">
+      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+        {icon}
+      </div>
+      <div>
+        <h3 className="text-base font-semibold text-gray-900 dark:text-white">{title}</h3>
+        <p className="text-xs text-gray-500 dark:text-gray-400">{description}</p>
+      </div>
+    </div>
+    {children}
+  </motion.div>
+);
+
 export default function SettingsPage() {
   const { theme, toggleTheme } = useTheme();
   const [saving, setSaving] = useState(false);
@@ -40,37 +71,6 @@ export default function SettingsPage() {
     setSaved(true);
     setTimeout(() => setSaved(false), 3000);
   };
-
-  const ToggleSwitch = ({ checked, onChange, label }: { checked: boolean; onChange: (v: boolean) => void; label?: string }) => (
-    <div className="flex items-center gap-3">
-      {label && <span className="text-sm text-gray-700 dark:text-gray-300">{label}</span>}
-      <button
-        onClick={() => onChange(!checked)}
-        className={`relative w-11 h-6 rounded-full transition-all duration-200 ${checked ? 'bg-primary' : 'bg-gray-200 dark:bg-gray-700'}`}
-      >
-        <span className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow-sm transition-transform duration-200 ${checked ? 'translate-x-5' : ''}`} />
-      </button>
-    </div>
-  );
-
-  const SectionCard = ({ icon, title, description, children }: { icon: React.ReactNode; title: string; description: string; children: React.ReactNode }) => (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="glass-card rounded-2xl p-6"
-    >
-      <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-100 dark:border-gray-800/50">
-        <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-          {icon}
-        </div>
-        <div>
-          <h3 className="text-base font-semibold text-gray-900 dark:text-white">{title}</h3>
-          <p className="text-xs text-gray-500 dark:text-gray-400">{description}</p>
-        </div>
-      </div>
-      {children}
-    </motion.div>
-  );
 
   return (
     <div className="space-y-6 max-w-4xl">
@@ -216,7 +216,7 @@ export default function SettingsPage() {
                 { role: 'Nurse', perms: [true, true, true, false, false, false] },
                 { role: 'Receptionist', perms: [true, false, false, false, false, false] },
                 { role: 'Patient', perms: [true, false, false, false, false, false] },
-              ].map((row, ri) => (
+              ].map((row) => (
                 <tr key={row.role} className="border-b border-gray-50 dark:border-gray-800/30 hover:bg-gray-50 dark:hover:bg-gray-800/20 transition-colors">
                   <td className="py-3 pr-4 font-medium text-gray-900 dark:text-white">{t(row.role)}</td>
                   {row.perms.map((perm, ci) => (

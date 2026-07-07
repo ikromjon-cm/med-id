@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import {
   UserPlus, Fingerprint, Share2, Shield, Smartphone,
-  QrCode, Bell, CheckCircle, ArrowRight, ArrowDown,
+  QrCode, Bell, CheckCircle, ArrowRight,
 } from 'lucide-react';
 import Link from 'next/link';
 import { t } from '@/lib/i18n';

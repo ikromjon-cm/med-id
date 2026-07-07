@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import {
   CalendarDays, Users, Stethoscope, DollarSign,
-  Clock, UserCheck, CheckCircle2, Activity
+  Clock, UserCheck, CheckCircle2
 } from 'lucide-react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
@@ -47,7 +47,7 @@ export default function ClinicDashboardPage() {
     }
   }, []);
 
-  useEffect(() => { loadData(); }, [loadData]);
+  useEffect(() => { queueMicrotask(() => loadData()); }, [loadData]);
 
   if (error) return <ErrorState onRetry={loadData} />;
 

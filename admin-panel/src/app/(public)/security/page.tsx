@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import {
-  Shield, Lock, Fingerprint, Eye, Server, Key, CheckCircle,
-  ArrowRight, FileCheck, AlertTriangle, Database, Globe,
+  Shield, Lock, Fingerprint, Eye, Server, Key,
+  ArrowRight, FileCheck, Database, Globe,
   ChevronDown, Search,
 } from 'lucide-react';
 import Link from 'next/link';

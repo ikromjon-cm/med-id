@@ -4,13 +4,11 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import {
-  CalendarDays, Search, Filter, Plus, Clock, Stethoscope,
+  Plus, Clock,
   ChevronLeft, ChevronRight, CheckCircle
 } from 'lucide-react';
 import DataTable from '@/components/DataTable';
-import LoadingSkeleton from '@/components/LoadingSkeleton';
 import ErrorState from '@/components/ErrorState';
-import EmptyState from '@/components/EmptyState';
 import Modal from '@/components/Modal';
 import StatusBadge from '@/components/StatusBadge';
 import { getClinicDetail } from '@/lib/mockData';
@@ -55,7 +53,7 @@ export default function ClinicAppointmentsPage() {
     }
   }, []);
 
-  useEffect(() => { loadData(); }, [loadData]);
+  useEffect(() => { queueMicrotask(() => loadData()); }, [loadData]);
 
   const filtered = appointments.filter(a => {
     if (statusFilter !== 'ALL' && a.status !== statusFilter) return false;

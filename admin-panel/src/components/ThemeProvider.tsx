@@ -19,13 +19,13 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    queueMicrotask(() => setMounted(true));
     const stored = localStorage.getItem('medid-theme') as Theme | null;
     if (stored) {
-      setTheme(stored);
+      queueMicrotask(() => setTheme(stored));
       document.documentElement.classList.toggle('dark', stored === 'dark');
     } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setTheme('dark');
+      queueMicrotask(() => setTheme('dark'));
       document.documentElement.classList.add('dark');
     }
   }, []);

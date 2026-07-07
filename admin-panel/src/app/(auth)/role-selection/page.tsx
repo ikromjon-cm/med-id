@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import {
   User, Stethoscope, Ambulance, Building2, Shield,
 } from 'lucide-react';
@@ -40,7 +41,7 @@ export default function RoleSelectionPage() {
       >
         <div className="glass-card rounded-3xl p-8 sm:p-10">
           <div className="flex flex-col items-center mb-8">
-            <img src="/logo.jpg" alt="MED-ID" className="w-16 h-16 rounded-2xl mb-4 shadow-xl" />
+            <Image src="/logo.jpg" alt="MED-ID" width={64} height={64} className="rounded-2xl mb-4 shadow-xl" />
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{t('Select Your Role')}</h1>
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('Choose the interface that suits you')}</p>
           </div>

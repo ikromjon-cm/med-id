@@ -2,9 +2,8 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Stethoscope, Plus, Calendar, User } from 'lucide-react';
+import { Plus, Calendar } from 'lucide-react';
 import DataTable from '@/components/DataTable';
-import LoadingSkeleton from '@/components/LoadingSkeleton';
 import ErrorState from '@/components/ErrorState';
 import Modal from '@/components/Modal';
 import { getDoctorDiagnoses, createDiagnosis } from '@/lib/mockData';
@@ -34,7 +33,7 @@ export default function DiagnosesPage() {
     }
   }, []);
 
-  useEffect(() => { loadData(); }, [loadData]);
+  useEffect(() => { queueMicrotask(() => loadData()); }, [loadData]);
 
   const handleCreate = async () => {
     if (!formData.condition.trim() || !formData.patientName.trim()) return;

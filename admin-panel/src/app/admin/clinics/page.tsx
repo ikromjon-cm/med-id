@@ -8,7 +8,6 @@ import Modal from '@/components/Modal';
 import FormInput from '@/components/FormInput';
 import StatusBadge from '@/components/StatusBadge';
 import { getClinics, createClinic, updateClinic, deleteClinic } from '@/lib/mockData';
-import { formatDate } from '@/lib/utils';
 import type { Clinic } from '@/lib/types';
 import { t } from '@/lib/i18n';
 
@@ -35,7 +34,7 @@ export default function ClinicsPage() {
     setLoading(false);
   }, []);
 
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => { queueMicrotask(() => load()); }, [load]);
 
   const openCreate = () => {
     setEditing(null);

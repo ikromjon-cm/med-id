@@ -4,8 +4,8 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import {
-  AlertTriangle, User, Zap, ShieldAlert, Clock,
-  CheckCircle2, Filter, ArrowRight
+  AlertTriangle, Zap, ShieldAlert, Clock,
+  CheckCircle2, ArrowRight
 } from 'lucide-react';
 import LoadingSkeleton from '@/components/LoadingSkeleton';
 import ErrorState from '@/components/ErrorState';
@@ -36,7 +36,7 @@ export default function AlertsPage() {
     }
   }, []);
 
-  useEffect(() => { loadData(); }, [loadData]);
+  useEffect(() => { queueMicrotask(() => loadData()); }, [loadData]);
 
   const filtered = filter === 'ALL' ? alerts : alerts.filter(a => a.status === filter);
 

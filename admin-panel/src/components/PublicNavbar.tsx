@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, LogIn } from 'lucide-react';
 import Link from 'next/link';
@@ -36,7 +37,7 @@ export default function PublicNavbar() {
   }, []);
 
   useEffect(() => {
-    setMobileOpen(false);
+    queueMicrotask(() => setMobileOpen(false));
   }, [pathname]);
 
   if (isAdmin) return null;
@@ -57,7 +58,7 @@ export default function PublicNavbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
             <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-              <img src="/logo.jpg" alt="MED-ID" className="w-8 h-8 rounded-lg" />
+              <Image src="/logo.jpg" alt="MED-ID" width={32} height={32} className="rounded-lg" />
               <span className="text-xl font-bold tracking-tight text-primary">{t('MED-ID')}</span>
             </Link>
 

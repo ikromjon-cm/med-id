@@ -4,8 +4,8 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import {
-  ScrollText, User, Clock, Shield, Download,
-  CheckCircle2, XCircle, AlertCircle, Filter, Search
+  User, Clock, Download,
+  CheckCircle2, XCircle, AlertCircle, Search
 } from 'lucide-react';
 import LoadingSkeleton from '@/components/LoadingSkeleton';
 import ErrorState from '@/components/ErrorState';
@@ -55,7 +55,7 @@ export default function LogsPage() {
     }
   }, []);
 
-  useEffect(() => { loadData(); }, [loadData]);
+  useEffect(() => { queueMicrotask(() => loadData()); }, [loadData]);
 
   const filtered = logs.filter(l => {
     const matchesSearch = l.patientName.toLowerCase().includes(search.toLowerCase()) ||

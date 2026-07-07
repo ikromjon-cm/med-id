@@ -1,6 +1,5 @@
 {
   "rootDirectory": "admin-panel",
-  "buildCommand": "next build",
-  "outputDirectory": ".next",
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "buildCommand": "next build"
 }

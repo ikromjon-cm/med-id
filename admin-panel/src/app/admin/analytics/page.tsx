@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import {
   LineChart, Line, AreaChart, Area, BarChart, Bar,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-  PieChart, Pie, Cell, Legend
+  PieChart, Pie, Cell
 } from 'recharts';
 import ChartCard from '@/components/ChartCard';
 import LoadingSkeleton from '@/components/LoadingSkeleton';
@@ -44,7 +44,7 @@ export default function AnalyticsPage() {
     }
   }, []);
 
-  useEffect(() => { loadData(); }, [loadData]);
+  useEffect(() => { queueMicrotask(() => loadData()); }, [loadData]);
 
   if (error) return <ErrorState onRetry={loadData} />;
 
@@ -120,7 +120,7 @@ export default function AnalyticsPage() {
             <ChartCard title={t('Role Distribution')} subtitle={t('User distribution by role')}>
               <ResponsiveContainer width="100%" height={300}>
                 <PieChart>
-                  <Pie data={roleDist} cx="50%" cy="50%" innerRadius={60} outerRadius={100} paddingAngle={3} dataKey="value" label={({ name, percent }: any) => `${name} ${((percent ?? 0) * 100).toFixed(0)}%`}>
+                  <Pie data={roleDist} cx="50%" cy="50%" innerRadius={60} outerRadius={100} paddingAngle={3} dataKey="value" label={({ name, percent }: { name?: string; percent?: number }) => `${name} ${((percent ?? 0) * 100).toFixed(0)}%`}>
                     {roleDist.map((_, i) => (<Cell key={i} fill={COLORS[i % COLORS.length]} />))}
                   </Pie>
                   <Tooltip contentStyle={{ backgroundColor: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(10px)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.2)' }} />

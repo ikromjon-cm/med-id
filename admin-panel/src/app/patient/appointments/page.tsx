@@ -4,9 +4,8 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import {
-  Calendar, Clock, Stethoscope, MapPin,
-  CheckCircle2, XCircle, Clock as ClockIcon,
-  ArrowRight, AlertCircle
+  Calendar, Clock, Stethoscope, MapPin, ArrowRight,
+  CheckCircle2, XCircle
 } from 'lucide-react';
 import { appointments } from '@/lib/mockData';
 import type { Appointment } from '@/lib/types';

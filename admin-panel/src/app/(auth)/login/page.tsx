@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { LogIn, ArrowRight } from 'lucide-react';
 import { t } from '@/lib/i18n';
@@ -31,7 +32,7 @@ export default function LoginPage() {
       >
         <div className="glass-card rounded-3xl p-8 sm:p-10">
           <div className="flex flex-col items-center mb-8">
-            <img src="/logo.jpg" alt="MED-ID" className="w-20 h-20 rounded-2xl mb-4 shadow-xl" />
+            <Image src="/logo.jpg" alt="MED-ID" width={80} height={80} className="rounded-2xl mb-4 shadow-xl" />
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">MED-ID</h1>
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('Biometric Medical Platform')}</p>
           </div>

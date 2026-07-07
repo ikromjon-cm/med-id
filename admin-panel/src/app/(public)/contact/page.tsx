@@ -3,19 +3,11 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
-  Mail, Phone, MapPin, Send, CheckCircle, AlertCircle,
-  MessageSquare, Clock,
+  Mail, Phone, MapPin, Send, CheckCircle, Clock,
 } from 'lucide-react';
 import { submitContactForm } from '@/lib/mockData';
 import { cn } from '@/lib/utils';
 import { t } from '@/lib/i18n';
-
-const fadeUp = {
-  initial: { opacity: 0, y: 30 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: '-60px' },
-  transition: { duration: 0.5 },
-};
 
 interface FormData {
   name: string;

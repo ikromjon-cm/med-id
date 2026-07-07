@@ -35,7 +35,7 @@ const values = [
 ];
 
 export default function AboutPage() {
-  const [stats, setStats] = useState({ totalUsers: 0, activeDoctors: 0, partnerClinics: 0, countriesReached: 0 });
+  const [, setStats] = useState({ totalUsers: 0, activeDoctors: 0, partnerClinics: 0, countriesReached: 0 });
   const [counts, setCounts] = useState<Record<string, number>>({});
   const statsRef = useRef<HTMLDivElement>(null);
 
@@ -47,7 +47,7 @@ export default function AboutPage() {
         ([entry]) => {
           if (entry.isIntersecting) {
             keys.forEach(key => {
-              const target = (s as any)[key] as number;
+              const target = (s as Record<string, number>)[key];
               const steps = 60;
               const increment = target / steps;
               let step = 0;

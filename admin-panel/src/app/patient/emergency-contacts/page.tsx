@@ -5,8 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import {
   Phone, Mail, User, Plus, Trash2, Edit3,
-  AlertTriangle, Star, X, Shield, Heart,
-  CheckCircle2
+  AlertTriangle, Star, X, Shield, Heart
 } from 'lucide-react';
 import {
   getEmergencyContacts, addEmergencyContact,

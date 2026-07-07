@@ -4,10 +4,9 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import {
-  Shield, Smartphone, Monitor, Globe, MapPin,
+  Smartphone, Monitor, Globe, MapPin,
   Clock, Fingerprint, LogOut, AlertTriangle,
-  CheckCircle2, X, Laptop, Tablet,
-  ToggleLeft, ToggleRight
+  Laptop
 } from 'lucide-react';
 import {
   getSecuritySessions, revokeSession,
@@ -15,13 +14,6 @@ import {
 } from '@/lib/mockData';
 import type { SecuritySession } from '@/lib/types';
 import { t } from '@/lib/i18n';
-
-const deviceIcons: Record<string, React.ReactNode> = {
-  iPhone: <Smartphone className="w-5 h-5" />,
-  'MacBook': <Laptop className="w-5 h-5" />,
-  'Samsung': <Smartphone className="w-5 h-5" />,
-  'Pixel': <Smartphone className="w-5 h-5" />,
-};
 
 export default function SecurityPage() {
   const [sessions, setSessions] = useState<SecuritySession[]>([]);

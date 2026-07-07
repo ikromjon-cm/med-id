@@ -1,12 +1,8 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { motion } from 'framer-motion';
-import {
-  Stethoscope, MapPin, Users, Calendar, Search
-} from 'lucide-react';
+import { Search } from 'lucide-react';
 import DoctorCard from '@/components/DoctorCard';
-import LoadingSkeleton from '@/components/LoadingSkeleton';
 import ErrorState from '@/components/ErrorState';
 import EmptyState from '@/components/EmptyState';
 import { getClinicDetail } from '@/lib/mockData';
@@ -34,7 +30,7 @@ export default function ClinicDoctorsPage() {
     }
   }, []);
 
-  useEffect(() => { loadData(); }, [loadData]);
+  useEffect(() => { queueMicrotask(() => loadData()); }, [loadData]);
 
   const filtered = doctors.filter(d =>
     d.name.toLowerCase().includes(search.toLowerCase()) ||

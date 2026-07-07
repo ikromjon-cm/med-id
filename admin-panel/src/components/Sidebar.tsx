@@ -1,15 +1,15 @@
 'use client';
 
 import { usePathname, useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { t } from '@/lib/i18n';
 import {
   LayoutDashboard, Users, Building2, Stethoscope,
   BarChart3, ScrollText, Bell, Settings, LogOut, X,
-  Activity, AlertTriangle
+  AlertTriangle
 } from 'lucide-react';
-import { useState } from 'react';
 
 const navSections = [
   {
@@ -61,7 +61,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
     <div className="flex flex-col h-full">
       <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100 dark:border-gray-800/50">
         <div className="flex items-center gap-3">
-          <img src="/logo.jpg" alt="MED-ID" className="w-9 h-9 rounded-xl" />
+          <Image src="/logo.jpg" alt="MED-ID" width={36} height={36} className="rounded-xl" />
           <div>
             <h1 className="text-base font-bold text-gray-900 dark:text-white tracking-tight">{t('MED-ID')}</h1>
             <p className="text-[10px] text-gray-500 dark:text-gray-400 font-medium tracking-wider uppercase">{t('Admin Panel')}</p>

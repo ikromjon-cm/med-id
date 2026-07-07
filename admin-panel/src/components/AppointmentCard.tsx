@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Clock, Calendar, Stethoscope } from 'lucide-react';
+import { Calendar, Stethoscope } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { t } from '@/lib/i18n';
 import type { Appointment } from '@/lib/types';

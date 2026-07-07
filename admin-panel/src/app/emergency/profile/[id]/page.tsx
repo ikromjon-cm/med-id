@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import {
-  ArrowLeft, User, Droplets, ShieldAlert, AlertTriangle,
+  ArrowLeft, User, Droplets, ShieldAlert,
   Pill, Phone, Heart, Zap, Clock, CheckCircle2,
   AlertCircle
 } from 'lucide-react';
@@ -40,7 +40,7 @@ export default function EmergencyProfilePage() {
     }
   }, [patientId]);
 
-  useEffect(() => { loadData(); }, [loadData]);
+  useEffect(() => { queueMicrotask(() => loadData()); }, [loadData]);
 
   if (error) return <ErrorState onRetry={loadData} />;
 

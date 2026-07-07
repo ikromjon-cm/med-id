@@ -13,16 +13,9 @@ import EmptyState from '@/components/EmptyState';
 import ChartCard from '@/components/ChartCard';
 import Modal from '@/components/Modal';
 import FormInput from '@/components/FormInput';
-import { getEmergencyAlerts, resolveEmergencyAlert, emergencyAlerts, emergencyAccessLogs, getEmergencyStaffList } from '@/lib/mockData';
+import { getEmergencyAlerts, resolveEmergencyAlert, emergencyAccessLogs, getEmergencyStaffList } from '@/lib/mockData';
 import type { EmergencyAlert, EmergencyStaff } from '@/lib/types';
 import { t } from '@/lib/i18n';
-
-const roleLabels: Record<string, string> = {
-  paramedic: 'Paramedic',
-  emergency_doctor: 'Emergency Doctor',
-  emergency_nurse: 'Emergency Nurse',
-  dispatcher: 'Dispatcher',
-};
 
 const statusVariants: Record<string, string> = {
   available: 'bg-[#00C896]/10 text-[#00C896]',
@@ -46,7 +39,7 @@ const statusUzLabels: Record<string, string> = {
 export default function EmergencyDashboardPage() {
   const router = useRouter();
   const [alerts, setAlerts] = useState<EmergencyAlert[]>([]);
-  const [logs, setLogs] = useState(typeof emergencyAccessLogs !== 'undefined' ? emergencyAccessLogs : []);
+  const [logs] = useState(typeof emergencyAccessLogs !== 'undefined' ? emergencyAccessLogs : []);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [staffList, setStaffList] = useState<EmergencyStaff[]>([]);
@@ -68,7 +61,7 @@ export default function EmergencyDashboardPage() {
     }
   }, []);
 
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => { queueMicrotask(() => load()); }, [load]);
 
   const handleResolve = (id: string) => {
     resolveEmergencyAlert(id);
@@ -212,7 +205,7 @@ export default function EmergencyDashboardPage() {
                   key={alert.id}
                   alert={alert}
                   onResolve={handleResolve}
-                  onViewProfile={(patientId) => {}}
+                  onViewProfile={() => {}}
                   delay={i * 0.05}
                 />
               ))}

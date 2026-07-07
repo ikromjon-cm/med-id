@@ -2,10 +2,9 @@
 
 import { motion } from 'framer-motion';
 import {
-  Smartphone, Tablet, Monitor, CheckCircle, ArrowRight,
+  Smartphone, Monitor, CheckCircle,
   Apple, QrCode, Shield, Star, Download,
 } from 'lucide-react';
-import Link from 'next/link';
 import { t } from '@/lib/i18n';
 
 const fadeUp = {

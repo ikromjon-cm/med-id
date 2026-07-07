@@ -10,13 +10,6 @@ import { getBlogPosts } from '@/lib/mockData';
 import type { BlogPost } from '@/lib/types';
 import { t } from '@/lib/i18n';
 
-const fadeUp = {
-  initial: { opacity: 0, y: 30 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: '-60px' },
-  transition: { duration: 0.5 },
-};
-
 const gradients: Record<string, string> = {
   Technology: 'from-blue-400/20 to-purple-400/20',
   'Emergency Care': 'from-emergency/20 to-orange-400/20',

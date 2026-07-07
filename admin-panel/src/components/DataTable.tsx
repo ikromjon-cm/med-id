@@ -25,7 +25,7 @@ interface DataTableProps<T> {
   className?: string;
 }
 
-export default function DataTable<T extends Record<string, any>>({
+export default function DataTable<T>({
   data,
   columns,
   keyExtractor,
@@ -51,20 +51,22 @@ export default function DataTable<T extends Record<string, any>>({
       const s = search.toLowerCase();
       items = items.filter(item =>
         columns.some(col => {
-          const val = item[col.key];
+          const val = (item as Record<string, unknown>)[col.key];
           return val != null && String(val).toLowerCase().includes(s);
         })
       );
     }
     if (sortKey) {
       items = [...items].sort((a, b) => {
-        const aVal = a[sortKey];
-        const bVal = b[sortKey];
+        const aVal = (a as Record<string, unknown>)[sortKey];
+        const bVal = (b as Record<string, unknown>)[sortKey];
         if (aVal == null) return 1;
         if (bVal == null) return -1;
-        const cmp = typeof aVal === 'string'
-          ? aVal.localeCompare(bVal)
-          : aVal - bVal;
+        if (typeof aVal === 'string' && typeof bVal === 'string') {
+          const cmp = aVal.localeCompare(bVal);
+          return sortDir === 'asc' ? cmp : -cmp;
+        }
+        const cmp = (aVal as number) - (bVal as number);
         return sortDir === 'asc' ? cmp : -cmp;
       });
     }
@@ -155,7 +157,7 @@ export default function DataTable<T extends Record<string, any>>({
                   >
                     {columns.map(col => (
                       <td key={col.key} className="px-6 py-3.5 text-sm text-gray-700 dark:text-gray-300 whitespace-nowrap">
-                        {col.render ? col.render(item) : item[col.key]}
+                        {col.render ? col.render(item) : (item as Record<string, unknown>)[col.key] as ReactNode}
                       </td>
                     ))}
                     {(onEdit || onDelete) && (

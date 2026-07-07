@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Plus, Send, AlertTriangle, Bell, Info, Calendar, Clock, CheckCircle, XCircle } from 'lucide-react';
+import { Plus, Send, AlertTriangle, Bell, Info, Calendar, Clock } from 'lucide-react';
 import Modal from '@/components/Modal';
 import FormInput from '@/components/FormInput';
 import StatusBadge from '@/components/StatusBadge';
@@ -58,7 +58,7 @@ export default function NotificationsPage() {
     setLoading(false);
   }, []);
 
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => { queueMicrotask(() => load()); }, [load]);
 
   const openCreate = () => {
     setForm({ type: 'Alert', title: '', message: '', recipients: [], recipientType: 'all' });

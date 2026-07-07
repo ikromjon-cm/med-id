@@ -49,7 +49,7 @@ export default function DoctorDashboardPage() {
     }
   }, []);
 
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => { queueMicrotask(() => load()); }, [load]);
 
   const activeDoctors = doctors.filter(d => d.status === 'active').length;
   const totalPatients = doctors.reduce((sum, d) => sum + d.patients, 0);
@@ -139,7 +139,7 @@ export default function DoctorDashboardPage() {
           <StatCard title={t('Total Doctors')} value={doctors.length} icon={<Stethoscope className="w-6 h-6" />} color="primary" delay={0} subtitle={t('All registered doctors')} />
           <StatCard title={t('Active Doctors')} value={activeDoctors} icon={<Activity className="w-6 h-6" />} color="secondary" delay={0.1} subtitle={t('Currently active')} />
           <StatCard title={t('Total Patients')} value={totalPatients.toLocaleString()} icon={<Users className="w-6 h-6" />} color="amber" delay={0.2} subtitle={t('Across all doctors')} />
-          <StatCard title={t('Appointments Today')} value={Math.floor(Math.random() * 50 + 20)} icon={<Calendar className="w-6 h-6" />} color="emergency" delay={0.3} subtitle={t('Scheduled for today')} />
+          <StatCard title={t('Appointments Today')} value={30} icon={<Calendar className="w-6 h-6" />} color="emergency" delay={0.3} subtitle={t('Scheduled for today')} />
         </div>
       )}
 

@@ -15,8 +15,7 @@ import AppointmentCard from '@/components/AppointmentCard';
 import QueueStatus from '@/components/QueueStatus';
 import ClinicFinanceChart from '@/components/ClinicFinanceChart';
 import StaffCard from '@/components/StaffCard';
-import { getClinicDetail, getClinics } from '@/lib/mockData';
-import type { Clinic, Doctor } from '@/lib/types';
+import { getClinicDetail } from '@/lib/mockData';
 import { t } from '@/lib/i18n';
 
 export default function ClinicDetailPage() {
@@ -38,7 +37,7 @@ export default function ClinicDetailPage() {
     }
   }, [params.id]);
 
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => { queueMicrotask(() => load()); }, [load]);
 
   if (error) return <ErrorState onRetry={load} />;
   if (loading) {

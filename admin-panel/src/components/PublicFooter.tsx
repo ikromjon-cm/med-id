@@ -1,6 +1,7 @@
 'use client';
 
 import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { t } from '@/lib/i18n';
@@ -19,7 +20,7 @@ export default function PublicFooter() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2 text-white hover:opacity-80 transition-opacity">
-              <img src="/logo.jpg" alt="MED-ID" className="w-8 h-8 rounded-lg" />
+              <Image src="/logo.jpg" alt="MED-ID" width={32} height={32} className="rounded-lg" />
               <span className="text-xl font-bold">{t('MED-ID')}</span>
             </Link>
             <p className="text-sm leading-relaxed text-gray-400">

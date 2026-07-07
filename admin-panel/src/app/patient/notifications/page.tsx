@@ -4,9 +4,8 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import {
-  Bell, AlertTriangle, Info, RefreshCw,
-  Shield, CheckCircle2, Clock, Filter,
-  X, AlertCircle
+  Bell, AlertTriangle, RefreshCw,
+  Shield, CheckCircle2, Clock
 } from 'lucide-react';
 import { getNotifications } from '@/lib/mockData';
 import type { Notification } from '@/lib/types';

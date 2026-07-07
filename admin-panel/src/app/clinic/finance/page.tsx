@@ -37,7 +37,7 @@ export default function FinancePage() {
     }
   }, []);
 
-  useEffect(() => { loadData(); }, [loadData]);
+  useEffect(() => { queueMicrotask(() => loadData()); }, [loadData]);
 
   if (error) return <ErrorState onRetry={loadData} />;
 
@@ -153,4 +153,4 @@ export default function FinancePage() {
   );
 }
 
-function cn(...classes: any[]) { return classes.filter(Boolean).join(' '); }
+function cn(...classes: (string | boolean | undefined | null)[]) { return classes.filter(Boolean).join(' '); }

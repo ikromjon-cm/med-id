@@ -4,14 +4,13 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import {
-  FileText, File, Upload, Trash2, Search, Filter,
-  X, AlertTriangle, Download, Calendar, HardDrive,
-  FileCheck, FileX, Stethoscope, Syringe,
+  FileText, File, Upload, Trash2,
+  X, AlertTriangle, Calendar, HardDrive,
+  FileCheck, Stethoscope, Syringe,
   ScanLine, FileImage
 } from 'lucide-react';
 import {
-  getPatientDocuments, addPatientDocument, deletePatientDocument,
-  getPatientProfile
+  getPatientDocuments, addPatientDocument, deletePatientDocument
 } from '@/lib/mockData';
 import type { PatientDocument } from '@/lib/types';
 import { formatDate } from '@/lib/utils';
@@ -33,7 +32,7 @@ export default function DocumentsPage() {
   const [documents, setDocuments] = useState<PatientDocument[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('All');
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [viewMode] = useState<'grid' | 'list'>('grid');
   const [deleteModal, setDeleteModal] = useState<string | null>(null);
   const [showUpload, setShowUpload] = useState(false);
   const [uploadData, setUploadData] = useState({ name: '', type: 'Other' as PatientDocument['type'], size: '0 B' });
@@ -69,13 +68,6 @@ export default function DocumentsPage() {
     await deletePatientDocument(patientId, docId);
     setDocuments(prev => prev.filter(d => d.id !== docId));
     setDeleteModal(null);
-  };
-
-  const getFileSize = () => {
-    const sizes = ['KB', 'MB', 'GB'];
-    const size = Math.floor(Math.random() * 5000) + 100;
-    const i = Math.floor(Math.log(size) / Math.log(1024));
-    return (size / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];
   };
 
   if (loading) {

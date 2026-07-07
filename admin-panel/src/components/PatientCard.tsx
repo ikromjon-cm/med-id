@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { User, Droplets, Phone, Calendar } from 'lucide-react';
+import { User, Droplets, Calendar } from 'lucide-react';
 import { t } from '@/lib/i18n';
 import StatusBadge from './StatusBadge';
 import { formatDate } from '@/lib/utils';

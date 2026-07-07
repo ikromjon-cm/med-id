@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 import {
   QrCode, Download, Share2, Shield, Info,
   Heart, AlertTriangle, CheckCircle2, Droplets,
-  Activity, Smartphone, ScanLine, ExternalLink
+  Activity
 } from 'lucide-react';
 import { getPatientProfile } from '@/lib/mockData';
 import type { PatientProfile } from '@/lib/types';

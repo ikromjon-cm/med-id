@@ -12,10 +12,10 @@ import ErrorState from '@/components/ErrorState';
 import EmptyState from '@/components/EmptyState';
 import Modal from '@/components/Modal';
 import {
-  getClinicQueue, updateQueueEntry, addToQueue, patients
+  getClinicQueue, updateQueueEntry, addToQueue
 } from '@/lib/mockData';
 import { t } from '@/lib/i18n';
-import type { QueueEntry, Patient } from '@/lib/types';
+import type { QueueEntry } from '@/lib/types';
 
 const CLINIC_ID = 'CLN-001';
 
@@ -38,7 +38,6 @@ export default function QueuePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [addModalOpen, setAddModalOpen] = useState(false);
-  const [patients, setPatients] = useState<Patient[]>([]);
   const [formData, setFormData] = useState({ patientId: '', patientName: '', priority: 'MEDIUM' as QueueEntry['priority'] });
 
   const loadData = useCallback(async () => {
@@ -47,7 +46,6 @@ export default function QueuePage() {
     try {
       const q = await Promise.resolve(getClinicQueue(CLINIC_ID));
       setQueue(q);
-      setPatients(patients);
     } catch {
       setError(true);
     } finally {
@@ -55,7 +53,7 @@ export default function QueuePage() {
     }
   }, []);
 
-  useEffect(() => { loadData(); }, [loadData]);
+  useEffect(() => { queueMicrotask(() => loadData()); }, [loadData]);
 
   const filtered = filter === 'ALL' ? queue : queue.filter(e => e.status === filter);
 

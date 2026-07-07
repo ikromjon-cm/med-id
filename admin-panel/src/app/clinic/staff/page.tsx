@@ -39,7 +39,7 @@ export default function StaffPage() {
     }
   }, []);
 
-  useEffect(() => { loadData(); }, [loadData]);
+  useEffect(() => { queueMicrotask(() => loadData()); }, [loadData]);
 
   const handleAdd = async () => {
     if (!formData.name.trim() || !formData.email.trim()) return;

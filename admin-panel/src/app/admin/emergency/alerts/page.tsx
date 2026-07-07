@@ -32,7 +32,7 @@ export default function EmergencyAlertsPage() {
     }
   }, []);
 
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => { queueMicrotask(() => load()); }, [load]);
 
   const handleResolve = (id: string) => {
     resolveEmergencyAlert(id);

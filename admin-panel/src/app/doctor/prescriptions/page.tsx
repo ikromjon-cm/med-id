@@ -2,9 +2,8 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Pill, Plus, Calendar, User } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import DataTable from '@/components/DataTable';
-import LoadingSkeleton from '@/components/LoadingSkeleton';
 import ErrorState from '@/components/ErrorState';
 import Modal from '@/components/Modal';
 import StatusBadge from '@/components/StatusBadge';
@@ -35,7 +34,7 @@ export default function PrescriptionsPage() {
     }
   }, []);
 
-  useEffect(() => { loadData(); }, [loadData]);
+  useEffect(() => { queueMicrotask(() => loadData()); }, [loadData]);
 
   const handleCreate = async () => {
     if (!formData.medication.trim() || !formData.dosage.trim() || !formData.patientName.trim()) return;

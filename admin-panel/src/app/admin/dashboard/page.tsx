@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import {
   Users, Stethoscope, Building2, FileText,
-  Activity, Clock, UserPlus, Shield, Download
+  Activity, Clock, UserPlus, Download
 } from 'lucide-react';
 import {
   LineChart, Line, AreaChart, Area, BarChart, Bar,
@@ -59,7 +59,7 @@ export default function DashboardPage() {
     }
   }, []);
 
-  useEffect(() => { loadData(); }, [loadData]);
+  useEffect(() => { queueMicrotask(() => loadData()); }, [loadData]);
 
   if (error) return <ErrorState onRetry={loadData} />;
 
@@ -282,4 +282,4 @@ export default function DashboardPage() {
   );
 }
 
-function cn(...classes: any[]) { return classes.filter(Boolean).join(' '); }
+function cn(...classes: (string | boolean | undefined | null)[]) { return classes.filter(Boolean).join(' '); }

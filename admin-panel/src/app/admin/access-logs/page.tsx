@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Download, Filter, Search } from 'lucide-react';
 import DataTable from '@/components/DataTable';
-import FormInput from '@/components/FormInput';
 import { getAccessLogs } from '@/lib/mockData';
 import { formatDateTime } from '@/lib/utils';
 import type { AccessLog } from '@/lib/types';
@@ -33,7 +32,7 @@ export default function AccessLogsPage() {
     setLoading(false);
   }, [search, roleFilter, startDate, endDate]);
 
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => { queueMicrotask(() => load()); }, [load]);
 
   const handleExport = () => {
     const csv = [[t('User'), t('Role'), t('Action'), t('Resource'), t('Timestamp'), t('IP')].join(',')];

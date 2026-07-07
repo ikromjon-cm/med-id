@@ -10,14 +10,11 @@ import LoadingSkeleton from '@/components/LoadingSkeleton';
 import ErrorState from '@/components/ErrorState';
 import EmptyState from '@/components/EmptyState';
 import StatusBadge from '@/components/StatusBadge';
-import { patients as mockPatients, getClinicDetail } from '@/lib/mockData';
+import { patients as mockPatients } from '@/lib/mockData';
 import type { Patient } from '@/lib/types';
 import { formatDate } from '@/lib/utils';
 import { t } from '@/lib/i18n';
-import { cn } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
-
-const CLINIC_ID = 'CLN-001';
 
 export default function CRMPage() {
   const router = useRouter();
@@ -39,7 +36,7 @@ export default function CRMPage() {
     }
   }, []);
 
-  useEffect(() => { loadData(); }, [loadData]);
+  useEffect(() => { queueMicrotask(() => loadData()); }, [loadData]);
 
   const filtered = patients.filter(p =>
     p.name.toLowerCase().includes(search.toLowerCase()) ||

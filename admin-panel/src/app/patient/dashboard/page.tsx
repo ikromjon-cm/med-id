@@ -6,22 +6,17 @@ import { cn } from '@/lib/utils';
 import {
   UserCircle, QrCode, Phone, FileText, Calendar,
   Clock, ShieldCheck, Droplets, Heart, Activity,
-  ChevronRight, Stethoscope, MapPin, AlertCircle,
+  Stethoscope, MapPin, AlertCircle,
   ArrowUpRight
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import {
-  getPatientProfile, getPatientDocuments, getEmergencyContacts,
-  patients, appointments
+  getPatientProfile,
+  appointments
 } from '@/lib/mockData';
-import type { PatientProfile, Appointment } from '@/lib/types';
+import type { PatientProfile } from '@/lib/types';
 import { formatDate } from '@/lib/utils';
 import { t } from '@/lib/i18n';
-
-const fadeUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-};
 
 export default function PatientDashboard() {
   const router = useRouter();

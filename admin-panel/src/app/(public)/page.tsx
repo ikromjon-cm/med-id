@@ -45,7 +45,7 @@ export default function HomePage() {
   const [partners, setPartners] = useState<Partner[]>([]);
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [features, setFeatures] = useState<Feature[]>([]);
-  const [stats, setStats] = useState({ totalUsers: 0, activeDoctors: 0, partnerClinics: 0, emergencyAccesses: 0, documentsStored: 0, countriesReached: 0 });
+  const [, setStats] = useState({ totalUsers: 0, activeDoctors: 0, partnerClinics: 0, emergencyAccesses: 0, documentsStored: 0, countriesReached: 0 });
   const [testimonialIdx, setTestimonialIdx] = useState(0);
   const [counts, setCounts] = useState<Record<string, number>>({});
   const statsRef = useRef<HTMLDivElement>(null);
@@ -67,7 +67,7 @@ export default function HomePage() {
         ([entry]) => {
           if (entry.isIntersecting) {
             keys.forEach(key => {
-              const target = (s as any)[key] as number;
+              const target = (s as Record<string, number>)[key];
               const duration = durations[key] || 1500;
               const steps = 60;
               const increment = target / steps;

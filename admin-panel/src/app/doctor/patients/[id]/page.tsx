@@ -5,7 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import {
   User, Droplets, Phone, Calendar, ArrowLeft, Stethoscope,
-  Pill, FileText, Clock, Plus, Activity
+  Pill, FileText, Plus
 } from 'lucide-react';
 import LoadingSkeleton from '@/components/LoadingSkeleton';
 import ErrorState from '@/components/ErrorState';
@@ -56,7 +56,7 @@ export default function PatientDetailPage() {
     }
   }, [patientId]);
 
-  useEffect(() => { loadData(); }, [loadData]);
+  useEffect(() => { queueMicrotask(() => loadData()); }, [loadData]);
 
   const handleCreateDiagnosis = async () => {
     if (!diagForm.condition.trim()) return;
@@ -171,7 +171,7 @@ export default function PatientDetailPage() {
           {/* Access Request Section */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }} className="glass-card rounded-2xl p-6">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-base font-semibold text-gray-900 dark:text-white">Kirish So'rovi</h3>
+              <h3 className="text-base font-semibold text-gray-900 dark:text-white">Kirish So&apos;rovi</h3>
               <span className={cn(
                 'px-2.5 py-0.5 text-xs font-medium rounded-full inline-flex items-center gap-1.5',
                 accessPending ? 'bg-amber-50 dark:bg-amber-500/10 text-amber-500' :
@@ -191,7 +191,7 @@ export default function PatientDetailPage() {
                 onClick={() => setAccessConfirmModal(true)}
                 className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-primary text-white text-sm font-medium hover:bg-primary-dark transition-all shadow-lg shadow-primary/20"
               >
-                <User className="w-4 h-4" /> To'liq Kirish So'rash
+                <User className="w-4 h-4" /> To&apos;liq Kirish So&apos;rash
               </motion.button>
             )}
             <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-800/30">
@@ -199,7 +199,7 @@ export default function PatientDetailPage() {
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-sm">
                   <span className="text-[#00C896]">✅</span>
-                  <span className="text-gray-700 dark:text-gray-300">Asosiy Ma'lumotlar</span>
+                  <span className="text-gray-700 dark:text-gray-300">Asosiy Ma&apos;lumotlar</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <span className="text-[#00C896]">✅</span>
@@ -209,7 +209,7 @@ export default function PatientDetailPage() {
                   <span className={accessPending ? 'text-amber-500' : 'text-gray-300 dark:text-gray-600'}>
                     {accessPending ? '⏳' : '❌'}
                   </span>
-                  <span className={cn(accessPending ? 'text-gray-500' : 'text-gray-400')}>To'liq Yozuvlar</span>
+                  <span className={cn(accessPending ? 'text-gray-500' : 'text-gray-400')}>To&apos;liq Yozuvlar</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <span className={accessPending ? 'text-amber-500' : 'text-gray-300 dark:text-gray-600'}>
@@ -436,7 +436,7 @@ export default function PatientDetailPage() {
         }
       >
         <p className="text-sm text-gray-600 dark:text-gray-400">
-          To'liq kirish so'rovi bemorga yuboriladi va uning tasdig'idan so'ng barcha ma'lumotlarga kirish huquqiga ega bo'lasiz.
+          To&apos;liq kirish so&apos;rovi bemorga yuboriladi va uning tasdig&apos;idan so&apos;ng barcha ma&apos;lumotlarga kirish huquqiga ega bo&apos;lasiz.
         </p>
       </Modal>
     </div>

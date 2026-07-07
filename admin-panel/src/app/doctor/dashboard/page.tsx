@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import {
-  Users, CalendarDays, Stethoscope, Pill, Clock,
+  Users, CalendarDays, Stethoscope, Pill,
   ChevronRight
 } from 'lucide-react';
 import StatCard from '@/components/StatCard';
@@ -48,7 +48,7 @@ export default function DoctorDashboardPage() {
     }
   }, []);
 
-  useEffect(() => { loadData(); }, [loadData]);
+  useEffect(() => { queueMicrotask(() => loadData()); }, [loadData]);
 
   if (error) return <ErrorState onRetry={loadData} />;
 

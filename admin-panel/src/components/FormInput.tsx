@@ -28,7 +28,7 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
       return (
         <div className="space-y-1.5">
           {label && <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">{label}</label>}
-          <select className={baseClasses} {...(props as any)}>
+          <select className={baseClasses} {...(props as React.SelectHTMLAttributes<HTMLSelectElement>)}>
             {options?.map(opt => (
               <option key={opt.value} value={opt.value}>{opt.label}</option>
             ))}
@@ -45,7 +45,7 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
           {label && <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">{label}</label>}
           <textarea
             className={cn(baseClasses, 'min-h-[100px] resize-y')}
-            {...(props as any)}
+            {...(props as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
           />
           {error && <p className="text-xs text-emergency mt-1">{error}</p>}
         </div>
@@ -55,7 +55,7 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
     return (
       <div className="space-y-1.5">
         {label && <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">{label}</label>}
-        <input ref={ref as any} className={baseClasses} {...props} />
+        <input ref={ref} className={baseClasses} {...props} />
         {error && <p className="text-xs text-emergency mt-1">{error}</p>}
       </div>
     );

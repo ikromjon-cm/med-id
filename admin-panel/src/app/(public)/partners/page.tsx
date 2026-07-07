@@ -1,23 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   Building2, Search, MapPin, Phone, Users, ArrowRight,
   Star, ChevronRight, Handshake,
 } from 'lucide-react';
 import Link from 'next/link';
-import { cn } from '@/lib/utils';
-import { getPartners, getSiteStats } from '@/lib/mockData';
-import type { Partner } from '@/lib/types';
 import { t } from '@/lib/i18n';
-
-const fadeUp = {
-  initial: { opacity: 0, y: 30 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: '-60px' },
-  transition: { duration: 0.5 },
-};
 
 const clinicData = [
   { id: 'CLN-001', name: 'Med-ID Central Hospital', address: '742 Evergreen Terrace, New York, NY', phone: '+1 (212) 555-0101', doctors: 45, patients: 12000, rating: 4.8 },

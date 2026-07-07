@@ -12,7 +12,7 @@ import ErrorState from '@/components/ErrorState';
 import EmptyState from '@/components/EmptyState';
 import PatientCard from '@/components/PatientCard';
 import AppointmentCard from '@/components/AppointmentCard';
-import { getDoctorDetail, getDoctorById } from '@/lib/mockData';
+import { getDoctorDetail } from '@/lib/mockData';
 import type { DoctorDetail } from '@/lib/types';
 import { formatDate } from '@/lib/utils';
 import { t } from '@/lib/i18n';
@@ -37,7 +37,7 @@ export default function DoctorDetailPage() {
     }
   }, [params.id]);
 
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => { queueMicrotask(() => load()); }, [load]);
 
   if (error) return <ErrorState onRetry={load} />;
   if (loading) {

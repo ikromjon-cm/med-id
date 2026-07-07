@@ -1,5 +1,5 @@
 import { User, Clinic, Doctor, AccessLog, Notification, DashboardStats, ChartDataPoint, Patient, Appointment, Diagnosis, Prescription, EmergencyAlert, QueueEntry, ClinicFinance, EmergencyAccessLog, DoctorDetail, Testimonial, Partner, BlogPost, FAQItem, Feature, ContactMessage, EmergencyStaff, ClinicEmployee, PatientDocument, EmergencyContact, SecuritySession, PatientProfile, ClinicDashboardStats, DoctorDashboardStats } from './types';
-import { delay, generateId } from './utils';
+import { delay } from './utils';
 
 const SPECIALIZATIONS = ['Cardiology', 'Neurology', 'Pediatrics', 'Orthopedics', 'Dermatology', 'Oncology', 'Radiology', 'Anesthesiology', 'Emergency Medicine', 'Family Medicine', 'Internal Medicine', 'Obstetrics', 'Ophthalmology', 'Pathology', 'Psychiatry', 'Surgery', 'Urology', 'Endocrinology', 'Gastroenterology', 'Pulmonology'];
 
@@ -34,7 +34,7 @@ function randomIP(): string {
 const now = new Date();
 const sixMonthsAgo = new Date(now.getTime() - 180 * 24 * 60 * 60 * 1000);
 
-export let users: User[] = Array.from({ length: 48 }, (_, i) => ({
+export const users: User[] = Array.from({ length: 48 }, (_, i) => ({
   id: `USR-${String(i + 1).padStart(4, '0')}`,
   name: `${randomFrom(FIRST_NAMES)} ${randomFrom(LAST_NAMES)}`,
   email: `user${i + 1}@medid.com`,
@@ -44,7 +44,7 @@ export let users: User[] = Array.from({ length: 48 }, (_, i) => ({
 }));
 users[0] = { ...users[0], name: 'Admin User', email: 'admin@medid.com', role: 'admin', status: 'active' };
 
-export let clinics: Clinic[] = CLINIC_NAMES.map((name, i) => ({
+export const clinics: Clinic[] = CLINIC_NAMES.map((name, i) => ({
   id: `CLN-${String(i + 1).padStart(3, '0')}`,
   name,
   address: CLINIC_ADDRESSES[i] || `${Math.floor(Math.random() * 999) + 1} Medical Plaza`,
@@ -53,7 +53,7 @@ export let clinics: Clinic[] = CLINIC_NAMES.map((name, i) => ({
   doctorsCount: Math.floor(Math.random() * 15) + 3,
 }));
 
-export let doctors: Doctor[] = Array.from({ length: 36 }, (_, i) => ({
+export const doctors: Doctor[] = Array.from({ length: 36 }, (_, i) => ({
   id: `DOC-${String(i + 1).padStart(3, '0')}`,
   name: `Dr. ${randomFrom(FIRST_NAMES)} ${randomFrom(LAST_NAMES)}`,
   specialization: randomFrom(SPECIALIZATIONS),
@@ -62,7 +62,7 @@ export let doctors: Doctor[] = Array.from({ length: 36 }, (_, i) => ({
   patients: Math.floor(Math.random() * 200) + 20,
 }));
 
-export let accessLogs: AccessLog[] = Array.from({ length: 100 }, (_, i) => ({
+export const accessLogs: AccessLog[] = Array.from({ length: 100 }, (_, i) => ({
   id: `LOG-${String(i + 1).padStart(4, '0')}`,
   user: `${randomFrom(FIRST_NAMES)} ${randomFrom(LAST_NAMES)}`,
   role: randomFrom(['Admin', 'Doctor', 'Nurse', 'Receptionist', 'Patient']),
@@ -72,7 +72,7 @@ export let accessLogs: AccessLog[] = Array.from({ length: 100 }, (_, i) => ({
   ip: randomIP(),
 }));
 
-export let notifications: Notification[] = [
+export const notifications: Notification[] = [
   {
     id: 'NOTIF-001',
     type: 'Emergency',

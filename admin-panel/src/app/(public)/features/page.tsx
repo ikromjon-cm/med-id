@@ -1,15 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   Shield, AlertTriangle, Fingerprint, FileText, Bell, Wifi,
-  CheckCircle, ArrowRight, Smartphone, ScanLine, HeartPulse,
-  Globe, Lock, Eye, Share2,
+  CheckCircle, ArrowRight, Sparkles, Lock, Eye, Share2,
 } from 'lucide-react';
 import Link from 'next/link';
-import { getFeatures } from '@/lib/mockData';
-import type { Feature } from '@/lib/types';
 import { t } from '@/lib/i18n';
 
 const fadeUp = {
@@ -19,77 +15,6 @@ const fadeUp = {
   transition: { duration: 0.5 },
 };
 
-const featureIcons: Record<string, React.ReactNode> = {
-  shield: <Shield className="w-8 h-8" />,
-  alert: <AlertTriangle className="w-8 h-8" />,
-  id: <Fingerprint className="w-8 h-8" />,
-  file: <FileText className="w-8 h-8" />,
-  bell: <Bell className="w-8 h-8" />,
-  wifi: <Wifi className="w-8 h-8" />,
-};
-
-const expandedFeatures: Record<string, { benefits: string[]; gradient: string }> = {
-  'FTR-001': {
-    benefits: [
-      'Fingerprint and facial recognition authentication',
-      'Biometric data stored in secure device enclave',
-      'Anti-spoofing technology prevents unauthorized access',
-      'Multi-factor authentication option available',
-      'Instant biometric verification under 0.5 seconds',
-    ],
-    gradient: 'from-primary/20 to-primary/5',
-  },
-  'FTR-002': {
-    benefits: [
-      'One QR scan grants access to critical medical data',
-      'First responders get blood type, allergies, medications instantly',
-      'Time-limited emergency access with automatic revocation',
-      'Real-time SMS and push notification to patient',
-      'Complete audit trail with timestamp and staff ID',
-    ],
-    gradient: 'from-emergency/20 to-emergency/5',
-  },
-  'FTR-003': {
-    benefits: [
-      'Universal medical ID works across all healthcare providers',
-      'No need to fill forms at every new clinic or hospital',
-      'Recognized in 45+ countries worldwide',
-      'Seamless integration with existing healthcare systems',
-      'OneID technology for consistent identity verification',
-    ],
-    gradient: 'from-secondary/20 to-secondary/5',
-  },
-  'FTR-004': {
-    benefits: [
-      'Securely store lab reports, prescriptions, and imaging',
-      'Organized document management with categories',
-      'Share specific documents with healthcare providers',
-      'Cloud backup with end-to-end encryption',
-      'Access your entire medical history from any device',
-    ],
-    gradient: 'from-primary/20 to-primary/5',
-  },
-  'FTR-005': {
-    benefits: [
-      'Instant alerts when medical profile is accessed',
-      'Emergency access notifications with location details',
-      'Daily health reminders and medication alerts',
-      'Appointment and follow-up notifications',
-      'Family account activity monitoring',
-    ],
-    gradient: 'from-secondary/20 to-secondary/5',
-  },
-  'FTR-006': {
-    benefits: [
-      'Critical medical data cached on your device',
-      'Access blood type, allergies, and emergency contacts offline',
-      'Automatically syncs when connection is restored',
-      'QR code generation works without internet',
-      'Emergency information available even in remote areas',
-    ],
-    gradient: 'from-primary/20 to-primary/5',
-  },
-};
 
 const pageFeatures = [
   {
@@ -173,12 +98,6 @@ const pageFeatures = [
 ];
 
 export default function FeaturesPage() {
-  const [features, setFeatures] = useState<Feature[]>([]);
-
-  useEffect(() => {
-    getFeatures().then(setFeatures);
-  }, []);
-
   return (
     <div className="pt-20 bg-bg-main dark:bg-[#0F0F15]">
       {/* HERO */}
@@ -189,6 +108,9 @@ export default function FeaturesPage() {
         </div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/10 text-primary text-sm font-medium mb-6">
+              <Sparkles className="w-4 h-4" /> {t('All Features')}
+            </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
               {t('Powerful Features for')}{' '}
               <span className="text-primary">{t('Better Healthcare')}</span>

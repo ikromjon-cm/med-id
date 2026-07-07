@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import {
-  LayoutDashboard, AlertTriangle, Scan, User,
+  LayoutDashboard, AlertTriangle, Scan,
   ScrollText, LogOut, X, Menu, Activity,
   Sun, Moon
 } from 'lucide-react';

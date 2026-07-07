@@ -39,7 +39,7 @@ export default function DoctorsPage() {
     setLoading(false);
   }, []);
 
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => { queueMicrotask(() => load()); }, [load]);
 
   const openCreate = () => {
     setEditing(null);
