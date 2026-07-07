@@ -126,10 +126,10 @@ export default function PatientDashboard() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: t('Documents'), value: profile.documents.length, icon: FileText, color: 'from-blue-500 to-blue-600', path: '/documents' },
-          { label: t('Upcoming Appointments'), value: upcomingAppts.length, icon: Calendar, color: 'from-emerald-500 to-emerald-600', path: '/appointments' },
-          { label: t('Emergency Contacts'), value: profile.emergencyContacts.length, icon: Phone, color: 'from-amber-500 to-amber-600', path: '/emergency-contacts' },
-          { label: t('Allergies'), value: profile.allergies.length, icon: AlertCircle, color: 'from-rose-500 to-rose-600', path: '/profile' },
+          { label: t('Documents'), value: profile.documents.length, icon: FileText, color: 'from-blue-500 to-blue-600', path: '/patient/documents' },
+          { label: t('Upcoming Appointments'), value: upcomingAppts.length, icon: Calendar, color: 'from-emerald-500 to-emerald-600', path: '/patient/appointments' },
+          { label: t('Emergency Contacts'), value: profile.emergencyContacts.length, icon: Phone, color: 'from-amber-500 to-amber-600', path: '/patient/emergency-contacts' },
+          { label: t('Allergies'), value: profile.allergies.length, icon: AlertCircle, color: 'from-rose-500 to-rose-600', path: '/patient/profile' },
         ].map((stat, i) => (
           <motion.button
             key={stat.label}
@@ -167,10 +167,10 @@ export default function PatientDashboard() {
           </h3>
           <div className="grid grid-cols-2 gap-3">
             {[
-              { label: t('View Profile'), icon: UserCircle, path: '/profile', color: 'text-primary' },
-              { label: t('My QR Code'), icon: QrCode, path: '/qr-code', color: 'text-secondary' },
-              { label: t('Emergency Contacts'), icon: Phone, path: '/emergency-contacts', color: 'text-amber-500' },
-              { label: t('Upload Document'), icon: FileText, path: '/documents', color: 'text-blue-500' },
+              { label: t('View Profile'), icon: UserCircle, path: '/patient/profile', color: 'text-primary' },
+              { label: t('My QR Code'), icon: QrCode, path: '/patient/qr-code', color: 'text-secondary' },
+              { label: t('Emergency Contacts'), icon: Phone, path: '/patient/emergency-contacts', color: 'text-amber-500' },
+              { label: t('Upload Document'), icon: FileText, path: '/patient/documents', color: 'text-blue-500' },
             ].map((action) => (
               <button
                 key={action.label}
@@ -198,7 +198,7 @@ export default function PatientDashboard() {
               {t('Upcoming Appointments')}
             </h3>
             <button
-              onClick={() => router.push('/appointments')}
+              onClick={() => router.push('/patient/appointments')}
               className="text-xs text-primary font-medium hover:underline"
             >
               {t('View all')}

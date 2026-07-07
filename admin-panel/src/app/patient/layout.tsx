@@ -12,14 +12,14 @@ import {
 import { t } from '@/lib/i18n';
 
 const navItems = [
-  { path: '/dashboard', label: t('Dashboard'), icon: LayoutDashboard },
-  { path: '/profile', label: t('Medical Profile'), icon: UserCircle },
-  { path: '/documents', label: t('My Documents'), icon: FileText },
-  { path: '/appointments', label: t('My Appointments'), icon: Calendar },
-  { path: '/emergency-contacts', label: t('Emergency Contacts'), icon: Phone },
-  { path: '/notifications', label: t('Notifications'), icon: Bell },
-  { path: '/security', label: t('Security'), icon: Shield },
-  { path: '/qr-code', label: t('QR Code'), icon: QrCode },
+  { path: '/patient/dashboard', label: t('Dashboard'), icon: LayoutDashboard },
+  { path: '/patient/profile', label: t('Medical Profile'), icon: UserCircle },
+  { path: '/patient/documents', label: t('My Documents'), icon: FileText },
+  { path: '/patient/appointments', label: t('My Appointments'), icon: Calendar },
+  { path: '/patient/emergency-contacts', label: t('Emergency Contacts'), icon: Phone },
+  { path: '/patient/notifications', label: t('Notifications'), icon: Bell },
+  { path: '/patient/security', label: t('Security'), icon: Shield },
+  { path: '/patient/qr-code', label: t('QR Code'), icon: QrCode },
 ];
 
 export default function PatientLayout({ children }: { children: React.ReactNode }) {
