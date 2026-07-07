@@ -69,3 +69,5 @@ Thumbs.db
 # Temp
 tmp/
 temp/
+.vercel
+.env*
