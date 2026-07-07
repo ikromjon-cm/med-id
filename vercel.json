@@ -1,5 +1,3 @@
 {
-  "rootDirectory": "admin-panel",
-  "framework": "nextjs",
-  "buildCommand": "next build"
+  "framework": "nextjs"
 }
