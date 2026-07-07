@@ -76,7 +76,7 @@ export default function NotificationsPage() {
           <div>
             <h2 className="text-xl font-bold text-gray-900 dark:text-white">{t('Notifications')}</h2>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              {unreadCount} {t('unread notification')}{unreadCount !== 1 ? 's' : ''}
+              {unreadCount} {t('unread notification')}
             </p>
           </div>
         </div>

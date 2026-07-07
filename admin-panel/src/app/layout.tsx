@@ -9,9 +9,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "MED-ID - Your Medical Identity, Secured by Biometrics",
+  title: "MED-ID - Tibbiy Identifikatsiyangiz, Biometriya bilan Himoyalangan",
   description:
-    "MED-ID is a biometric medical identity platform that securely stores and provides instant access to your complete medical history.",
+    "MED-ID - bu biometrik tibbiy identifikatsiya platformasi bo'lib, sizning to'liq tibbiy tarixingizni xavfsiz saqlaydi va tezkor kirish imkonini beradi.",
 };
 
 export default function RootLayout({

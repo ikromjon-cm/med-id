@@ -67,7 +67,7 @@ export default function LogsPage() {
 
   const handleExport = () => {
     const csv = [
-      ['Patient', 'Accessed By', 'Access Type', 'Timestamp', 'Status'].join(','),
+      [t('Patient'), t('Accessed By'), t('Access Type'), t('Timestamp'), t('Status')].join(','),
       ...filtered.map(l =>
         [l.patientName, l.accessedBy, l.accessType, l.timestamp, l.status].join(',')
       ),

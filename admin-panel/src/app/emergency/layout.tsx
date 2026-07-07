@@ -43,7 +43,7 @@ export default function EmergencyLayout({ children }: { children: React.ReactNod
             <Activity className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h1 className="text-base font-bold text-gray-900 dark:text-white tracking-tight">MED-ID</h1>
+            <h1 className="text-base font-bold text-gray-900 dark:text-white tracking-tight">{t('MED-ID')}</h1>
             <p className="text-[10px] text-gray-500 dark:text-gray-400 font-medium tracking-wider uppercase">{t('Emergency')}</p>
           </div>
         </div>

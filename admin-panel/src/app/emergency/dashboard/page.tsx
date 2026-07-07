@@ -60,7 +60,7 @@ export default function EmergencyDashboardPage() {
         {stats && stats.activeAlerts > 0 && (
           <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-emergency/10 text-emergency text-sm font-medium emergency-glow">
             <span className="w-2 h-2 rounded-full bg-emergency blink-alert" />
-            {stats.activeAlerts} {t('Active')} {t('Alert')}{stats.activeAlerts !== 1 ? 's' : ''}
+            {stats.activeAlerts} {t('Active')} {t('Alert')}
           </div>
         )}
       </div>

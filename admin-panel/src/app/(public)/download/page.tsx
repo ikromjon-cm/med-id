@@ -35,7 +35,7 @@ export default function DownloadPage() {
             <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
                 {t('Download')}{' '}
-                <span className="text-primary">MED-ID</span>
+                <span className="text-primary">{t('MED-ID')}</span>
               </h1>
               <p className="mt-6 text-lg text-gray-600 dark:text-gray-400 leading-relaxed max-w-xl">
                 {t('Get the MED-ID app and secure your medical identity today. Available on iOS, Android, and coming soon to desktop.')}

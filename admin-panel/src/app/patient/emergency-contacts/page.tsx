@@ -125,7 +125,7 @@ export default function EmergencyContactsPage() {
         <div>
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">{t('Emergency Contacts')}</h2>
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            {contacts.length} {t('contact')}{contacts.length !== 1 ? 's' : ''} - {t('contacts - these people will be notified in an emergency')}
+            {contacts.length} {t('contact')} - {t('contacts - these people will be notified in an emergency')}
           </p>
         </div>
         <button

@@ -78,7 +78,7 @@ export default function AppointmentsPage() {
       >
         <h2 className="text-xl font-bold text-gray-900 dark:text-white">{t('My Appointments')}</h2>
         <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-          {allAppts.filter(a => a.status === 'scheduled').length} {t('upcoming appointment')}{allAppts.filter(a => a.status === 'scheduled').length !== 1 ? 's' : ''}
+          {allAppts.filter(a => a.status === 'scheduled').length} {t('upcoming appointment')}
         </p>
       </motion.div>
 

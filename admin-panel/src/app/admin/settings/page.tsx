@@ -44,7 +44,7 @@ export default function SettingsPage() {
   const [saved, setSaved] = useState(false);
 
   const [system, setSystem] = useState({
-    appName: 'MED-ID Platform',
+    appName: t('MED-ID Platform'),
     version: '3.2.1',
     maintenanceMode: false,
   });
