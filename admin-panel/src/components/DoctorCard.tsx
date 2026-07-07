@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Stethoscope, MapPin, Users, Calendar } from 'lucide-react';
+import { t } from '@/lib/i18n';
 import StatusBadge from './StatusBadge';
 import type { Doctor } from '@/lib/types';
 
@@ -39,7 +40,7 @@ export default function DoctorCard({ doctor, onView, delay = 0 }: DoctorCardProp
             </span>
             <span className="flex items-center gap-1">
               <Users className="w-3.5 h-3.5" />
-              {doctor.patients} patients
+              {doctor.patients} {t('patients')}
             </span>
           </div>
         </div>
@@ -48,9 +49,9 @@ export default function DoctorCard({ doctor, onView, delay = 0 }: DoctorCardProp
         <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
           <span className="flex items-center gap-1">
             <Calendar className="w-3.5 h-3.5" />
-            ID: {doctor.id}
+            {t('ID')}: {doctor.id}
           </span>
-          <span className="text-primary font-medium group-hover:underline">View Profile →</span>
+          <span className="text-primary font-medium group-hover:underline">{t('View Profile')} →</span>
         </div>
       </div>
     </motion.div>

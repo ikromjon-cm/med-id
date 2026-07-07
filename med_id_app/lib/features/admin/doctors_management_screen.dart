@@ -33,15 +33,15 @@ class _DoctorsManagementScreenState extends ConsumerState<DoctorsManagementScree
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Delete Doctor'),
-        content: const Text('Are you sure?'),
+        title: const Text('Shifokorni o\'chirish'),
+        content: const Text('Ishonchingiz komilmi?'),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
+          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Bekor qilish')),
           TextButton(onPressed: () {
             MockApiService().deleteDoctor(id);
             _loadDoctors();
             Navigator.pop(ctx);
-          }, child: const Text('Delete', style: TextStyle(color: Colors.red))),
+          }, child: const Text('O\'chirish', style: TextStyle(color: Colors.red))),
         ],
       ),
     );
@@ -61,13 +61,13 @@ class _DoctorsManagementScreenState extends ConsumerState<DoctorsManagementScree
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Doctors Management', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('Shifokorlar boshqaruvi', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
           ),
           body: _loading
               ? const ShimmerLoading(itemCount: 5)
               : _doctors.isEmpty
-                  ? const EmptyStateWidget(icon: Icons.medical_services, title: 'No doctors')
+                  ? const EmptyStateWidget(icon: Icons.medical_services, title: 'Shifokorlar yo\'q')
                   : RefreshIndicator(
                       onRefresh: _loadDoctors,
                       child: ListView.builder(

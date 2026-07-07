@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../core/constants/color_constants.dart';
-import '../../core/utils/secure_storage_helper.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
@@ -24,19 +23,10 @@ class _SplashScreenState extends ConsumerState<SplashScreen> with SingleTickerPr
     _fadeAnimation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
     _scaleAnimation = Tween<double>(begin: 0.5, end: 1).animate(CurvedAnimation(parent: _controller, curve: Curves.elasticOut));
     _controller.forward();
-    _navigate();
   }
 
-  Future<void> _navigate() async {
-    await Future.delayed(const Duration(seconds: 3));
-    if (!mounted) return;
-    final onboardingDone = await SecureStorageHelper.isOnboardingDone();
-    if (!mounted) return;
-    if (onboardingDone) {
-      context.go('/otp');
-    } else {
-      context.go('/onboarding');
-    }
+  Future<void> _quickLogin() async {
+    if (mounted) context.go('/role-selection');
   }
 
   @override
@@ -68,21 +58,42 @@ class _SplashScreenState extends ConsumerState<SplashScreen> with SingleTickerPr
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    width: 100,
-                    height: 100,
+                    width: 120,
+                    height: 120,
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(24),
-                      boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 30, offset: const Offset(0, 10))],
+                      borderRadius: BorderRadius.circular(28),
+                      boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 40, offset: const Offset(0, 15))],
                     ),
-                    child: const Icon(Icons.medical_services, size: 56, color: ColorConstants.primary),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(28),
+                      child: Image.asset('assets/images/logo.jpg', width: 120, height: 120, fit: BoxFit.cover),
+                    ),
                   ),
                   const SizedBox(height: 24),
-                  Text('MED-ID', style: GoogleFonts.inter(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white, letterSpacing: 2)),
+                  Text('MED-ID', style: GoogleFonts.inter(fontSize: 36, fontWeight: FontWeight.bold, color: Colors.white, letterSpacing: 2)),
                   const SizedBox(height: 8),
-                  Text('Sog\'liq uchun yagona identifikator', style: GoogleFonts.inter(fontSize: 16, color: Colors.white70, letterSpacing: 1)),
-                  const SizedBox(height: 48),
-                  const SizedBox(width: 32, height: 32, child: CircularProgressIndicator(strokeWidth: 2.5, color: Colors.white70)),
+                  Text('Sog\'liq uchun yagona identifikator', style: GoogleFonts.inter(fontSize: 15, color: Colors.white70, letterSpacing: 0.5)),
+                  const SizedBox(height: 64),
+                  GestureDetector(
+                    onTap: _quickLogin,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 20, offset: const Offset(0, 8))],
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(Icons.login, color: ColorConstants.primary, size: 22),
+                          const SizedBox(width: 10),
+                          Text('Kirish', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600, color: ColorConstants.primary)),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

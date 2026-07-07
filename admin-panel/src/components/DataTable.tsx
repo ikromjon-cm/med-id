@@ -3,6 +3,7 @@
 import { useState, useMemo, type ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { t } from '@/lib/i18n';
 import { Search, ChevronUp, ChevronDown, ChevronLeft, ChevronRight, Pencil, Trash2 } from 'lucide-react';
 import type { TableColumn, SortDirection } from '@/lib/types';
 import EmptyState from './EmptyState';
@@ -31,7 +32,7 @@ export default function DataTable<T extends Record<string, any>>({
   onEdit,
   onDelete,
   searchable = true,
-  searchPlaceholder = 'Search...',
+  searchPlaceholder = t('Search') + '...',
   pageSize = 10,
   loading = false,
   emptyTitle,
@@ -104,15 +105,15 @@ export default function DataTable<T extends Record<string, any>>({
             </div>
           )}
           <div className="text-sm text-gray-500 dark:text-gray-400 ml-auto">
-            {filtered.length} result{filtered.length !== 1 ? 's' : ''}
+            {filtered.length} {t('results')}
           </div>
         </div>
       )}
 
       {filtered.length === 0 ? (
         <EmptyState
-          title={emptyTitle || 'No results found'}
-          description={emptyDescription || (search ? 'Try adjusting your search or filters.' : 'No data available yet.')}
+          title={emptyTitle || t('No results found')}
+          description={emptyDescription || (search ? t('Try adjusting your search or filters.') : t('No data available yet.'))}
           action={onEmptyAction ? { label: onEmptyAction.label, onClick: onEmptyAction.onClick } : undefined}
         />
       ) : (
@@ -139,7 +140,7 @@ export default function DataTable<T extends Record<string, any>>({
                     </th>
                   ))}
                   {(onEdit || onDelete) && (
-                    <th className="px-6 py-3.5 text-right text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Actions</th>
+                    <th className="px-6 py-3.5 text-right text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">{t('Actions')}</th>
                   )}
                 </tr>
               </thead>
@@ -164,7 +165,7 @@ export default function DataTable<T extends Record<string, any>>({
                             <button
                               onClick={() => onEdit(item)}
                               className="w-8 h-8 rounded-lg flex items-center justify-center text-gray-400 hover:text-primary hover:bg-primary/10 transition-all"
-                              title="Edit"
+                              title={t('Edit')}
                             >
                               <Pencil className="w-4 h-4" />
                             </button>
@@ -173,7 +174,7 @@ export default function DataTable<T extends Record<string, any>>({
                             <button
                               onClick={() => onDelete(item)}
                               className="w-8 h-8 rounded-lg flex items-center justify-center text-gray-400 hover:text-emergency hover:bg-emergency/10 transition-all"
-                              title="Delete"
+                              title={t('Delete')}
                             >
                               <Trash2 className="w-4 h-4" />
                             </button>
@@ -194,7 +195,7 @@ export default function DataTable<T extends Record<string, any>>({
                 disabled={page === 1}
                 className="flex items-center gap-1 px-3 py-1.5 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
               >
-                <ChevronLeft className="w-4 h-4" /> Previous
+                <ChevronLeft className="w-4 h-4" /> {t('Previous')}
               </button>
               <div className="flex items-center gap-1.5">
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
@@ -217,7 +218,7 @@ export default function DataTable<T extends Record<string, any>>({
                 disabled={page === totalPages}
                 className="flex items-center gap-1 px-3 py-1.5 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
               >
-                Next <ChevronRight className="w-4 h-4" />
+                {t('Next')} <ChevronRight className="w-4 h-4" />
               </button>
             </div>
           )}

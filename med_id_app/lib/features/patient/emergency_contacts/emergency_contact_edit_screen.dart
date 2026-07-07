@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../core/providers/auth_provider.dart';
 import '../../../core/providers/emergency_contact_provider.dart';
 import '../../../core/models/emergency_contact_model.dart';
 import '../../../core/widgets/animated_button.dart';
@@ -23,8 +24,9 @@ class _EmergencyContactEditScreenState extends ConsumerState<EmergencyContactEdi
   String _relation = 'Relative';
   bool _isPrimary = false;
   bool _isEditing = false;
+  bool _hasUnsavedChanges = false;
 
-  final _relations = ['Relative', 'Spouse', 'Parent', 'Sibling', 'Friend', 'Colleague', 'Doctor', 'Other'];
+  final _relations = ['Qarindosh', 'Turmush o\'rtog\'', 'Ota-ona', 'Aka-uka', 'Do\'st', 'Hamkasb', 'Shifokor', 'Boshqa'];
 
   @override
   void initState() {
@@ -55,7 +57,7 @@ class _EmergencyContactEditScreenState extends ConsumerState<EmergencyContactEdi
     if (_formKey.currentState!.validate()) {
       final contact = EmergencyContactModel(
         id: widget.contactId ?? 'ec${DateTime.now().millisecondsSinceEpoch}',
-        patientId: 'user1',
+        patientId: ref.read(authProvider).user?.id ?? 'user1',
         fullName: _nameCtrl.text.trim(),
         phone: _phoneCtrl.text.trim(),
         relation: _relation,
@@ -69,8 +71,9 @@ class _EmergencyContactEditScreenState extends ConsumerState<EmergencyContactEdi
         ref.read(emergencyContactProvider.notifier).addContact(contact);
       }
 
+      _hasUnsavedChanges = false;
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(_isEditing ? 'Contact updated' : 'Contact added'),
+        content: Text(_isEditing ? 'Kontakt yangilandi' : 'Kontakt qo\'shildi'),
         backgroundColor: const Color(0xFF00C896),
       ));
       context.pop();
@@ -88,41 +91,65 @@ class _EmergencyContactEditScreenState extends ConsumerState<EmergencyContactEdi
         ),
       ),
       child: SafeArea(
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            title: Text(_isEditing ? 'Edit Contact' : 'Add Contact', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
-            backgroundColor: Colors.transparent, elevation: 0,
-          ),
-          body: Form(
-            key: _formKey,
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                children: [
-                  TextFormField(controller: _nameCtrl, decoration: const InputDecoration(labelText: 'Full Name', prefixIcon: Icon(Icons.person)), validator: (v) => v == null || v.trim().isEmpty ? 'Name required' : null),
-                  const SizedBox(height: 16),
-                  TextFormField(controller: _phoneCtrl, decoration: const InputDecoration(labelText: 'Phone', prefixIcon: Icon(Icons.phone)), keyboardType: TextInputType.phone, validator: (v) => v == null || v.trim().isEmpty ? 'Phone required' : null),
-                  const SizedBox(height: 16),
-                  TextFormField(controller: _emailCtrl, decoration: const InputDecoration(labelText: 'Email (optional)', prefixIcon: Icon(Icons.email))),
-                  const SizedBox(height: 16),
-                  DropdownButtonFormField<String>(
-                    value: _relation,
-                    decoration: const InputDecoration(labelText: 'Relation', prefixIcon: Icon(Icons.people)),
-                    items: _relations.map((r) => DropdownMenuItem(value: r, child: Text(r))).toList(),
-                    onChanged: (v) => setState(() => _relation = v!),
-                  ),
-                  const SizedBox(height: 16),
-                  SwitchListTile(
-                    title: Text('Primary Contact', style: GoogleFonts.inter(fontSize: 14)),
-                    subtitle: Text('Primary contact is shown first in emergencies', style: GoogleFonts.inter(fontSize: 12, color: isDark ? Colors.grey[500] : Colors.grey[400])),
-                    value: _isPrimary,
-                    onChanged: (v) => setState(() => _isPrimary = v),
-                    activeColor: ColorConstants.primary,
-                  ),
-                  const SizedBox(height: 32),
-                  AnimatedButton(label: _isEditing ? 'Update Contact' : 'Add Contact', onPressed: _save),
-                ],
+        child: PopScope(
+          canPop: !_hasUnsavedChanges,
+          onPopInvokedWithResult: (didPop, _) {
+            if (!didPop) {
+              showDialog<bool>(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: const Text('Saqlanmagan o\'zgarishlar'),
+                  content: const Text('Sizda saqlanmagan o\'zgarishlar mavjud. Ularni bekor qilishni xohlaysizmi?'),
+                  actions: [
+                    TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: const Text('Qolish')),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(ctx).pop(true);
+                        if (context.mounted) Navigator.of(context).pop();
+                      },
+                      child: const Text('Bekor qilish'),
+                    ),
+                  ],
+                ),
+              );
+            }
+          },
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: AppBar(
+              title: Text(_isEditing ? 'Kontaktni tahrirlash' : 'Kontakt qo\'shish', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+              backgroundColor: Colors.transparent, elevation: 0,
+            ),
+            body: Form(
+              key: _formKey,
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    TextFormField(controller: _nameCtrl, onChanged: (_) => _hasUnsavedChanges = true, decoration: const InputDecoration(labelText: 'To\'liq ism', prefixIcon: Icon(Icons.person)), validator: (v) => v == null || v.trim().isEmpty ? 'Ism talab qilinadi' : null),
+                    const SizedBox(height: 16),
+                    TextFormField(controller: _phoneCtrl, onChanged: (_) => _hasUnsavedChanges = true, decoration: const InputDecoration(labelText: 'Telefon', prefixIcon: Icon(Icons.phone)), keyboardType: TextInputType.phone, validator: (v) => v == null || v.trim().isEmpty ? 'Telefon talab qilinadi' : null),
+                    const SizedBox(height: 16),
+                    TextFormField(controller: _emailCtrl, onChanged: (_) => _hasUnsavedChanges = true, decoration: const InputDecoration(labelText: 'Email (ixtiyoriy)', prefixIcon: Icon(Icons.email))),
+                    const SizedBox(height: 16),
+                    DropdownButtonFormField<String>(
+                      initialValue: _relation,
+                      decoration: const InputDecoration(labelText: 'Munosabat', prefixIcon: Icon(Icons.people)),
+                      items: _relations.map((r) => DropdownMenuItem(value: r, child: Text(r))).toList(),
+                      onChanged: (v) => setState(() { _relation = v!; _hasUnsavedChanges = true; }),
+                    ),
+                    const SizedBox(height: 16),
+                    SwitchListTile(
+                      title: Text('Asosiy kontakt', style: GoogleFonts.inter(fontSize: 14)),
+                      subtitle: Text('Asosiy kontakt favqulodda vaziyatlarda birinchi ko\'rsatiladi', style: GoogleFonts.inter(fontSize: 12, color: isDark ? Colors.grey[500] : Colors.grey[400])),
+                      value: _isPrimary,
+                      onChanged: (v) => setState(() { _isPrimary = v; _hasUnsavedChanges = true; }),
+                      activeThumbColor: ColorConstants.primary,
+                    ),
+                    const SizedBox(height: 32),
+                    AnimatedButton(label: _isEditing ? 'Kontaktni yangilash' : 'Kontakt qo\'shish', onPressed: _save),
+                  ],
+                ),
               ),
             ),
           ),

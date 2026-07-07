@@ -1,6 +1,7 @@
 'use client';
 
 import { AlertTriangle } from 'lucide-react';
+import { t } from '@/lib/i18n';
 
 interface EmergencyBadgeProps {
   count: number;
@@ -15,7 +16,7 @@ export default function EmergencyBadge({ count, onClick }: EmergencyBadgeProps) 
       className="emergency-glow inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emergency/10 text-emergency text-xs font-semibold blink-alert hover:bg-emergency/20 transition-colors"
     >
       <AlertTriangle className="w-3.5 h-3.5" />
-      {count} Active
+      {count} {t('Active')}
     </button>
   );
 }

@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { User, Settings, LogOut, ChevronDown } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { t } from '@/lib/i18n';
 
 export default function ProfileDropdown() {
   const [open, setOpen] = useState(false);
@@ -46,7 +47,7 @@ export default function ProfileDropdown() {
             <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-800">
               <p className="text-sm font-medium text-gray-900 dark:text-white">Admin User</p>
               <p className="text-xs text-gray-500 dark:text-gray-400">admin@medid.com</p>
-              <span className="inline-block mt-1.5 px-2 py-0.5 text-[10px] font-semibold rounded-full bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400">Administrator</span>
+              <span className="inline-block mt-1.5 px-2 py-0.5 text-[10px] font-semibold rounded-full bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400">{t('Administrator')}</span>
             </div>
             <div className="py-1">
               <button
@@ -54,14 +55,14 @@ export default function ProfileDropdown() {
                 className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
               >
                 <Settings className="w-4 h-4" />
-                Settings
+                {t('Settings')}
               </button>
               <button
                 onClick={() => { router.push('/login'); setOpen(false); }}
                 className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-emergency hover:bg-emergency/5 transition-colors"
               >
                 <LogOut className="w-4 h-4" />
-                Logout
+                {t('Logout')}
               </button>
             </div>
           </motion.div>

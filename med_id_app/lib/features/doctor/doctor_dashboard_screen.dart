@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animate_do/animate_do.dart';
+import '../../core/providers/auth_provider.dart';
 import '../../core/utils/mock_api_service.dart';
 import '../../core/widgets/glass_card.dart';
 import '../../core/widgets/shimmer_loading.dart';
@@ -28,8 +29,9 @@ class _DoctorDashboardScreenState extends ConsumerState<DoctorDashboardScreen> {
 
   Future<void> _loadData() async {
     setState(() => _loading = true);
-    final patients = await _api.getDoctorPatients('doc1');
-    final appointments = await _api.getDoctorAppointments('doc1');
+    final userId = ref.read(authProvider).user?.id ?? 'doc1';
+    final patients = await _api.getDoctorPatients(userId);
+    final appointments = await _api.getDoctorAppointments(userId);
     setState(() {
       _stats = {
         'totalPatients': patients.length,
@@ -37,11 +39,11 @@ class _DoctorDashboardScreenState extends ConsumerState<DoctorDashboardScreen> {
         'pendingRequests': appointments.where((a) => a['status'] == 'pending').length,
         'recentDiagnoses': 12,
         'recentActivity': [
-          {'action': 'Diagnosis added for Aziz Karimov', 'time': '2 hours ago'},
-          {'action': 'Prescription written for Dilnoza Rahimova', 'time': '4 hours ago'},
-          {'action': 'Appointment completed - Botir Tursunov', 'time': 'Yesterday'},
-          {'action': 'Emergency alert for patient #P-1004', 'time': 'Yesterday'},
-          {'action': 'Lab results reviewed for Malika Azimova', 'time': '2 days ago'},
+          {'action': 'Aziz Karimov uchun tashxis qo\'shildi', 'time': '2 hours ago'},
+          {'action': 'Dilnoza Rahimova uchun retsept yozildi', 'time': '4 hours ago'},
+          {'action': 'Uchrashuv yakunlandi - Botir Tursunov', 'time': 'Yesterday'},
+          {'action': 'Bemor #P-1004 uchun favqulodda ogohlantirish', 'time': 'Yesterday'},
+          {'action': 'Malika Azimova uchun laboratoriya natijalari ko\'rib chiqildi', 'time': '2 days ago'},
         ],
       };
       _loading = false;
@@ -61,7 +63,7 @@ class _DoctorDashboardScreenState extends ConsumerState<DoctorDashboardScreen> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Doctor Dashboard', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('Shifokor Panel', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
           ),
           body: _loading
@@ -74,25 +76,25 @@ class _DoctorDashboardScreenState extends ConsumerState<DoctorDashboardScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        FadeInDown(child: Text('Overview', style: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.bold, color: isDark ? Colors.white : const Color(0xFF1A1D21)))),
+                        FadeInDown(child: Text('Umumiy', style: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.bold, color: isDark ? Colors.white : const Color(0xFF1A1D21)))),
                         const SizedBox(height: 16),
                         FadeInLeft(child: Row(children: [
-                          _statCard('Patients', '${_stats!['totalPatients']}', Icons.people, const Color(0xFF0F6FFF), isDark),
+                          _statCard('Bemorlar', '${(_stats ?? {})['totalPatients'] ?? 0}', Icons.people, const Color(0xFF0F6FFF), isDark),
                           const SizedBox(width: 12),
-                          _statCard('Appointments', '${_stats!['todayAppointments']}', Icons.calendar_today, const Color(0xFF00C896), isDark),
+                          _statCard('Uchrashuvlar', '${(_stats ?? {})['todayAppointments'] ?? 0}', Icons.calendar_today, const Color(0xFF00C896), isDark),
                         ])),
                         const SizedBox(height: 12),
                         FadeInRight(child: Row(children: [
-                          _statCard('Pending', '${_stats!['pendingRequests']}', Icons.pending_actions, const Color(0xFFFFB020), isDark),
+                          _statCard('Kutilmoqda', '${(_stats ?? {})['pendingRequests'] ?? 0}', Icons.pending_actions, const Color(0xFFFFB020), isDark),
                           const SizedBox(width: 12),
-                          _statCard('Diagnoses', '${_stats!['recentDiagnoses']}', Icons.biotech, const Color(0xFF7C3AED), isDark),
+                          _statCard('Tashxislar', '${(_stats ?? {})['recentDiagnoses'] ?? 0}', Icons.biotech, const Color(0xFF7C3AED), isDark),
                         ])),
                         const SizedBox(height: 20),
                         FadeInUp(child: GlassCard(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Quick Actions', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                              Text('Tezkor amallar', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
                               const SizedBox(height: 16),
                               _buildQuickActions(context, isDark),
                             ],
@@ -103,9 +105,9 @@ class _DoctorDashboardScreenState extends ConsumerState<DoctorDashboardScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Recent Activity', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                              Text('Oxirgi faoliyat', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
                               const SizedBox(height: 12),
-                              ...(_stats!['recentActivity'] as List).map((a) => Padding(
+                              ...((_stats ?? {})['recentActivity'] as List? ?? []).map((a) => Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 8),
                                 child: Row(children: [
                                   Container(width: 8, height: 8, decoration: const BoxDecoration(color: ColorConstants.primary, shape: BoxShape.circle)),
@@ -136,10 +138,10 @@ class _DoctorDashboardScreenState extends ConsumerState<DoctorDashboardScreen> {
       crossAxisSpacing: 12,
       childAspectRatio: 0.8,
       children: [
-        _actionItem(Icons.search, 'Search Patient', const Color(0xFF0F6FFF), () => context.go('/doctor/patient-search'), isDark),
-        _actionItem(Icons.biotech, 'Write Diagnosis', const Color(0xFF7C3AED), () => context.go('/doctor/diagnosis'), isDark),
-        _actionItem(Icons.calendar_month, 'Appointments', const Color(0xFF00C896), () => context.go('/doctor/appointments'), isDark),
-        _actionItem(Icons.warning, 'Emergency', ColorConstants.emergency, () => context.go('/emergency/dashboard'), isDark),
+        _actionItem(Icons.search, 'Bemor qidirish', const Color(0xFF0F6FFF), () => context.go('/doctor/patient-search'), isDark),
+        _actionItem(Icons.biotech, 'Tashxis yozish', const Color(0xFF7C3AED), () => context.go('/doctor/diagnosis'), isDark),
+        _actionItem(Icons.calendar_month, 'Uchrashuvlar', const Color(0xFF00C896), () => context.go('/doctor/appointments'), isDark),
+        _actionItem(Icons.warning, 'Favqulodda', ColorConstants.emergency, () => context.go('/emergency/dashboard'), isDark),
       ],
     );
   }

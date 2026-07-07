@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animate_do/animate_do.dart';
+import '../../core/providers/auth_provider.dart';
 import '../../core/utils/mock_api_service.dart';
 import '../../core/widgets/glass_card.dart';
 import '../../core/widgets/shimmer_loading.dart';
@@ -32,7 +33,8 @@ class _EmergencyProfileViewScreenState extends ConsumerState<EmergencyProfileVie
   Future<void> _loadProfile() async {
     setState(() { _loading = true; _error = null; });
     try {
-      final patients = await _api.getDoctorPatients('doc1');
+      final userId = ref.read(authProvider).user?.id ?? 'doc1';
+      final patients = await _api.getDoctorPatients(userId);
       _patient = patients.firstWhere((p) => p['id'] == widget.patientId);
       setState(() => _loading = false);
     } catch (e) {
@@ -41,11 +43,12 @@ class _EmergencyProfileViewScreenState extends ConsumerState<EmergencyProfileVie
   }
 
   Future<void> _logAccess() async {
-    await _api.logEmergencyAccess(widget.patientId, 'staff1');
+    final staffId = ref.read(authProvider).user?.id ?? 'staff1';
+    await _api.logEmergencyAccess(widget.patientId, staffId);
     await MedicalBusinessLogic.notifyRelativesOnEmergencyAccess(widget.patientId);
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Emergency access logged successfully'),
+        content: Text('Favqulodda kirish muvaffaqiyatli qayd etildi'),
         backgroundColor: ColorConstants.success,
       ));
     }
@@ -64,7 +67,7 @@ class _EmergencyProfileViewScreenState extends ConsumerState<EmergencyProfileVie
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Emergency Profile', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('Favqulodda profil', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
           ),
           body: _loading
@@ -114,7 +117,7 @@ class _EmergencyProfileViewScreenState extends ConsumerState<EmergencyProfileVie
                                         children: [
                                           const Icon(Icons.bloodtype, size: 20, color: ColorConstants.emergency),
                                           const SizedBox(width: 8),
-                                          Text('BLOOD TYPE: ${_patient!['bloodType'] ?? 'N/A'}', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.bold, color: ColorConstants.emergency, letterSpacing: 2)),
+                                          Text('QON GURUHI: ${_patient!['bloodType'] ?? 'Mavjud emas'}', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.bold, color: ColorConstants.emergency, letterSpacing: 2)),
                                         ],
                                       ),
                                     ),
@@ -132,10 +135,10 @@ class _EmergencyProfileViewScreenState extends ConsumerState<EmergencyProfileVie
                                     Row(children: [
                                       const Icon(Icons.warning, size: 18, color: ColorConstants.emergency),
                                       const SizedBox(width: 8),
-                                      Text('Allergies', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                                      Text('Allergiyalar', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
                                     ]),
                                     const SizedBox(height: 8),
-                                    _chipList(_patient!['allergies'] as List? ?? ['None recorded'], ColorConstants.emergency),
+                                    _chipList(_patient!['allergies'] as List? ?? ['Hech narsa qayd etilmagan'], ColorConstants.emergency),
                                   ],
                                 ),
                               ),
@@ -150,10 +153,10 @@ class _EmergencyProfileViewScreenState extends ConsumerState<EmergencyProfileVie
                                     Row(children: [
                                       const Icon(Icons.medication, size: 18, color: ColorConstants.warning),
                                       const SizedBox(width: 8),
-                                      Text('Current Medications', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                                      Text('Joriy dorilar', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
                                     ]),
                                     const SizedBox(height: 8),
-                                    _chipList(_patient!['currentMedications'] as List? ?? ['None recorded'], ColorConstants.warning),
+                                    _chipList(_patient!['currentMedications'] as List? ?? ['Hech narsa qayd etilmagan'], ColorConstants.warning),
                                   ],
                                 ),
                               ),
@@ -168,10 +171,10 @@ class _EmergencyProfileViewScreenState extends ConsumerState<EmergencyProfileVie
                                     Row(children: [
                                       const Icon(Icons.medical_services, size: 18, color: Color(0xFFFFB020)),
                                       const SizedBox(width: 8),
-                                      Text('Chronic Diseases', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                                      Text('Surunkali kasalliklar', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
                                     ]),
                                     const SizedBox(height: 8),
-                                    _chipList(_patient!['chronicDiseases'] as List? ?? ['None recorded'], const Color(0xFFFFB020)),
+                                    _chipList(_patient!['chronicDiseases'] as List? ?? ['Hech narsa qayd etilmagan'], const Color(0xFFFFB020)),
                                   ],
                                 ),
                               ),
@@ -183,7 +186,7 @@ class _EmergencyProfileViewScreenState extends ConsumerState<EmergencyProfileVie
                                 child: ElevatedButton.icon(
                                   onPressed: _logAccess,
                                   icon: const Icon(Icons.login),
-                                  label: const Text('Log Emergency Access'),
+                                  label: const Text('Favqulodda kirishni qayd etish'),
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: ColorConstants.emergency,
                                     padding: const EdgeInsets.symmetric(vertical: 16),
@@ -193,7 +196,7 @@ class _EmergencyProfileViewScreenState extends ConsumerState<EmergencyProfileVie
                             ),
                             const SizedBox(height: 12),
                             FadeInUp(
-                              child: Text('This access will be recorded in the patient\'s access log', style: GoogleFonts.inter(fontSize: 12, color: isDark ? Colors.grey[500] : Colors.grey[400]), textAlign: TextAlign.center),
+                              child: Text('Bu kirish bemorning kirish jurnalida qayd etiladi', style: GoogleFonts.inter(fontSize: 12, color: isDark ? Colors.grey[500] : Colors.grey[400]), textAlign: TextAlign.center),
                             ),
                             const SizedBox(height: 24),
                           ],
@@ -207,7 +210,7 @@ class _EmergencyProfileViewScreenState extends ConsumerState<EmergencyProfileVie
 
   Widget _chipList(List list, Color color) {
     if (list.isEmpty || (list.length == 1 && list[0] == 'None recorded')) {
-      return Text('None recorded', style: GoogleFonts.inter(fontSize: 14, color: Colors.grey));
+      return Text('Hech narsa qayd etilmagan', style: GoogleFonts.inter(fontSize: 14, color: Colors.grey));
     }
     return Wrap(
       spacing: 8, runSpacing: 4,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animate_do/animate_do.dart';
+import '../../core/providers/auth_provider.dart';
 import '../../core/utils/mock_api_service.dart';
 import '../../core/widgets/glass_card.dart';
 import '../../core/widgets/shimmer_loading.dart';
@@ -30,7 +31,8 @@ class _ClinicDoctorScheduleScreenState extends ConsumerState<ClinicDoctorSchedul
 
   Future<void> _loadData() async {
     setState(() => _loading = true);
-    await _api.getClinicStaff('clinic1');
+    final clinicId = ref.read(authProvider).user?.id ?? 'clinic1';
+    await _api.getClinicStaff(clinicId);
     setState(() {
       _schedules = [
         {'doctor': 'Dr. Alisher Tursunov', 'specialty': 'Cardiology', 'time': '09:00', 'patientName': 'Aziz Karimov', 'status': 'completed'},
@@ -81,7 +83,7 @@ class _ClinicDoctorScheduleScreenState extends ConsumerState<ClinicDoctorSchedul
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Doctor Schedule', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('Shifokor jadvali', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
           ),
           body: _loading
@@ -97,7 +99,7 @@ class _ClinicDoctorScheduleScreenState extends ConsumerState<ClinicDoctorSchedul
                           children: ['all', ..._doctors].map((d) => Padding(
                             padding: const EdgeInsets.only(right: 8),
                             child: ChoiceChip(
-                              label: Text(d == 'all' ? 'All Doctors' : d.split(' ').sublist(0, 2).join(' '), style: GoogleFonts.inter(fontSize: 12)),
+                              label: Text(d == 'all' ? 'Barcha shifokorlar' : d.split(' ').sublist(0, 2).join(' '), style: GoogleFonts.inter(fontSize: 12)),
                               selected: _selectedDoctor == d,
                               onSelected: (_) => _filterByDoctor(d),
                               selectedColor: ColorConstants.primary,
@@ -109,7 +111,7 @@ class _ClinicDoctorScheduleScreenState extends ConsumerState<ClinicDoctorSchedul
                     ),
                     Expanded(
                       child: _filtered.isEmpty
-                          ? const EmptyStateWidget(icon: Icons.schedule, title: 'No schedules found')
+                          ? const EmptyStateWidget(icon: Icons.schedule, title: 'Jadvallar topilmadi')
                           : ListView.builder(
                               padding: const EdgeInsets.symmetric(horizontal: 16),
                               itemCount: _filtered.length,

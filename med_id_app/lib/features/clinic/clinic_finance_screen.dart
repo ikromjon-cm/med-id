@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:animate_do/animate_do.dart';
+import '../../core/providers/auth_provider.dart';
 import '../../core/utils/mock_api_service.dart';
 import '../../core/widgets/glass_card.dart';
 import '../../core/widgets/shimmer_loading.dart';
@@ -29,7 +30,8 @@ class _ClinicFinanceScreenState extends ConsumerState<ClinicFinanceScreen> {
 
   Future<void> _loadData() async {
     setState(() => _loading = true);
-    final transactions = await _api.getClinicFinance('clinic1');
+    final clinicId = ref.read(authProvider).user?.id ?? 'clinic1';
+    final transactions = await _api.getClinicFinance(clinicId);
     setState(() {
       _transactions = transactions;
       _finance = {
@@ -64,7 +66,7 @@ class _ClinicFinanceScreenState extends ConsumerState<ClinicFinanceScreen> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Finance', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('Moliya', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
           ),
           body: _loading
@@ -77,21 +79,21 @@ class _ClinicFinanceScreenState extends ConsumerState<ClinicFinanceScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        FadeInDown(child: Text('Financial Overview', style: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.bold, color: isDark ? Colors.white : const Color(0xFF1A1D21)))),
+                        FadeInDown(child: Text('Moliya sharhi', style: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.bold, color: isDark ? Colors.white : const Color(0xFF1A1D21)))),
                         const SizedBox(height: 16),
                         FadeInLeft(child: Row(children: [
-                          _statCard('Today', _formatCurrency(_finance!['todayRevenue']), Icons.today, const Color(0xFF0F6FFF), isDark),
+                          _statCard('Bugun', _formatCurrency((_finance ?? {})['todayRevenue'] ?? 0), Icons.today, const Color(0xFF0F6FFF), isDark),
                           const SizedBox(width: 12),
-                          _statCard('This Month', _formatCurrency(_finance!['monthlyRevenue']), Icons.date_range, const Color(0xFF00C896), isDark),
+                          _statCard('Bu oy', _formatCurrency((_finance ?? {})['monthlyRevenue'] ?? 0), Icons.date_range, const Color(0xFF00C896), isDark),
                         ])),
                         const SizedBox(height: 12),
-                        FadeInRight(child: _statCard('Pending Payments', _formatCurrency(_finance!['pendingPayments']), Icons.pending, const Color(0xFFFFB020), isDark)),
+                        FadeInRight(child: _statCard('Kutilayotgan to\'lovlar', _formatCurrency((_finance ?? {})['pendingPayments'] ?? 0), Icons.pending, const Color(0xFFFFB020), isDark)),
                         const SizedBox(height: 20),
                         FadeInUp(child: GlassCard(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Revenue Chart', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                              Text('Daromad diagrammasi', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
                               const SizedBox(height: 16),
                               SizedBox(
                                 height: 180,
@@ -124,9 +126,15 @@ class _ClinicFinanceScreenState extends ConsumerState<ClinicFinanceScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Recent Transactions', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                              Text('Oxirgi tranzaksiyalar', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
                               const SizedBox(height: 12),
-                              ..._transactions.map((t) => Padding(
+                              if (_transactions.isEmpty)
+                                const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 24),
+                                  child: Center(child: Text('Ma\'lumot yo\'q', style: TextStyle(color: Colors.grey))),
+                                )
+                              else
+                                ..._transactions.map((t) => Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 6),
                                 child: Row(
                                   children: [

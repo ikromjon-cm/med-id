@@ -5,12 +5,14 @@ class OnboardingPage extends StatelessWidget {
   final String image;
   final String title;
   final String description;
+  final IconData iconData;
 
   const OnboardingPage({
     super.key,
     required this.image,
     required this.title,
     required this.description,
+    required this.iconData,
   });
 
   @override
@@ -28,7 +30,7 @@ class OnboardingPage extends StatelessWidget {
               color: isDark ? Colors.white12 : const Color(0xFFE8F0FE),
               borderRadius: BorderRadius.circular(40),
             ),
-            child: Icon(getIconForImage(), size: 80, color: const Color(0xFF0F6FFF)),
+            child: Icon(iconData, size: 80, color: const Color(0xFF0F6FFF)),
           ),
           const SizedBox(height: 48),
           Text(title, style: GoogleFonts.inter(fontSize: 24, fontWeight: FontWeight.bold, color: isDark ? Colors.white : const Color(0xFF1A1D21)), textAlign: TextAlign.center),
@@ -37,11 +39,5 @@ class OnboardingPage extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  IconData getIconForImage() {
-    if (title.contains('xavfsiz')) return Icons.security;
-    if (title.contains('Biometrik')) return Icons.fingerprint;
-    return Icons.emergency;
   }
 }

@@ -71,11 +71,15 @@ final routerProvider = Provider<GoRouter>((ref) {
       final loggedIn = auth.status == AuthStatus.authenticated;
       final location = state.uri.toString();
 
-      if (!loggedIn && location != '/splash' && location != '/onboarding' && location != '/otp' && location != '/biometric') {
+      if (!loggedIn && location != '/splash' && location != '/onboarding' && location != '/otp' && location != '/biometric' && location != '/role-selection') {
         return '/splash';
       }
 
-      if (loggedIn && (location == '/splash' || location == '/onboarding' || location == '/otp' || location == '/biometric' || location == '/role-selection')) {
+      if (loggedIn && (location == '/splash' || location == '/onboarding' || location == '/otp' || location == '/biometric')) {
+        return '/role-selection';
+      }
+
+      if (loggedIn && location == '/role-selection') {
         switch (role) {
           case Role.admin: return '/admin/dashboard';
           case Role.doctor: return '/doctor/dashboard';
@@ -83,6 +87,27 @@ final routerProvider = Provider<GoRouter>((ref) {
           case Role.emergencyStaff: return '/emergency/dashboard';
           case Role.patient: return '/patient/dashboard';
         }
+      }
+
+      // Role-based route protection
+      if (loggedIn) {
+        final adminRoutes = ['/admin/', '/admin'];
+        final doctorRoutes = ['/doctor/', '/doctor'];
+        final clinicRoutes = ['/clinic/', '/clinic'];
+        final emergencyRoutes = ['/emergency/', '/emergency'];
+        final patientRoutes = ['/patient/', '/patient'];
+
+        bool isAdminRoute = adminRoutes.any((r) => location.startsWith(r));
+        bool isDoctorRoute = doctorRoutes.any((r) => location.startsWith(r));
+        bool isClinicRoute = clinicRoutes.any((r) => location.startsWith(r));
+        bool isEmergencyRoute = emergencyRoutes.any((r) => location.startsWith(r));
+        bool isPatientRoute = patientRoutes.any((r) => location.startsWith(r));
+
+        if (isAdminRoute && role != Role.admin) return '/${role.name}/dashboard';
+        if (isDoctorRoute && role != Role.doctor) return '/${role.name}/dashboard';
+        if (isClinicRoute && role != Role.clinic) return '/${role.name}/dashboard';
+        if (isEmergencyRoute && role != Role.emergencyStaff) return '/${role.name}/dashboard';
+        if (isPatientRoute && role != Role.patient) return '/${role.name}/dashboard';
       }
 
       return null;
@@ -272,8 +297,7 @@ class DoctorShell extends ConsumerWidget {
     int currentIndex = 0;
     if (location.startsWith('/doctor/patient-search') || location.startsWith('/doctor/patient-detail') || location.startsWith('/doctor/diagnosis') || location.startsWith('/doctor/prescription')) currentIndex = 1;
     else if (location.startsWith('/doctor/appointments')) currentIndex = 2;
-    else if (location.startsWith('/emergency')) currentIndex = 3;
-    else if (location.startsWith('/settings')) currentIndex = 4;
+    else if (location.startsWith('/settings')) currentIndex = 3;
 
     return Scaffold(
       body: child,
@@ -288,15 +312,13 @@ class DoctorShell extends ConsumerWidget {
               case 0: context.go('/doctor/dashboard');
               case 1: context.go('/doctor/patient-search');
               case 2: context.go('/doctor/appointments');
-              case 3: context.go('/emergency/dashboard');
-              case 4: context.go('/settings');
+              case 3: context.go('/settings');
             }
           },
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.dashboard_outlined), activeIcon: Icon(Icons.dashboard), label: 'Dashboard'),
             BottomNavigationBarItem(icon: Icon(Icons.people_outline), activeIcon: Icon(Icons.people), label: 'Patients'),
             BottomNavigationBarItem(icon: Icon(Icons.calendar_month_outlined), activeIcon: Icon(Icons.calendar_month), label: 'Appointments'),
-            BottomNavigationBarItem(icon: Icon(Icons.warning_amber_outlined), activeIcon: Icon(Icons.warning_amber), label: 'Emergency'),
             BottomNavigationBarItem(icon: Icon(Icons.more_horiz), activeIcon: Icon(Icons.more_horiz), label: 'More'),
           ],
         ),

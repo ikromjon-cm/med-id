@@ -1,4 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import '../models/role_model.dart';
 
 class SecureStorageHelper {
   static const FlutterSecureStorage _storage = FlutterSecureStorage();
@@ -6,6 +7,7 @@ class SecureStorageHelper {
   static const String _themeKey = 'theme_mode';
   static const String _onboardingKey = 'onboarding_done';
   static const String _biometricKey = 'biometric_enabled';
+  static const String _roleKey = 'user_role';
 
   static Future<void> saveToken(String token) async {
     await _storage.write(key: _tokenKey, value: token);
@@ -44,6 +46,16 @@ class SecureStorageHelper {
   static Future<bool> isBiometricEnabled() async {
     final value = await _storage.read(key: _biometricKey);
     return value == 'true';
+  }
+
+  static Future<void> saveRole(Role role) async {
+    await _storage.write(key: _roleKey, value: role.name);
+  }
+
+  static Future<Role?> getRole() async {
+    final value = await _storage.read(key: _roleKey);
+    if (value == null) return null;
+    return Role.values.firstWhere((r) => r.name == value, orElse: () => Role.patient);
   }
 
   static Future<void> clearAll() async {

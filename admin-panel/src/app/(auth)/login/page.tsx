@@ -3,27 +3,17 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Activity, Eye, EyeOff, ArrowRight } from 'lucide-react';
+import { LogIn, ArrowRight } from 'lucide-react';
+import { t } from '@/lib/i18n';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-
-    if (!email.trim()) { setError('Please enter your email'); return; }
-    if (!password.trim()) { setError('Please enter your password'); return; }
-
+  const handleLogin = async () => {
     setLoading(true);
-    await new Promise(r => setTimeout(r, 800));
-    setLoading(false);
-    router.push('/dashboard');
+    await new Promise(r => setTimeout(r, 600));
+    router.push('/role-selection');
   };
 
   return (
@@ -41,73 +31,30 @@ export default function LoginPage() {
       >
         <div className="glass-card rounded-3xl p-8 sm:p-10">
           <div className="flex flex-col items-center mb-8">
-            <div className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center shadow-xl shadow-primary/25 mb-4">
-              <Activity className="w-9 h-9 text-white" />
-            </div>
+            <img src="/logo.jpg" alt="MED-ID" className="w-20 h-20 rounded-2xl mb-4 shadow-xl" />
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">MED-ID</h1>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Biometric Medical Platform</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('Biometric Medical Platform')}</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Email</label>
-              <input
-                type="email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                className="w-full px-4 py-2.5 rounded-xl text-sm bg-white/80 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Password</label>
-              <div className="relative">
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
-                  placeholder="Enter your password"
-                  className="w-full px-4 py-2.5 pr-11 rounded-xl text-sm bg-white/80 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
-                >
-                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                </button>
-              </div>
-            </div>
-
-            {error && (
-              <motion.p
-                initial={{ opacity: 0, y: -5 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="text-xs text-emergency bg-emergency/5 px-3 py-2 rounded-lg"
-              >
-                {error}
-              </motion.p>
+          <button
+            onClick={handleLogin}
+            disabled={loading}
+            className="w-full py-3 rounded-xl bg-primary text-white text-base font-semibold hover:bg-primary-dark transition-all duration-200 shadow-lg shadow-primary/25 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-3 group"
+          >
+            {loading ? (
+              <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+            ) : (
+              <>
+                <LogIn className="w-5 h-5" />
+                {t('Kirish')}
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </>
             )}
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full py-2.5 rounded-xl bg-primary text-white text-sm font-semibold hover:bg-primary-dark transition-all duration-200 shadow-lg shadow-primary/25 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 group"
-            >
-              {loading ? (
-                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-              ) : (
-                <>
-                  Sign In
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                </>
-              )}
-            </button>
-          </form>
+          </button>
 
           <div className="mt-6 text-center">
             <p className="text-xs text-gray-400 dark:text-gray-500">
-              Demo: Any credentials work
+              {t('Bir tugma bilan tezkor kirish')}
             </p>
           </div>
         </div>

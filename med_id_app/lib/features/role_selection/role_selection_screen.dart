@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../core/providers/role_provider.dart';
+import '../../core/providers/auth_provider.dart';
 import '../../core/models/role_model.dart';
 import '../../core/widgets/glass_card.dart';
 
@@ -50,15 +50,9 @@ class RoleSelectionScreen extends ConsumerWidget {
                   ...roles.map((role) => Padding(
                     padding: const EdgeInsets.only(bottom: 12),
                     child: GlassCard(
-                      onTap: () {
+                      onTap: () async {
                         ref.read(roleProvider.notifier).switchRole(role.role);
-                        switch (role.role) {
-                          case Role.admin: context.go('/admin/dashboard');
-                          case Role.doctor: context.go('/doctor/dashboard');
-                          case Role.clinic: context.go('/clinic/dashboard');
-                          case Role.emergencyStaff: context.go('/emergency/dashboard');
-                          case Role.patient: context.go('/patient/dashboard');
-                        }
+                        await ref.read(authProvider.notifier).simulateBiometricLogin();
                       },
                       child: Container(
                         padding: const EdgeInsets.all(16),

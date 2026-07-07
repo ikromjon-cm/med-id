@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bell, CheckCheck } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { t } from '@/lib/i18n';
 import type { Notification } from '@/lib/types';
 import { getNotifications } from '@/lib/mockData';
 import { formatDateTime } from '@/lib/utils';
@@ -60,8 +61,8 @@ export default function NotificationBell() {
               className="absolute right-0 mt-2 w-80 sm:w-96 bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800 overflow-hidden z-50"
             >
               <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 dark:border-gray-800">
-                <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Notifications</h3>
-                <span className="text-xs text-gray-500 dark:text-gray-400">{notifs.length} total</span>
+                <h3 className="text-sm font-semibold text-gray-900 dark:text-white">{t('Notifications')}</h3>
+                <span className="text-xs text-gray-500 dark:text-gray-400">{notifs.length} {t('total')}</span>
               </div>
 
               <div className="max-h-80 overflow-y-auto divide-y divide-gray-50 dark:divide-gray-800/30">
@@ -69,7 +70,7 @@ export default function NotificationBell() {
                   <div key={n.id} className="px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
                     <div className="flex items-start gap-3">
                       <span className={cn('px-2 py-0.5 rounded-full text-[10px] font-semibold', typeColors[n.type])}>
-                        {n.type}
+                        {t(n.type)}
                       </span>
                       <div className="flex-1 min-w-0">
                         <p className="text-xs font-medium text-gray-900 dark:text-white truncate">{n.title}</p>
@@ -83,7 +84,7 @@ export default function NotificationBell() {
 
               <div className="px-4 py-2.5 border-t border-gray-100 dark:border-gray-800">
                 <button className="w-full text-xs text-primary font-medium hover:text-primary-dark transition-colors">
-                  View all notifications
+                  {t('View all notifications')}
                 </button>
               </div>
             </motion.div>

@@ -16,8 +16,8 @@ class DocumentPreviewScreen extends ConsumerWidget {
 
     if (doc == null) {
       return Scaffold(
-        appBar: AppBar(title: const Text('Document')),
-        body: const Center(child: Text('Document not found')),
+        appBar: AppBar(title: const Text('Hujjat')),
+        body: const Center(child: Text('Hujjat topilmadi')),
       );
     }
 
@@ -31,7 +31,7 @@ class DocumentPreviewScreen extends ConsumerWidget {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Preview', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('Ko\'rib chiqish', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
           ),
           body: Padding(
@@ -51,27 +51,27 @@ class DocumentPreviewScreen extends ConsumerWidget {
                       children: [
                         Icon(Icons.description, size: 80, color: isDark ? Colors.grey[600] : Colors.grey[300]),
                         const SizedBox(height: 16),
-                        Text('File Preview', style: GoogleFonts.inter(fontSize: 16, color: isDark ? Colors.grey[400] : Colors.grey[500])),
-                        Text('(Demo preview)', style: GoogleFonts.inter(fontSize: 13, color: isDark ? Colors.grey[600] : Colors.grey[400])),
+                        Text('Fayl ko\'rinishi', style: GoogleFonts.inter(fontSize: 16, color: isDark ? Colors.grey[400] : Colors.grey[500])),
+                        Text('(Demo ko\'rinish)', style: GoogleFonts.inter(fontSize: 13, color: isDark ? Colors.grey[600] : Colors.grey[400])),
                       ],
                     ),
                   ),
                 ),
                 const SizedBox(height: 24),
-                _infoRow('Name', doc.name, isDark),
-                _infoRow('Type', doc.type, isDark),
-                _infoRow('Uploaded', DateFormat('dd MMM yyyy, HH:mm').format(doc.uploadDate), isDark),
-                _infoRow('Size', '${doc.fileSize.toStringAsFixed(1)} MB', isDark),
-                if (doc.notes != null) _infoRow('Notes', doc.notes!, isDark),
+                _infoRow('Nomi', doc.name, isDark),
+                _infoRow('Turi', doc.type, isDark),
+                _infoRow('Yuklangan', DateFormat('dd MMM yyyy, HH:mm').format(doc.uploadDate), isDark),
+                _infoRow('Hajmi', '${doc.fileSize.toStringAsFixed(1)} MB', isDark),
+                if (doc.notes != null) _infoRow('Izohlar', doc.notes!, isDark),
                 const Spacer(),
                 SizedBox(
                   width: double.infinity, height: 48,
                   child: ElevatedButton.icon(
                     onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('File downloaded (demo)')));
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Fayl yuklandi (demo)')));
                     },
                     icon: const Icon(Icons.download),
-                    label: Text('Download', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600)),
+                    label: Text('Yuklab olish', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600)),
                     style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
                   ),
                 ),

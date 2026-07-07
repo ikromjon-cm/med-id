@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animate_do/animate_do.dart';
+import '../../core/providers/auth_provider.dart';
 import '../../core/utils/mock_api_service.dart';
 import '../../core/widgets/glass_card.dart';
 import '../../core/widgets/shimmer_loading.dart';
@@ -28,8 +29,9 @@ class _ClinicDashboardScreenState extends ConsumerState<ClinicDashboardScreen> {
 
   Future<void> _loadData() async {
     setState(() => _loading = true);
-    final queue = await _api.getClinicQueue('clinic1');
-    final staff = await _api.getClinicStaff('clinic1');
+    final clinicId = ref.read(authProvider).user?.id ?? 'clinic1';
+    final queue = await _api.getClinicQueue(clinicId);
+    final staff = await _api.getClinicStaff(clinicId);
     setState(() {
       _stats = {
         'patientsToday': 24,
@@ -64,7 +66,7 @@ class _ClinicDashboardScreenState extends ConsumerState<ClinicDashboardScreen> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Clinic Dashboard', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('Klinika Paneli', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
           ),
           body: _loading
@@ -77,34 +79,34 @@ class _ClinicDashboardScreenState extends ConsumerState<ClinicDashboardScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        FadeInDown(child: Text('Overview', style: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.bold, color: isDark ? Colors.white : const Color(0xFF1A1D21)))),
+                        FadeInDown(child: Text('Umumiy', style: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.bold, color: isDark ? Colors.white : const Color(0xFF1A1D21)))),
                         const SizedBox(height: 16),
                         FadeInLeft(child: Row(children: [
-                          _statCard('Patients Today', '${_stats!['patientsToday']}', Icons.people, const Color(0xFF0F6FFF), isDark),
+                          _statCard('Bugungi bemorlar', '${(_stats ?? {})['patientsToday'] ?? 0}', Icons.people, const Color(0xFF0F6FFF), isDark),
                           const SizedBox(width: 12),
-                          _statCard('Doctors', '${_stats!['doctorsAvailable']}', Icons.medical_services, const Color(0xFF00C896), isDark),
+                          _statCard('Shifokorlar', '${(_stats ?? {})['doctorsAvailable'] ?? 0}', Icons.medical_services, const Color(0xFF00C896), isDark),
                         ])),
                         const SizedBox(height: 12),
                         FadeInRight(child: Row(children: [
-                          _statCard('Queue', '${_stats!['queueLength']}', Icons.queue, const Color(0xFFFFB020), isDark),
+                          _statCard('Navbat', '${(_stats ?? {})['queueLength'] ?? 0}', Icons.queue, const Color(0xFFFFB020), isDark),
                           const SizedBox(width: 12),
-                          _statCard('Appointments', '${_stats!['appointments']}', Icons.calendar_month, const Color(0xFF7C3AED), isDark),
+                          _statCard('Uchrashuvlar', '${(_stats ?? {})['appointments'] ?? 0}', Icons.calendar_month, const Color(0xFF7C3AED), isDark),
                         ])),
                         const SizedBox(height: 20),
                         FadeInUp(child: GlassCard(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Quick Actions', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                              Text('Tezkor amallar', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
                               const SizedBox(height: 16),
                               GridView.count(
                                 shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
                                 crossAxisCount: 4, mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 0.8,
                                 children: [
-                                  _actionItem(Icons.person_add, 'Register Patient', const Color(0xFF0F6FFF), () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Register Patient (demo)'))), isDark),
-                                  _actionItem(Icons.schedule, 'Schedule', const Color(0xFF00C896), () => context.go('/clinic/doctor-schedule'), isDark),
-                                  _actionItem(Icons.people, 'Staff', const Color(0xFF7C3AED), () => context.go('/clinic/staff'), isDark),
-                                  _actionItem(Icons.assessment, 'Reports', const Color(0xFFFFB020), () => context.go('/clinic/finance'), isDark),
+                                  _actionItem(Icons.person_add, 'Bemorni ro\'yxatga olish', const Color(0xFF0F6FFF), () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Bemorni ro\'yxatga olish (demo)'))), isDark),
+                                  _actionItem(Icons.schedule, 'Jadval', const Color(0xFF00C896), () => context.go('/clinic/doctor-schedule'), isDark),
+                                  _actionItem(Icons.people, 'Xodimlar', const Color(0xFF7C3AED), () => context.go('/clinic/staff'), isDark),
+                                  _actionItem(Icons.assessment, 'Hisobotlar', const Color(0xFFFFB020), () => context.go('/clinic/finance'), isDark),
                                 ],
                               ),
                             ],
@@ -116,11 +118,17 @@ class _ClinicDashboardScreenState extends ConsumerState<ClinicDashboardScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                                Text('Queue', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
-                                TextButton(onPressed: () => context.go('/clinic/queue'), child: const Text('View All')),
+                                Text('Navbat', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                                TextButton(onPressed: () => context.go('/clinic/queue'), child: const Text('Barchasini ko\'rish')),
                               ]),
                               const SizedBox(height: 8),
-                              ...(_stats!['queue'] as List).take(4).map((q) => Padding(
+                              if ((_stats!['queue'] as List).isEmpty)
+                                const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 24),
+                                  child: Center(child: Text('Ma\'lumot yo\'q', style: TextStyle(color: Colors.grey))),
+                                )
+                              else
+                                ...((_stats ?? {})['queue'] as List? ?? []).take(4).map((q) => Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 6),
                                 child: Row(children: [
                                   Container(

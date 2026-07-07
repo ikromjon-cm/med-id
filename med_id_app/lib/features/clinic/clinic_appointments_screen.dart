@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animate_do/animate_do.dart';
+import '../../core/providers/auth_provider.dart';
 import '../../core/utils/mock_api_service.dart';
 import '../../core/widgets/glass_card.dart';
 import '../../core/widgets/shimmer_loading.dart';
@@ -30,7 +31,8 @@ class _ClinicAppointmentsScreenState extends ConsumerState<ClinicAppointmentsScr
 
   Future<void> _loadData() async {
     setState(() => _loading = true);
-    final apps = await _api.getDoctorAppointments('doc1');
+    final userId = ref.read(authProvider).user?.id ?? 'doc1';
+    final apps = await _api.getDoctorAppointments(userId);
     setState(() {
       _appointments = apps.map((a) => Map<String, dynamic>.from(a)..['doctorName'] = 'Dr. Alisher Tursunov').toList();
       _filtered = List.from(_appointments);
@@ -71,7 +73,7 @@ class _ClinicAppointmentsScreenState extends ConsumerState<ClinicAppointmentsScr
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Appointments', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('Uchrashuvlar', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
           ),
           body: Column(
@@ -98,7 +100,7 @@ class _ClinicAppointmentsScreenState extends ConsumerState<ClinicAppointmentsScr
                 child: _loading
                     ? const ShimmerLoading(itemCount: 5)
                     : _filtered.isEmpty
-                        ? EmptyStateWidget(icon: Icons.calendar_today, title: 'No appointments')
+                        ? EmptyStateWidget(icon: Icons.calendar_today, title: 'Uchrashuvlar yo\'q')
                         : ListView.builder(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             itemCount: _filtered.length,

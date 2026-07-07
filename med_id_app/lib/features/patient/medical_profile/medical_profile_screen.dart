@@ -30,7 +30,7 @@ class MedicalProfileScreen extends ConsumerWidget {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Medical Profile', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+            title: Text('Tibbiy profil', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
             centerTitle: true,
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -45,31 +45,31 @@ class MedicalProfileScreen extends ConsumerWidget {
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                _buildSection('Personal Information', [
-                  _infoRow('Full Name', user.fullName, Icons.person, isDark),
-                  _infoRow('Gender', user.gender ?? 'Not set', Icons.wc, isDark),
-                  _infoRow('Birth Date', user.birthDate != null ? dateFormat.format(user.birthDate!) : 'Not set', Icons.cake, isDark),
-                  _infoRow('Blood Type', user.bloodType ?? 'Not set', Icons.dangerous, isDark),
-                  _infoRow('Phone', user.phone, Icons.phone, isDark),
-                  _infoRow('Email', user.email ?? 'Not set', Icons.email, isDark),
+                _buildSection('Shaxsiy ma\'lumotlar', [
+                  _infoRow('To\'liq ism', user.fullName, Icons.person, isDark),
+                  _infoRow('Jins', user.gender ?? 'Ko\'rsatilmagan', Icons.wc, isDark),
+                  _infoRow('Tug\'ilgan sana', user.birthDate != null ? dateFormat.format(user.birthDate!) : 'Ko\'rsatilmagan', Icons.cake, isDark),
+                  _infoRow('Qon guruhi', user.bloodType ?? 'Ko\'rsatilmagan', Icons.dangerous, isDark),
+                  _infoRow('Telefon', user.phone, Icons.phone, isDark),
+                  _infoRow('Email', user.email ?? 'Ko\'rsatilmagan', Icons.email, isDark),
                 ], isDark),
                 const SizedBox(height: 16),
-                _buildSection('Allergies', user.allergies.isEmpty
-                    ? [_emptyItem('No allergies recorded', isDark)]
+                _buildSection('Allergiyalar', user.allergies.isEmpty
+                    ? [_emptyItem('Allergiyalar qayd etilmagan', isDark)]
                     : user.allergies.map((a) => _chipItem(a, ColorConstants.emergency, isDark)).toList(), isDark),
                 const SizedBox(height: 16),
-                _buildSection('Chronic Diseases', user.chronicDiseases.isEmpty
-                    ? [_emptyItem('No chronic diseases', isDark)]
+                _buildSection('Surunkali kasalliklar', user.chronicDiseases.isEmpty
+                    ? [_emptyItem('Surunkali kasalliklar yo\'q', isDark)]
                     : user.chronicDiseases.map((d) => _chipItem(d, const Color(0xFFFFB020), isDark)).toList(), isDark),
                 const SizedBox(height: 16),
-                _buildSection('Current Medications', user.currentMedications.isEmpty
-                    ? [_emptyItem('No medications', isDark)]
+                _buildSection('Joriy dorilar', user.currentMedications.isEmpty
+                    ? [_emptyItem('Dorilar yo\'q', isDark)]
                     : user.currentMedications.map((m) => _chipItem(m, ColorConstants.primary, isDark)).toList(), isDark),
                 const SizedBox(height: 16),
-                _buildSection('Insurance Information', [
-                  _infoRow('Provider', user.insuranceProvider ?? 'Not set', Icons.business, isDark),
-                  _infoRow('Policy Number', user.insurancePolicyNumber ?? 'Not set', Icons.numbers, isDark),
-                  _infoRow('Expiry', user.insuranceExpiry != null ? dateFormat.format(user.insuranceExpiry!) : 'Not set', Icons.calendar_today, isDark),
+                _buildSection('Sug\'urta ma\'lumotlari', [
+                  _infoRow('Provayder', user.insuranceProvider ?? 'Ko\'rsatilmagan', Icons.business, isDark),
+                  _infoRow('Polis raqami', user.insurancePolicyNumber ?? 'Ko\'rsatilmagan', Icons.numbers, isDark),
+                  _infoRow('Amal qilish muddati', user.insuranceExpiry != null ? dateFormat.format(user.insuranceExpiry!) : 'Ko\'rsatilmagan', Icons.calendar_today, isDark),
                 ], isDark),
                 const SizedBox(height: 24),
               ],

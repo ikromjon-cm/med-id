@@ -37,13 +37,13 @@ class _AdminAccessLogsScreenState extends ConsumerState<AdminAccessLogsScreen> {
       child: SafeArea(
         child: Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: AppBar(title: Text('Access Logs', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)), backgroundColor: Colors.transparent, elevation: 0),
+          appBar: AppBar(title: Text('Kirish jurnallari', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)), backgroundColor: Colors.transparent, elevation: 0),
           body: state.isLoading
               ? const ShimmerLoading(itemCount: 5)
               : state.error != null
                   ? ErrorStateWidget(message: state.error, onRetry: () => ref.read(accessLogProvider.notifier).loadAllLogs())
                   : state.logs.isEmpty
-                      ? const EmptyStateWidget(icon: Icons.security, title: 'No logs')
+                      ? const EmptyStateWidget(icon: Icons.security, title: 'Jurnallar yo\'q')
                       : RefreshIndicator(
                           onRefresh: () => ref.read(accessLogProvider.notifier).loadAllLogs(),
                           child: ListView.builder(

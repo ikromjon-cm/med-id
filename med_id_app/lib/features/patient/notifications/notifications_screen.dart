@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import '../../../core/providers/auth_provider.dart';
 import '../../../core/providers/notification_provider.dart';
 import '../../../core/widgets/shimmer_loading.dart';
 import '../../../core/widgets/empty_state_widget.dart';
@@ -20,7 +21,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(notificationProvider.notifier).loadNotifications('user1');
+      ref.read(notificationProvider.notifier).loadNotifications(ref.read(authProvider).user?.id ?? 'user1');
     });
   }
 
@@ -59,17 +60,17 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Notifications', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('Bildirishnomalar', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
           ),
           body: state.isLoading
               ? const ShimmerLoading(itemCount: 5, itemHeight: 90)
               : state.error != null
-                  ? ErrorStateWidget(message: state.error, onRetry: () => ref.read(notificationProvider.notifier).loadNotifications('user1'))
+                  ? ErrorStateWidget(message: state.error, onRetry: () => ref.read(notificationProvider.notifier).loadNotifications(ref.read(authProvider).user?.id ?? 'user1'))
                   : state.notifications.isEmpty
-                      ? EmptyStateWidget(icon: Icons.notifications_off, title: 'No notifications', subtitle: 'You\'re all caught up')
+                      ? EmptyStateWidget(icon: Icons.notifications_off, title: 'Bildirishnomalar yo\'q', subtitle: 'Barcha bildirishnomalar ko\'rilgan')
                       : RefreshIndicator(
-                          onRefresh: () => ref.read(notificationProvider.notifier).loadNotifications('user1'),
+                          onRefresh: () => ref.read(notificationProvider.notifier).loadNotifications(ref.read(authProvider).user?.id ?? 'user1'),
                           child: ListView.builder(
                             padding: const EdgeInsets.all(16),
                             itemCount: state.notifications.length,

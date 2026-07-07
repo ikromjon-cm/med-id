@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../core/providers/auth_provider.dart';
 import '../../core/utils/mock_api_service.dart';
 import '../../core/models/notification_model.dart';
 import '../../core/widgets/animated_button.dart';
@@ -28,17 +29,17 @@ class _AdminNotificationsScreenState extends ConsumerState<AdminNotificationsScr
 
   void _send() {
     if (_titleCtrl.text.trim().isEmpty || _bodyCtrl.text.trim().isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Please fill all fields'), backgroundColor: ColorConstants.emergency));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Iltimos, barcha maydonlarni to\'ldiring'), backgroundColor: ColorConstants.emergency));
       return;
     }
     MockApiService().addNotification(NotificationModel(
       id: 'n${DateTime.now().millisecondsSinceEpoch}',
-      userId: 'user1',
+      userId: ref.read(authProvider).user?.id ?? 'user1',
       title: _titleCtrl.text.trim(),
       body: _bodyCtrl.text.trim(),
       type: _type,
     ));
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Notification sent (demo)'), backgroundColor: ColorConstants.success));
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Bildirishnoma yuborildi (demo)'), backgroundColor: ColorConstants.success));
     _titleCtrl.clear();
     _bodyCtrl.clear();
   }
@@ -56,27 +57,33 @@ class _AdminNotificationsScreenState extends ConsumerState<AdminNotificationsScr
       child: SafeArea(
         child: Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: AppBar(title: Text('Send Notification', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)), backgroundColor: Colors.transparent, elevation: 0),
+          appBar: AppBar(title: Text('Bildirishnoma yuborish', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)), backgroundColor: Colors.transparent, elevation: 0),
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(16),
             child: GlassCard(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Compose Notification', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                  Text('Bildirishnoma yozish', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
                   const SizedBox(height: 20),
-                  TextField(controller: _titleCtrl, decoration: const InputDecoration(labelText: 'Title', prefixIcon: Icon(Icons.title))),
+                  TextField(controller: _titleCtrl, decoration: const InputDecoration(labelText: 'Sarlavha', prefixIcon: Icon(Icons.title))),
                   const SizedBox(height: 16),
-                  TextField(controller: _bodyCtrl, maxLines: 4, decoration: const InputDecoration(labelText: 'Body', prefixIcon: Icon(Icons.message), alignLabelWithHint: true)),
+                  TextField(controller: _bodyCtrl, maxLines: 4, decoration: const InputDecoration(labelText: 'Matn', prefixIcon: Icon(Icons.message), alignLabelWithHint: true)),
                   const SizedBox(height: 16),
                   DropdownButtonFormField<String>(
-                    value: _type,
-                    decoration: const InputDecoration(labelText: 'Type', prefixIcon: Icon(Icons.category)),
-                    items: ['appointment', 'emergency', 'insurance', 'document', 'system'].map((t) => DropdownMenuItem(value: t, child: Text(t))).toList(),
+                    initialValue: _type,
+                    decoration: const InputDecoration(labelText: 'Tur', prefixIcon: Icon(Icons.category)),
+                    items: [
+                      DropdownMenuItem(value: NotificationType.appointment, child: const Text('Uchrashuv')),
+                      DropdownMenuItem(value: NotificationType.emergency, child: const Text('Favqulodda')),
+                      DropdownMenuItem(value: NotificationType.insurance, child: const Text("Sug'urta")),
+                      DropdownMenuItem(value: NotificationType.document, child: const Text('Hujjat')),
+                      DropdownMenuItem(value: NotificationType.system, child: const Text('Tizim')),
+                    ],
                     onChanged: (v) => setState(() => _type = v!),
                   ),
                   const SizedBox(height: 24),
-                  AnimatedButton(label: 'Send Notification', onPressed: _send),
+                  AnimatedButton(label: 'Bildirishnoma yuborish', onPressed: _send),
                 ],
               ),
             ),

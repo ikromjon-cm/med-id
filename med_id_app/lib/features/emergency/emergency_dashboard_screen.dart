@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animate_do/animate_do.dart';
+import '../../core/providers/auth_provider.dart';
 import '../../core/utils/mock_api_service.dart';
 import '../../core/widgets/glass_card.dart';
 import '../../core/widgets/shimmer_loading.dart';
@@ -56,7 +57,7 @@ class _EmergencyDashboardScreenState extends ConsumerState<EmergencyDashboardScr
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Emergency Dashboard', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('Favqulodda Panel', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
           ),
           body: _loading
@@ -77,16 +78,16 @@ class _EmergencyDashboardScreenState extends ConsumerState<EmergencyDashboardScr
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('Emergency Mode', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
-                                    Text(_emergencyMode ? 'Active - Access Granted' : 'Inactive', style: GoogleFonts.inter(fontSize: 13, color: _emergencyMode ? ColorConstants.emergency : Colors.grey)),
+                                    Text('Favqulodda rejim', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                                    Text(_emergencyMode ? 'Faol - Kirish ruxsat berilgan' : 'Faol emas', style: GoogleFonts.inter(fontSize: 13, color: _emergencyMode ? ColorConstants.emergency : Colors.grey)),
                                   ],
                                 ),
                                 Switch(
                                   value: _emergencyMode,
-                                  activeColor: ColorConstants.emergency,
+                                  activeThumbColor: ColorConstants.emergency,
                                   onChanged: (v) {
                                     setState(() => _emergencyMode = v);
-                                    if (v) MedicalBusinessLogic.handleEmergencyMode('user1');
+                                    if (v) MedicalBusinessLogic.handleEmergencyMode(ref.read(authProvider).user?.id ?? 'user1');
                                   },
                                 ),
                               ],
@@ -95,15 +96,15 @@ class _EmergencyDashboardScreenState extends ConsumerState<EmergencyDashboardScr
                         ),
                         const SizedBox(height: 16),
                         FadeInLeft(child: Row(children: [
-                          _statCard('Total', '${_stats!['totalEmergencies']}', Icons.warning, ColorConstants.emergency, isDark),
+                          _statCard('Jami', '${(_stats ?? {})['totalEmergencies'] ?? 0}', Icons.warning, ColorConstants.emergency, isDark),
                           const SizedBox(width: 12),
-                          _statCard('Active', '${_stats!['activeCases']}', Icons.emergency, const Color(0xFFFFB020), isDark),
+                          _statCard('Faol', '${(_stats ?? {})['activeCases'] ?? 0}', Icons.emergency, const Color(0xFFFFB020), isDark),
                         ])),
                         const SizedBox(height: 12),
                         FadeInRight(child: Row(children: [
-                          _statCard('Response', '${_stats!['responseTime']}', Icons.timer, const Color(0xFF0F6FFF), isDark),
+                          _statCard('Javob', '${(_stats ?? {})['responseTime'] ?? 0}', Icons.timer, const Color(0xFF0F6FFF), isDark),
                           const SizedBox(width: 12),
-                          _quickActionCard('Scan QR', Icons.qr_code_scanner, ColorConstants.primary, () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('QR Scanner (demo)'))), isDark),
+                          _quickActionCard('QR Skaner', Icons.qr_code_scanner, ColorConstants.primary, () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('QR Skaner (demo)'))), isDark),
                         ])),
                         const SizedBox(height: 20),
                         FadeInUp(child: GlassCard(
@@ -111,11 +112,17 @@ class _EmergencyDashboardScreenState extends ConsumerState<EmergencyDashboardScr
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                                Text('Recent Emergency Accesses', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
-                                TextButton(onPressed: () => context.go('/emergency/active'), child: const Text('View All')),
+                                Text('Oxirgi favqulodda kirishlar', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                                TextButton(onPressed: () => context.go('/emergency/active'), child: const Text('Barchasini ko\'rish')),
                               ]),
                               const SizedBox(height: 8),
-                              ...(_stats!['recentAccesses'] as List).map((a) => Padding(
+                              if ((_stats!['recentAccesses'] as List).isEmpty)
+                                const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 24),
+                                  child: Center(child: Text('Ma\'lumot yo\'q', style: TextStyle(color: Colors.grey))),
+                                )
+                              else
+                                ...((_stats ?? {})['recentAccesses'] as List? ?? []).map((a) => Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 6),
                                 child: Row(children: [
                                   Container(
@@ -124,7 +131,7 @@ class _EmergencyDashboardScreenState extends ConsumerState<EmergencyDashboardScr
                                     child: const Icon(Icons.emergency, size: 18, color: ColorConstants.emergency),
                                   ),
                                   const SizedBox(width: 12),
-                                  Expanded(child: Text(a['patientName'] ?? a['patientId'] ?? 'Unknown', style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.white : const Color(0xFF1A1D21)))),
+                                  Expanded(child: Text(a['patientName'] ?? a['patientId'] ?? 'Noma\'lum', style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.white : const Color(0xFF1A1D21)))),
                                   Text(a['time'] ?? '', style: GoogleFonts.inter(fontSize: 12, color: isDark ? Colors.grey[400] : Colors.grey[500])),
                                 ]),
                               )),
@@ -134,7 +141,7 @@ class _EmergencyDashboardScreenState extends ConsumerState<EmergencyDashboardScr
                                 child: ElevatedButton.icon(
                                   onPressed: () => context.go('/emergency/active'),
                                   icon: const Icon(Icons.emergency),
-                                  label: const Text('View Active Emergencies'),
+                                  label: const Text('Faol favqulodda vaziyatlarni ko\'rish'),
                                   style: ElevatedButton.styleFrom(backgroundColor: ColorConstants.emergency),
                                 ),
                               ),

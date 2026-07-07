@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'biometric_helper.dart';
 import 'mock_api_service.dart';
@@ -50,6 +51,6 @@ class MedicalBusinessLogic {
           ));
         }
       }
-    } catch (_) {}
+    } catch (e) { debugPrint('Error: $e'); }
   }
 }

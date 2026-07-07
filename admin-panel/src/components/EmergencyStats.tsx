@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { AlertTriangle, CheckCircle, Clock, Activity } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { t } from '@/lib/i18n';
 
 interface EmergencyStatsProps {
   activeAlerts: number;
@@ -14,7 +15,7 @@ interface EmergencyStatsProps {
 export default function EmergencyStats({ activeAlerts, resolvedToday, avgResponseTime, totalAlerts }: EmergencyStatsProps) {
   const stats = [
     {
-      label: 'Active Alerts',
+      label: t('Active Alerts'),
       value: activeAlerts,
       icon: AlertTriangle,
       color: 'text-emergency',
@@ -22,21 +23,21 @@ export default function EmergencyStats({ activeAlerts, resolvedToday, avgRespons
       alert: true,
     },
     {
-      label: 'Resolved Today',
+      label: t('Resolved Today'),
       value: resolvedToday,
       icon: CheckCircle,
       color: 'text-[#00C896]',
       bg: 'bg-[#00C896]/10',
     },
     {
-      label: 'Avg Response',
+      label: t('Avg Response'),
       value: avgResponseTime,
       icon: Clock,
       color: 'text-amber-500',
       bg: 'bg-amber-50 dark:bg-amber-500/10',
     },
     {
-      label: 'Total Alerts',
+      label: t('Total Alerts'),
       value: totalAlerts,
       icon: Activity,
       color: 'text-primary',

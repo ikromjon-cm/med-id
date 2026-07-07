@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { User, Droplets, Phone, Calendar } from 'lucide-react';
+import { t } from '@/lib/i18n';
 import StatusBadge from './StatusBadge';
 import { formatDate } from '@/lib/utils';
 import type { Patient } from '@/lib/types';
@@ -28,7 +29,7 @@ export default function PatientCard({ patient, delay = 0 }: PatientCardProps) {
           <StatusBadge status={patient.status} />
         </div>
         <div className="flex items-center gap-3 mt-0.5 text-xs text-gray-500 dark:text-gray-400">
-          <span>{patient.age} yrs, {patient.gender}</span>
+                <span>{patient.age} {t('yrs')}, {patient.gender}</span>
           <span className="flex items-center gap-1">
             <Droplets className="w-3 h-3" />
             {patient.bloodType}
@@ -39,7 +40,7 @@ export default function PatientCard({ patient, delay = 0 }: PatientCardProps) {
           </span>
         </div>
       </div>
-      <button className="text-xs text-primary font-medium hover:underline flex-shrink-0">View</button>
+      <button className="text-xs text-primary font-medium hover:underline flex-shrink-0">{t('View')}</button>
     </motion.div>
   );
 }

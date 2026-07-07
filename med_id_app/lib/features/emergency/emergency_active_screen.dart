@@ -36,7 +36,7 @@ class _EmergencyActiveScreenState extends ConsumerState<EmergencyActiveScreen> {
   Future<void> _markResolved(int index) async {
     setState(() => _emergencies.removeAt(index));
     if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Emergency marked as resolved'), backgroundColor: ColorConstants.success));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Favqulodda vaziyat hal qilingan deb belgilandi'), backgroundColor: ColorConstants.success));
     }
   }
 
@@ -53,13 +53,13 @@ class _EmergencyActiveScreenState extends ConsumerState<EmergencyActiveScreen> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Active Emergencies', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('Faol favqulodda vaziyatlar', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
           ),
           body: _loading
               ? const ShimmerLoading(itemCount: 5)
               : _emergencies.isEmpty
-                  ? const EmptyStateWidget(icon: Icons.check_circle, title: 'No active emergencies', subtitle: 'All emergencies have been resolved')
+                  ? const EmptyStateWidget(icon: Icons.check_circle, title: 'Faol favqulodda vaziyatlar yo\'q', subtitle: 'Barcha favqulodda vaziyatlar hal qilingan')
                   : RefreshIndicator(
                       onRefresh: _loadData,
                       child: ListView.builder(
@@ -103,12 +103,12 @@ class _EmergencyActiveScreenState extends ConsumerState<EmergencyActiveScreen> {
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
-                                            Text(_emergencies[i]['patientName'] ?? 'Unknown Patient', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                                            Text(_emergencies[i]['patientName'] ?? 'Noma\'lum Bemor', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
                                             const SizedBox(height: 4),
                                             Row(children: [
-                                              _emergencyTag('Blood: ${_emergencies[i]['bloodType'] ?? 'N/A'}', ColorConstants.emergency),
+                                              _emergencyTag('Qon: ${_emergencies[i]['bloodType'] ?? 'Mavjud emas'}', ColorConstants.emergency),
                                               const SizedBox(width: 6),
-                                              _emergencyTag('${_emergencies[i]['allergies'] ?? 'No allergies'}', ColorConstants.warning),
+                                              _emergencyTag('${_emergencies[i]['allergies'] ?? 'Allergiyalar yo\'q'}', ColorConstants.warning),
                                             ]),
                                           ],
                                         ),
@@ -117,7 +117,7 @@ class _EmergencyActiveScreenState extends ConsumerState<EmergencyActiveScreen> {
                                   ),
                                   if (_emergencies[i]['medications'] != null) ...[
                                     const SizedBox(height: 8),
-                                    Text('Medications: ${_emergencies[i]['medications']}', style: GoogleFonts.inter(fontSize: 12, color: isDark ? Colors.grey[400] : Colors.grey[500])),
+                                    Text('Dorilar: ${_emergencies[i]['medications']}', style: GoogleFonts.inter(fontSize: 12, color: isDark ? Colors.grey[400] : Colors.grey[500])),
                                   ],
                                   const SizedBox(height: 12),
                                   Row(
@@ -126,7 +126,7 @@ class _EmergencyActiveScreenState extends ConsumerState<EmergencyActiveScreen> {
                                         child: OutlinedButton.icon(
                                           onPressed: () => context.go('/emergency/profile/${_emergencies[i]['patientId']}'),
                                           icon: const Icon(Icons.visibility, size: 18),
-                                          label: const Text('View Profile'),
+                                          label: const Text('Profilni ko\'rish'),
                                           style: OutlinedButton.styleFrom(foregroundColor: ColorConstants.primary),
                                         ),
                                       ),
@@ -135,7 +135,7 @@ class _EmergencyActiveScreenState extends ConsumerState<EmergencyActiveScreen> {
                                         child: ElevatedButton.icon(
                                           onPressed: () => _markResolved(i),
                                           icon: const Icon(Icons.check, size: 18),
-                                          label: const Text('Resolved'),
+                                          label: const Text('Hal qilingan'),
                                           style: ElevatedButton.styleFrom(backgroundColor: ColorConstants.success),
                                         ),
                                       ),

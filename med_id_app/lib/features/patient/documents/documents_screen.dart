@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import '../../../core/providers/auth_provider.dart';
 import '../../../core/providers/document_provider.dart';
 import '../../../core/widgets/glass_card.dart';
 import '../../../core/widgets/shimmer_loading.dart';
@@ -24,7 +25,7 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(documentProvider.notifier).loadDocuments('user1');
+      ref.read(documentProvider.notifier).loadDocuments(ref.read(authProvider).user?.id ?? 'user1');
     });
   }
 
@@ -62,14 +63,14 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Delete Document'),
-        content: const Text('Are you sure you want to delete this document?'),
+        title: const Text('Hujjatni o\'chirish'),
+        content: const Text('Bu hujjatni o\'chirishga ishonchingiz komilmi?'),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
+          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Bekor qilish')),
           TextButton(onPressed: () {
             ref.read(documentProvider.notifier).deleteDocument(docId);
             Navigator.pop(ctx);
-          }, child: const Text('Delete', style: TextStyle(color: ColorConstants.emergency))),
+          }, child: const Text('O\'chirish', style: TextStyle(color: ColorConstants.emergency))),
         ],
       ),
     );
@@ -91,7 +92,7 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Documents', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('Hujjatlar', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
             actions: [
               IconButton(icon: const Icon(Icons.add), onPressed: () => context.go('/patient/documents/upload')),
@@ -105,7 +106,7 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
                   controller: _searchCtrl,
                   onChanged: (_) => setState(() {}),
                   decoration: InputDecoration(
-                    hintText: 'Search documents...',
+                    hintText: 'Hujjatlarni qidirish...',
                     prefixIcon: const Icon(Icons.search),
                     suffixIcon: _searchCtrl.text.isNotEmpty ? IconButton(icon: const Icon(Icons.clear), onPressed: () { _searchCtrl.clear(); setState(() {}); }) : null,
                   ),
@@ -115,11 +116,11 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
                 child: docState.isLoading
                     ? const ShimmerLoading(itemCount: 5, itemHeight: 100)
                     : docState.error != null
-                        ? ErrorStateWidget(message: docState.error, onRetry: () => ref.read(documentProvider.notifier).loadDocuments('user1'))
+                        ? ErrorStateWidget(message: docState.error, onRetry: () => ref.read(documentProvider.notifier).loadDocuments(ref.read(authProvider).user?.id ?? 'user1'))
                         : docs.isEmpty
-                            ? EmptyStateWidget(icon: Icons.description, title: 'No documents yet', subtitle: 'Upload your medical documents', actionLabel: 'Upload Document', onAction: () => context.go('/patient/documents/upload'))
+                            ? EmptyStateWidget(icon: Icons.description, title: 'Hujjatlar yo\'q', subtitle: 'Tibbiy hujjatlaringizni yuklang', actionLabel: 'Hujjat yuklash', onAction: () => context.go('/patient/documents/upload'))
                             : RefreshIndicator(
-                                onRefresh: () => ref.read(documentProvider.notifier).loadDocuments('user1'),
+                                onRefresh: () => ref.read(documentProvider.notifier).loadDocuments(ref.read(authProvider).user?.id ?? 'user1'),
                                 child: ListView.builder(
                                   padding: const EdgeInsets.all(16),
                                   itemCount: docs.length,

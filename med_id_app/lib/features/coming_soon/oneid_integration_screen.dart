@@ -18,11 +18,11 @@ class OneIdIntegrationScreen extends StatelessWidget {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('OneID Integration', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('OneID Integratsiyasi', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
           ),
           body: const ComingSoonWidget(
-            featureName: 'OneID Integration',
+            featureName: 'OneID Integratsiyasi',
             icon: Icons.fingerprint,
             description: 'Seamlessly integrate with Uzbekistan\'s OneID system for unified digital identity verification across all healthcare services.',
           ),

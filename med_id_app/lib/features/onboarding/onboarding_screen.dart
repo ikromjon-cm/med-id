@@ -21,16 +21,19 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       image: 'security',
       title: "Ma'lumotlaringiz doimo xavfsiz",
       description: "MED-ID platformasi eng so'nggi shifrlash texnologiyalari bilan tibbiy ma'lumotlaringizni himoya qiladi.",
+      iconData: Icons.security,
     ),
     OnboardingPage(
       image: 'biometric',
       title: 'Biometrik tezkor kirish',
       description: "Barmoq izi yoki yuz tanish orqali bir zumda profilingizga kiring. Xavfsiz va qulay.",
+      iconData: Icons.fingerprint,
     ),
     OnboardingPage(
       image: 'emergency',
       title: "Shoshilinch vaziyatda hayotni saqlab qoling",
       description: "Favqulodda vaziyatlarda shifokorlar sizning muhim tibbiy ma'lumotlaringizga tezda kirishlari mumkin.",
+      iconData: Icons.emergency,
     ),
   ];
 
@@ -72,7 +75,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
             children: [
               Align(
                 alignment: Alignment.topRight,
-                child: TextButton(onPressed: _onSkip, child: Text('Skip', style: GoogleFonts.inter(fontSize: 16, color: const Color(0xFF0F6FFF)))),
+                child: TextButton(onPressed: _onSkip, child: Text('O\'tkazib yuborish', style: GoogleFonts.inter(fontSize: 16, color: const Color(0xFF0F6FFF)))),
               ),
               Expanded(
                 child: PageView.builder(
@@ -90,7 +93,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                     _currentPage > 0
                         ? TextButton(
                             onPressed: () => _pageController.previousPage(duration: const Duration(milliseconds: 400), curve: Curves.easeInOut),
-                            child: Text('Back', style: GoogleFonts.inter(fontSize: 16, color: const Color(0xFF0F6FFF))),
+                            child: Text('Orqaga', style: GoogleFonts.inter(fontSize: 16, color: const Color(0xFF0F6FFF))),
                           )
                         : const SizedBox(width: 60),
                     Row(
@@ -111,7 +114,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                       ),
-                      child: Text(_currentPage == _pages.length - 1 ? 'Start' : 'Next'),
+                      child: Text(_currentPage == _pages.length - 1 ? 'Boshlash' : 'Keyingi'),
                     ),
                   ],
                 ),

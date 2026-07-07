@@ -1,6 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
+import { t } from '@/lib/i18n';
 import { CheckCircle, XCircle, Clock, AlertTriangle, Minus } from 'lucide-react';
 
 interface StatusBadgeProps {
@@ -60,7 +61,7 @@ export default function StatusBadge({ status, size = 'sm' }: StatusBadgeProps) {
       )}
     >
       {config.icon}
-      {status}
+      {t(status)}
     </span>
   );
 }

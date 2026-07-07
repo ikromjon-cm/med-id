@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Building2, MapPin, Phone, Users } from 'lucide-react';
+import { t } from '@/lib/i18n';
 import StatusBadge from './StatusBadge';
 import type { Clinic } from '@/lib/types';
 
@@ -47,9 +48,9 @@ export default function ClinicCard({ clinic, onView, delay = 0 }: ClinicCardProp
       <div className="mt-4 pt-3 border-t border-gray-100 dark:border-gray-800/30 flex items-center justify-between">
         <span className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400">
           <Users className="w-3.5 h-3.5" />
-          {clinic.doctorsCount} doctors
+          {clinic.doctorsCount} {t('doctors')}
         </span>
-        <span className="text-xs text-[#00C896] font-medium group-hover:underline">View Details →</span>
+        <span className="text-xs text-[#00C896] font-medium group-hover:underline">{t('View Details')} →</span>
       </div>
     </motion.div>
   );

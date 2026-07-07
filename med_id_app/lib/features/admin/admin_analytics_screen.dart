@@ -42,7 +42,7 @@ class _AdminAnalyticsScreenState extends ConsumerState<AdminAnalyticsScreen> {
       child: SafeArea(
         child: Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: AppBar(title: Text('Analytics', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)), backgroundColor: Colors.transparent, elevation: 0),
+          appBar: AppBar(title: Text('Analitika', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)), backgroundColor: Colors.transparent, elevation: 0),
           body: _loading
               ? const ShimmerLoading(itemCount: 4)
               : SingleChildScrollView(
@@ -53,7 +53,7 @@ class _AdminAnalyticsScreenState extends ConsumerState<AdminAnalyticsScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Emergency Access Count', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                            Text('Favqulodda kirishlar soni', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
                             const SizedBox(height: 16),
                             SizedBox(
                               height: 200,
@@ -67,7 +67,7 @@ class _AdminAnalyticsScreenState extends ConsumerState<AdminAnalyticsScreen> {
                                   borderData: FlBorderData(show: false),
                                   lineBarsData: [
                                     LineChartBarData(
-                                      spots: List.generate(12, (i) => FlSpot(i.toDouble(), (_stats!['emergencyAccessCount'] as List)[i].toDouble())),
+                                      spots: List.generate(12, (i) => FlSpot(i.toDouble(), ((_stats ?? {})['emergencyAccessCount'] as List? ?? [])[i].toDouble())),
                                       isCurved: true,
                                       color: const Color(0xFFFF4D4F),
                                       barWidth: 3,
@@ -86,7 +86,7 @@ class _AdminAnalyticsScreenState extends ConsumerState<AdminAnalyticsScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Monthly Growth', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                            Text('Oylik o\'sish', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
                             const SizedBox(height: 16),
                             SizedBox(
                               height: 200,
@@ -94,7 +94,7 @@ class _AdminAnalyticsScreenState extends ConsumerState<AdminAnalyticsScreen> {
                                 BarChartData(
                                   alignment: BarChartAlignment.spaceAround,
                                   maxY: 200,
-                                  barGroups: List.generate(12, (i) => BarChartGroupData(x: i, barRods: [BarChartRodData(toY: (_stats!['monthlyGrowth'] as List)[i].toDouble(), color: const Color(0xFF0F6FFF), width: 12, borderRadius: const BorderRadius.vertical(top: Radius.circular(4)))])),
+                                  barGroups: List.generate(12, (i) => BarChartGroupData(x: i, barRods: [BarChartRodData(toY: ((_stats ?? {})['monthlyGrowth'] as List? ?? [])[i].toDouble(), color: const Color(0xFF0F6FFF), width: 12, borderRadius: const BorderRadius.vertical(top: Radius.circular(4)))])),
                                   titlesData: FlTitlesData(show: true, bottomTitles: AxisTitles(sideTitles: SideTitles(showTitles: true, getTitlesWidget: (v, _) => Text(['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][v.toInt()], style: GoogleFonts.inter(fontSize: 9, color: isDark ? Colors.grey[400] : Colors.grey[500])))), leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: true, reservedSize: 30, getTitlesWidget: (v, _) => Text('${v.toInt()}', style: GoogleFonts.inter(fontSize: 10, color: isDark ? Colors.grey[500] : Colors.grey[400]))))),
                                   borderData: FlBorderData(show: false),
                                   gridData: FlGridData(show: true, drawVerticalLine: false, horizontalInterval: 50, getDrawingHorizontalLine: (_) => FlLine(color: isDark ? Colors.white10 : Colors.grey[200]!, strokeWidth: 1)),
@@ -109,7 +109,7 @@ class _AdminAnalyticsScreenState extends ConsumerState<AdminAnalyticsScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Document Distribution', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                            Text('Hujjat taqsimoti', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
                             const SizedBox(height: 16),
                             SizedBox(
                               height: 200,
@@ -118,12 +118,12 @@ class _AdminAnalyticsScreenState extends ConsumerState<AdminAnalyticsScreen> {
                                   sectionsSpace: 2,
                                   centerSpaceRadius: 40,
                                   sections: [
-                                    PieChartSectionData(value: (_stats!['documentStats'] as Map)['lab'].toDouble(), color: const Color(0xFF7C3AED), title: 'Lab', titleStyle: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white), radius: 45),
-                                    PieChartSectionData(value: (_stats!['documentStats'] as Map)['prescription'].toDouble(), color: const Color(0xFF0F6FFF), title: 'Rx', titleStyle: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white), radius: 45),
-                                    PieChartSectionData(value: (_stats!['documentStats'] as Map)['vaccination'].toDouble(), color: const Color(0xFF00C896), title: 'Vax', titleStyle: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white), radius: 45),
-                                    PieChartSectionData(value: (_stats!['documentStats'] as Map)['mri'].toDouble(), color: const Color(0xFFFFB020), title: 'MRI', titleStyle: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white), radius: 45),
-                                    PieChartSectionData(value: (_stats!['documentStats'] as Map)['ct'].toDouble(), color: const Color(0xFFFF4D4F), title: 'CT', titleStyle: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white), radius: 45),
-                                    PieChartSectionData(value: (_stats!['documentStats'] as Map)['insurance'].toDouble(), color: const Color(0xFF0891B2), title: 'Ins', titleStyle: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white), radius: 45),
+                                    PieChartSectionData(value: (((_stats ?? {})['documentStats'] as Map? ?? {})['lab'] ?? 0).toDouble(), color: const Color(0xFF7C3AED), title: 'Lab', titleStyle: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white), radius: 45),
+                                    PieChartSectionData(value: (((_stats ?? {})['documentStats'] as Map? ?? {})['prescription'] ?? 0).toDouble(), color: const Color(0xFF0F6FFF), title: 'Rx', titleStyle: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white), radius: 45),
+                                    PieChartSectionData(value: (((_stats ?? {})['documentStats'] as Map? ?? {})['vaccination'] ?? 0).toDouble(), color: const Color(0xFF00C896), title: 'Vax', titleStyle: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white), radius: 45),
+                                    PieChartSectionData(value: (((_stats ?? {})['documentStats'] as Map? ?? {})['mri'] ?? 0).toDouble(), color: const Color(0xFFFFB020), title: 'MRI', titleStyle: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white), radius: 45),
+                                    PieChartSectionData(value: (((_stats ?? {})['documentStats'] as Map? ?? {})['ct'] ?? 0).toDouble(), color: const Color(0xFFFF4D4F), title: 'CT', titleStyle: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white), radius: 45),
+                                    PieChartSectionData(value: (((_stats ?? {})['documentStats'] as Map? ?? {})['insurance'] ?? 0).toDouble(), color: const Color(0xFF0891B2), title: 'Ins', titleStyle: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white), radius: 45),
                                   ],
                                 ),
                               ),

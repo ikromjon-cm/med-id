@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animate_do/animate_do.dart';
+import '../../core/providers/auth_provider.dart';
 import '../../core/utils/mock_api_service.dart';
 import '../../core/widgets/glass_card.dart';
 import '../../core/widgets/shimmer_loading.dart';
@@ -37,7 +38,8 @@ class _DoctorPatientSearchScreenState extends ConsumerState<DoctorPatientSearchS
     }
     setState(() { _loading = true; _error = null; });
     try {
-      final patients = await _api.getDoctorPatients('doc1');
+      final userId = ref.read(authProvider).user?.id ?? 'doc1';
+      final patients = await _api.getDoctorPatients(userId);
       final filtered = patients.where((p) =>
         (p['fullName'] as String).toLowerCase().contains(query.toLowerCase()) ||
         (p['phone'] as String).contains(query) ||
@@ -62,7 +64,7 @@ class _DoctorPatientSearchScreenState extends ConsumerState<DoctorPatientSearchS
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Search Patients', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('Bemorlarni qidirish', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
           ),
           body: Column(
@@ -75,7 +77,7 @@ class _DoctorPatientSearchScreenState extends ConsumerState<DoctorPatientSearchS
                     controller: _searchController,
                     onChanged: _search,
                     decoration: InputDecoration(
-                      hintText: 'Search by name, phone, or ID',
+                      hintText: 'Ism, telefon yoki ID bo\'yicha qidirish',
                       prefixIcon: const Icon(Icons.search, color: ColorConstants.primary),
                       border: InputBorder.none,
                       hintStyle: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.grey[500] : Colors.grey[400]),
@@ -92,8 +94,8 @@ class _DoctorPatientSearchScreenState extends ConsumerState<DoctorPatientSearchS
                         : _results.isEmpty
                             ? EmptyStateWidget(
                                 icon: Icons.person_search,
-                                title: 'No patients found',
-                                subtitle: 'Search for patients by name, phone number, or patient ID',
+                                title: 'Bemorlar topilmadi',
+                                subtitle: 'Ism, telefon raqami yoki bemor ID si bo\'yicha qidirish',
                               )
                             : RefreshIndicator(
                                 onRefresh: () => _search(_searchController.text),

@@ -22,7 +22,7 @@ class AdminSettingsScreen extends ConsumerWidget {
       child: SafeArea(
         child: Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: AppBar(title: Text('System Settings', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)), backgroundColor: Colors.transparent, elevation: 0),
+          appBar: AppBar(title: Text('Tizim sozlamalari', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)), backgroundColor: Colors.transparent, elevation: 0),
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -30,19 +30,19 @@ class AdminSettingsScreen extends ConsumerWidget {
                 GlassCard(
                   child: Column(
                     children: [
-                      _settingTile('Maintenance Mode', 'System is operational', Icons.build, isDark, () => showSnack('Maintenance mode (demo)')),
+                      _settingTile('Texnik xizmat rejimi', 'Tizim ishlamoqda', Icons.build, isDark, () => showSnack('Texnik xizmat rejimi (demo)')),
                       const Divider(),
-                      _settingTile('Emergency Mode', 'Disabled', Icons.warning, isDark, () => showSnack('Emergency mode (demo)')),
+                      _settingTile('Favqulodda rejim', 'O\'chirilgan', Icons.warning, isDark, () => showSnack('Favqulodda rejim (demo)')),
                       const Divider(),
-                      _settingTile('Data Sync', 'Last synced: 5 min ago', Icons.sync, isDark, () => showSnack('Data sync (demo)')),
+                      _settingTile('Ma\'lumot sinxronizatsiyasi', 'Oxirgi sinxronlash: 5 daqiqa oldin', Icons.sync, isDark, () => showSnack('Ma\'lumot sinxronizatsiyasi (demo)')),
                       const Divider(),
-                      _settingTile('Backup', 'Auto backup enabled', Icons.backup, isDark, () => showSnack('Backup (demo)')),
+                      _settingTile('Zaxira nusxa', 'Avtomatik zaxira yoqilgan', Icons.backup, isDark, () => showSnack('Zaxira nusxa (demo)')),
                       const Divider(),
                       SwitchListTile(
                         title: Text('Dark Mode', style: GoogleFonts.inter(fontSize: 15, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
                         value: isDark,
                         onChanged: (_) => ref.read(themeProvider.notifier).toggleTheme(),
-                        activeColor: ColorConstants.primary,
+                        activeThumbColor: ColorConstants.primary,
                       ),
                     ],
                   ),
@@ -51,11 +51,11 @@ class AdminSettingsScreen extends ConsumerWidget {
                 GlassCard(
                   child: Column(
                     children: [
-                      _settingTile('System Version', 'v1.0.0 (Build 1)', Icons.info, isDark, null),
+                      _settingTile('Tizim versiyasi', 'v1.0.0 (Build 1)', Icons.info, isDark, null),
                       const Divider(),
-                      _settingTile('API Endpoint', 'https://api.med-id.uz/v1', Icons.link, isDark, null),
+                      _settingTile('API manzili', 'https://api.med-id.uz/v1', Icons.link, isDark, null),
                       const Divider(),
-                      _settingTile('Database Status', 'Connected', Icons.storage, isDark, null),
+                      _settingTile('Ma\'lumotlar bazasi holati', 'Ulangan', Icons.storage, isDark, null),
                     ],
                   ),
                 ),
@@ -63,9 +63,9 @@ class AdminSettingsScreen extends ConsumerWidget {
                 SizedBox(
                   width: double.infinity,
                   child: OutlinedButton.icon(
-                    onPressed: () => showSnack('Settings saved (demo)'),
+                    onPressed: () => showSnack('Sozlamalar saqlandi (demo)'),
                     icon: const Icon(Icons.save),
-                    label: Text('Save Settings', style: GoogleFonts.inter(fontSize: 16)),
+                    label: Text('Sozlamalarni saqlash', style: GoogleFonts.inter(fontSize: 16)),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: ColorConstants.primary,
                       side: const BorderSide(color: ColorConstants.primary),

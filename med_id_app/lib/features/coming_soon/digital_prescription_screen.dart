@@ -18,11 +18,11 @@ class DigitalPrescriptionScreen extends StatelessWidget {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Digital Prescription', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('Raqamli Retsept', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
           ),
           body: const ComingSoonWidget(
-            featureName: 'Digital Prescription',
+            featureName: 'Raqamli Retsept',
             icon: Icons.description,
             description: 'Create, sign, and share digital prescriptions with QR verification. Reduce paperwork and prevent prescription fraud.',
           ),

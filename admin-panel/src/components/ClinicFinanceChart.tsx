@@ -2,6 +2,7 @@
 
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { cn } from '@/lib/utils';
+import { t } from '@/lib/i18n';
 import type { ClinicFinance } from '@/lib/types';
 
 interface ClinicFinanceChartProps {
@@ -19,22 +20,22 @@ export default function ClinicFinanceChart({ data, className }: ClinicFinanceCha
     <div className={cn('space-y-4', className)}>
       <div className="grid grid-cols-3 gap-3">
         <div className="rounded-xl bg-primary/10 p-3 text-center">
-          <p className="text-xs text-gray-500 dark:text-gray-400">Revenue</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400">{t('Revenue')}</p>
           <p className="text-lg font-bold text-primary">${(totalRevenue / 1000).toFixed(1)}k</p>
         </div>
         <div className="rounded-xl bg-emergency/10 p-3 text-center">
-          <p className="text-xs text-gray-500 dark:text-gray-400">Expenses</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400">{t('Expenses')}</p>
           <p className="text-lg font-bold text-emergency">${(totalExpenses / 1000).toFixed(1)}k</p>
         </div>
         <div className={cn('rounded-xl p-3 text-center', profit >= 0 ? 'bg-[#00C896]/10' : 'bg-emergency/10')}>
-          <p className="text-xs text-gray-500 dark:text-gray-400">Profit</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400">{t('Profit')}</p>
           <p className={cn('text-lg font-bold', profit >= 0 ? 'text-[#00C896]' : 'text-emergency')}>
             ${(profit / 1000).toFixed(1)}k
           </p>
         </div>
       </div>
       <div className="text-center">
-        <p className="text-xs text-gray-500 dark:text-gray-400">Total Appointments</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400">{t('Total Appointments')}</p>
         <p className="text-sm font-semibold text-gray-900 dark:text-white">{totalAppointments.toLocaleString()}</p>
       </div>
       <ResponsiveContainer width="100%" height={250}>
@@ -55,8 +56,8 @@ export default function ClinicFinanceChart({ data, className }: ClinicFinanceCha
             formatter={(value: any) => [`$${Number(value).toLocaleString()}`, undefined]}
           />
           <Legend />
-          <Bar dataKey="revenue" name="Revenue" fill="#0F6FFF" radius={[4, 4, 0, 0]} maxBarSize={30} />
-          <Bar dataKey="expenses" name="Expenses" fill="#FF4D4F" radius={[4, 4, 0, 0]} maxBarSize={30} />
+          <Bar dataKey="revenue" name={t('Revenue')} fill="#0F6FFF" radius={[4, 4, 0, 0]} maxBarSize={30} />
+          <Bar dataKey="expenses" name={t('Expenses')} fill="#FF4D4F" radius={[4, 4, 0, 0]} maxBarSize={30} />
         </BarChart>
       </ResponsiveContainer>
     </div>

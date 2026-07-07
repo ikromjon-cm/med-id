@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/user_model.dart';
 import '../utils/mock_api_service.dart';
@@ -33,9 +34,39 @@ class AuthNotifier extends StateNotifier<AuthState> {
   Future<void> _init() async {
     final token = await SecureStorageHelper.getToken();
     if (token != null) {
-      state = AuthState(status: AuthStatus.authenticated, token: token, user: _getDummyUser());
+      try {
+        final userId = _extractUserIdFromToken(token);
+        if (userId != null) {
+          final user = await _api.getUser(userId);
+          state = AuthState(status: AuthStatus.authenticated, token: token, user: user);
+        } else {
+          await SecureStorageHelper.deleteToken();
+          state = const AuthState(status: AuthStatus.unauthenticated);
+        }
+      } catch (e) {
+        await SecureStorageHelper.deleteToken();
+        state = const AuthState(status: AuthStatus.unauthenticated);
+      }
     } else {
       state = const AuthState(status: AuthStatus.unauthenticated);
+    }
+  }
+
+  String? _extractUserIdFromToken(String token) {
+    try {
+      final parts = token.split('.');
+      if (parts.length != 3) return null;
+      String normalized = parts[1].replaceAll('-', '+').replaceAll('_', '/');
+      switch (normalized.length % 4) {
+        case 0: break;
+        case 2: normalized += '=='; break;
+        case 3: normalized += '='; break;
+      }
+      final decoded = utf8.decode(base64.decode(normalized));
+      final subMatch = RegExp(r'"sub"\s*:\s*"([^"]+)"').firstMatch(decoded);
+      return subMatch?.group(1);
+    } catch (_) {
+      return null;
     }
   }
 
@@ -88,6 +119,10 @@ class AuthNotifier extends StateNotifier<AuthState> {
   Future<void> logout() async {
     await SecureStorageHelper.deleteToken();
     state = const AuthState(status: AuthStatus.unauthenticated);
+  }
+
+  void updateUser(UserModel user) {
+    state = state.copyWith(user: user);
   }
 
   void clearError() {

@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Clock, User, AlertTriangle } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { t } from '@/lib/i18n';
 import type { QueueEntry } from '@/lib/types';
 
 interface QueueCardProps {
@@ -11,10 +12,10 @@ interface QueueCardProps {
 }
 
 const priorityColors: Record<string, { bg: string; text: string; dot: string; label: string }> = {
-  LOW: { bg: 'bg-[#00C896]/10', text: 'text-[#00C896]', dot: 'bg-[#00C896]', label: 'Low' },
-  MEDIUM: { bg: 'bg-amber-50 dark:bg-amber-500/10', text: 'text-amber-500', dot: 'bg-amber-500', label: 'Medium' },
-  HIGH: { bg: 'bg-emergency/10', text: 'text-emergency', dot: 'bg-emergency', label: 'High' },
-  CRITICAL: { bg: 'bg-emergency/10', text: 'text-emergency', dot: 'bg-emergency pulse-dot', label: 'Critical' },
+  LOW: { bg: 'bg-[#00C896]/10', text: 'text-[#00C896]', dot: 'bg-[#00C896]', label: t('Low') },
+  MEDIUM: { bg: 'bg-amber-50 dark:bg-amber-500/10', text: 'text-amber-500', dot: 'bg-amber-500', label: t('Medium') },
+  HIGH: { bg: 'bg-emergency/10', text: 'text-emergency', dot: 'bg-emergency', label: t('High') },
+  CRITICAL: { bg: 'bg-emergency/10', text: 'text-emergency', dot: 'bg-emergency pulse-dot', label: t('Critical') },
 };
 
 const statusStyles: Record<string, string> = {
@@ -47,7 +48,7 @@ export default function QueueCard({ entry, delay = 0 }: QueueCardProps) {
             <span className={cn('capitalize font-medium', statusStyles[entry.status])}>{entry.status.replace('_', ' ')}</span>
             <span className="flex items-center gap-1">
               <Clock className="w-3 h-3" />
-              {entry.waitTimeMinutes} min
+              {entry.waitTimeMinutes} {t('min')}
             </span>
           </div>
         </div>

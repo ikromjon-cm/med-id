@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Clock, Calendar, Stethoscope } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { t } from '@/lib/i18n';
 import type { Appointment } from '@/lib/types';
 
 interface AppointmentCardProps {
@@ -45,9 +46,9 @@ export default function AppointmentCard({ appointment, delay = 0 }: AppointmentC
       </div>
       <div className="flex flex-col items-end gap-1 flex-shrink-0">
         <span className={cn('px-2 py-0.5 text-[10px] font-medium rounded-full capitalize', statusStyles[appointment.status])}>
-          {appointment.status}
+          {t(appointment.status)}
         </span>
-        <span className="text-[10px] text-gray-400 dark:text-gray-500">{appointment.type}</span>
+        <span className="text-[10px] text-gray-400 dark:text-gray-500">{t(appointment.type)}</span>
       </div>
     </motion.div>
   );

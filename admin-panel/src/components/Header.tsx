@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import { Menu, Sun, Moon } from 'lucide-react';
+import { t } from '@/lib/i18n';
 import { useTheme } from './ThemeProvider';
 import NotificationBell from './NotificationBell';
 import ProfileDropdown from './ProfileDropdown';
@@ -11,17 +12,17 @@ interface HeaderProps {
 }
 
 const pageTitles: Record<string, string> = {
-  '/dashboard': 'Dashboard',
-  '/users': 'Users Management',
-  '/doctors': 'Doctors Management',
-  '/clinics': 'Clinics Management',
-  '/doctor': 'Doctors',
-  '/clinic': 'Clinics',
-  '/analytics': 'Analytics',
-  '/access-logs': 'Access Logs',
-  '/notifications': 'Notifications',
-  '/settings': 'Settings',
-  '/emergency': 'Emergency Management',
+  '/admin/dashboard': t('Dashboard'),
+  '/admin/users': t('Users Management'),
+  '/admin/doctors': t('Doctors Management'),
+  '/admin/clinics': t('Clinics Management'),
+  '/admin/doctor': t('Doctors'),
+  '/admin/clinic': t('Clinics'),
+  '/admin/analytics': t('Analytics'),
+  '/admin/access-logs': t('Access Logs'),
+  '/admin/notifications': t('Notifications'),
+  '/admin/settings': t('Settings'),
+  '/admin/emergency': t('Emergency Management'),
 };
 
 export default function Header({ onMenuToggle }: HeaderProps) {
@@ -42,7 +43,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
           <div>
             <h1 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">{title}</h1>
             <p className="text-xs text-gray-500 dark:text-gray-400 hidden sm:block">
-              MED-ID Biometric Medical Platform
+              {t('MED-ID Biometric Medical Platform')}
             </p>
           </div>
         </div>

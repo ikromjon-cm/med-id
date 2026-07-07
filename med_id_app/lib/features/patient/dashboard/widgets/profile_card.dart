@@ -63,7 +63,7 @@ class ProfileCard extends StatelessWidget {
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: Text(
-                          user.insuranceExpiry != null && user.insuranceExpiry!.isAfter(DateTime.now()) ? 'Active Insurance' : 'No Insurance',
+                          user.insuranceExpiry != null && user.insuranceExpiry!.isAfter(DateTime.now()) ? 'Faol sug\'urta' : 'Sug\'urta yo\'q',
                           style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w500, color: Colors.white),
                         ),
                       ),

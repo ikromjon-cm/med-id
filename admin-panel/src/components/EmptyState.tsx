@@ -1,6 +1,7 @@
 'use client';
 
 import { PackageOpen } from 'lucide-react';
+import { t } from '@/lib/i18n';
 
 interface EmptyStateProps {
   title?: string;
@@ -9,8 +10,8 @@ interface EmptyStateProps {
 }
 
 export default function EmptyState({
-  title = 'No data found',
-  description = 'There are no items to display at the moment.',
+  title = t('No data found'),
+  description = t('There are no items to display at the moment.'),
   action,
 }: EmptyStateProps) {
   return (

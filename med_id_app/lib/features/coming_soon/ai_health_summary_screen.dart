@@ -18,11 +18,11 @@ class AiHealthSummaryScreen extends StatelessWidget {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('AI Health Summary', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('AI Salomatlik Xulosasi', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
           ),
           body: const ComingSoonWidget(
-            featureName: 'AI Health Summary',
+            featureName: 'AI Salomatlik Xulosasi',
             icon: Icons.auto_awesome,
             description: 'Get intelligent health summaries powered by AI. Analyze your medical history, lab results, and get personalized health insights and recommendations.',
           ),

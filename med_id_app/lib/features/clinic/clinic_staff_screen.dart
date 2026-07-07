@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animate_do/animate_do.dart';
+import '../../core/providers/auth_provider.dart';
 import '../../core/utils/mock_api_service.dart';
 import '../../core/widgets/glass_card.dart';
 import '../../core/widgets/shimmer_loading.dart';
@@ -44,7 +45,8 @@ class _ClinicStaffScreenState extends ConsumerState<ClinicStaffScreen> {
 
   Future<void> _loadData() async {
     setState(() => _loading = true);
-    final staff = await _api.getClinicStaff('clinic1');
+    final clinicId = ref.read(authProvider).user?.id ?? 'clinic1';
+    final staff = await _api.getClinicStaff(clinicId);
     setState(() { _staff = staff; _filtered = staff; _loading = false; });
   }
 
@@ -77,7 +79,7 @@ class _ClinicStaffScreenState extends ConsumerState<ClinicStaffScreen> {
     _phoneController.clear();
     if (mounted) {
       Navigator.of(context).pop();
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Staff added'), backgroundColor: ColorConstants.success));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Xodim qo\'shildi'), backgroundColor: ColorConstants.success));
     }
   }
 
@@ -86,7 +88,7 @@ class _ClinicStaffScreenState extends ConsumerState<ClinicStaffScreen> {
     _nameController.text = s['fullName'];
     _roleController.text = s['role'];
     _phoneController.text = s['phone'];
-    showDialog(context: context, builder: (ctx) => _staffFormDialog(ctx, 'Edit Staff', () async {
+    showDialog(context: context, builder: (ctx) => _staffFormDialog(ctx, 'Xodim tahrirlash', () async {
       _filtered[index]['fullName'] = _nameController.text.trim();
       _filtered[index]['role'] = _roleController.text.trim();
       _filtered[index]['phone'] = _phoneController.text.trim();
@@ -99,7 +101,7 @@ class _ClinicStaffScreenState extends ConsumerState<ClinicStaffScreen> {
     final removed = _filtered.removeAt(index);
     _staff.removeWhere((s) => s['id'] == removed['id']);
     setState(() {});
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Staff removed'), backgroundColor: ColorConstants.error));
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Xodim o\'chirildi'), backgroundColor: ColorConstants.error));
   }
 
   IconData _roleIcon(String role) {
@@ -133,10 +135,10 @@ class _ClinicStaffScreenState extends ConsumerState<ClinicStaffScreen> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Staff', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('Xodimlar', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
             actions: [
-              IconButton(icon: const Icon(Icons.person_add), onPressed: () => showDialog(context: context, builder: (ctx) => _staffFormDialog(ctx, 'Add Staff', _addStaff))),
+              IconButton(icon: const Icon(Icons.person_add), onPressed: () => showDialog(context: context, builder: (ctx) => _staffFormDialog(ctx, 'Xodim qo\'shish', _addStaff))),
             ],
           ),
           body: Column(
@@ -149,7 +151,7 @@ class _ClinicStaffScreenState extends ConsumerState<ClinicStaffScreen> {
                     controller: _searchController,
                     onChanged: _search,
                     decoration: InputDecoration(
-                      hintText: 'Search staff...',
+                      hintText: 'Xodimlarni qidirish...',
                       prefixIcon: const Icon(Icons.search, color: ColorConstants.primary),
                       border: InputBorder.none,
                     ),
@@ -161,7 +163,7 @@ class _ClinicStaffScreenState extends ConsumerState<ClinicStaffScreen> {
                 child: _loading
                     ? const ShimmerLoading(itemCount: 5)
                     : _filtered.isEmpty
-                        ? const EmptyStateWidget(icon: Icons.people, title: 'No staff found')
+                        ? const EmptyStateWidget(icon: Icons.people, title: 'Xodimlar topilmadi')
                         : ListView.builder(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             itemCount: _filtered.length,
@@ -201,8 +203,8 @@ class _ClinicStaffScreenState extends ConsumerState<ClinicStaffScreen> {
                                           if (v == 'delete') _deleteStaff(i);
                                         },
                                         itemBuilder: (_) => [
-                                          const PopupMenuItem(value: 'edit', child: Text('Edit')),
-                                          const PopupMenuItem(value: 'delete', child: Text('Delete')),
+                                          const PopupMenuItem(value: 'edit', child: Text('Tahrirlash')),
+                                          const PopupMenuItem(value: 'delete', child: Text('O\'chirish')),
                                         ],
                                       ),
                                     ],
@@ -229,26 +231,26 @@ class _ClinicStaffScreenState extends ConsumerState<ClinicStaffScreen> {
           children: [
             TextFormField(
               controller: _nameController,
-              decoration: const InputDecoration(labelText: 'Full Name'),
-              validator: (v) => v == null || v.trim().isEmpty ? 'Required' : null,
+              decoration: const InputDecoration(labelText: 'To\'liq ism'),
+              validator: (v) => v == null || v.trim().isEmpty ? 'Majburiy' : null,
             ),
             const SizedBox(height: 12),
             TextFormField(
               controller: _roleController,
-              decoration: const InputDecoration(labelText: 'Role (doctor/nurse/receptionist)'),
-              validator: (v) => v == null || v.trim().isEmpty ? 'Required' : null,
+              decoration: const InputDecoration(labelText: 'Rol (shifokor/hamshira/qabulxona)'),
+              validator: (v) => v == null || v.trim().isEmpty ? 'Majburiy' : null,
             ),
             const SizedBox(height: 12),
             TextFormField(
               controller: _phoneController,
-              decoration: const InputDecoration(labelText: 'Phone'),
+              decoration: const InputDecoration(labelText: 'Telefon'),
             ),
           ],
         ),
       ),
       actions: [
-        TextButton(onPressed: () => Navigator.of(ctx).pop(), child: const Text('Cancel')),
-        ElevatedButton(onPressed: onSave, child: const Text('Save')),
+        TextButton(onPressed: () => Navigator.of(ctx).pop(), child: const Text('Bekor qilish')),
+        ElevatedButton(onPressed: onSave, child: const Text('Saqlash')),
       ],
     );
   }

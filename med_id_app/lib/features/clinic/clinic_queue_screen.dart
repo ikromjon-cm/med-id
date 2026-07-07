@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animate_do/animate_do.dart';
+import '../../core/providers/auth_provider.dart';
 import '../../core/utils/mock_api_service.dart';
 import '../../core/widgets/glass_card.dart';
 import '../../core/widgets/shimmer_loading.dart';
@@ -42,7 +43,8 @@ class _ClinicQueueScreenState extends ConsumerState<ClinicQueueScreen> {
 
   Future<void> _loadQueue() async {
     setState(() => _loading = true);
-    final queue = await _api.getClinicQueue('clinic1');
+    final clinicId = ref.read(authProvider).user?.id ?? 'clinic1';
+    final queue = await _api.getClinicQueue(clinicId);
     setState(() { _queue = queue; _filtered = queue; _loading = false; });
   }
 
@@ -65,7 +67,7 @@ class _ClinicQueueScreenState extends ConsumerState<ClinicQueueScreen> {
     _filtered = List.from(_queue);
     setState(() {});
     if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Calling: ${next['patientName']}'), backgroundColor: ColorConstants.success));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Chaqirilmoqda: ${next['patientName']}'), backgroundColor: ColorConstants.success));
     }
   }
 
@@ -85,7 +87,7 @@ class _ClinicQueueScreenState extends ConsumerState<ClinicQueueScreen> {
     _priorityController.clear();
     if (mounted) {
       Navigator.of(context).pop();
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Added to queue'), backgroundColor: ColorConstants.success));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Navbatga qo\'shildi'), backgroundColor: ColorConstants.success));
     }
   }
 
@@ -111,7 +113,7 @@ class _ClinicQueueScreenState extends ConsumerState<ClinicQueueScreen> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Queue Management', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('Navbat boshqaruvi', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
             actions: [
               IconButton(icon: const Icon(Icons.person_add), onPressed: () => _showAddDialog(context, isDark)),
@@ -127,7 +129,7 @@ class _ClinicQueueScreenState extends ConsumerState<ClinicQueueScreen> {
                     controller: _searchController,
                     onChanged: _search,
                     decoration: InputDecoration(
-                      hintText: 'Search queue...',
+                      hintText: 'Navbatni qidirish...',
                       prefixIcon: const Icon(Icons.search, color: ColorConstants.primary),
                       border: InputBorder.none,
                       hintStyle: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.grey[500] : Colors.grey[400]),
@@ -143,7 +145,7 @@ class _ClinicQueueScreenState extends ConsumerState<ClinicQueueScreen> {
                   child: ElevatedButton.icon(
                     onPressed: _queue.isEmpty ? null : _callNext,
                     icon: const Icon(Icons.skip_next),
-                    label: const Text('Call Next Patient'),
+                    label: const Text('Keyingi bemorni chaqirish'),
                     style: ElevatedButton.styleFrom(backgroundColor: ColorConstants.success),
                   ),
                 ),
@@ -153,7 +155,7 @@ class _ClinicQueueScreenState extends ConsumerState<ClinicQueueScreen> {
                 child: _loading
                     ? const ShimmerLoading(itemCount: 5)
                     : _filtered.isEmpty
-                        ? const EmptyStateWidget(icon: Icons.queue, title: 'Queue is empty', subtitle: 'No patients waiting')
+                        ? const EmptyStateWidget(icon: Icons.queue, title: 'Navbat bo\'sh', subtitle: 'Kutayotgan bemorlar yo\'q')
                         : ListView.builder(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             itemCount: _filtered.length,
@@ -211,7 +213,7 @@ class _ClinicQueueScreenState extends ConsumerState<ClinicQueueScreen> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: Text('Add to Queue', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+        title: Text('Navbatga qo\'shish', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
         content: Form(
           key: _formKey,
           child: Column(
@@ -219,21 +221,21 @@ class _ClinicQueueScreenState extends ConsumerState<ClinicQueueScreen> {
             children: [
               TextFormField(
                 controller: _nameController,
-                decoration: const InputDecoration(labelText: 'Patient Name'),
-                validator: (v) => v == null || v.trim().isEmpty ? 'Required' : null,
+                decoration: const InputDecoration(labelText: 'Bemor ismi'),
+                validator: (v) => v == null || v.trim().isEmpty ? 'Majburiy' : null,
               ),
               const SizedBox(height: 12),
               TextFormField(
                 controller: _priorityController,
-                decoration: const InputDecoration(labelText: 'Priority (low/medium/high/critical)'),
-                validator: (v) => v == null || v.trim().isEmpty ? 'Required' : null,
+                decoration: const InputDecoration(labelText: 'Prioritet (past/o\'rta/yuqori/kritik)'),
+                validator: (v) => v == null || v.trim().isEmpty ? 'Majburiy' : null,
               ),
             ],
           ),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.of(ctx).pop(), child: const Text('Cancel')),
-          ElevatedButton(onPressed: _addToQueue, child: const Text('Add')),
+          TextButton(onPressed: () => Navigator.of(ctx).pop(), child: const Text('Bekor qilish')),
+          ElevatedButton(onPressed: _addToQueue, child: const Text('Qo\'shish')),
         ],
       ),
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animate_do/animate_do.dart';
+import '../../core/providers/auth_provider.dart';
 import '../../core/utils/mock_api_service.dart';
 import '../../core/widgets/glass_card.dart';
 import '../../core/widgets/shimmer_loading.dart';
@@ -38,7 +39,8 @@ class _ClinicCrmScreenState extends ConsumerState<ClinicCrmScreen> {
 
   Future<void> _loadData() async {
     setState(() => _loading = true);
-    final patients = await _api.getDoctorPatients('doc1');
+    final userId = ref.read(authProvider).user?.id ?? 'doc1';
+    final patients = await _api.getDoctorPatients(userId);
     setState(() {
       _patients = patients.map((p) => Map<String, dynamic>.from(p)..['lastVisit'] = '2026-06-${(patients.indexOf(p) + 1).toString().padLeft(2, '0')}'..['notes'] = <String>[]).toList();
       _filtered = List.from(_patients);
@@ -63,14 +65,14 @@ class _ClinicCrmScreenState extends ConsumerState<ClinicCrmScreen> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Add Note'),
+        title: const Text('Izoh qo\'shish'),
         content: TextField(
           controller: _noteController,
-          decoration: const InputDecoration(labelText: 'Note'),
+          decoration: const InputDecoration(labelText: 'Izoh'),
           maxLines: 3,
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.of(ctx).pop(), child: const Text('Cancel')),
+          TextButton(onPressed: () => Navigator.of(ctx).pop(), child: const Text('Bekor qilish')),
           ElevatedButton(onPressed: () {
             if (_noteController.text.trim().isNotEmpty) {
               (_filtered[index]['notes'] as List).add(_noteController.text.trim());
@@ -78,7 +80,7 @@ class _ClinicCrmScreenState extends ConsumerState<ClinicCrmScreen> {
               setState(() {});
               Navigator.of(ctx).pop();
             }
-          }, child: const Text('Add')),
+          }, child: const Text('Qo\'shish')),
         ],
       ),
     );
@@ -97,7 +99,7 @@ class _ClinicCrmScreenState extends ConsumerState<ClinicCrmScreen> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Patient CRM', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('Bemor CRM', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
           ),
           body: Column(
@@ -110,7 +112,7 @@ class _ClinicCrmScreenState extends ConsumerState<ClinicCrmScreen> {
                     controller: _searchController,
                     onChanged: _search,
                     decoration: InputDecoration(
-                      hintText: 'Search patients...',
+                      hintText: 'Bemorlarni qidirish...',
                       prefixIcon: const Icon(Icons.search, color: ColorConstants.primary),
                       border: InputBorder.none,
                     ),
@@ -122,7 +124,7 @@ class _ClinicCrmScreenState extends ConsumerState<ClinicCrmScreen> {
                 child: _loading
                     ? const ShimmerLoading(itemCount: 5)
                     : _filtered.isEmpty
-                        ? const EmptyStateWidget(icon: Icons.people, title: 'No patients found')
+                        ? const EmptyStateWidget(icon: Icons.people, title: 'Bemorlar topilmadi')
                         : ListView.builder(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             itemCount: _filtered.length,
@@ -163,7 +165,7 @@ class _ClinicCrmScreenState extends ConsumerState<ClinicCrmScreen> {
                                           Column(
                                             crossAxisAlignment: CrossAxisAlignment.end,
                                             children: [
-                                              Text('Last visit:', style: GoogleFonts.inter(fontSize: 10, color: isDark ? Colors.grey[500] : Colors.grey[400])),
+                                              Text('Oxirgi tashrif:', style: GoogleFonts.inter(fontSize: 10, color: isDark ? Colors.grey[500] : Colors.grey[400])),
                                               Text(_filtered[i]['lastVisit'], style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w500, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
                                             ],
                                           ),
@@ -190,7 +192,7 @@ class _ClinicCrmScreenState extends ConsumerState<ClinicCrmScreen> {
                                         child: TextButton.icon(
                                           onPressed: () => _addNote(i),
                                           icon: const Icon(Icons.add, size: 16),
-                                          label: const Text('Add Note', style: TextStyle(fontSize: 12)),
+                                          label: const Text('Izoh qo\'shish', style: TextStyle(fontSize: 12)),
                                         ),
                                       ),
                                     ],

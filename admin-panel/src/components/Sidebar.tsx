@@ -3,6 +3,7 @@
 import { usePathname, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { t } from '@/lib/i18n';
 import {
   LayoutDashboard, Users, Building2, Stethoscope,
   BarChart3, ScrollText, Bell, Settings, LogOut, X,
@@ -12,37 +13,37 @@ import { useState } from 'react';
 
 const navSections = [
   {
-    title: 'Main',
+    title: t('Main'),
     items: [
-      { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+      { path: '/admin/dashboard', label: t('Dashboard'), icon: LayoutDashboard },
     ],
   },
   {
-    title: 'Management',
+    title: t('Management'),
     items: [
-      { path: '/users', label: 'Users', icon: Users },
-      { path: '/doctors', label: 'Doctors', icon: Stethoscope },
-      { path: '/clinics', label: 'Clinics', icon: Building2 },
+      { path: '/admin/users', label: t('Users'), icon: Users },
+      { path: '/admin/doctors', label: t('Doctors'), icon: Stethoscope },
+      { path: '/admin/clinics', label: t('Clinics'), icon: Building2 },
     ],
   },
   {
-    title: 'Monitoring',
+    title: t('Monitoring'),
     items: [
-      { path: '/analytics', label: 'Analytics', icon: BarChart3 },
-      { path: '/access-logs', label: 'Access Logs', icon: ScrollText },
-      { path: '/emergency', label: 'Emergency', icon: AlertTriangle },
+      { path: '/admin/analytics', label: t('Analytics'), icon: BarChart3 },
+      { path: '/admin/access-logs', label: t('Access Logs'), icon: ScrollText },
+      { path: '/admin/emergency', label: t('Emergency'), icon: AlertTriangle },
     ],
   },
   {
-    title: 'Communication',
+    title: t('Communication'),
     items: [
-      { path: '/notifications', label: 'Notifications', icon: Bell },
+      { path: '/admin/notifications', label: t('Notifications'), icon: Bell },
     ],
   },
   {
-    title: 'System',
+    title: t('System'),
     items: [
-      { path: '/settings', label: 'Settings', icon: Settings },
+      { path: '/admin/settings', label: t('Settings'), icon: Settings },
     ],
   },
 ];
@@ -60,12 +61,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
     <div className="flex flex-col h-full">
       <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100 dark:border-gray-800/50">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center shadow-lg shadow-primary/20">
-            <Activity className="w-5 h-5 text-white" />
-          </div>
+          <img src="/logo.jpg" alt="MED-ID" className="w-9 h-9 rounded-xl" />
           <div>
-            <h1 className="text-base font-bold text-gray-900 dark:text-white tracking-tight">MED-ID</h1>
-            <p className="text-[10px] text-gray-500 dark:text-gray-400 font-medium tracking-wider uppercase">Admin Panel</p>
+            <h1 className="text-base font-bold text-gray-900 dark:text-white tracking-tight">{t('MED-ID')}</h1>
+            <p className="text-[10px] text-gray-500 dark:text-gray-400 font-medium tracking-wider uppercase">{t('Admin Panel')}</p>
           </div>
         </div>
         <button
@@ -119,7 +118,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-emergency/10 hover:text-emergency transition-all duration-200"
         >
           <LogOut className="w-5 h-5" />
-          <span>Logout</span>
+          <span>{t('Logout')}</span>
         </button>
       </div>
     </div>

@@ -24,7 +24,8 @@ class _PatientDashboardScreenState extends ConsumerState<PatientDashboardScreen>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(patientProvider.notifier).loadPatient('user1');
+      final userId = ref.read(authProvider).user?.id ?? 'user1';
+      ref.read(patientProvider.notifier).loadPatient(userId);
     });
   }
 
@@ -44,7 +45,7 @@ class _PatientDashboardScreenState extends ConsumerState<PatientDashboardScreen>
       ),
       child: SafeArea(
         child: RefreshIndicator(
-          onRefresh: () => ref.read(patientProvider.notifier).loadPatient('user1'),
+          onRefresh: () => ref.read(patientProvider.notifier).loadPatient(ref.read(authProvider).user?.id ?? 'user1'),
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
             padding: const EdgeInsets.all(16),
@@ -83,7 +84,7 @@ class _PatientDashboardScreenState extends ConsumerState<PatientDashboardScreen>
                 if (patientState.isLoading)
                   const ShimmerLoading(itemCount: 4)
                 else if (patientState.error != null)
-                  ErrorStateWidget(message: patientState.error, onRetry: () => ref.read(patientProvider.notifier).loadPatient('user1'))
+                  ErrorStateWidget(message: patientState.error, onRetry: () => ref.read(patientProvider.notifier).loadPatient(ref.read(authProvider).user?.id ?? 'user1'))
                 else ...[
                   FadeInLeft(
                     child: ProfileCard(
@@ -103,10 +104,10 @@ class _PatientDashboardScreenState extends ConsumerState<PatientDashboardScreen>
                       FadeInUp(
                         child: QuickActionsCard(
                           actions: [
-                            QuickAction(icon: Icons.upload_file, label: 'Upload Document', color: ColorConstants.primary, onTap: () => context.go('/patient/documents/upload')),
-                            QuickAction(icon: Icons.contacts, label: 'Emergency Contacts', color: ColorConstants.emergency, onTap: () => context.go('/patient/emergency-contacts')),
-                            QuickAction(icon: Icons.qr_code, label: 'QR Code', color: const Color(0xFF00C896), onTap: () => context.go('/patient/qr-code')),
-                            QuickAction(icon: Icons.history, label: 'Medical History', color: const Color(0xFFFFB020), onTap: () => context.go('/patient/medical-profile')),
+                            QuickAction(icon: Icons.upload_file, label: 'Hujjat yuklash', color: ColorConstants.primary, onTap: () => context.go('/patient/documents/upload')),
+                            QuickAction(icon: Icons.contacts, label: 'Favqulodda kontaktlar', color: ColorConstants.emergency, onTap: () => context.go('/patient/emergency-contacts')),
+                            QuickAction(icon: Icons.qr_code, label: 'QR Kod', color: const Color(0xFF00C896), onTap: () => context.go('/patient/qr-code')),
+                            QuickAction(icon: Icons.history, label: 'Tibbiy tarix', color: const Color(0xFFFFB020), onTap: () => context.go('/patient/medical-profile')),
                           ],
                         ),
                       ),
@@ -114,10 +115,10 @@ class _PatientDashboardScreenState extends ConsumerState<PatientDashboardScreen>
                       FadeInUp(
                         child: QuickActionsCard(
                           actions: [
-                            QuickAction(icon: Icons.security, label: 'Access Logs', color: const Color(0xFF7C3AED), onTap: () => context.go('/patient/access-logs')),
-                            QuickAction(icon: Icons.warning, label: 'Emergency Profile', color: ColorConstants.emergency, onTap: () => context.go('/patient/emergency-profile')),
-                            QuickAction(icon: Icons.camera_alt, label: 'Scan QR', color: const Color(0xFF0891B2), onTap: () => context.go('/patient/qr-scanner')),
-                            QuickAction(icon: Icons.description, label: 'Documents', color: const Color(0xFF0F6FFF), onTap: () => context.go('/patient/documents')),
+                            QuickAction(icon: Icons.security, label: 'Kirish jurnallari', color: const Color(0xFF7C3AED), onTap: () => context.go('/patient/access-logs')),
+                            QuickAction(icon: Icons.warning, label: 'Favqulodda profil', color: ColorConstants.emergency, onTap: () => context.go('/patient/emergency-profile')),
+                            QuickAction(icon: Icons.camera_alt, label: 'QR skanerlash', color: const Color(0xFF0891B2), onTap: () => context.go('/patient/qr-scanner')),
+                            QuickAction(icon: Icons.description, label: 'Hujjatlar', color: const Color(0xFF0F6FFF), onTap: () => context.go('/patient/documents')),
                           ],
                         ),
                       ),

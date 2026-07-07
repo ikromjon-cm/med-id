@@ -44,7 +44,7 @@ class _EmergencyBiometricScreenState extends ConsumerState<EmergencyBiometricScr
     } else {
       setState(() => _authenticating = false);
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Biometric verification failed'), backgroundColor: ColorConstants.emergency));
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Biometrik tekshirish muvaffaqiyatsiz'), backgroundColor: ColorConstants.emergency));
       }
     }
   }
@@ -62,7 +62,7 @@ class _EmergencyBiometricScreenState extends ConsumerState<EmergencyBiometricScr
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Biometric Access', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('Biometrik kirish', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
           ),
           body: Center(
@@ -101,12 +101,12 @@ class _EmergencyBiometricScreenState extends ConsumerState<EmergencyBiometricScr
                             ),
                             const SizedBox(height: 24),
                             Text(
-                              _success ? 'Access Granted!' : 'Emergency Biometric Access',
+                              _success ? 'Kirish ruxsat berildi!' : 'Favqulodda biometrik kirish',
                               style: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.bold, color: isDark ? Colors.white : const Color(0xFF1A1D21)),
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              _success ? 'Redirecting to emergency profile...' : 'Use biometric verification to access emergency medical records',
+                              _success ? 'Favqulodda profilga yo\'naltirilmoqda...' : 'Favqulodda tibbiy ma\'lumotlarga kirish uchun biometrik tekshiruvdan foydalaning',
                               style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.grey[400] : Colors.grey[500]),
                               textAlign: TextAlign.center,
                             ),
@@ -118,7 +118,7 @@ class _EmergencyBiometricScreenState extends ConsumerState<EmergencyBiometricScr
                                 icon: _authenticating
                                     ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
                                     : const Icon(Icons.fingerprint),
-                                label: Text(_authenticating ? 'Verifying...' : 'Authenticate'),
+                                label: Text(_authenticating ? 'Tekshirilmoqda...' : 'Tasdiqlash'),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: _success ? ColorConstants.success : ColorConstants.emergency,
                                   padding: const EdgeInsets.symmetric(vertical: 16),

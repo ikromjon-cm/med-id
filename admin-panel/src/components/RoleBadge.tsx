@@ -1,6 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
+import { t } from '@/lib/i18n';
 import { Shield, Stethoscope, Heart, Users, User } from 'lucide-react';
 
 interface RoleBadgeProps {
@@ -45,7 +46,7 @@ export default function RoleBadge({ role }: RoleBadgeProps) {
   return (
     <span className={cn('inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-medium rounded-full capitalize', config.bg, config.color)}>
       {config.icon}
-      {role}
+      {t(role)}
     </span>
   );
 }

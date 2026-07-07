@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animate_do/animate_do.dart';
+import '../../core/providers/auth_provider.dart';
 import '../../core/utils/mock_api_service.dart';
 import '../../core/widgets/glass_card.dart';
 import '../../core/widgets/shimmer_loading.dart';
@@ -31,7 +32,8 @@ class _DoctorAppointmentsScreenState extends ConsumerState<DoctorAppointmentsScr
 
   Future<void> _loadData() async {
     setState(() => _loading = true);
-    final appointments = await _api.getDoctorAppointments('doc1');
+    final userId = ref.read(authProvider).user?.id ?? 'doc1';
+    final appointments = await _api.getDoctorAppointments(userId);
     setState(() {
       _appointments = appointments;
       _applyFilter();
@@ -66,7 +68,7 @@ class _DoctorAppointmentsScreenState extends ConsumerState<DoctorAppointmentsScr
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Appointments', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('Uchrashuvlar', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
           ),
           body: Column(
@@ -93,7 +95,7 @@ class _DoctorAppointmentsScreenState extends ConsumerState<DoctorAppointmentsScr
                 child: _loading
                     ? const ShimmerLoading(itemCount: 5)
                     : _filtered.isEmpty
-                        ? EmptyStateWidget(icon: Icons.calendar_today, title: 'No appointments found', subtitle: 'No ${_filter == 'all' ? '' : _filter} appointments')
+                        ? EmptyStateWidget(icon: Icons.calendar_today, title: 'Uchrashuvlar topilmadi', subtitle: 'No ${_filter == 'all' ? '' : _filter} appointments')
                         : RefreshIndicator(
                             onRefresh: _loadData,
                             child: ListView.builder(
@@ -163,13 +165,13 @@ class _DoctorAppointmentsScreenState extends ConsumerState<DoctorAppointmentsScr
                                               OutlinedButton(
                                                 onPressed: () => _updateStatus(i, 'cancelled'),
                                                 style: OutlinedButton.styleFrom(foregroundColor: ColorConstants.emergency, side: const BorderSide(color: ColorConstants.emergency)),
-                                                child: const Text('Reject'),
+                                                child: const Text('Rad etish'),
                                               ),
                                               const SizedBox(width: 8),
                                               ElevatedButton(
                                                 onPressed: () => _updateStatus(i, 'completed'),
                                                 style: ElevatedButton.styleFrom(backgroundColor: ColorConstants.success),
-                                                child: const Text('Accept'),
+                                                child: const Text('Qabul qilish'),
                                               ),
                                             ],
                                           ),

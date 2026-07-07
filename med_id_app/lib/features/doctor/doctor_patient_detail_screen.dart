@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animate_do/animate_do.dart';
+import '../../core/providers/auth_provider.dart';
 import '../../core/utils/mock_api_service.dart';
 import '../../core/widgets/glass_card.dart';
 import '../../core/widgets/shimmer_loading.dart';
@@ -37,7 +38,8 @@ class _DoctorPatientDetailScreenState extends ConsumerState<DoctorPatientDetailS
   Future<void> _loadData() async {
     setState(() { _loading = true; _error = null; });
     try {
-      final patients = await _api.getDoctorPatients('doc1');
+      final userId = ref.read(authProvider).user?.id ?? 'doc1';
+      final patients = await _api.getDoctorPatients(userId);
       _patient = patients.firstWhere((p) => p['id'] == widget.patientId);
       _diagnoses = List.from(_patient!['diagnoses'] ?? []);
       _prescriptions = List.from(_patient!['prescriptions'] ?? []);
@@ -48,11 +50,12 @@ class _DoctorPatientDetailScreenState extends ConsumerState<DoctorPatientDetailS
   }
 
   Future<void> _requestFullAccess() async {
-    final granted = await MedicalBusinessLogic.requestPatientPermission('doc1', widget.patientId);
+    final userId = ref.read(authProvider).user?.id ?? 'doc1';
+    final granted = await MedicalBusinessLogic.requestPatientPermission(userId, widget.patientId);
     if (granted) {
       setState(() => _hasFullAccess = true);
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Full access granted')));
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('To\'liq kirish ruxsat berildi')));
       }
     }
   }
@@ -70,7 +73,7 @@ class _DoctorPatientDetailScreenState extends ConsumerState<DoctorPatientDetailS
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Patient Detail', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('Bemor ma\'lumotlari', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
           ),
           body: _loading
@@ -155,14 +158,14 @@ class _DoctorPatientDetailScreenState extends ConsumerState<DoctorPatientDetailS
           children: [
             const Icon(Icons.lock, size: 48, color: ColorConstants.emergency),
             const SizedBox(height: 12),
-            Text('Limited Access', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+            Text('Cheklangan kirish', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
             const SizedBox(height: 8),
             Text('Request full access to view medical history, diagnoses, and prescriptions', style: GoogleFonts.inter(fontSize: 13, color: isDark ? Colors.grey[400] : Colors.grey[500]), textAlign: TextAlign.center),
             const SizedBox(height: 16),
             ElevatedButton.icon(
               onPressed: _requestFullAccess,
               icon: const Icon(Icons.vpn_key),
-              label: const Text('Request Full Access'),
+              label: const Text('To\'liq kirishni so\'rash'),
               style: ElevatedButton.styleFrom(backgroundColor: ColorConstants.primary),
             ),
           ],
@@ -180,13 +183,13 @@ class _DoctorPatientDetailScreenState extends ConsumerState<DoctorPatientDetailS
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Medical Information', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+            Text('Tibbiy ma\'lumotlar', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
             const SizedBox(height: 12),
-            _infoChip(Icons.warning, 'Allergies', allergies.join(', '), ColorConstants.emergency, isDark),
+            _infoChip(Icons.warning, 'Allergiyalar', allergies.join(', '), ColorConstants.emergency, isDark),
             const SizedBox(height: 8),
-            _infoChip(Icons.medical_services, 'Chronic Diseases', diseases.join(', '), const Color(0xFFFFB020), isDark),
+            _infoChip(Icons.medical_services, 'Surunkali kasalliklar', diseases.join(', '), const Color(0xFFFFB020), isDark),
             const SizedBox(height: 8),
-            _infoChip(Icons.medication, 'Medications', medications.join(', '), const Color(0xFF0F6FFF), isDark),
+            _infoChip(Icons.medication, 'Dorilar', medications.join(', '), const Color(0xFF0F6FFF), isDark),
           ],
         ),
       ),
@@ -205,7 +208,7 @@ class _DoctorPatientDetailScreenState extends ConsumerState<DoctorPatientDetailS
             children: [
               Text(label, style: GoogleFonts.inter(fontSize: 12, color: isDark ? Colors.grey[400] : Colors.grey[500])),
               const SizedBox(height: 2),
-              Text(value.isEmpty ? 'None' : value, style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+              Text(value.isEmpty ? 'Yo\'q' : value, style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
             ],
           ),
         ),
@@ -220,7 +223,7 @@ class _DoctorPatientDetailScreenState extends ConsumerState<DoctorPatientDetailS
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Text('Diagnoses', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+              Text('Tashxislar', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
               TextButton.icon(
                 onPressed: () => context.go('/doctor/diagnosis'),
                 icon: const Icon(Icons.add, size: 18),
@@ -229,7 +232,7 @@ class _DoctorPatientDetailScreenState extends ConsumerState<DoctorPatientDetailS
             ]),
             const SizedBox(height: 8),
             _diagnoses.isEmpty
-                ? EmptyStateWidget(icon: Icons.biotech, title: 'No diagnoses yet', subtitle: 'Add a diagnosis for this patient')
+                ? EmptyStateWidget(icon: Icons.biotech, title: 'Tashxislar yo\'q', subtitle: 'Ushbu bemor uchun tashxis qo\'shing')
                 : ListView.separated(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -259,16 +262,16 @@ class _DoctorPatientDetailScreenState extends ConsumerState<DoctorPatientDetailS
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Text('Prescriptions', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+              Text('Retseptlar', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
               TextButton.icon(
                 onPressed: () => context.go('/doctor/prescription'),
                 icon: const Icon(Icons.add, size: 18),
-                label: const Text('Add'),
+                label: const Text('Qo\'shish'),
               ),
             ]),
             const SizedBox(height: 8),
             _prescriptions.isEmpty
-                ? EmptyStateWidget(icon: Icons.medication, title: 'No prescriptions yet', subtitle: 'Add a prescription for this patient')
+                ? EmptyStateWidget(icon: Icons.medication, title: 'Retseptlar yo\'q', subtitle: 'Ushbu bemor uchun retsept qo\'shing')
                 : ListView.separated(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),

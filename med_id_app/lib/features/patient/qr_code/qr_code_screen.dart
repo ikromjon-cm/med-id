@@ -27,13 +27,13 @@ class QrCodeScreen extends ConsumerWidget {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('My QR Code', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('Mening QR Kodim', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
             actions: [
               IconButton(
                 icon: const Icon(Icons.camera_alt_outlined),
                 onPressed: () => context.go('/patient/qr-scanner'),
-                tooltip: 'Scan QR',
+                tooltip: 'QR skanerlash',
               ),
             ],
           ),
@@ -55,7 +55,7 @@ class QrCodeScreen extends ConsumerWidget {
                           dataModuleStyle: const QrDataModuleStyle(dataModuleShape: QrDataModuleShape.square, color: ColorConstants.primary),
                         ),
                         const SizedBox(height: 20),
-                        Text('Scan to view Medical Profile', style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.grey[400] : Colors.grey[500])),
+                        Text('Tibbiy profilni ko\'rish uchun skanerlang', style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.grey[400] : Colors.grey[500])),
                       ],
                     ),
                   ),
@@ -66,8 +66,8 @@ class QrCodeScreen extends ConsumerWidget {
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         child: Column(
                           children: [
-                            _qrInfo('Name', user.fullName, isDark),
-                            _qrInfo('Blood Type', user.bloodType ?? 'N/A', isDark),
+                            _qrInfo('Ism', user.fullName, isDark),
+                            _qrInfo('Qon guruhi', user.bloodType ?? 'Mavjud emas', isDark),
                             _qrInfo('ID', user.id, isDark),
                           ],
                         ),
@@ -81,7 +81,7 @@ class QrCodeScreen extends ConsumerWidget {
                         Share.share(qrData, subject: 'MED-ID Profile');
                       },
                       icon: const Icon(Icons.share),
-                      label: Text('Share QR Code', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600)),
+                      label: Text('QR Kodni ulashish', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600)),
                       style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
                     ),
                   ),

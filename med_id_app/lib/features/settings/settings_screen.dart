@@ -7,11 +7,18 @@ import '../../core/providers/theme_provider.dart';
 import '../../core/widgets/glass_card.dart';
 import '../../core/constants/color_constants.dart';
 
-class SettingsScreen extends ConsumerWidget {
+class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends ConsumerState<SettingsScreen> {
+  final Set<String> _notificationToggles = {'appointments', 'emergency', 'insurance'};
+
+  @override
+  Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final auth = ref.watch(authProvider);
 
@@ -25,7 +32,7 @@ class SettingsScreen extends ConsumerWidget {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Settings', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('Sozlamalar', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
           ),
           body: SingleChildScrollView(
@@ -51,36 +58,36 @@ class SettingsScreen extends ConsumerWidget {
                   child: Column(
                     children: [
                       SwitchListTile(
-                        title: Text('Dark Mode', style: GoogleFonts.inter(fontSize: 15, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
-                        subtitle: Text('Toggle dark/light theme', style: GoogleFonts.inter(fontSize: 12, color: isDark ? Colors.grey[400] : Colors.grey[500])),
+                        title: Text('Tungi rejim', style: GoogleFonts.inter(fontSize: 15, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                        subtitle: Text('Tungi/kunduzgi temani almashtirish', style: GoogleFonts.inter(fontSize: 12, color: isDark ? Colors.grey[400] : Colors.grey[500])),
                         value: isDark,
                         onChanged: (_) => ref.read(themeProvider.notifier).toggleTheme(),
-                        activeColor: ColorConstants.primary,
+                        activeThumbColor: ColorConstants.primary,
                         secondary: Icon(isDark ? Icons.dark_mode : Icons.light_mode, color: ColorConstants.primary),
                       ),
                       const Divider(height: 1),
                       ListTile(
                         leading: const Icon(Icons.language, color: ColorConstants.primary),
-                        title: Text('Language', style: GoogleFonts.inter(fontSize: 15, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
-                        subtitle: Text('English', style: GoogleFonts.inter(fontSize: 12, color: isDark ? Colors.grey[400] : Colors.grey[500])),
+                        title: Text('Til', style: GoogleFonts.inter(fontSize: 15, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                        subtitle: Text('O\'zbekcha', style: GoogleFonts.inter(fontSize: 12, color: isDark ? Colors.grey[400] : Colors.grey[500])),
                         trailing: const Icon(Icons.chevron_right, size: 20),
-                        onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Language settings (demo)'))),
+                        onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Til sozlamalari (demo)'))),
                       ),
                       const Divider(height: 1),
                       ListTile(
                         leading: const Icon(Icons.security, color: ColorConstants.primary),
-                        title: Text('Security', style: GoogleFonts.inter(fontSize: 15, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
-                        subtitle: Text('Biometric, PIN, Password', style: GoogleFonts.inter(fontSize: 12, color: isDark ? Colors.grey[400] : Colors.grey[500])),
+                        title: Text('Xavfsizlik', style: GoogleFonts.inter(fontSize: 15, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                        subtitle: Text('Biometriya, PIN, Parol', style: GoogleFonts.inter(fontSize: 12, color: isDark ? Colors.grey[400] : Colors.grey[500])),
                         trailing: const Icon(Icons.chevron_right, size: 20),
-                        onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Security settings (demo)'))),
+                        onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Xavfsizlik sozlamalari (demo)'))),
                       ),
                       const Divider(height: 1),
                       SwitchListTile(
-                        title: Text('Offline Mode', style: GoogleFonts.inter(fontSize: 15, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
-                        subtitle: Text('Cache data for offline access', style: GoogleFonts.inter(fontSize: 12, color: isDark ? Colors.grey[400] : Colors.grey[500])),
+                        title: Text('Oflayn rejim', style: GoogleFonts.inter(fontSize: 15, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                        subtitle: Text('Ma\'lumotlarni keshda saqlash', style: GoogleFonts.inter(fontSize: 12, color: isDark ? Colors.grey[400] : Colors.grey[500])),
                         value: false,
-                        onChanged: (_) => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Offline mode (demo)'))),
-                        activeColor: ColorConstants.primary,
+                        onChanged: (_) => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Oflayn rejim (demo)'))),
+                        activeThumbColor: ColorConstants.primary,
                         secondary: const Icon(Icons.wifi_off, color: ColorConstants.primary),
                       ),
                     ],
@@ -93,33 +100,37 @@ class SettingsScreen extends ConsumerWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(16),
-                        child: Text('Notification Preferences', style: GoogleFonts.inter(fontSize: 15, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                        child: Text('Bildirishnoma sozlamalari', style: GoogleFonts.inter(fontSize: 15, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
                       ),
                       SwitchListTile(
-                        title: Text('Appointments', style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
-                        value: true, onChanged: (_) {},
-                        activeColor: ColorConstants.primary,
+                        title: Text('Uchrashuvlar', style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                        value: _notificationToggles.contains('appointments'),
+                        onChanged: (v) => setState(() => v ? _notificationToggles.add('appointments') : _notificationToggles.remove('appointments')),
+                        activeThumbColor: ColorConstants.primary,
                         secondary: const Icon(Icons.calendar_today, size: 20, color: ColorConstants.primary),
                       ),
                       const Divider(height: 1),
                       SwitchListTile(
-                        title: Text('Emergency Alerts', style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
-                        value: true, onChanged: (_) {},
-                        activeColor: ColorConstants.emergency,
+                        title: Text('Favqulodda ogohlantirishlar', style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                        value: _notificationToggles.contains('emergency'),
+                        onChanged: (v) => setState(() => v ? _notificationToggles.add('emergency') : _notificationToggles.remove('emergency')),
+                        activeThumbColor: ColorConstants.emergency,
                         secondary: const Icon(Icons.warning, size: 20, color: ColorConstants.emergency),
                       ),
                       const Divider(height: 1),
                       SwitchListTile(
-                        title: Text('Insurance Reminders', style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
-                        value: true, onChanged: (_) {},
-                        activeColor: ColorConstants.warning,
+                        title: Text('Sug\'urta eslatmalari', style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                        value: _notificationToggles.contains('insurance'),
+                        onChanged: (v) => setState(() => v ? _notificationToggles.add('insurance') : _notificationToggles.remove('insurance')),
+                        activeThumbColor: ColorConstants.warning,
                         secondary: const Icon(Icons.verified_user, size: 20, color: ColorConstants.warning),
                       ),
                       const Divider(height: 1),
                       SwitchListTile(
-                        title: Text('Document Updates', style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
-                        value: false, onChanged: (_) {},
-                        activeColor: ColorConstants.primary,
+                        title: Text('Hujjat yangilanishlari', style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                        value: _notificationToggles.contains('documents'),
+                        onChanged: (v) => setState(() => v ? _notificationToggles.add('documents') : _notificationToggles.remove('documents')),
+                        activeThumbColor: ColorConstants.primary,
                         secondary: const Icon(Icons.description, size: 20, color: ColorConstants.primary),
                       ),
                     ],
@@ -132,7 +143,7 @@ class SettingsScreen extends ConsumerWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(16),
-                        child: Text('Coming Soon', style: GoogleFonts.inter(fontSize: 15, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                        child: Text('Tez kunda', style: GoogleFonts.inter(fontSize: 15, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
                       ),
                       ...() {
                         final features = _comingSoonFeatures(context, isDark);
@@ -149,7 +160,7 @@ class SettingsScreen extends ConsumerWidget {
                               trailing: Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                                 decoration: BoxDecoration(color: ColorConstants.warning.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(10)),
-                                child: Text('Soon', style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w600, color: ColorConstants.warning)),
+                                child: Text('Tez kunda', style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w600, color: ColorConstants.warning)),
                               ),
                               onTap: () => context.go(f.route),
                             ),
@@ -166,17 +177,17 @@ class SettingsScreen extends ConsumerWidget {
                     children: [
                       ListTile(
                         leading: const Icon(Icons.cleaning_services, color: ColorConstants.primary),
-                        title: Text('Cache Management', style: GoogleFonts.inter(fontSize: 15, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
-                        subtitle: Text('Clear cached data: 12.5 MB', style: GoogleFonts.inter(fontSize: 12, color: isDark ? Colors.grey[400] : Colors.grey[500])),
+                        title: Text('Kesh boshqaruvi', style: GoogleFonts.inter(fontSize: 15, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                        subtitle: Text('Keshni tozalash: 12.5 MB', style: GoogleFonts.inter(fontSize: 12, color: isDark ? Colors.grey[400] : Colors.grey[500])),
                         trailing: const Icon(Icons.chevron_right, size: 20),
                         onTap: () => showDialog(
                           context: context,
                           builder: (ctx) => AlertDialog(
-                            title: const Text('Clear Cache'),
-                            content: const Text('Are you sure you want to clear all cached data?'),
+                            title: const Text('Keshni tozalash'),
+                            content: const Text('Barcha kesh ma\'lumotlarini tozalashga ishonchingiz komilmi?'),
                             actions: [
-                              TextButton(onPressed: () => Navigator.of(ctx).pop(), child: const Text('Cancel')),
-                              ElevatedButton(onPressed: () { Navigator.of(ctx).pop(); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Cache cleared'))); }, child: const Text('Clear')),
+                              TextButton(onPressed: () => Navigator.of(ctx).pop(), child: const Text('Bekor qilish')),
+                              ElevatedButton(onPressed: () { Navigator.of(ctx).pop(); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Kesh tozalandi'))); }, child: const Text('Tozalash')),
                             ],
                           ),
                         ),
@@ -184,17 +195,17 @@ class SettingsScreen extends ConsumerWidget {
                       const Divider(height: 1),
                       ListTile(
                         leading: const Icon(Icons.info_outline, color: ColorConstants.primary),
-                        title: Text('About', style: GoogleFonts.inter(fontSize: 15, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
-                        subtitle: Text('Version 1.0.0', style: GoogleFonts.inter(fontSize: 12, color: isDark ? Colors.grey[400] : Colors.grey[500])),
+                        title: Text('Ilova haqida', style: GoogleFonts.inter(fontSize: 15, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                        subtitle: Text('Versiya 1.0.0', style: GoogleFonts.inter(fontSize: 12, color: isDark ? Colors.grey[400] : Colors.grey[500])),
                         trailing: const Icon(Icons.chevron_right, size: 20),
-                        onTap: () => showAboutDialog(context: context, applicationName: 'MED-ID', applicationVersion: '1.0.0', children: [const Text('Biometric Medical Platform')]),
+                        onTap: () => showAboutDialog(context: context, applicationName: 'MED-ID', applicationVersion: '1.0.0', applicationIcon: const ClipRRect(borderRadius: BorderRadius.all(Radius.circular(8)), child: SizedBox(width: 48, height: 48, child: Image(image: AssetImage('assets/images/logo.jpg')))), children: [const Text('Biometrik Tibbiy Platforma')]),
                       ),
                       const Divider(height: 1),
                       ListTile(
                         leading: const Icon(Icons.help_outline, color: ColorConstants.primary),
-                        title: Text('Help & Support', style: GoogleFonts.inter(fontSize: 15, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                        title: Text('Yordam va qo\'llab-quvvatlash', style: GoogleFonts.inter(fontSize: 15, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
                         trailing: const Icon(Icons.chevron_right, size: 20),
-                        onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Help & Support (demo)'))),
+                        onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Yordam va qo\'llab-quvvatlash (demo)'))),
                       ),
                     ],
                   ),
@@ -205,10 +216,10 @@ class SettingsScreen extends ConsumerWidget {
                   child: OutlinedButton.icon(
                     onPressed: () async {
                       await ref.read(authProvider.notifier).logout();
-                      if (context.mounted) context.go('/otp');
+                      if (context.mounted) context.go('/splash');
                     },
                     icon: const Icon(Icons.logout, color: ColorConstants.emergency),
-                    label: Text('Logout', style: GoogleFonts.inter(fontSize: 16, color: ColorConstants.emergency)),
+                    label: Text('Chiqish', style: GoogleFonts.inter(fontSize: 16, color: ColorConstants.emergency)),
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: ColorConstants.emergency),
                       padding: const EdgeInsets.symmetric(vertical: 14),
@@ -227,10 +238,10 @@ class SettingsScreen extends ConsumerWidget {
 
   List<_ComingSoonFeature> _comingSoonFeatures(BuildContext context, bool isDark) {
     return [
-      _ComingSoonFeature(Icons.auto_awesome, 'AI Health Summary', 'Intelligent health insights', const Color(0xFF7C3AED), '/coming-soon/ai-health'),
-      _ComingSoonFeature(Icons.fingerprint, 'OneID Integration', 'Unified digital identity', const Color(0xFF0F6FFF), '/coming-soon/oneid'),
-      _ComingSoonFeature(Icons.description, 'Digital Prescription', 'QR-verified prescriptions', const Color(0xFF00C896), '/coming-soon/digital-prescription'),
-      _ComingSoonFeature(Icons.nfc, 'NFC MED-ID', 'Contactless data sharing', const Color(0xFF0891B2), '/coming-soon/nfc'),
+      _ComingSoonFeature(Icons.auto_awesome, 'AI Salomatlik Xulosasi', 'Intellektual salomatlik tahlili', const Color(0xFF7C3AED), '/coming-soon/ai-health'),
+      _ComingSoonFeature(Icons.fingerprint, 'OneID Integratsiyasi', 'Yagona raqamli identifikatsiya', const Color(0xFF0F6FFF), '/coming-soon/oneid'),
+      _ComingSoonFeature(Icons.description, 'Raqamli Retsept', 'QR orqali tasdiqlangan retseptlar', const Color(0xFF00C896), '/coming-soon/digital-prescription'),
+      _ComingSoonFeature(Icons.nfc, 'NFC MED-ID', 'Kontaktsiz ma\'lumot almashish', const Color(0xFF0891B2), '/coming-soon/nfc'),
     ];
   }
 }

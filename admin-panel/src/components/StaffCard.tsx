@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Stethoscope, Heart, Users, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { t } from '@/lib/i18n';
 import StatusBadge from './StatusBadge';
 
 interface StaffCardProps {
@@ -37,7 +38,7 @@ export default function StaffCard({ name, role, status, delay = 0 }: StaffCardPr
       </div>
       <div className="flex-1 min-w-0">
         <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{name}</p>
-        <p className="text-xs text-gray-500 dark:text-gray-400 capitalize">{role}</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400 capitalize">{t(role)}</p>
       </div>
       <StatusBadge status={status} />
     </motion.div>

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../core/providers/auth_provider.dart';
 import '../../../core/providers/emergency_contact_provider.dart';
 import '../../../core/widgets/glass_card.dart';
 import '../../../core/widgets/shimmer_loading.dart';
@@ -21,7 +22,7 @@ class _EmergencyContactsScreenState extends ConsumerState<EmergencyContactsScree
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(emergencyContactProvider.notifier).loadContacts('user1');
+      ref.read(emergencyContactProvider.notifier).loadContacts(ref.read(authProvider).user?.id ?? 'user1');
     });
   }
 
@@ -29,14 +30,14 @@ class _EmergencyContactsScreenState extends ConsumerState<EmergencyContactsScree
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Delete Contact'),
-        content: const Text('Are you sure?'),
+        title: const Text('Kontaktni o\'chirish'),
+        content: const Text('Ishonchingiz komilmi?'),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
+          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Bekor qilish')),
           TextButton(onPressed: () {
             ref.read(emergencyContactProvider.notifier).deleteContact(contactId);
             Navigator.pop(ctx);
-          }, child: const Text('Delete', style: TextStyle(color: ColorConstants.emergency))),
+          }, child: const Text('O\'chirish', style: TextStyle(color: ColorConstants.emergency))),
         ],
       ),
     );
@@ -57,7 +58,7 @@ class _EmergencyContactsScreenState extends ConsumerState<EmergencyContactsScree
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Emergency Contacts', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('Favqulodda kontaktlar', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
             actions: [
               IconButton(icon: const Icon(Icons.add), onPressed: () => context.go('/patient/emergency-contacts/edit')),
@@ -66,11 +67,11 @@ class _EmergencyContactsScreenState extends ConsumerState<EmergencyContactsScree
           body: state.isLoading
               ? const ShimmerLoading(itemCount: 3, itemHeight: 100)
               : state.error != null
-                  ? ErrorStateWidget(message: state.error, onRetry: () => ref.read(emergencyContactProvider.notifier).loadContacts('user1'))
+                  ? ErrorStateWidget(message: state.error, onRetry: () => ref.read(emergencyContactProvider.notifier).loadContacts(ref.read(authProvider).user?.id ?? 'user1'))
                   : state.contacts.isEmpty
                       ? EmptyStateWidget(icon: Icons.contacts, title: 'No emergency contacts', subtitle: 'Add emergency contacts who can be reached in case of emergency', actionLabel: 'Add Contact', onAction: () => context.go('/patient/emergency-contacts/edit'))
                       : RefreshIndicator(
-                          onRefresh: () => ref.read(emergencyContactProvider.notifier).loadContacts('user1'),
+                          onRefresh: () => ref.read(emergencyContactProvider.notifier).loadContacts(ref.read(authProvider).user?.id ?? 'user1'),
                           child: ListView.builder(
                             padding: const EdgeInsets.all(16),
                             itemCount: state.contacts.length,
@@ -104,7 +105,7 @@ class _EmergencyContactsScreenState extends ConsumerState<EmergencyContactsScree
                                                         Container(
                                                           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                                                           decoration: BoxDecoration(color: ColorConstants.emergency.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(4)),
-                                                          child: Text('Primary', style: GoogleFonts.inter(fontSize: 10, color: ColorConstants.emergency, fontWeight: FontWeight.w600)),
+                                                          child: Text('Asosiy', style: GoogleFonts.inter(fontSize: 10, color: ColorConstants.emergency, fontWeight: FontWeight.w600)),
                                                         ),
                                                       ],
                                                     ],
@@ -120,8 +121,8 @@ class _EmergencyContactsScreenState extends ConsumerState<EmergencyContactsScree
                                                 if (v == 'delete') _confirmDelete(c.id);
                                               },
                                               itemBuilder: (_) => [
-                                                const PopupMenuItem(value: 'edit', child: Text('Edit')),
-                                                const PopupMenuItem(value: 'delete', child: Text('Delete', style: TextStyle(color: ColorConstants.emergency))),
+                                                const PopupMenuItem(value: 'edit', child: Text('Tahrirlash')),
+                                                const PopupMenuItem(value: 'delete', child: Text('O\'chirish', style: TextStyle(color: ColorConstants.emergency))),
                                               ],
                                             ),
                                           ],
@@ -131,16 +132,16 @@ class _EmergencyContactsScreenState extends ConsumerState<EmergencyContactsScree
                                           children: [
                                             Expanded(
                                               child: OutlinedButton.icon(
-                                                onPressed: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Calling ${c.fullName}...'))),
+                                                onPressed: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Qo\'ng\'iroq qilinmoqda ${c.fullName}...'))),
                                                 icon: const Icon(Icons.call, size: 16),
-                                                label: Text('Call', style: GoogleFonts.inter(fontSize: 12)),
+                                                label: Text('Qo\'ng\'iroq', style: GoogleFonts.inter(fontSize: 12)),
                                                 style: OutlinedButton.styleFrom(foregroundColor: const Color(0xFF00C896), side: const BorderSide(color: Color(0xFF00C896))),
                                               ),
                                             ),
                                             const SizedBox(width: 8),
                                             Expanded(
                                               child: OutlinedButton.icon(
-                                                onPressed: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('SMS sent to ${c.fullName}'))),
+                                                onPressed: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('SMS yuborildi ${c.fullName}'))),
                                                 icon: const Icon(Icons.message, size: 16),
                                                 label: Text('SMS', style: GoogleFonts.inter(fontSize: 12)),
                                                 style: OutlinedButton.styleFrom(foregroundColor: ColorConstants.primary, side: const BorderSide(color: ColorConstants.primary)),

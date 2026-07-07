@@ -34,6 +34,7 @@ class _MedicalProfileEditScreenState extends ConsumerState<MedicalProfileEditScr
   final _allergyCtrl = TextEditingController();
   final _diseaseCtrl = TextEditingController();
   final _medicationCtrl = TextEditingController();
+  bool _hasUnsavedChanges = false;
 
   @override
   void initState() {
@@ -69,7 +70,7 @@ class _MedicalProfileEditScreenState extends ConsumerState<MedicalProfileEditScr
   void _save() {
     if (_formKey.currentState!.validate()) {
       final currentUser = ref.read(authProvider).user!;
-      currentUser.copyWith(
+      final updatedUser = currentUser.copyWith(
         fullName: _nameCtrl.text,
         bloodType: _bloodType,
         gender: _gender,
@@ -81,7 +82,9 @@ class _MedicalProfileEditScreenState extends ConsumerState<MedicalProfileEditScr
         chronicDiseases: _diseases,
         currentMedications: _medications,
       );
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Profile updated successfully'), backgroundColor: Color(0xFF00C896)));
+      ref.read(authProvider.notifier).updateUser(updatedUser);
+      _hasUnsavedChanges = false;
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Profil muvaffaqiyatli yangilandi'), backgroundColor: Color(0xFF00C896)));
       context.pop();
     }
   }
@@ -113,67 +116,91 @@ class _MedicalProfileEditScreenState extends ConsumerState<MedicalProfileEditScr
         ),
       ),
       child: SafeArea(
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            title: Text('Edit Profile', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
-            backgroundColor: Colors.transparent, elevation: 0,
-          ),
-          body: Form(
-            key: _formKey,
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                children: [
-                  TextFormField(controller: _nameCtrl, decoration: const InputDecoration(labelText: 'Full Name', prefixIcon: Icon(Icons.person)), validator: Validators.name),
-                  const SizedBox(height: 16),
-                  TextFormField(controller: _phoneCtrl, decoration: const InputDecoration(labelText: 'Phone', prefixIcon: Icon(Icons.phone)), validator: Validators.phone),
-                  const SizedBox(height: 16),
-                  TextFormField(controller: _emailCtrl, decoration: const InputDecoration(labelText: 'Email', prefixIcon: Icon(Icons.email)), validator: Validators.email),
-                  const SizedBox(height: 16),
-                  DropdownButtonFormField<String>(
-                    value: _gender,
-                    decoration: const InputDecoration(labelText: 'Gender', prefixIcon: Icon(Icons.wc)),
-                    items: AppConstants.genders.map((g) => DropdownMenuItem(value: g, child: Text(g))).toList(),
-                    onChanged: (v) => setState(() => _gender = v!),
-                  ),
-                  const SizedBox(height: 16),
-                  DropdownButtonFormField<String>(
-                    value: _bloodType,
-                    decoration: const InputDecoration(labelText: 'Blood Type', prefixIcon: Icon(Icons.dangerous)),
-                    items: AppConstants.bloodTypes.map((b) => DropdownMenuItem(value: b, child: Text(b))).toList(),
-                    onChanged: (v) => setState(() => _bloodType = v!),
-                  ),
-                  const SizedBox(height: 16),
-                  InkWell(
-                    onTap: () => _pickDate(true),
-                    child: InputDecorator(
-                      decoration: const InputDecoration(labelText: 'Birth Date', prefixIcon: Icon(Icons.cake)),
-                      child: Text(_birthDate != null ? DateFormat('dd MMM yyyy').format(_birthDate!) : 'Select date'),
+        child: PopScope(
+          canPop: !_hasUnsavedChanges,
+          onPopInvokedWithResult: (didPop, _) {
+            if (!didPop) {
+              showDialog<bool>(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: const Text('Saqlanmagan o\'zgarishlar'),
+                  content: const Text('Sizda saqlanmagan o\'zgarishlar mavjud. Ularni bekor qilishni xohlaysizmi?'),
+                  actions: [
+                    TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: const Text('Qolish')),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(ctx).pop(true);
+                        if (context.mounted) Navigator.of(context).pop();
+                      },
+                      child: const Text('Bekor qilish'),
                     ),
-                  ),
-                  const SizedBox(height: 24),
-                  _listEditor('Allergies', _allergies, _allergyCtrl, ColorConstants.emergency, isDark),
-                  const SizedBox(height: 16),
-                  _listEditor('Chronic Diseases', _diseases, _diseaseCtrl, const Color(0xFFFFB020), isDark),
-                  const SizedBox(height: 16),
-                  _listEditor('Current Medications', _medications, _medicationCtrl, ColorConstants.primary, isDark),
-                  const SizedBox(height: 24),
-                  TextFormField(controller: _insuranceCtrl, decoration: const InputDecoration(labelText: 'Insurance Provider', prefixIcon: Icon(Icons.business))),
-                  const SizedBox(height: 16),
-                  TextFormField(controller: _policyCtrl, decoration: const InputDecoration(labelText: 'Policy Number', prefixIcon: Icon(Icons.numbers)), validator: Validators.policyNumber),
-                  const SizedBox(height: 16),
-                  InkWell(
-                    onTap: () => _pickDate(false),
-                    child: InputDecorator(
-                      decoration: const InputDecoration(labelText: 'Insurance Expiry', prefixIcon: Icon(Icons.calendar_today)),
-                      child: Text(_insuranceExpiry != null ? DateFormat('dd MMM yyyy').format(_insuranceExpiry!) : 'Select date'),
+                  ],
+                ),
+              );
+            }
+          },
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: AppBar(
+              title: Text('Profilni tahrirlash', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+              backgroundColor: Colors.transparent, elevation: 0,
+            ),
+            body: Form(
+              key: _formKey,
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    TextFormField(controller: _nameCtrl, onChanged: (_) => _hasUnsavedChanges = true, decoration: const InputDecoration(labelText: 'To\'liq ism', prefixIcon: Icon(Icons.person)), validator: Validators.name),
+                    const SizedBox(height: 16),
+                    TextFormField(controller: _phoneCtrl, onChanged: (_) => _hasUnsavedChanges = true, decoration: const InputDecoration(labelText: 'Telefon', prefixIcon: Icon(Icons.phone)), validator: Validators.phone),
+                    const SizedBox(height: 16),
+                    TextFormField(controller: _emailCtrl, onChanged: (_) => _hasUnsavedChanges = true, decoration: const InputDecoration(labelText: 'Email', prefixIcon: Icon(Icons.email)), validator: Validators.email),
+                    const SizedBox(height: 16),
+                    DropdownButtonFormField<String>(
+                      initialValue: _gender,
+                      decoration: const InputDecoration(labelText: 'Jins', prefixIcon: Icon(Icons.wc)),
+                      items: AppConstants.genders.map((g) => DropdownMenuItem(value: g, child: Text(g))).toList(),
+                      onChanged: (v) => setState(() { _gender = v!; _hasUnsavedChanges = true; }),
                     ),
-                  ),
-                  const SizedBox(height: 32),
-                  AnimatedButton(label: 'Save Changes', onPressed: _save, isLoading: isLoading),
-                  const SizedBox(height: 24),
-                ],
+                    const SizedBox(height: 16),
+                    DropdownButtonFormField<String>(
+                      initialValue: _bloodType,
+                      decoration: const InputDecoration(labelText: 'Qon guruhi', prefixIcon: Icon(Icons.dangerous)),
+                      items: AppConstants.bloodTypes.map((b) => DropdownMenuItem(value: b, child: Text(b))).toList(),
+                      onChanged: (v) => setState(() { _bloodType = v!; _hasUnsavedChanges = true; }),
+                    ),
+                    const SizedBox(height: 16),
+                    InkWell(
+                      onTap: () => _pickDate(true),
+                      child: InputDecorator(
+                        decoration: const InputDecoration(labelText: 'Tug\'ilgan sana', prefixIcon: Icon(Icons.cake)),
+                        child: Text(_birthDate != null ? DateFormat('dd MMM yyyy').format(_birthDate!) : 'Sanani tanlang'),
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    _listEditor('Allergiyalar', _allergies, _allergyCtrl, ColorConstants.emergency, isDark),
+                    const SizedBox(height: 16),
+                    _listEditor('Surunkali kasalliklar', _diseases, _diseaseCtrl, const Color(0xFFFFB020), isDark),
+                    const SizedBox(height: 16),
+                    _listEditor('Joriy dorilar', _medications, _medicationCtrl, ColorConstants.primary, isDark),
+                    const SizedBox(height: 24),
+                    TextFormField(controller: _insuranceCtrl, onChanged: (_) => _hasUnsavedChanges = true, decoration: const InputDecoration(labelText: 'Sug\'urta kompaniyasi', prefixIcon: Icon(Icons.business))),
+                    const SizedBox(height: 16),
+                    TextFormField(controller: _policyCtrl, onChanged: (_) => _hasUnsavedChanges = true, decoration: const InputDecoration(labelText: 'Polis raqami', prefixIcon: Icon(Icons.numbers)), validator: Validators.policyNumber),
+                    const SizedBox(height: 16),
+                    InkWell(
+                      onTap: () => _pickDate(false),
+                      child: InputDecorator(
+                        decoration: const InputDecoration(labelText: 'Sug\'urta muddati', prefixIcon: Icon(Icons.calendar_today)),
+                        child: Text(_insuranceExpiry != null ? DateFormat('dd MMM yyyy').format(_insuranceExpiry!) : 'Sanani tanlang'),
+                      ),
+                    ),
+                    const SizedBox(height: 32),
+                    AnimatedButton(label: 'O\'zgarishlarni saqlash', onPressed: _save, isLoading: isLoading),
+                    const SizedBox(height: 24),
+                  ],
+                ),
               ),
             ),
           ),
@@ -206,7 +233,7 @@ class _MedicalProfileEditScreenState extends ConsumerState<MedicalProfileEditScr
             Expanded(
               child: TextField(
                 controller: ctrl,
-                decoration: InputDecoration(hintText: 'Add ${label.toLowerCase()}', isDense: true, contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10)),
+                decoration: InputDecoration(hintText: 'Qo\'shish ${label.toLowerCase()}', isDense: true, contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10)),
               ),
             ),
             const SizedBox(width: 8),

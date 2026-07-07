@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../../core/providers/auth_provider.dart';
 import '../../../core/providers/document_provider.dart';
 import '../../../core/models/document_model.dart';
 import '../../../core/constants/app_constants.dart';
@@ -44,17 +45,17 @@ class _DocumentUploadScreenState extends ConsumerState<DocumentUploadScreen> {
 
   void _upload() {
     if (_nameCtrl.text.trim().isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Please enter document name'), backgroundColor: ColorConstants.emergency));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Iltimos, hujjat nomini kiriting'), backgroundColor: ColorConstants.emergency));
       return;
     }
     if (_selectedFile == null) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Please select a file'), backgroundColor: ColorConstants.emergency));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Iltimos, faylni tanlang'), backgroundColor: ColorConstants.emergency));
       return;
     }
 
     final doc = DocumentModel(
       id: 'doc${DateTime.now().millisecondsSinceEpoch}',
-      patientId: 'user1',
+      patientId: ref.read(authProvider).user?.id ?? 'user1',
       name: _nameCtrl.text.trim(),
       type: _selectedType,
       notes: _notesCtrl.text.isNotEmpty ? _notesCtrl.text.trim() : null,
@@ -62,7 +63,7 @@ class _DocumentUploadScreenState extends ConsumerState<DocumentUploadScreen> {
     );
 
     ref.read(documentProvider.notifier).addDocument(doc);
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Document uploaded successfully'), backgroundColor: Color(0xFF00C896)));
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Hujjat muvaffaqiyatli yuklandi'), backgroundColor: Color(0xFF00C896)));
     context.pop();
   }
 
@@ -80,7 +81,7 @@ class _DocumentUploadScreenState extends ConsumerState<DocumentUploadScreen> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Upload Document', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('Hujjat yuklash', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
           ),
           body: SingleChildScrollView(
@@ -103,8 +104,8 @@ class _DocumentUploadScreenState extends ConsumerState<DocumentUploadScreen> {
                       children: [
                         Icon(_selectedFile != null ? Icons.check_circle : Icons.cloud_upload_outlined, size: 48, color: _selectedFile != null ? const Color(0xFF00C896) : const Color(0xFF0F6FFF)),
                         const SizedBox(height: 12),
-                        Text(_selectedFile != null ? _fileName! : 'Tap to select file', style: GoogleFonts.inter(fontSize: 16, color: isDark ? Colors.grey[300] : Colors.grey[600])),
-                        Text('PDF, PNG, JPG supported', style: GoogleFonts.inter(fontSize: 12, color: isDark ? Colors.grey[500] : Colors.grey[400])),
+                        Text(_selectedFile != null ? _fileName! : 'Faylni tanlash uchun bosing', style: GoogleFonts.inter(fontSize: 16, color: isDark ? Colors.grey[300] : Colors.grey[600])),
+                        Text('PDF, PNG, JPG qo\'llab-quvvatlanadi', style: GoogleFonts.inter(fontSize: 12, color: isDark ? Colors.grey[500] : Colors.grey[400])),
                       ],
                     ),
                   ),
@@ -112,12 +113,12 @@ class _DocumentUploadScreenState extends ConsumerState<DocumentUploadScreen> {
                 const SizedBox(height: 20),
                 TextField(
                   controller: _nameCtrl,
-                  decoration: const InputDecoration(labelText: 'Document Name', prefixIcon: Icon(Icons.text_fields)),
+                  decoration: const InputDecoration(labelText: 'Hujjat nomi', prefixIcon: Icon(Icons.text_fields)),
                 ),
                 const SizedBox(height: 16),
                 DropdownButtonFormField<String>(
-                  value: _selectedType,
-                  decoration: const InputDecoration(labelText: 'Document Type', prefixIcon: Icon(Icons.category)),
+                  initialValue: _selectedType,
+                  decoration: const InputDecoration(labelText: 'Hujjat turi', prefixIcon: Icon(Icons.category)),
                   items: AppConstants.documentTypes.map((t) => DropdownMenuItem(value: t, child: Text(t))).toList(),
                   onChanged: (v) => setState(() => _selectedType = v!),
                 ),
@@ -125,10 +126,10 @@ class _DocumentUploadScreenState extends ConsumerState<DocumentUploadScreen> {
                 TextField(
                   controller: _notesCtrl,
                   maxLines: 3,
-                  decoration: const InputDecoration(labelText: 'Notes (optional)', prefixIcon: Icon(Icons.notes), alignLabelWithHint: true),
+                  decoration: const InputDecoration(labelText: 'Izohlar (ixtiyoriy)', prefixIcon: Icon(Icons.notes), alignLabelWithHint: true),
                 ),
                 const SizedBox(height: 32),
-                AnimatedButton(label: 'Upload Document', onPressed: _upload),
+                AnimatedButton(label: 'Hujjat yuklash', onPressed: _upload),
                 const SizedBox(height: 24),
               ],
             ),

@@ -143,3 +143,6 @@ body {
   border: 1px solid rgba(255, 77, 79, 0.15);
   background: linear-gradient(135deg, rgba(255, 77, 79, 0.08) 0%, rgba(255, 77, 79, 0.03) 100%);
 }
+
+body { overflow-x: hidden; }
+html { scroll-behavior: smooth; }

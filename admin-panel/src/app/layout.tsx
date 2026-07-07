@@ -9,8 +9,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "MED-ID Admin Panel",
-  description: "MED-ID Biometric Medical Platform Admin Panel",
+  title: "MED-ID - Your Medical Identity, Secured by Biometrics",
+  description:
+    "MED-ID is a biometric medical identity platform that securely stores and provides instant access to your complete medical history.",
 };
 
 export default function RootLayout({
@@ -20,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`} suppressHydrationWarning>
-      <body className="min-h-full">
+      <body className="min-h-full bg-bg-main dark:bg-[#0F0F15]">
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

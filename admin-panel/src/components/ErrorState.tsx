@@ -1,6 +1,7 @@
 'use client';
 
 import { AlertTriangle, RefreshCw } from 'lucide-react';
+import { t } from '@/lib/i18n';
 
 interface ErrorStateProps {
   title?: string;
@@ -9,8 +10,8 @@ interface ErrorStateProps {
 }
 
 export default function ErrorState({
-  title = 'Something went wrong',
-  description = 'An error occurred while loading the data. Please try again.',
+  title = t('Something went wrong'),
+  description = t('An error occurred while loading the data. Please try again.'),
   onRetry,
 }: ErrorStateProps) {
   return (
@@ -26,7 +27,7 @@ export default function ErrorState({
           className="px-5 py-2.5 bg-primary text-white rounded-xl text-sm font-medium hover:bg-primary-dark transition-all duration-200 shadow-lg shadow-primary/20 inline-flex items-center gap-2"
         >
           <RefreshCw className="w-4 h-4" />
-          Try Again
+          {t('Try Again')}
         </button>
       )}
     </div>

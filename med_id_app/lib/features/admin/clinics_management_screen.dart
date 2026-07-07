@@ -33,15 +33,15 @@ class _ClinicsManagementScreenState extends ConsumerState<ClinicsManagementScree
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Delete Clinic'),
-        content: const Text('Are you sure?'),
+        title: const Text('Klinikani o\'chirish'),
+        content: const Text('Ishonchingiz komilmi?'),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
+          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Bekor qilish')),
           TextButton(onPressed: () {
             MockApiService().deleteClinic(id);
             _loadClinics();
             Navigator.pop(ctx);
-          }, child: const Text('Delete', style: TextStyle(color: Colors.red))),
+          }, child: const Text('O\'chirish', style: TextStyle(color: Colors.red))),
         ],
       ),
     );
@@ -61,13 +61,13 @@ class _ClinicsManagementScreenState extends ConsumerState<ClinicsManagementScree
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Clinics Management', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('Klinikalar boshqaruvi', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
           ),
           body: _loading
               ? const ShimmerLoading(itemCount: 5)
               : _clinics.isEmpty
-                  ? const EmptyStateWidget(icon: Icons.local_hospital, title: 'No clinics')
+                  ? const EmptyStateWidget(icon: Icons.local_hospital, title: 'Klinikalar yo\'q')
                   : RefreshIndicator(
                       onRefresh: _loadClinics,
                       child: ListView.builder(

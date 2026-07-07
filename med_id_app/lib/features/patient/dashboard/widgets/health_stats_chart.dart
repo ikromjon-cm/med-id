@@ -28,7 +28,7 @@ class HealthStatsChart extends StatelessWidget {
             children: [
               Icon(Icons.bar_chart, size: 40, color: isDark ? Colors.grey[600] : Colors.grey[300]),
               const SizedBox(height: 8),
-              Text('No health data yet', style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.grey[400] : Colors.grey[500])),
+              Text('Salomatlik ma\'lumotlari yo\'q', style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.grey[400] : Colors.grey[500])),
             ],
           ),
         ),
@@ -45,7 +45,7 @@ class HealthStatsChart extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Health Overview', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+          Text('Salomatlik sharhi', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
           const SizedBox(height: 16),
           SizedBox(
             height: 140,
@@ -61,11 +61,11 @@ class HealthStatsChart extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _legendItem('Allergies', allergies.length, const Color(0xFFFF4D4F), isDark),
+                    _legendItem('Allergiyalar', allergies.length, const Color(0xFFFF4D4F), isDark),
                     const SizedBox(height: 8),
-                    _legendItem('Medications', medications.length, const Color(0xFF0F6FFF), isDark),
+                    _legendItem('Dorilar', medications.length, const Color(0xFF0F6FFF), isDark),
                     const SizedBox(height: 8),
-                    _legendItem('Diseases', diseases.length, const Color(0xFFFFB020), isDark),
+                    _legendItem('Kasalliklar', diseases.length, const Color(0xFFFFB020), isDark),
                   ],
                 ),
               ],

@@ -1,4 +1,4 @@
-import { User, Clinic, Doctor, AccessLog, Notification, DashboardStats, ChartDataPoint, Patient, Appointment, Diagnosis, Prescription, EmergencyAlert, QueueEntry, ClinicFinance, EmergencyAccessLog, DoctorDetail } from './types';
+import { User, Clinic, Doctor, AccessLog, Notification, DashboardStats, ChartDataPoint, Patient, Appointment, Diagnosis, Prescription, EmergencyAlert, QueueEntry, ClinicFinance, EmergencyAccessLog, DoctorDetail, Testimonial, Partner, BlogPost, FAQItem, Feature, ContactMessage, EmergencyStaff, ClinicEmployee, PatientDocument, EmergencyContact, SecuritySession, PatientProfile, ClinicDashboardStats, DoctorDashboardStats } from './types';
 import { delay, generateId } from './utils';
 
 const SPECIALIZATIONS = ['Cardiology', 'Neurology', 'Pediatrics', 'Orthopedics', 'Dermatology', 'Oncology', 'Radiology', 'Anesthesiology', 'Emergency Medicine', 'Family Medicine', 'Internal Medicine', 'Obstetrics', 'Ophthalmology', 'Pathology', 'Psychiatry', 'Surgery', 'Urology', 'Endocrinology', 'Gastroenterology', 'Pulmonology'];
@@ -592,4 +592,407 @@ export async function createNotification(data: { type: Notification['type']; tit
   };
   notifications.unshift(newNotif);
   return newNotif;
+}
+
+// ========== LANDING PAGE DATA ==========
+
+export const testimonials: Testimonial[] = [
+  { id: 'TST-001', name: 'Dr. Sarah Chen', role: 'Cardiologist, Med-ID Central Hospital', avatar: 'SC', content: 'MED-ID has revolutionized how we access patient data. In emergency situations, every second counts, and this platform gives us instant access to critical medical information.', rating: 5 },
+  { id: 'TST-002', name: 'James Rodriguez', role: 'Patient', avatar: 'JR', content: 'Having my entire medical history on my phone gives me peace of mind. The biometric security makes me feel confident that my data is safe.', rating: 5 },
+  { id: 'TST-003', name: 'Dr. Emily Watson', role: 'Emergency Medicine Specialist', avatar: 'EW', content: 'The emergency access feature is a game-changer. When a patient comes in unconscious, we can immediately access blood type, allergies, and medications.', rating: 5 },
+  { id: 'TST-004', name: 'Michael Park', role: 'Clinic Director, Green Valley Medical', avatar: 'MP', content: 'Implementing MED-ID across our network of 12 clinics has streamlined our operations and improved patient outcomes significantly.', rating: 4 },
+  { id: 'TST-005', name: 'Lisa Thompson', role: 'Nurse, Riverside Medical Group', avatar: 'LT', content: 'The QR code system is incredibly intuitive. Patients love how easy it is to share their medical profiles securely.', rating: 5 },
+];
+
+export const partners: Partner[] = [
+  { id: 'PTN-001', name: 'Med-ID Central Hospital', logo: 'MCH' },
+  { id: 'PTN-002', name: 'Green Valley Medical', logo: 'GVM' },
+  { id: 'PTN-003', name: 'Riverside Medical Group', logo: 'RMG' },
+  { id: 'PTN-004', name: 'Pacific Health Alliance', logo: 'PHA' },
+  { id: 'PTN-005', name: 'Summit Medical Group', logo: 'SMG' },
+  { id: 'PTN-006', name: 'Crystal Run Healthcare', logo: 'CRH' },
+  { id: 'PTN-007', name: 'North Star Medical', logo: 'NSM' },
+  { id: 'PTN-008', name: 'Bay Area Medical Assoc.', logo: 'BAMA' },
+];
+
+export const blogPosts: BlogPost[] = [
+  { id: 'BLG-001', title: 'The Future of Biometric Authentication in Healthcare', excerpt: 'How biometric technology is transforming patient data security and accessibility in modern healthcare systems.', content: 'Biometric authentication is rapidly becoming the gold standard for secure access control in healthcare...', author: 'Dr. Amanda Foster', category: 'Technology', image: '/blog/biometric.jpg', date: '2026-06-15', readTime: '5 min read' },
+  { id: 'BLG-002', title: 'Emergency Medical Access: Why Every Second Matters', excerpt: 'In critical situations, immediate access to patient medical history can mean the difference between life and death.', content: 'Time is the most critical factor in emergency medicine. When a patient arrives at the ER unconscious...', author: 'Dr. Robert Kim', category: 'Emergency Care', image: '/blog/emergency.jpg', date: '2026-06-10', readTime: '4 min read' },
+  { id: 'BLG-003', title: 'MED-ID OneID: Your Universal Medical Identity', excerpt: 'Introducing a unified medical identity system that works across all healthcare providers.', content: 'OneID is our latest innovation designed to create a seamless, universal medical identity...', author: 'Product Team', category: 'Product', image: '/blog/oneid.jpg', date: '2026-06-05', readTime: '6 min read' },
+  { id: 'BLG-004', title: 'HIPAA Compliance in the Digital Age', excerpt: 'Understanding how MED-ID meets and exceeds HIPAA compliance requirements for patient data protection.', content: 'Data privacy and security are at the core of everything we build at MED-ID...', author: 'Sarah Mitchell', category: 'Security', image: '/blog/hipaa.jpg', date: '2026-05-28', readTime: '7 min read' },
+  { id: 'BLG-005', title: 'Digital Prescriptions: The End of Paper Scripts', excerpt: 'How electronic prescribing is reducing errors and improving patient medication adherence.', content: 'The transition from paper prescriptions to digital formats is revolutionizing medication management...', author: 'Dr. James Wilson', category: 'Features', image: '/blog/prescriptions.jpg', date: '2026-05-20', readTime: '5 min read' },
+  { id: 'BLG-006', title: 'Partner Spotlight: Med-ID Central Hospital', excerpt: 'How our flagship partner clinic is leveraging MED-ID to improve patient care across the board.', content: 'Med-ID Central Hospital has been at the forefront of adopting digital health solutions...', author: 'Editorial Team', category: 'Partners', image: '/blog/partner.jpg', date: '2026-05-15', readTime: '4 min read' },
+];
+
+export const faqItems: FAQItem[] = [
+  { id: 'FAQ-001', question: 'What is MED-ID?', answer: 'MED-ID is a biometric medical identity platform that securely stores and provides instant access to your complete medical history. It uses advanced encryption and biometric authentication to ensure your data is always protected while being available when you need it most.', category: 'General' },
+  { id: 'FAQ-002', question: 'How does biometric authentication work?', answer: 'MED-ID uses your unique biometric characteristics — fingerprint or facial recognition — to verify your identity. This ensures that only you can access your medical profile. The biometric data is stored locally on your device using secure enclave technology.', category: 'Security' },
+  { id: 'FAQ-003', question: 'Is my medical data secure?', answer: 'Absolutely. MED-ID employs end-to-end encryption, biometric authentication, and complies with HIPAA and GDPR regulations. Your data is encrypted both in transit and at rest, and you have full control over who can access your information.', category: 'Security' },
+  { id: 'FAQ-004', question: 'How does emergency access work?', answer: 'In an emergency, authorized medical staff can scan your MED-ID QR code or use your MED-ID number to access critical information like blood type, allergies, and chronic conditions. This access is logged and you receive an immediate notification.', category: 'Emergency' },
+  { id: 'FAQ-005', question: 'Can I use MED-ID outside my country?', answer: 'Yes! MED-ID OneID is designed to work globally. Partner clinics and hospitals worldwide can access your medical information with your consent, making it ideal for travelers.', category: 'General' },
+  { id: 'FAQ-006', question: 'What information is shared during emergency access?', answer: 'During emergency access, only vital information is shared: blood type, allergies, chronic diseases, current medications, and emergency contacts. Full medical history requires your explicit consent.', category: 'Emergency' },
+  { id: 'FAQ-007', question: 'How do I get started?', answer: 'Simply download the MED-ID app from the App Store or Google Play, create your profile, and complete the biometric setup. The process takes less than 5 minutes. You can then share your MED-ID with your healthcare provider.', category: 'General' },
+  { id: 'FAQ-008', question: 'Is MED-ID free?', answer: 'The basic MED-ID profile is free for all users. Premium features including expanded storage, family accounts, and advanced analytics are available through subscription plans.', category: 'General' },
+  { id: 'FAQ-009', question: 'Can I add my family members?', answer: 'Yes, you can manage medical profiles for your children or elderly parents under your account. Each family member gets their own secure MED-ID profile.', category: 'General' },
+  { id: 'FAQ-010', question: 'What happens if I lose my phone?', answer: 'Your MED-ID data is securely backed up in the cloud. You can restore your profile on a new device using your credentials and biometric verification. You can also remotely deactivate access from the web dashboard.', category: 'Security' },
+];
+
+export const features: Feature[] = [
+  { id: 'FTR-001', title: 'Biometric Security', description: 'Fingerprint and facial recognition ensure only you can access your medical profile.', icon: 'shield' },
+  { id: 'FTR-002', title: 'Emergency Access', description: 'First responders get vital info instantly via QR scan when every second counts.', icon: 'alert' },
+  { id: 'FTR-003', title: 'Universal Medical ID', description: 'One identity that works across all healthcare providers and clinics.', icon: 'id' },
+  { id: 'FTR-004', title: 'Digital Records', description: 'Store, manage, and share your medical documents securely from anywhere.', icon: 'file' },
+  { id: 'FTR-005', title: 'Real-time Notifications', description: 'Instant alerts when your medical profile is accessed or updated.', icon: 'bell' },
+  { id: 'FTR-006', title: 'Offline Access', description: 'Critical medical information available even without internet connection.', icon: 'wifi' },
+];
+
+export const siteStats = {
+  totalUsers: 1250000,
+  activeDoctors: 8600,
+  partnerClinics: 3200,
+  emergencyAccesses: 45800,
+  documentsStored: 2500000,
+  countriesReached: 45,
+};
+
+export async function getTestimonials(): Promise<Testimonial[]> {
+  await delay(200); return [...testimonials];
+}
+
+export async function getPartners(): Promise<Partner[]> {
+  await delay(200); return [...partners];
+}
+
+export async function getBlogPosts(): Promise<BlogPost[]> {
+  await delay(300); return [...blogPosts];
+}
+
+export async function getBlogPost(id: string): Promise<BlogPost | undefined> {
+  await delay(200); return blogPosts.find(p => p.id === id);
+}
+
+export async function getFAQItems(): Promise<FAQItem[]> {
+  await delay(200); return [...faqItems];
+}
+
+export async function getFeatures(): Promise<Feature[]> {
+  await delay(200); return [...features];
+}
+
+export async function getSiteStats(): Promise<typeof siteStats> {
+  await delay(300); return { ...siteStats };
+}
+
+// ========== PATIENT WEB CABINET DATA ==========
+
+export const patientProfiles: PatientProfile[] = [
+  {
+    id: 'PAT-001', name: 'John Anderson', email: 'john.anderson@email.com', phone: '+1 (555) 123-4567',
+    dateOfBirth: '1985-03-15', gender: 'Male', bloodType: 'O+', height: '180 cm', weight: '78 kg',
+    allergies: ['Penicillin', 'Sulfa'], chronicDiseases: ['Hypertension', 'Type 2 Diabetes'],
+    medications: ['Lisinopril 10mg daily', 'Metformin 500mg twice daily'],
+    emergencyContacts: [
+      { id: 'EC-001', patientId: 'PAT-001', name: 'Mary Anderson', relationship: 'Spouse', phone: '+1 (555) 234-5678', email: 'mary.anderson@email.com', isPrimary: true },
+      { id: 'EC-002', patientId: 'PAT-001', name: 'Robert Anderson', relationship: 'Brother', phone: '+1 (555) 345-6789', email: 'robert.anderson@email.com', isPrimary: false },
+    ],
+    documents: [
+      { id: 'DOC-001', patientId: 'PAT-001', name: 'Blood Test Results - Jun 2026', type: 'Lab Report', size: '2.4 MB', date: '2026-06-10', url: '#' },
+      { id: 'DOC-002', patientId: 'PAT-001', name: 'Chest X-Ray - May 2026', type: 'X-Ray', size: '8.1 MB', date: '2026-05-22', url: '#' },
+      { id: 'DOC-003', patientId: 'PAT-001', name: 'Cardiology Report - Apr 2026', type: 'Medical Record', size: '1.8 MB', date: '2026-04-15', url: '#' },
+    ],
+    sessions: [
+      { id: 'SES-001', device: 'iPhone 15 Pro', browser: 'Safari', ip: '192.168.1.100', location: 'New York, US', lastActive: '2 minutes ago', isCurrent: true },
+      { id: 'SES-002', device: 'MacBook Pro', browser: 'Chrome', ip: '192.168.1.101', location: 'New York, US', lastActive: '1 hour ago', isCurrent: false },
+      { id: 'SES-003', device: 'Samsung Galaxy S24', browser: 'Chrome Mobile', ip: '10.0.0.45', location: 'Brooklyn, US', lastActive: '2 days ago', isCurrent: false },
+    ],
+    biometricEnabled: true,
+  },
+  {
+    id: 'PAT-002', name: 'Diana Foster', email: 'diana.foster@email.com', phone: '+1 (555) 456-7890',
+    dateOfBirth: '1992-07-22', gender: 'Female', bloodType: 'A+', height: '165 cm', weight: '62 kg',
+    allergies: ['Latex'], chronicDiseases: ['Asthma'], medications: ['Albuterol inhaler as needed'],
+    emergencyContacts: [
+      { id: 'EC-003', patientId: 'PAT-002', name: 'David Foster', relationship: 'Husband', phone: '+1 (555) 567-8901', email: 'david.foster@email.com', isPrimary: true },
+    ],
+    documents: [
+      { id: 'DOC-004', patientId: 'PAT-002', name: 'Pulmonary Function Test', type: 'Lab Report', size: '3.2 MB', date: '2026-06-05', url: '#' },
+    ],
+    sessions: [
+      { id: 'SES-004', device: 'iPhone 14', browser: 'Safari', ip: '192.168.2.50', location: 'Los Angeles, US', lastActive: '5 minutes ago', isCurrent: true },
+    ],
+    biometricEnabled: true,
+  },
+  {
+    id: 'PAT-003', name: 'Alice Clark', email: 'alice.clark@email.com', phone: '+1 (555) 678-9012',
+    dateOfBirth: '1978-11-08', gender: 'Female', bloodType: 'A-', height: '170 cm', weight: '70 kg',
+    allergies: ['Peanuts', 'Sulfa'], chronicDiseases: ['Hypothyroidism'], medications: ['Levothyroxine 75mcg daily'],
+    emergencyContacts: [
+      { id: 'EC-004', patientId: 'PAT-003', name: 'Tom Clark', relationship: 'Son', phone: '+1 (555) 789-0123', email: 'tom.clark@email.com', isPrimary: true },
+    ],
+    documents: [],
+    sessions: [
+      { id: 'SES-005', device: 'Pixel 8', browser: 'Chrome', ip: '172.16.0.10', location: 'Chicago, US', lastActive: '1 hour ago', isCurrent: true },
+    ],
+    biometricEnabled: false,
+  },
+];
+
+export async function getPatientProfile(patientId: string): Promise<PatientProfile | undefined> {
+  await delay(300); return patientProfiles.find(p => p.id === patientId);
+}
+
+export async function updatePatientProfile(patientId: string, data: Partial<PatientProfile>): Promise<PatientProfile | undefined> {
+  await delay(400);
+  const idx = patientProfiles.findIndex(p => p.id === patientId);
+  if (idx === -1) return undefined;
+  patientProfiles[idx] = { ...patientProfiles[idx], ...data };
+  return patientProfiles[idx];
+}
+
+export async function getPatientDocuments(patientId: string): Promise<PatientDocument[]> {
+  await delay(200);
+  const profile = patientProfiles.find(p => p.id === patientId);
+  return profile?.documents || [];
+}
+
+export async function addPatientDocument(patientId: string, doc: Omit<PatientDocument, 'id'>): Promise<PatientDocument> {
+  await delay(300);
+  const newDoc: PatientDocument = { id: `DOC-${String(Math.floor(Math.random() * 9000) + 1000)}`, ...doc };
+  const profile = patientProfiles.find(p => p.id === patientId);
+  if (profile) profile.documents.unshift(newDoc);
+  return newDoc;
+}
+
+export async function deletePatientDocument(patientId: string, docId: string): Promise<boolean> {
+  await delay(200);
+  const profile = patientProfiles.find(p => p.id === patientId);
+  if (!profile) return false;
+  const idx = profile.documents.findIndex(d => d.id === docId);
+  if (idx === -1) return false;
+  profile.documents.splice(idx, 1);
+  return true;
+}
+
+export async function getEmergencyContacts(patientId: string): Promise<EmergencyContact[]> {
+  await delay(200);
+  const profile = patientProfiles.find(p => p.id === patientId);
+  return profile?.emergencyContacts || [];
+}
+
+export async function addEmergencyContact(patientId: string, contact: Omit<EmergencyContact, 'id'>): Promise<EmergencyContact> {
+  await delay(300);
+  const newContact: EmergencyContact = { id: `EC-${String(Math.floor(Math.random() * 9000) + 1000)}`, ...contact };
+  const profile = patientProfiles.find(p => p.id === patientId);
+  if (profile) {
+    if (newContact.isPrimary) profile.emergencyContacts.forEach(c => c.isPrimary = false);
+    profile.emergencyContacts.push(newContact);
+  }
+  return newContact;
+}
+
+export async function updateEmergencyContact(patientId: string, contactId: string, data: Partial<EmergencyContact>): Promise<EmergencyContact | undefined> {
+  await delay(300);
+  const profile = patientProfiles.find(p => p.id === patientId);
+  if (!profile) return undefined;
+  const idx = profile.emergencyContacts.findIndex(c => c.id === contactId);
+  if (idx === -1) return undefined;
+  if (data.isPrimary) profile.emergencyContacts.forEach(c => c.isPrimary = false);
+  profile.emergencyContacts[idx] = { ...profile.emergencyContacts[idx], ...data };
+  return profile.emergencyContacts[idx];
+}
+
+export async function deleteEmergencyContact(patientId: string, contactId: string): Promise<boolean> {
+  await delay(200);
+  const profile = patientProfiles.find(p => p.id === patientId);
+  if (!profile) return false;
+  const idx = profile.emergencyContacts.findIndex(c => c.id === contactId);
+  if (idx === -1) return false;
+  profile.emergencyContacts.splice(idx, 1);
+  return true;
+}
+
+export async function getSecuritySessions(patientId: string): Promise<SecuritySession[]> {
+  await delay(200);
+  const profile = patientProfiles.find(p => p.id === patientId);
+  return profile?.sessions || [];
+}
+
+export async function revokeSession(patientId: string, sessionId: string): Promise<boolean> {
+  await delay(200);
+  const profile = patientProfiles.find(p => p.id === patientId);
+  if (!profile) return false;
+  const idx = profile.sessions.findIndex(s => s.id === sessionId);
+  if (idx === -1 || profile.sessions[idx].isCurrent) return false;
+  profile.sessions.splice(idx, 1);
+  return true;
+}
+
+// ========== EMERGENCY STAFF DATA ==========
+
+export const emergencyStaffList: EmergencyStaff[] = [
+  { id: 'ES-001', name: 'Dr. James Wilson', email: 'jwilson@emergency.medid.com', phone: '+1 (555) 111-0001', role: 'emergency_doctor', status: 'on_duty', clinic: 'Med-ID Central Hospital', createdAt: '2025-01-15' },
+  { id: 'ES-002', name: 'Nurse Sarah Johnson', email: 'sjohnson@emergency.medid.com', phone: '+1 (555) 111-0002', role: 'emergency_nurse', status: 'on_duty', clinic: 'Med-ID Central Hospital', createdAt: '2025-03-20' },
+  { id: 'ES-003', name: 'Paramedic Mike Torres', email: 'mtorres@emergency.medid.com', phone: '+1 (555) 111-0003', role: 'paramedic', status: 'available', clinic: 'Green Valley Medical Center', createdAt: '2025-02-10' },
+  { id: 'ES-004', name: 'Dispatcher Lisa Park', email: 'lpark@emergency.medid.com', phone: '+1 (555) 111-0004', role: 'dispatcher', status: 'on_duty', clinic: 'Riverside Medical Group', createdAt: '2025-04-05' },
+  { id: 'ES-005', name: 'Dr. Emily Chen', email: 'echen@emergency.medid.com', phone: '+1 (555) 111-0005', role: 'emergency_doctor', status: 'off_duty', clinic: 'Pinecrest Health Clinic', createdAt: '2025-01-01' },
+  { id: 'ES-006', name: 'Nurse Robert Miller', email: 'rmiller@emergency.medid.com', phone: '+1 (555) 111-0006', role: 'emergency_nurse', status: 'available', clinic: 'Med-ID Central Hospital', createdAt: '2025-05-12' },
+  { id: 'ES-007', name: 'Paramedic Jessica Lee', email: 'jlee@emergency.medid.com', phone: '+1 (555) 111-0007', role: 'paramedic', status: 'on_duty', clinic: 'Sunset Diagnostic Center', createdAt: '2025-06-01' },
+  { id: 'ES-008', name: 'Dispatcher David Brown', email: 'dbrown@emergency.medid.com', phone: '+1 (555) 111-0008', role: 'dispatcher', status: 'available', clinic: 'Harbor Health Partners', createdAt: '2025-02-28' },
+];
+
+export async function getEmergencyStaffList(): Promise<EmergencyStaff[]> {
+  await delay(300); return [...emergencyStaffList];
+}
+
+export async function getEmergencyStats(): Promise<{ totalAlerts: number; activeAlerts: number; resolvedToday: number; avgResponseTime: string }> {
+  await delay(200);
+  return { totalAlerts: emergencyAlerts.length, activeAlerts: emergencyAlerts.filter(a => a.status === 'ACTIVE').length, resolvedToday: 3, avgResponseTime: '4.5 min' };
+}
+
+export async function getActiveEmergencyAlerts(): Promise<EmergencyAlert[]> {
+  await delay(200); return emergencyAlerts.filter(a => a.status === 'ACTIVE');
+}
+
+// ========== CLINIC PANEL DATA ==========
+
+export const clinicStaffList: Record<string, ClinicEmployee[]> = {};
+clinics.slice(0, 6).forEach((clinic, ci) => {
+  clinicStaffList[clinic.id] = Array.from({ length: Math.floor(Math.random() * 4) + 2 }, (_, i) => ({
+    id: `EMP-${String(ci * 10 + i + 1).padStart(3, '0')}`,
+    name: `${randomFrom(FIRST_NAMES)} ${randomFrom(LAST_NAMES)}`,
+    email: `emp${ci * 10 + i + 1}@${clinic.name.toLowerCase().replace(/\s+/g, '')}.com`,
+    phone: randomPhone(),
+    role: randomFrom(['receptionist', 'nurse', 'administrator', 'technician'] as const),
+    status: randomFrom(['active', 'active', 'active', 'inactive'] as const),
+    clinicId: clinic.id,
+    createdAt: randomDate(sixMonthsAgo, now),
+  }));
+});
+
+export async function getClinicDashboardStats(clinicId: string): Promise<ClinicDashboardStats> {
+  await delay(300);
+  const q = queueEntries.filter(e => e.clinicId === clinicId);
+  const appts = appointments.filter(a => a.clinicId === clinicId && a.date === todayStr);
+  return {
+    todayAppointments: appts.length,
+    totalPatients: patients.length,
+    totalDoctors: doctors.filter(d => d.clinic === clinics.find(c => c.id === clinicId)?.name).length,
+    queueStatus: { waiting: q.filter(e => e.status === 'WAITING').length, withDoctor: q.filter(e => e.status === 'WITH_DOCTOR').length, completed: q.filter(e => e.status === 'COMPLETED').length },
+    todayRevenue: Math.floor(Math.random() * 15000) + 5000,
+  };
+}
+
+export async function getClinicStaff(clinicId: string): Promise<ClinicEmployee[]> {
+  await delay(300); return clinicStaffList[clinicId] || [];
+}
+
+export async function addClinicStaff(clinicId: string, data: Omit<ClinicEmployee, 'id'>): Promise<ClinicEmployee> {
+  await delay(300);
+  const emp: ClinicEmployee = { id: `EMP-${String(Math.floor(Math.random() * 9000) + 1000)}`, ...data };
+  if (!clinicStaffList[clinicId]) clinicStaffList[clinicId] = [];
+  clinicStaffList[clinicId].unshift(emp);
+  return emp;
+}
+
+export async function removeClinicStaff(clinicId: string, empId: string): Promise<boolean> {
+  await delay(200);
+  if (!clinicStaffList[clinicId]) return false;
+  const idx = clinicStaffList[clinicId].findIndex(e => e.id === empId);
+  if (idx === -1) return false;
+  clinicStaffList[clinicId].splice(idx, 1);
+  return true;
+}
+
+// ========== DOCTOR PANEL DATA ==========
+
+export async function getDoctorDashboardStats(doctorId: string): Promise<DoctorDashboardStats> {
+  await delay(300);
+  const todayAppts = appointments.filter(a => a.doctorId === doctorId && a.date === todayStr);
+  return {
+    todayPatients: todayAppts.length,
+    upcomingAppointments: appointments.filter(a => a.doctorId === doctorId && a.date >= todayStr && a.status === 'scheduled').length,
+    pendingDiagnoses: Math.floor(Math.random() * 5) + 1,
+    activePrescriptions: prescriptions.filter(p => p.doctorId === doctorId && p.status === 'active').length,
+  };
+}
+
+export async function searchPatients(query: string): Promise<Patient[]> {
+  await delay(300);
+  const q = query.toLowerCase();
+  return patients.filter(p => p.name.toLowerCase().includes(q) || p.id.toLowerCase().includes(q) || p.phone.includes(q));
+}
+
+export async function getPatientFullProfile(patientId: string): Promise<{
+  patient: Patient | undefined;
+  diagnoses: Diagnosis[];
+  prescriptions: Prescription[];
+  appointments: Appointment[];
+  documents: PatientDocument[];
+}> {
+  await delay(400);
+  const profile = patientProfiles.find(p => p.id === patientId);
+  return {
+    patient: patients.find(p => p.id === patientId),
+    diagnoses: diagnoses.filter(d => d.patientId === patientId),
+    prescriptions: prescriptions.filter(p => p.patientId === patientId),
+    appointments: appointments.filter(a => a.patientId === patientId),
+    documents: profile?.documents || [],
+  };
+}
+
+export async function getTodayAppointments(doctorId: string): Promise<Appointment[]> {
+  await delay(200);
+  return appointments.filter(a => a.doctorId === doctorId && a.date === todayStr);
+}
+
+export async function getUpcomingAppointments(doctorId: string): Promise<Appointment[]> {
+  await delay(200);
+  return appointments.filter(a => a.doctorId === doctorId && a.date >= todayStr && a.status === 'scheduled').sort((a, b) => a.date.localeCompare(b.date));
+}
+
+export async function createDiagnosis(data: Omit<Diagnosis, 'id'>): Promise<Diagnosis> {
+  await delay(300);
+  const newDiag: Diagnosis = { id: `DIA-${String(diagnoses.length + 1).padStart(3, '0')}`, ...data };
+  diagnoses.unshift(newDiag);
+  return newDiag;
+}
+
+export async function createPrescription(data: Omit<Prescription, 'id'>): Promise<Prescription> {
+  await delay(300);
+  const newPre: Prescription = { id: `PRE-${String(prescriptions.length + 1).padStart(3, '0')}`, ...data };
+  prescriptions.unshift(newPre);
+  return newPre;
+}
+
+export async function getMyPatients(doctorId: string): Promise<Patient[]> {
+  await delay(300);
+  const docAppts = appointments.filter(a => a.doctorId === doctorId);
+  return patients.filter(p => docAppts.some(a => a.patientId === p.id)).slice(0, 20);
+}
+
+// ========== QUEUE MANAGEMENT ==========
+
+export async function updateQueueEntry(id: string, data: Partial<QueueEntry>): Promise<QueueEntry | null> {
+  await delay(200);
+  const idx = queueEntries.findIndex(q => q.id === id);
+  if (idx === -1) return null;
+  queueEntries[idx] = { ...queueEntries[idx], ...data };
+  return queueEntries[idx];
+}
+
+export async function addToQueue(data: Omit<QueueEntry, 'id'>): Promise<QueueEntry> {
+  await delay(200);
+  const entry: QueueEntry = { id: `QUE-${String(queueEntries.length + 1).padStart(3, '0')}`, ...data };
+  queueEntries.push(entry);
+  return entry;
+}
+
+// ========== CONTACT MESSAGES ==========
+
+export const contactMessages: ContactMessage[] = [];
+export async function submitContactForm(data: Omit<ContactMessage, 'id' | 'createdAt'>): Promise<ContactMessage> {
+  await delay(300);
+  const msg: ContactMessage = { id: `MSG-${String(contactMessages.length + 1).padStart(3, '0')}`, ...data, createdAt: new Date().toISOString() };
+  contactMessages.unshift(msg);
+  return msg;
 }

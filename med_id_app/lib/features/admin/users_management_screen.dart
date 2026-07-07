@@ -51,7 +51,7 @@ class _UsersManagementScreenState extends ConsumerState<UsersManagementScreen> {
       child: SafeArea(
         child: Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: AppBar(title: Text('Users Management', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)), backgroundColor: Colors.transparent, elevation: 0),
+          appBar: AppBar(title: Text('Foydalanuvchilar boshqaruvi', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)), backgroundColor: Colors.transparent, elevation: 0),
           body: Column(
             children: [
               Padding(
@@ -59,14 +59,14 @@ class _UsersManagementScreenState extends ConsumerState<UsersManagementScreen> {
                 child: TextField(
                   controller: _searchCtrl,
                   onChanged: (_) => setState(() {}),
-                  decoration: const InputDecoration(hintText: 'Search users...', prefixIcon: Icon(Icons.search)),
+                  decoration: const InputDecoration(hintText: 'Foydalanuvchilarni qidirish...', prefixIcon: Icon(Icons.search)),
                 ),
               ),
               Expanded(
                 child: _loading
                     ? const ShimmerLoading(itemCount: 5)
                     : filtered.isEmpty
-                        ? const EmptyStateWidget(icon: Icons.people, title: 'No users found')
+                        ? const EmptyStateWidget(icon: Icons.people, title: 'Foydalanuvchilar topilmadi')
                         : RefreshIndicator(
                             onRefresh: _loadUsers,
                             child: ListView.builder(
@@ -83,8 +83,8 @@ class _UsersManagementScreenState extends ConsumerState<UsersManagementScreen> {
                                         child: Text(u.fullName[0], style: GoogleFonts.inter(color: const Color(0xFF0F6FFF), fontWeight: FontWeight.bold)),
                                       ),
                                       title: Text(u.fullName, style: GoogleFonts.inter(fontSize: 15, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
-                                      subtitle: Text('${u.phone} | ${u.email ?? "No email"}', style: GoogleFonts.inter(fontSize: 12, color: isDark ? Colors.grey[400] : Colors.grey[500])),
-                                      trailing: Chip(label: Text(u.bloodType ?? 'N/A', style: GoogleFonts.inter(fontSize: 11)), backgroundColor: const Color(0xFF0F6FFF).withValues(alpha: 0.1)),
+                                      subtitle: Text('${u.phone} | ${u.email ?? "Email yoq"}', style: GoogleFonts.inter(fontSize: 12, color: isDark ? Colors.grey[400] : Colors.grey[500])),
+                                      trailing: Chip(label: Text(u.bloodType ?? 'Mavjud emas', style: GoogleFonts.inter(fontSize: 11)), backgroundColor: const Color(0xFF0F6FFF).withValues(alpha: 0.1)),
                                     ),
                                   ),
                                 );

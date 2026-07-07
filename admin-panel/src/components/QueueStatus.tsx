@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Clock, UserCheck, Users, AlertTriangle } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { t } from '@/lib/i18n';
 import type { QueueEntry } from '@/lib/types';
 import QueueCard from './QueueCard';
 
@@ -17,9 +18,9 @@ export default function QueueStatus({ entries }: QueueStatusProps) {
   const critical = entries.filter(e => e.priority === 'CRITICAL' && e.status !== 'COMPLETED');
 
   const stats = [
-    { label: 'Waiting', count: waiting.length, icon: Users, color: 'text-amber-500', bg: 'bg-amber-50 dark:bg-amber-500/10' },
-    { label: 'With Doctor', count: withDoctor.length, icon: UserCheck, color: 'text-primary', bg: 'bg-primary/10' },
-    { label: 'Completed', count: completed.length, icon: Clock, color: 'text-[#00C896]', bg: 'bg-[#00C896]/10' },
+    { label: t('Waiting'), count: waiting.length, icon: Users, color: 'text-amber-500', bg: 'bg-amber-50 dark:bg-amber-500/10' },
+    { label: t('With Doctor'), count: withDoctor.length, icon: UserCheck, color: 'text-primary', bg: 'bg-primary/10' },
+    { label: t('Completed'), count: completed.length, icon: Clock, color: 'text-[#00C896]', bg: 'bg-[#00C896]/10' },
   ];
 
   return (
@@ -36,12 +37,12 @@ export default function QueueStatus({ entries }: QueueStatusProps) {
       {critical.length > 0 && (
         <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-emergency/10 text-emergency text-xs font-medium">
           <AlertTriangle className="w-4 h-4" />
-          {critical.length} critical patient{critical.length !== 1 ? 's' : ''} in queue
+          {critical.length} {critical.length !== 1 ? t('critical patients') : t('critical patient')} {t('in queue')}
         </div>
       )}
       <div className="space-y-1 max-h-64 overflow-y-auto">
         {entries.length === 0 ? (
-          <p className="text-sm text-gray-500 dark:text-gray-400 text-center py-6">No entries in queue</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 text-center py-6">{t('No entries in queue')}</p>
         ) : (
           entries.map((entry, i) => (
             <QueueCard key={entry.id} entry={entry} delay={i * 0.03} />

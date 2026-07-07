@@ -27,7 +27,7 @@ class EmergencyProfileScreen extends ConsumerWidget {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Emergency Profile', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600, color: ColorConstants.emergency)),
+            title: Text('Favqulodda profil', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600, color: ColorConstants.emergency)),
             centerTitle: true,
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -55,7 +55,7 @@ class EmergencyProfileScreen extends ConsumerWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('EMERGENCY MODE', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.bold, color: ColorConstants.emergency)),
+                            Text('FAVQULODDA REJIM', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.bold, color: ColorConstants.emergency)),
                             Text('Shoshilinch tibbiy ma\'lumot', style: GoogleFonts.inter(fontSize: 13, color: isDark ? Colors.grey[400] : Colors.grey[600])),
                           ],
                         ),
@@ -68,11 +68,11 @@ class EmergencyProfileScreen extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Patient Information', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                      Text('Bemor ma\'lumotlari', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
                       const SizedBox(height: 12),
-                      _eRow('Full Name', user.fullName, isDark),
-                      _eRow('Blood Type', user.bloodType ?? 'Not set', isDark),
-                      _eRow('Phone', user.phone, isDark),
+                      _eRow('To\'liq ism', user.fullName, isDark),
+                      _eRow('Qon guruhi', user.bloodType ?? 'Ko\'rsatilmagan', isDark),
+                      _eRow('Telefon', user.phone, isDark),
                     ],
                   ),
                 ),
@@ -81,19 +81,19 @@ class EmergencyProfileScreen extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Medical Alerts', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                      Text('Tibbiy ogohlantirishlar', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
                       const SizedBox(height: 12),
                       if (user.allergies.isEmpty)
-                        _eRow('Allergies', 'None recorded', isDark)
+                        _eRow('Allergiyalar', 'Hech narsa qayd etilmagan', isDark)
                       else
-                        ...user.allergies.map((a) => _chipRow('Allergy', a, ColorConstants.emergency, isDark)),
+                        ...user.allergies.map((a) => _chipRow('Allergiya', a, ColorConstants.emergency, isDark)),
                       if (user.chronicDiseases.isNotEmpty) ...[
                         const SizedBox(height: 8),
-                        ...user.chronicDiseases.map((d) => _chipRow('Condition', d, const Color(0xFFFFB020), isDark)),
+                        ...user.chronicDiseases.map((d) => _chipRow('Holat', d, const Color(0xFFFFB020), isDark)),
                       ],
                       if (user.currentMedications.isNotEmpty) ...[
                         const SizedBox(height: 8),
-                        ...user.currentMedications.map((m) => _chipRow('Medication', m, ColorConstants.primary, isDark)),
+                        ...user.currentMedications.map((m) => _chipRow('Dori', m, ColorConstants.primary, isDark)),
                       ],
                     ],
                   ),
@@ -103,9 +103,9 @@ class EmergencyProfileScreen extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Emergency Contacts', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                      Text('Favqulodda kontaktlar', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
                       const SizedBox(height: 12),
-                      Text('View full contacts in Emergency Contacts section', style: GoogleFonts.inter(fontSize: 13, color: isDark ? Colors.grey[400] : Colors.grey[500])),
+                      Text('To\'liq kontaktlarni Favqulodda kontaktlar bo\'limida ko\'ring', style: GoogleFonts.inter(fontSize: 13, color: isDark ? Colors.grey[400] : Colors.grey[500])),
                     ],
                   ),
                 ),
@@ -114,10 +114,10 @@ class EmergencyProfileScreen extends ConsumerWidget {
                   width: double.infinity, height: 52,
                   child: ElevatedButton.icon(
                     onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Emergency profile link copied')));
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Favqulodda profil havolasi nusxalandi')));
                     },
                     icon: const Icon(Icons.share),
-                    label: Text('OPEN EMERGENCY PROFILE', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600)),
+                    label: Text('FAVQULODDA PROFILNI OCHISH', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600)),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: ColorConstants.emergency,
                       foregroundColor: Colors.white,

@@ -36,12 +36,12 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen> {
         showDialog(
           context: context,
           builder: (ctx) => AlertDialog(
-            title: const Text('QR Code Scanned'),
+            title: const Text('QR Kod skanerlandi'),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Emergency Profile Accessed:'),
+                const Text('Favqulodda profilga kirildi:'),
                 const SizedBox(height: 8),
                 Container(
                   padding: const EdgeInsets.all(12),
@@ -56,18 +56,18 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen> {
                   Navigator.pop(ctx);
                   _hasScanned = false;
                 },
-                child: const Text('Scan Again'),
+                child: const Text('Qayta skanerlash'),
               ),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pop(ctx);
                   _hasScanned = false;
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text('Emergency profile opened (demo)'),
+                    content: Text('Favqulodda profil ochildi (demo)'),
                     backgroundColor: ColorConstants.emergency,
                   ));
                 },
-                child: const Text('Open Emergency Profile'),
+                child: const Text('Favqulodda profilni ochish'),
               ),
             ],
           ),
@@ -83,7 +83,7 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Scan QR Code', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+        title: Text('QR Kodni skanerlash', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
         backgroundColor: isDark ? const Color(0xFF0D1117) : ColorConstants.background,
         iconTheme: IconThemeData(color: isDark ? Colors.white : Colors.black),
       ),
@@ -110,7 +110,7 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen> {
                   bottom: 30,
                   left: 0,
                   right: 0,
-                  child: Text('Point camera at a MED-ID QR code', style: GoogleFonts.inter(fontSize: 14, color: Colors.white, fontWeight: FontWeight.w500), textAlign: TextAlign.center),
+                  child: Text('Kamerani MED-ID QR kodga qarating', style: GoogleFonts.inter(fontSize: 14, color: Colors.white, fontWeight: FontWeight.w500), textAlign: TextAlign.center),
                 ),
               ],
             ),
@@ -128,7 +128,7 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen> {
                   children: [
                     Icon(Icons.info_outline, size: 16, color: isDark ? Colors.grey[400] : Colors.grey[500]),
                     const SizedBox(width: 8),
-                    Text('Scanning enables emergency data access', style: GoogleFonts.inter(fontSize: 13, color: isDark ? Colors.grey[400] : Colors.grey[500])),
+                    Text('Skanerlash favqulodda ma\'lumotlarga kirish imkonini beradi', style: GoogleFonts.inter(fontSize: 13, color: isDark ? Colors.grey[400] : Colors.grey[500])),
                   ],
                 ),
                 const SizedBox(height: 12),
@@ -137,7 +137,7 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen> {
                   child: ElevatedButton.icon(
                     onPressed: () => _controller?.toggleTorch(),
                     icon: const Icon(Icons.flash_on),
-                    label: Text('Toggle Flash', style: GoogleFonts.inter(fontSize: 14)),
+                    label: Text('Chiroqni yoqish/o\'chirish', style: GoogleFonts.inter(fontSize: 14)),
                     style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
                   ),
                 ),

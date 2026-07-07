@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 import '../models/user_model.dart';
 import '../models/medical_profile_model.dart';
@@ -37,6 +38,8 @@ class MockApiService {
     _users = [
       UserModel(id: 'user1', fullName: 'Aziz Karimov', phone: '+998901234567', email: 'aziz@mail.uz', bloodType: 'A+', gender: 'Male', birthDate: DateTime(1990, 5, 15), insuranceProvider: 'Sug\'urta Kompaniyasi', insurancePolicyNumber: 'POL123456', insuranceExpiry: DateTime(2026, 12, 31), allergies: ['Penicillin', 'Latex'], chronicDiseases: ['Asthma'], currentMedications: ['Salbutamol', 'Vitamin D']),
       UserModel(id: 'user2', fullName: 'Dilnoza Rahimova', phone: '+998907654321', bloodType: 'O-', gender: 'Female', allergies: ['Sulfa'], currentMedications: []),
+      UserModel(id: 'user3', fullName: 'Botir Tursunov', phone: '+998909876543', bloodType: 'B+', gender: 'Male', allergies: [], chronicDiseases: ['Diabetes Type 2'], currentMedications: ['Metformin']),
+      UserModel(id: 'user4', fullName: 'Malika Azimova', phone: '+998937771122', bloodType: 'AB+', gender: 'Female', allergies: ['Ibuprofen'], chronicDiseases: ['Hypertension'], currentMedications: ['Lisinopril']),
     ];
     _profiles = [
       MedicalProfileModel(id: 'prof1', patientId: 'user1', fullName: 'Aziz Karimov', birthDate: DateTime(1990, 5, 15), gender: 'Male', bloodType: 'A+', height: 178, weight: 75, allergies: ['Penicillin', 'Latex'], chronicDiseases: ['Asthma'], currentMedications: ['Salbutamol', 'Vitamin D'], insuranceProvider: 'Sug\'urta Kompaniyasi', insurancePolicyNumber: 'POL123456', insuranceExpiry: DateTime(2026, 12, 31), emergencyContactName: 'Gulnora Karimova', emergencyContactPhone: '+998935551122', emergencyContactRelation: 'Wife'),
@@ -132,19 +135,24 @@ class MockApiService {
   Future<Map<String, dynamic>> login(String phone, String code) async {
     await _delay();
     if (code == '123456') {
-      return {'success': true, 'token': _generateDummyJWT(), 'user': _users[0].toJson()};
+      final user = _users.firstWhere((u) => u.phone == phone, orElse: () => _users.first);
+      return {'success': true, 'token': _generateDummyJWT(user.id), 'user': user.toJson()};
     }
     return {'success': false, 'error': 'Invalid OTP code'};
   }
 
-  String _generateDummyJWT() {
-    return 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsIm5hbWUiOiJBeml6IEthcmltb3YiLCJpYXQiOjE3MTIzNDU2Nzh9.dummy_signature';
+  String _generateDummyJWT(String userId) {
+    final header = base64Url.encode(utf8.encode('{"alg":"HS256"}'));
+    final payload = base64Url.encode(utf8.encode('{"sub":"$userId","name":"User","iat":${DateTime.now().millisecondsSinceEpoch ~/ 1000}}'));
+    return '$header.$payload.ZHVtbXlfc2lnbmF0dXJl';
   }
 
   // User / Profile
   Future<UserModel> getUser(String userId) async {
     await _delay();
-    return _users.firstWhere((u) => u.id == userId);
+    final index = _users.indexWhere((u) => u.id == userId);
+    if (index == -1) throw Exception('User not found: $userId');
+    return _users[index];
   }
 
   Future<UserModel> updateUser(String userId, UserModel updatedUser) async {
@@ -157,7 +165,9 @@ class MockApiService {
 
   Future<MedicalProfileModel> getMedicalProfile(String patientId) async {
     await _delay();
-    return _profiles.firstWhere((p) => p.patientId == patientId);
+    final index = _profiles.indexWhere((p) => p.patientId == patientId);
+    if (index == -1) throw Exception('Medical profile not found: $patientId');
+    return _profiles[index];
   }
 
   Future<MedicalProfileModel> updateMedicalProfile(String patientId, MedicalProfileModel profile) async {

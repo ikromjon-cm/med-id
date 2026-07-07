@@ -45,7 +45,7 @@ class _AdminDashboardScreenState extends ConsumerState<AdminDashboardScreen> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Admin Dashboard', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('Admin Panel', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
           ),
           body: _loading
@@ -59,15 +59,15 @@ class _AdminDashboardScreenState extends ConsumerState<AdminDashboardScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         FadeInDown(
-                          child: Text('Overview', style: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.bold, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                          child: Text('Umumiy', style: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.bold, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
                         ),
                         const SizedBox(height: 16),
                         FadeInLeft(
                           child: Row(
                             children: [
-                              _statCard('Patients', '${_stats!['totalPatients']}', Icons.people, const Color(0xFF0F6FFF), isDark),
+                              _statCard('Bemorlar', '${(_stats ?? {})['totalPatients'] ?? 0}', Icons.people, const Color(0xFF0F6FFF), isDark),
                               const SizedBox(width: 12),
-                              _statCard('Doctors', '${_stats!['totalDoctors']}', Icons.medical_services, const Color(0xFF00C896), isDark),
+                              _statCard('Shifokorlar', '${(_stats ?? {})['totalDoctors'] ?? 0}', Icons.medical_services, const Color(0xFF00C896), isDark),
                             ],
                           ),
                         ),
@@ -75,9 +75,9 @@ class _AdminDashboardScreenState extends ConsumerState<AdminDashboardScreen> {
                         FadeInRight(
                           child: Row(
                             children: [
-                              _statCard('Clinics', '${_stats!['totalClinics']}', Icons.local_hospital, const Color(0xFFFFB020), isDark),
+                              _statCard('Klinikalar', '${(_stats ?? {})['totalClinics'] ?? 0}', Icons.local_hospital, const Color(0xFFFFB020), isDark),
                               const SizedBox(width: 12),
-                              _statCard('Documents', '${_stats!['totalDocuments']}', Icons.description, const Color(0xFF7C3AED), isDark),
+                              _statCard('Hujjatlar', '${(_stats ?? {})['totalDocuments'] ?? 0}', Icons.description, const Color(0xFF7C3AED), isDark),
                             ],
                           ),
                         ),
@@ -87,7 +87,7 @@ class _AdminDashboardScreenState extends ConsumerState<AdminDashboardScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Users Growth (Monthly)', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                                Text('Foydalanuvchilar o\'sishi (Oylik)', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
                                 const SizedBox(height: 16),
                                 SizedBox(
                                   height: 180,
@@ -97,7 +97,7 @@ class _AdminDashboardScreenState extends ConsumerState<AdminDashboardScreen> {
                                       maxY: 200,
                                       barGroups: List.generate(12, (i) => BarChartGroupData(
                                         x: i,
-                                        barRods: [BarChartRodData(toY: (_stats!['monthlyGrowth'] as List)[i].toDouble(), color: ColorConstants.primary, width: 14, borderRadius: const BorderRadius.vertical(top: Radius.circular(4)))],
+                                        barRods: [BarChartRodData(toY: ((_stats ?? {})['monthlyGrowth'] as List? ?? [])[i].toDouble(), color: ColorConstants.primary, width: 14, borderRadius: const BorderRadius.vertical(top: Radius.circular(4)))],
                                       )),
                                       titlesData: FlTitlesData(show: true, bottomTitles: AxisTitles(sideTitles: SideTitles(showTitles: true, getTitlesWidget: (v, _) => Text(['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][v.toInt()], style: GoogleFonts.inter(fontSize: 9, color: isDark ? Colors.grey[400] : Colors.grey[500])))), leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: true, reservedSize: 30, getTitlesWidget: (v, _) => Text('${v.toInt()}', style: GoogleFonts.inter(fontSize: 10, color: isDark ? Colors.grey[500] : Colors.grey[400]))))),
                                       borderData: FlBorderData(show: false),
@@ -115,7 +115,7 @@ class _AdminDashboardScreenState extends ConsumerState<AdminDashboardScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Document Statistics', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                                Text('Hujjat statistikasi', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
                                 const SizedBox(height: 16),
                                 SizedBox(
                                   height: 160,
@@ -124,12 +124,12 @@ class _AdminDashboardScreenState extends ConsumerState<AdminDashboardScreen> {
                                       sectionsSpace: 2,
                                       centerSpaceRadius: 35,
                                       sections: [
-                                        _pieSection('Lab', (_stats!['documentStats'] as Map)['lab'], const Color(0xFF7C3AED)),
-                                        _pieSection('Prescription', (_stats!['documentStats'] as Map)['prescription'], const Color(0xFF0F6FFF)),
-                                        _pieSection('Vaccination', (_stats!['documentStats'] as Map)['vaccination'], const Color(0xFF00C896)),
-                                        _pieSection('MRI', (_stats!['documentStats'] as Map)['mri'], const Color(0xFFFFB020)),
-                                        _pieSection('CT', (_stats!['documentStats'] as Map)['ct'], const Color(0xFFFF4D4F)),
-                                        _pieSection('Insurance', (_stats!['documentStats'] as Map)['insurance'], const Color(0xFF0891B2)),
+                                        _pieSection('Laboratoriya', ((_stats ?? {})['documentStats'] as Map? ?? {})['lab'], const Color(0xFF7C3AED)),
+                                        _pieSection('Retsept', ((_stats ?? {})['documentStats'] as Map? ?? {})['prescription'], const Color(0xFF0F6FFF)),
+                                        _pieSection('Vaksinatsiya', ((_stats ?? {})['documentStats'] as Map? ?? {})['vaccination'], const Color(0xFF00C896)),
+                                        _pieSection('MRI', ((_stats ?? {})['documentStats'] as Map? ?? {})['mri'], const Color(0xFFFFB020)),
+                                        _pieSection('KT', ((_stats ?? {})['documentStats'] as Map? ?? {})['ct'], const Color(0xFFFF4D4F)),
+                                        _pieSection('Sug\'urta', ((_stats ?? {})['documentStats'] as Map? ?? {})['insurance'], const Color(0xFF0891B2)),
                                       ],
                                     ),
                                   ),
@@ -144,13 +144,13 @@ class _AdminDashboardScreenState extends ConsumerState<AdminDashboardScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Role Distribution', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                                Text('Rol taqsimoti', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
                                 const SizedBox(height: 12),
-                                _roleBar('Patients', (_stats!['roleStats'] as Map)['patient'], const Color(0xFF0F6FFF), isDark),
-                                _roleBar('Doctors', (_stats!['roleStats'] as Map)['doctor'], const Color(0xFF00C896), isDark),
-                                _roleBar('Clinics', (_stats!['roleStats'] as Map)['clinic'], const Color(0xFFFFB020), isDark),
-                                _roleBar('Emergency', (_stats!['roleStats'] as Map)['emergency'], const Color(0xFFFF4D4F), isDark),
-                                _roleBar('Admins', (_stats!['roleStats'] as Map)['admin'], const Color(0xFF7C3AED), isDark),
+                                _roleBar('Bemorlar', ((_stats ?? {})['roleStats'] as Map? ?? {})['patient'], const Color(0xFF0F6FFF), isDark),
+                                _roleBar('Shifokorlar', ((_stats ?? {})['roleStats'] as Map? ?? {})['doctor'], const Color(0xFF00C896), isDark),
+                                _roleBar('Klinikalar', ((_stats ?? {})['roleStats'] as Map? ?? {})['clinic'], const Color(0xFFFFB020), isDark),
+                                _roleBar('Favqulodda', ((_stats ?? {})['roleStats'] as Map? ?? {})['emergency'], const Color(0xFFFF4D4F), isDark),
+                                _roleBar('Administratorlar', ((_stats ?? {})['roleStats'] as Map? ?? {})['admin'], const Color(0xFF7C3AED), isDark),
                               ],
                             ),
                           ),
@@ -189,7 +189,7 @@ class _AdminDashboardScreenState extends ConsumerState<AdminDashboardScreen> {
   }
 
   Widget _roleBar(String label, dynamic value, Color color, bool isDark) {
-    final total = ((_stats!['roleStats'] as Map).values.fold(0, (a, b) => a + (b as int))).toDouble();
+    final total = (((_stats ?? {})['roleStats'] as Map? ?? {}).values.fold(0, (a, b) => a + (b as int))).toDouble();
     final pct = (value / total * 100);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),

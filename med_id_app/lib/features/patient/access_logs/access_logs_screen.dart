@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import '../../../core/providers/auth_provider.dart';
 import '../../../core/providers/access_log_provider.dart';
 import '../../../core/widgets/shimmer_loading.dart';
 import '../../../core/widgets/empty_state_widget.dart';
@@ -23,7 +24,7 @@ class _AccessLogsScreenState extends ConsumerState<AccessLogsScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(accessLogProvider.notifier).loadLogs('user1');
+      ref.read(accessLogProvider.notifier).loadLogs(ref.read(authProvider).user?.id ?? 'user1');
     });
   }
 
@@ -62,7 +63,7 @@ class _AccessLogsScreenState extends ConsumerState<AccessLogsScreen> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Access Logs', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+            title: Text('Kirish jurnallari', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
             backgroundColor: Colors.transparent, elevation: 0,
           ),
           body: Column(
@@ -73,7 +74,7 @@ class _AccessLogsScreenState extends ConsumerState<AccessLogsScreen> {
                   controller: _searchCtrl,
                   onChanged: (_) => setState(() {}),
                   decoration: InputDecoration(
-                    hintText: 'Search by name or data type...',
+                    hintText: 'Ism yoki ma\'lumot turi bo\'yicha qidirish...',
                     prefixIcon: const Icon(Icons.search),
                     suffixIcon: _searchCtrl.text.isNotEmpty ? IconButton(icon: const Icon(Icons.clear), onPressed: () { _searchCtrl.clear(); setState(() {}); }) : null,
                   ),
@@ -84,7 +85,7 @@ class _AccessLogsScreenState extends ConsumerState<AccessLogsScreen> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  children: ['All', 'Viewed', 'Edited', 'Uploaded', 'Deleted'].map((f) => Padding(
+                  children: ['Barchasi', 'Ko\'rilgan', 'Tahrirlangan', 'Yuklangan', 'O\'chirilgan'].map((f) => Padding(
                     padding: const EdgeInsets.only(right: 8),
                     child: ChoiceChip(
                       label: Text(f, style: GoogleFonts.inter(fontSize: 12)),
@@ -100,11 +101,11 @@ class _AccessLogsScreenState extends ConsumerState<AccessLogsScreen> {
                 child: state.isLoading
                     ? const ShimmerLoading(itemCount: 5, itemHeight: 80)
                     : state.error != null
-                        ? ErrorStateWidget(message: state.error, onRetry: () => ref.read(accessLogProvider.notifier).loadLogs('user1'))
+                        ? ErrorStateWidget(message: state.error, onRetry: () => ref.read(accessLogProvider.notifier).loadLogs(ref.read(authProvider).user?.id ?? 'user1'))
                         : logs.isEmpty
-                            ? EmptyStateWidget(icon: Icons.security, title: 'No access logs', subtitle: 'Access logs will appear here')
+                            ? EmptyStateWidget(icon: Icons.security, title: 'Kirish jurnallari yo\'q', subtitle: 'Kirish jurnallari bu yerda ko\'rinadi')
                             : RefreshIndicator(
-                                onRefresh: () => ref.read(accessLogProvider.notifier).loadLogs('user1'),
+                                onRefresh: () => ref.read(accessLogProvider.notifier).loadLogs(ref.read(authProvider).user?.id ?? 'user1'),
                                 child: ListView.builder(
                                   padding: const EdgeInsets.all(16),
                                   itemCount: logs.length,

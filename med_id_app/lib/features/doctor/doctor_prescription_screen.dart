@@ -21,6 +21,7 @@ class _DoctorPrescriptionScreenState extends ConsumerState<DoctorPrescriptionScr
   final _durationController = TextEditingController();
   final _notesController = TextEditingController();
   bool _saving = false;
+  bool _hasUnsavedChanges = false;
   final _api = MockApiService();
 
   @override
@@ -49,12 +50,13 @@ class _DoctorPrescriptionScreenState extends ConsumerState<DoctorPrescriptionScr
       };
       await _api.addPrescription(prescription);
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Prescription saved successfully'), backgroundColor: ColorConstants.success));
+        _hasUnsavedChanges = false;
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Retsept muvaffaqiyatli saqlandi'), backgroundColor: ColorConstants.success));
         context.pop();
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error: $e'), backgroundColor: ColorConstants.error));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Xato: $e'), backgroundColor: ColorConstants.error));
       }
     } finally {
       if (mounted) setState(() => _saving = false);
@@ -71,71 +73,100 @@ class _DoctorPrescriptionScreenState extends ConsumerState<DoctorPrescriptionScr
         ),
       ),
       child: SafeArea(
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            title: Text('New Prescription', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
-            backgroundColor: Colors.transparent, elevation: 0,
-          ),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  GlassCard(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Prescription Details', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
-                        const SizedBox(height: 16),
-                        TextFormField(
-                          controller: _patientIdController,
-                          decoration: const InputDecoration(labelText: 'Patient ID', prefixIcon: Icon(Icons.person)),
-                          validator: (v) => v == null || v.trim().isEmpty ? 'Patient ID is required' : null,
-                          style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.white : const Color(0xFF1A1D21)),
-                        ),
-                        const SizedBox(height: 12),
-                        TextFormField(
-                          controller: _medicationController,
-                          decoration: const InputDecoration(labelText: 'Medication Name', prefixIcon: Icon(Icons.medication)),
-                          validator: (v) => v == null || v.trim().isEmpty ? 'Medication name is required' : null,
-                          style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.white : const Color(0xFF1A1D21)),
-                        ),
-                        const SizedBox(height: 12),
-                        TextFormField(
-                          controller: _dosageController,
-                          decoration: const InputDecoration(labelText: 'Dosage', prefixIcon: Icon(Icons.speed)),
-                          validator: (v) => v == null || v.trim().isEmpty ? 'Dosage is required' : null,
-                          style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.white : const Color(0xFF1A1D21)),
-                        ),
-                        const SizedBox(height: 12),
-                        TextFormField(
-                          controller: _durationController,
-                          decoration: const InputDecoration(labelText: 'Duration', prefixIcon: Icon(Icons.timer)),
-                          validator: (v) => v == null || v.trim().isEmpty ? 'Duration is required' : null,
-                          style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.white : const Color(0xFF1A1D21)),
-                        ),
-                        const SizedBox(height: 12),
-                        TextFormField(
-                          controller: _notesController,
-                          decoration: const InputDecoration(labelText: 'Notes (optional)', prefixIcon: Icon(Icons.notes)),
-                          maxLines: 3,
-                          style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.white : const Color(0xFF1A1D21)),
-                        ),
-                      ],
+        child: PopScope(
+          canPop: !_hasUnsavedChanges,
+          onPopInvokedWithResult: (didPop, _) {
+            if (!didPop) {
+              showDialog<bool>(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: const Text('Saqlanmagan o\'zgarishlar'),
+                  content: const Text('Saqlanmagan o\'zgarishlar bor. Ularni bekor qilasizmi?'),
+                  actions: [
+                    TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: const Text('Qolish')),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(ctx).pop(true);
+                        if (context.mounted) Navigator.of(context).pop();
+                      },
+                      child: const Text('Bekor qilish'),
                     ),
-                  ),
-                  const SizedBox(height: 24),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton.icon(
-                      onPressed: _saving ? null : _save,
-                      icon: _saving ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white)) : const Icon(Icons.save),
-                      label: Text(_saving ? 'Saving...' : 'Save Prescription'),
+                  ],
+                ),
+              );
+            }
+          },
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: AppBar(
+              title: Text('Yangi Retsept', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600)),
+              backgroundColor: Colors.transparent, elevation: 0,
+            ),
+            body: SingleChildScrollView(
+              padding: const EdgeInsets.all(16),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    GlassCard(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Retsept ma\'lumotlari', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600, color: isDark ? Colors.white : const Color(0xFF1A1D21))),
+                          const SizedBox(height: 16),
+                          TextFormField(
+                            controller: _patientIdController,
+                            onChanged: (_) => _hasUnsavedChanges = true,
+                            decoration: const InputDecoration(labelText: 'Bemor ID', prefixIcon: Icon(Icons.person)),
+                            validator: (v) => v == null || v.trim().isEmpty ? 'Bemor ID talab qilinadi' : null,
+                            style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.white : const Color(0xFF1A1D21)),
+                          ),
+                          const SizedBox(height: 12),
+                          TextFormField(
+                            controller: _medicationController,
+                            onChanged: (_) => _hasUnsavedChanges = true,
+                            decoration: const InputDecoration(labelText: 'Dori nomi', prefixIcon: Icon(Icons.medication)),
+                            validator: (v) => v == null || v.trim().isEmpty ? 'Dori nomi talab qilinadi' : null,
+                            style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.white : const Color(0xFF1A1D21)),
+                          ),
+                          const SizedBox(height: 12),
+                          TextFormField(
+                            controller: _dosageController,
+                            onChanged: (_) => _hasUnsavedChanges = true,
+                            decoration: const InputDecoration(labelText: 'Doza', prefixIcon: Icon(Icons.speed)),
+                            validator: (v) => v == null || v.trim().isEmpty ? 'Doza talab qilinadi' : null,
+                            style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.white : const Color(0xFF1A1D21)),
+                          ),
+                          const SizedBox(height: 12),
+                          TextFormField(
+                            controller: _durationController,
+                            onChanged: (_) => _hasUnsavedChanges = true,
+                            decoration: const InputDecoration(labelText: 'Davomiylik', prefixIcon: Icon(Icons.timer)),
+                            validator: (v) => v == null || v.trim().isEmpty ? 'Davomiylik talab qilinadi' : null,
+                            style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.white : const Color(0xFF1A1D21)),
+                          ),
+                          const SizedBox(height: 12),
+                          TextFormField(
+                            controller: _notesController,
+                            onChanged: (_) => _hasUnsavedChanges = true,
+                            decoration: const InputDecoration(labelText: 'Izohlar (ixtiyoriy)', prefixIcon: Icon(Icons.notes)),
+                            maxLines: 3,
+                            style: GoogleFonts.inter(fontSize: 14, color: isDark ? Colors.white : const Color(0xFF1A1D21)),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 24),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton.icon(
+                        onPressed: _saving ? null : _save,
+                        icon: _saving ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white)) : const Icon(Icons.save),
+                        label: Text(_saving ? 'Saqlanmoqda...' : 'Retseptni saqlash'),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
