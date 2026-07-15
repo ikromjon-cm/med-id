@@ -51,8 +51,8 @@ export default function AnalyticsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('Analytics')}</h2>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('Comprehensive platform analytics and insights')}</p>
+        <h2 className="text-2xl font-bold text-gray-900 ">{t('Analytics')}</h2>
+        <p className="text-sm text-gray-500  mt-1">{t('Comprehensive platform analytics and insights')}</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -69,7 +69,7 @@ export default function AnalyticsPage() {
             <ChartCard title={t('Users Growth')} subtitle={t('Monthly growth over the last 12 months')} className="lg:col-span-2">
               <ResponsiveContainer width="100%" height={350}>
                 <LineChart data={userGrowth}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:opacity-20" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="" />
                   <XAxis dataKey="name" tick={{ fontSize: 12 }} stroke="#9ca3af" />
                   <YAxis tick={{ fontSize: 12 }} stroke="#9ca3af" />
                   <Tooltip contentStyle={{ backgroundColor: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(10px)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.2)' }} />
@@ -93,7 +93,7 @@ export default function AnalyticsPage() {
                       <stop offset="100%" stopColor="#0F6FFF" stopOpacity={0} />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:opacity-20" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="" />
                   <XAxis dataKey="name" tick={{ fontSize: 12 }} stroke="#9ca3af" />
                   <YAxis tick={{ fontSize: 12 }} stroke="#9ca3af" />
                   <Tooltip contentStyle={{ backgroundColor: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(10px)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.2)' }} />
@@ -106,7 +106,7 @@ export default function AnalyticsPage() {
             <ChartCard title={t('Documents by Type')} subtitle={t('Distribution across document categories')}>
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={documentStats} layout="vertical">
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:opacity-20" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="" />
                   <XAxis type="number" tick={{ fontSize: 12 }} stroke="#9ca3af" />
                   <YAxis type="category" dataKey="name" tick={{ fontSize: 11 }} stroke="#9ca3af" width={100} />
                   <Tooltip contentStyle={{ backgroundColor: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(10px)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.2)' }} />
@@ -131,7 +131,7 @@ export default function AnalyticsPage() {
             <ChartCard title={t('Monthly Active Users')} subtitle={t('Active users per month')} className="lg:col-span-2">
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={monthlyActive}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:opacity-20" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="" />
                   <XAxis dataKey="name" tick={{ fontSize: 12 }} stroke="#9ca3af" />
                   <YAxis tick={{ fontSize: 12 }} stroke="#9ca3af" />
                   <Tooltip contentStyle={{ backgroundColor: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(10px)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.2)' }} />

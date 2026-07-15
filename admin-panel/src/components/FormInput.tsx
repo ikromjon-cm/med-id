@@ -14,10 +14,10 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
   ({ label, error, as = 'input', options, className, children, ...props }, ref) => {
     const baseClasses = cn(
       'w-full px-4 py-2.5 rounded-xl text-sm transition-all duration-200',
-      'bg-white/80 dark:bg-gray-800/50',
-      'border border-gray-200 dark:border-gray-700/50',
-      'text-gray-900 dark:text-white',
-      'placeholder:text-gray-400 dark:placeholder:text-gray-500',
+      'bg-white/80 ',
+      'border border-gray-200 ',
+      'text-gray-900 ',
+      'placeholder:text-gray-400 ',
       'focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary',
       'disabled:opacity-50 disabled:cursor-not-allowed',
       error && 'border-emergency focus:ring-emergency/20 focus:border-emergency',
@@ -27,7 +27,7 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
     if (as === 'select') {
       return (
         <div className="space-y-1.5">
-          {label && <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">{label}</label>}
+          {label && <label className="block text-sm font-medium text-gray-700 ">{label}</label>}
           <select className={baseClasses} {...(props as React.SelectHTMLAttributes<HTMLSelectElement>)}>
             {options?.map(opt => (
               <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -42,7 +42,7 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
     if (as === 'textarea') {
       return (
         <div className="space-y-1.5">
-          {label && <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">{label}</label>}
+          {label && <label className="block text-sm font-medium text-gray-700 ">{label}</label>}
           <textarea
             className={cn(baseClasses, 'min-h-[100px] resize-y')}
             {...(props as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
@@ -54,7 +54,7 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
 
     return (
       <div className="space-y-1.5">
-        {label && <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">{label}</label>}
+        {label && <label className="block text-sm font-medium text-gray-700 ">{label}</label>}
         <input ref={ref} className={baseClasses} {...props} />
         {error && <p className="text-xs text-emergency mt-1">{error}</p>}
       </div>

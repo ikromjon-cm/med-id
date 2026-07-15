@@ -28,25 +28,25 @@ export default function ClinicCard({ clinic, onView, delay = 0 }: ClinicCardProp
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2">
             <div>
-              <h3 className="text-base font-semibold text-gray-900 dark:text-white truncate">{clinic.name}</h3>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{clinic.id}</p>
+              <h3 className="text-base font-semibold text-gray-900  truncate">{clinic.name}</h3>
+              <p className="text-xs text-gray-500  mt-0.5">{clinic.id}</p>
             </div>
             <StatusBadge status={clinic.status} />
           </div>
           <div className="mt-3 space-y-1.5">
-            <p className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400">
+            <p className="flex items-center gap-1.5 text-xs text-gray-500 ">
               <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
               {clinic.address}
             </p>
-            <p className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400">
+            <p className="flex items-center gap-1.5 text-xs text-gray-500 ">
               <Phone className="w-3.5 h-3.5 flex-shrink-0" />
               {clinic.phone}
             </p>
           </div>
         </div>
       </div>
-      <div className="mt-4 pt-3 border-t border-gray-100 dark:border-gray-800/30 flex items-center justify-between">
-        <span className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400">
+      <div className="mt-4 pt-3 border-t border-gray-100  flex items-center justify-between">
+        <span className="flex items-center gap-1.5 text-xs text-gray-500 ">
           <Users className="w-3.5 h-3.5" />
           {clinic.doctorsCount} {t('doctors')}
         </span>

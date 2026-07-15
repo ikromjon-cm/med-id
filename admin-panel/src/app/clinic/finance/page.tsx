@@ -54,8 +54,8 @@ export default function FinancePage() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('Finance')}</h2>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('Revenue statistics and financial overview')}</p>
+        <h2 className="text-2xl font-bold text-gray-900 ">{t('Finance')}</h2>
+        <p className="text-sm text-gray-500  mt-1">{t('Revenue statistics and financial overview')}</p>
       </div>
 
       {loading ? (
@@ -72,32 +72,32 @@ export default function FinancePage() {
                 {Math.abs(Number(revenueTrend))}%
               </span>
             </div>
-            <p className="text-2xl font-bold text-gray-900 dark:text-white">${totalRevenue.toLocaleString()}</p>
-            <p className="text-sm text-gray-500 dark:text-gray-400">{t('Total Revenue')}</p>
+            <p className="text-2xl font-bold text-gray-900 ">${totalRevenue.toLocaleString()}</p>
+            <p className="text-sm text-gray-500 ">{t('Total Revenue')}</p>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="glass-card rounded-2xl p-6">
             <div className="w-10 h-10 rounded-xl bg-emergency/10 flex items-center justify-center mb-3">
               <TrendingDown className="w-5 h-5 text-emergency" />
             </div>
-            <p className="text-2xl font-bold text-gray-900 dark:text-white">${totalExpenses.toLocaleString()}</p>
-            <p className="text-sm text-gray-500 dark:text-gray-400">{t('Total Expenses')}</p>
+            <p className="text-2xl font-bold text-gray-900 ">${totalExpenses.toLocaleString()}</p>
+            <p className="text-sm text-gray-500 ">{t('Total Expenses')}</p>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="glass-card rounded-2xl p-6">
             <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
               <TrendingUp className="w-5 h-5 text-primary" />
             </div>
-            <p className="text-2xl font-bold text-gray-900 dark:text-white">${profit.toLocaleString()}</p>
-            <p className="text-sm text-gray-500 dark:text-gray-400">{t('Net Profit')} ({profitMargin}%)</p>
+            <p className="text-2xl font-bold text-gray-900 ">${profit.toLocaleString()}</p>
+            <p className="text-sm text-gray-500 ">{t('Net Profit')} ({profitMargin}%)</p>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="glass-card rounded-2xl p-6">
-            <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-500/10 flex items-center justify-center mb-3">
+            <div className="w-10 h-10 rounded-xl bg-amber-50  flex items-center justify-center mb-3">
               <CalendarDays className="w-5 h-5 text-amber-500" />
             </div>
-            <p className="text-2xl font-bold text-gray-900 dark:text-white">{totalAppointments.toLocaleString()}</p>
-            <p className="text-sm text-gray-500 dark:text-gray-400">{t('Total Appointments')}</p>
+            <p className="text-2xl font-bold text-gray-900 ">{totalAppointments.toLocaleString()}</p>
+            <p className="text-sm text-gray-500 ">{t('Total Appointments')}</p>
           </motion.div>
         </div>
       )}
@@ -108,7 +108,7 @@ export default function FinancePage() {
         <ChartCard title={t('Revenue vs Expenses')} subtitle={t('Monthly financial comparison')}>
           <ResponsiveContainer width="100%" height={350}>
             <BarChart data={finance}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:opacity-20" />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="" />
               <XAxis dataKey="date" tick={{ fontSize: 11 }} stroke="#9ca3af" />
               <YAxis tick={{ fontSize: 12 }} stroke="#9ca3af" />
               <Tooltip
@@ -133,7 +133,7 @@ export default function FinancePage() {
         <ChartCard title={t('Appointments Trend')} subtitle={t('Monthly appointment count')}>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={finance}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:opacity-20" />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="" />
               <XAxis dataKey="date" tick={{ fontSize: 11 }} stroke="#9ca3af" />
               <YAxis tick={{ fontSize: 12 }} stroke="#9ca3af" />
               <Tooltip

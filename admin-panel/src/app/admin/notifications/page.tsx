@@ -29,7 +29,7 @@ const TYPE_COLORS: Record<string, string> = {
 
 const TYPE_BG: Record<string, string> = {
   Emergency: 'bg-emergency/5',
-  Alert: 'bg-amber-50/50 dark:bg-amber-500/5',
+  Alert: 'bg-amber-50/50 ',
   Update: 'bg-primary/5',
   Reminder: 'bg-[#00C896]/5',
 };
@@ -98,8 +98,8 @@ export default function NotificationsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('Notifications')}</h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('Send and manage system notifications')}</p>
+          <h2 className="text-2xl font-bold text-gray-900 ">{t('Notifications')}</h2>
+          <p className="text-sm text-gray-500  mt-1">{t('Send and manage system notifications')}</p>
         </div>
         <motion.button
           whileHover={{ scale: 1.02 }}
@@ -129,19 +129,19 @@ export default function NotificationsPage() {
               className={`glass-card rounded-2xl p-5 border-l-4 ${TYPE_COLORS[n.type]} ${TYPE_BG[n.type]}`}
             >
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-white dark:bg-gray-800/50 flex items-center justify-center shadow-sm flex-shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-white  flex items-center justify-center shadow-sm flex-shrink-0">
                   {TYPE_ICONS[n.type]}
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <h3 className="text-sm font-semibold text-gray-900 dark:text-white">{n.title}</h3>
-                      <span className="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full bg-white dark:bg-gray-800/50 text-gray-500 dark:text-gray-400">{n.type}</span>
+                      <h3 className="text-sm font-semibold text-gray-900 ">{n.title}</h3>
+                      <span className="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full bg-white  text-gray-500 ">{n.type}</span>
                     </div>
                     <StatusBadge status={n.status} />
                   </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">{n.message}</p>
-                  <div className="flex items-center gap-4 mt-3 text-xs text-gray-400 dark:text-gray-500">
+                  <p className="text-sm text-gray-600  mt-2">{n.message}</p>
+                  <div className="flex items-center gap-4 mt-3 text-xs text-gray-400 ">
                     <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {formatDateTime(n.createdAt)}</span>
                     <span>{n.recipients.length === 1 && n.recipients[0] === 'all' ? t('All users') : `${n.recipients.length} ${n.recipients.length > 1 ? t('recipients') : t('recipient')}`}</span>
                   </div>
@@ -159,7 +159,7 @@ export default function NotificationsPage() {
         size="lg"
         footer={
           <>
-            <button onClick={() => setModalOpen(false)} className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-colors">{t('Cancel')}</button>
+            <button onClick={() => setModalOpen(false)} className="px-4 py-2 text-sm font-medium text-gray-600  hover:bg-gray-100  rounded-xl transition-colors">{t('Cancel')}</button>
             <button onClick={handleSend} disabled={saving} className="px-5 py-2 text-sm font-medium bg-primary text-white rounded-xl hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 disabled:opacity-60 flex items-center gap-2">
               {saving && <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />}
               <Send className="w-4 h-4" />
@@ -174,23 +174,23 @@ export default function NotificationsPage() {
           <FormInput label={t('Message')} as="textarea" value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} error={formErrors.message} placeholder={t('Enter notification message...')} />
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t('Recipients')}</label>
+            <label className="block text-sm font-medium text-gray-700  mb-2">{t('Recipients')}</label>
             <div className="flex items-center gap-3 mb-3">
               <button
                 onClick={() => setForm({ ...form, recipientType: 'all', recipients: [] })}
-                className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${form.recipientType === 'all' ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400'}`}
+                className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${form.recipientType === 'all' ? 'bg-primary text-white' : 'bg-gray-100  text-gray-600 '}`}
               >
                 {t('All Users')}
               </button>
               <button
                 onClick={() => setForm({ ...form, recipientType: 'select' })}
-                className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${form.recipientType === 'select' ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400'}`}
+                className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${form.recipientType === 'select' ? 'bg-primary text-white' : 'bg-gray-100  text-gray-600 '}`}
               >
                 {t('Select Users')}
               </button>
             </div>
             {form.recipientType === 'select' && (
-              <div className="max-h-32 overflow-y-auto space-y-1.5 p-3 rounded-xl bg-gray-50 dark:bg-gray-800/30 border border-gray-100 dark:border-gray-700/50">
+              <div className="max-h-32 overflow-y-auto space-y-1.5 p-3 rounded-xl bg-gray-50  border border-gray-100 ">
                 {users.slice(0, 10).map(u => (
                   <label key={u.id} className="flex items-center gap-2 cursor-pointer">
                     <input
@@ -200,9 +200,9 @@ export default function NotificationsPage() {
                         if (e.target.checked) setForm({ ...form, recipients: [...form.recipients, u.email] });
                         else setForm({ ...form, recipients: form.recipients.filter(r => r !== u.email) });
                       }}
-                      className="rounded border-gray-300 dark:border-gray-600 text-primary focus:ring-primary/20"
+                      className="rounded border-gray-300  text-primary focus:ring-primary/20"
                     />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">{u.name} ({u.email})</span>
+                    <span className="text-sm text-gray-700 ">{u.name} ({u.email})</span>
                   </label>
                 ))}
               </div>

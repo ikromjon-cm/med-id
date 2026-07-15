@@ -17,7 +17,7 @@ export default function QueueStatus({ entries }: QueueStatusProps) {
   const critical = entries.filter(e => e.priority === 'CRITICAL' && e.status !== 'COMPLETED');
 
   const stats = [
-    { label: t('Waiting'), count: waiting.length, icon: Users, color: 'text-amber-500', bg: 'bg-amber-50 dark:bg-amber-500/10' },
+    { label: t('Waiting'), count: waiting.length, icon: Users, color: 'text-amber-500', bg: 'bg-amber-50 ' },
     { label: t('With Doctor'), count: withDoctor.length, icon: UserCheck, color: 'text-primary', bg: 'bg-primary/10' },
     { label: t('Completed'), count: completed.length, icon: Clock, color: 'text-[#00C896]', bg: 'bg-[#00C896]/10' },
   ];
@@ -29,7 +29,7 @@ export default function QueueStatus({ entries }: QueueStatusProps) {
           <div key={s.label} className={cn('flex-1 rounded-xl p-3 text-center', s.bg)}>
             <s.icon className={cn('w-4 h-4 mx-auto mb-1', s.color)} />
             <p className={cn('text-lg font-bold', s.color)}>{s.count}</p>
-            <p className="text-[10px] text-gray-500 dark:text-gray-400">{s.label}</p>
+            <p className="text-[10px] text-gray-500 ">{s.label}</p>
           </div>
         ))}
       </div>
@@ -41,7 +41,7 @@ export default function QueueStatus({ entries }: QueueStatusProps) {
       )}
       <div className="space-y-1 max-h-64 overflow-y-auto">
         {entries.length === 0 ? (
-          <p className="text-sm text-gray-500 dark:text-gray-400 text-center py-6">{t('No entries in queue')}</p>
+          <p className="text-sm text-gray-500  text-center py-6">{t('No entries in queue')}</p>
         ) : (
           entries.map((entry, i) => (
             <QueueCard key={entry.id} entry={entry} delay={i * 0.03} />

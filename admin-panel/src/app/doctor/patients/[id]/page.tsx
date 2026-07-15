@@ -116,7 +116,7 @@ export default function PatientDetailPage() {
         initial={{ opacity: 0, x: -10 }}
         animate={{ opacity: 1, x: 0 }}
         onClick={() => router.back()}
-        className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
+        className="flex items-center gap-2 text-sm text-gray-500  hover:text-gray-700  transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
         {t('Back to Patients')}
@@ -126,10 +126,10 @@ export default function PatientDetailPage() {
         <div className="space-y-6">
           <div className="glass-card rounded-2xl p-6 animate-pulse">
             <div className="flex items-center gap-4">
-              <div className="w-16 h-16 rounded-2xl bg-gray-200 dark:bg-gray-700/50" />
+              <div className="w-16 h-16 rounded-2xl bg-gray-200 " />
               <div className="space-y-2">
-                <div className="h-5 w-48 bg-gray-200 dark:bg-gray-700/50 rounded" />
-                <div className="h-4 w-32 bg-gray-200 dark:bg-gray-700/50 rounded" />
+                <div className="h-5 w-48 bg-gray-200  rounded" />
+                <div className="h-4 w-32 bg-gray-200  rounded" />
               </div>
             </div>
           </div>
@@ -146,11 +146,11 @@ export default function PatientDetailPage() {
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">{patient.name}</h3>
+                  <h3 className="text-xl font-bold text-gray-900 ">{patient.name}</h3>
                   <StatusBadge status={patient.status} />
-                  <span className="text-xs text-gray-400 dark:text-gray-500">{patient.id}</span>
+                  <span className="text-xs text-gray-400 ">{patient.id}</span>
                 </div>
-                <div className="flex items-center gap-4 mt-2 text-sm text-gray-500 dark:text-gray-400 flex-wrap">
+                <div className="flex items-center gap-4 mt-2 text-sm text-gray-500  flex-wrap">
                   <span>{patient.age} yrs, {patient.gender}</span>
                   <span className="flex items-center gap-1"><Droplets className="w-3.5 h-3.5" />{patient.bloodType}</span>
                   <span className="flex items-center gap-1"><Phone className="w-3.5 h-3.5" />{patient.phone}</span>
@@ -171,17 +171,17 @@ export default function PatientDetailPage() {
           {/* Access Request Section */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }} className="glass-card rounded-2xl p-6">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-base font-semibold text-gray-900 dark:text-white">Kirish So&apos;rovi</h3>
+              <h3 className="text-base font-semibold text-gray-900 ">Kirish So&apos;rovi</h3>
               <span className={cn(
                 'px-2.5 py-0.5 text-xs font-medium rounded-full inline-flex items-center gap-1.5',
-                accessPending ? 'bg-amber-50 dark:bg-amber-500/10 text-amber-500' :
+                accessPending ? 'bg-amber-50  text-amber-500' :
                 accessStatus === 'full' ? 'bg-[#00C896]/10 text-[#00C896]' :
-                'bg-gray-100 dark:bg-gray-800/50 text-gray-400'
+                'bg-gray-100  text-gray-400'
               )}>
                 {accessPending ? 'Kutilmoqda' : accessStatus === 'full' ? "To'liq Kirish" : 'Cheklangan'}
               </span>
             </div>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+            <p className="text-sm text-gray-500  mb-4">
               {accessPending ? "So'rovingiz yuborildi. Bemor javobini kuting." : "Bemorning to'liq ma'lumotlariga kirish uchun ruxsat so'rang."}
             </p>
             {!accessPending && accessStatus !== 'full' && (
@@ -194,25 +194,25 @@ export default function PatientDetailPage() {
                 <User className="w-4 h-4" /> To&apos;liq Kirish So&apos;rash
               </motion.button>
             )}
-            <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-800/30">
-              <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-3">Ruxsatlar</p>
+            <div className="mt-4 pt-4 border-t border-gray-100 ">
+              <p className="text-xs font-medium text-gray-500  mb-3">Ruxsatlar</p>
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-sm">
                   <span className="text-[#00C896]">✅</span>
-                  <span className="text-gray-700 dark:text-gray-300">Asosiy Ma&apos;lumotlar</span>
+                  <span className="text-gray-700 ">Asosiy Ma&apos;lumotlar</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <span className="text-[#00C896]">✅</span>
-                  <span className="text-gray-700 dark:text-gray-300">Tibbiy Tarix</span>
+                  <span className="text-gray-700 ">Tibbiy Tarix</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
-                  <span className={accessPending ? 'text-amber-500' : 'text-gray-300 dark:text-gray-600'}>
+                  <span className={accessPending ? 'text-amber-500' : 'text-gray-300 '}>
                     {accessPending ? '⏳' : '❌'}
                   </span>
                   <span className={cn(accessPending ? 'text-gray-500' : 'text-gray-400')}>To&apos;liq Yozuvlar</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
-                  <span className={accessPending ? 'text-amber-500' : 'text-gray-300 dark:text-gray-600'}>
+                  <span className={accessPending ? 'text-amber-500' : 'text-gray-300 '}>
                     {accessPending ? '⏳' : '❌'}
                   </span>
                   <span className={cn(accessPending ? 'text-gray-500' : 'text-gray-400')}>Hujjatlar</span>
@@ -224,21 +224,21 @@ export default function PatientDetailPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="glass-card rounded-2xl p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-base font-semibold text-gray-900 dark:text-white">{t('Medical History')}</h3>
-                <span className="text-xs text-gray-500 dark:text-gray-400">{diagnoses.length} {t('records')}</span>
+                <h3 className="text-base font-semibold text-gray-900 ">{t('Medical History')}</h3>
+                <span className="text-xs text-gray-500 ">{diagnoses.length} {t('records')}</span>
               </div>
               {diagnoses.length === 0 ? (
-                <p className="text-sm text-gray-500 dark:text-gray-400 py-8 text-center">{t('No diagnoses recorded yet.')}</p>
+                <p className="text-sm text-gray-500  py-8 text-center">{t('No diagnoses recorded yet.')}</p>
               ) : (
                 <div className="space-y-3">
                   {diagnoses.map((d, i) => (
-                    <motion.div key={d.id} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.03 }} className="p-3 rounded-xl bg-gray-50 dark:bg-gray-800/30">
+                    <motion.div key={d.id} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.03 }} className="p-3 rounded-xl bg-gray-50 ">
                       <div className="flex items-center justify-between mb-1">
-                        <span className="text-sm font-medium text-gray-900 dark:text-white">{d.condition}</span>
-                        <span className="text-xs text-gray-400 dark:text-gray-500">{formatDate(d.date)}</span>
+                        <span className="text-sm font-medium text-gray-900 ">{d.condition}</span>
+                        <span className="text-xs text-gray-400 ">{formatDate(d.date)}</span>
                       </div>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">{d.notes}</p>
-                      <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">{t('Diagnosed by')} {d.doctorName}</p>
+                      <p className="text-xs text-gray-500 ">{d.notes}</p>
+                      <p className="text-xs text-gray-400  mt-1">{t('Diagnosed by')} {d.doctorName}</p>
                     </motion.div>
                   ))}
                 </div>
@@ -247,21 +247,21 @@ export default function PatientDetailPage() {
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="glass-card rounded-2xl p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-base font-semibold text-gray-900 dark:text-white">{t('Prescriptions')}</h3>
-                <span className="text-xs text-gray-500 dark:text-gray-400">{prescriptions.length} {t('active')}</span>
+                <h3 className="text-base font-semibold text-gray-900 ">{t('Prescriptions')}</h3>
+                <span className="text-xs text-gray-500 ">{prescriptions.length} {t('active')}</span>
               </div>
               {prescriptions.length === 0 ? (
-                <p className="text-sm text-gray-500 dark:text-gray-400 py-8 text-center">{t('No prescriptions yet.')}</p>
+                <p className="text-sm text-gray-500  py-8 text-center">{t('No prescriptions yet.')}</p>
               ) : (
                 <div className="space-y-3">
                   {prescriptions.map((p, i) => (
-                    <motion.div key={p.id} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.03 }} className="p-3 rounded-xl bg-gray-50 dark:bg-gray-800/30">
+                    <motion.div key={p.id} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.03 }} className="p-3 rounded-xl bg-gray-50 ">
                       <div className="flex items-center justify-between mb-1">
-                        <span className="text-sm font-medium text-gray-900 dark:text-white">{p.medication}</span>
+                        <span className="text-sm font-medium text-gray-900 ">{p.medication}</span>
                         <StatusBadge status={p.status} />
                       </div>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">{p.dosage} • {p.frequency}</p>
-                      <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">{formatDate(p.startDate)} - {formatDate(p.endDate)}</p>
+                      <p className="text-xs text-gray-500 ">{p.dosage} • {p.frequency}</p>
+                      <p className="text-xs text-gray-400  mt-1">{formatDate(p.startDate)} - {formatDate(p.endDate)}</p>
                     </motion.div>
                   ))}
                 </div>
@@ -272,7 +272,7 @@ export default function PatientDetailPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="glass-card rounded-2xl p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-base font-semibold text-gray-900 dark:text-white">{t('Documents')}</h3>
+                <h3 className="text-base font-semibold text-gray-900 ">{t('Documents')}</h3>
                 <div className="flex items-center gap-2">
                   <motion.button
                     whileHover={{ scale: 1.02 }}
@@ -282,21 +282,21 @@ export default function PatientDetailPage() {
                   >
                     <Plus className="w-3.5 h-3.5" /> Hujjat Yuklash
                   </motion.button>
-                  <span className="text-xs text-gray-500 dark:text-gray-400">{documents.length} {t('files')}</span>
+                  <span className="text-xs text-gray-500 ">{documents.length} {t('files')}</span>
                 </div>
               </div>
               {documents.length === 0 ? (
-                <p className="text-sm text-gray-500 dark:text-gray-400 py-8 text-center">{t('No documents uploaded.')}</p>
+                <p className="text-sm text-gray-500  py-8 text-center">{t('No documents uploaded.')}</p>
               ) : (
                 <div className="space-y-2">
                   {documents.map((doc, i) => (
-                    <motion.div key={doc.id} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.03 }} className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
+                    <motion.div key={doc.id} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.03 }} className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50  transition-colors">
                       <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
                         <FileText className="w-4 h-4 text-primary" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{doc.name}</p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">{doc.type} • {doc.size} • {formatDate(doc.date)}</p>
+                        <p className="text-sm font-medium text-gray-900  truncate">{doc.name}</p>
+                        <p className="text-xs text-gray-500 ">{doc.type} • {doc.size} • {formatDate(doc.date)}</p>
                       </div>
                     </motion.div>
                   ))}
@@ -306,21 +306,21 @@ export default function PatientDetailPage() {
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="glass-card rounded-2xl p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-base font-semibold text-gray-900 dark:text-white">{t('Appointments Timeline')}</h3>
-                <span className="text-xs text-gray-500 dark:text-gray-400">{appointments.length} {t('visits')}</span>
+                <h3 className="text-base font-semibold text-gray-900 ">{t('Appointments Timeline')}</h3>
+                <span className="text-xs text-gray-500 ">{appointments.length} {t('visits')}</span>
               </div>
               {appointments.length === 0 ? (
-                <p className="text-sm text-gray-500 dark:text-gray-400 py-8 text-center">{t('No appointments yet.')}</p>
+                <p className="text-sm text-gray-500  py-8 text-center">{t('No appointments yet.')}</p>
               ) : (
                 <div className="space-y-2">
                   {appointments.sort((a, b) => b.date.localeCompare(a.date)).map((a, i) => (
-                    <motion.div key={a.id} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.03 }} className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
-                      <div className="w-9 h-9 rounded-lg bg-amber-50 dark:bg-amber-500/10 flex items-center justify-center">
+                    <motion.div key={a.id} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.03 }} className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50  transition-colors">
+                      <div className="w-9 h-9 rounded-lg bg-amber-50  flex items-center justify-center">
                         <Calendar className="w-4 h-4 text-amber-500" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 dark:text-white">{a.date} at {a.time}</p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">{a.type} with {a.doctorName}</p>
+                        <p className="text-sm font-medium text-gray-900 ">{a.date} at {a.time}</p>
+                        <p className="text-xs text-gray-500 ">{a.type} with {a.doctorName}</p>
                       </div>
                       <StatusBadge status={a.status} />
                     </motion.div>
@@ -335,19 +335,19 @@ export default function PatientDetailPage() {
       <Modal isOpen={diagnosisModal} onClose={() => setDiagnosisModal(false)} title={t('Create Diagnosis')} size="md"
         footer={
           <>
-            <button onClick={() => setDiagnosisModal(false)} className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-all">{t('Cancel')}</button>
+            <button onClick={() => setDiagnosisModal(false)} className="px-4 py-2 text-sm font-medium text-gray-600  hover:bg-gray-100  rounded-xl transition-all">{t('Cancel')}</button>
             <button onClick={handleCreateDiagnosis} disabled={!diagForm.condition.trim()} className="px-4 py-2 text-sm font-medium bg-primary text-white rounded-xl hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed">{t('Save Diagnosis')}</button>
           </>
         }
       >
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('Condition *')}</label>
-            <input type="text" value={diagForm.condition} onChange={e => setDiagForm(p => ({ ...p, condition: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder={t('Diagnosed condition')} />
+            <label className="block text-sm font-medium text-gray-700  mb-1">{t('Condition *')}</label>
+            <input type="text" value={diagForm.condition} onChange={e => setDiagForm(p => ({ ...p, condition: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50  border border-gray-200  text-gray-900  placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder={t('Diagnosed condition')} />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('Notes')}</label>
-            <textarea value={diagForm.notes} onChange={e => setDiagForm(p => ({ ...p, notes: e.target.value }))} rows={4} className="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none" placeholder={t('Additional notes...')} />
+            <label className="block text-sm font-medium text-gray-700  mb-1">{t('Notes')}</label>
+            <textarea value={diagForm.notes} onChange={e => setDiagForm(p => ({ ...p, notes: e.target.value }))} rows={4} className="w-full px-4 py-2.5 rounded-xl bg-gray-50  border border-gray-200  text-gray-900  placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none" placeholder={t('Additional notes...')} />
           </div>
         </div>
       </Modal>
@@ -355,24 +355,24 @@ export default function PatientDetailPage() {
       <Modal isOpen={prescriptionModal} onClose={() => setPrescriptionModal(false)} title={t('Create Prescription')} size="md"
         footer={
           <>
-            <button onClick={() => setPrescriptionModal(false)} className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-all">{t('Cancel')}</button>
+            <button onClick={() => setPrescriptionModal(false)} className="px-4 py-2 text-sm font-medium text-gray-600  hover:bg-gray-100  rounded-xl transition-all">{t('Cancel')}</button>
             <button onClick={handleCreatePrescription} disabled={!preForm.medication.trim() || !preForm.dosage.trim()} className="px-4 py-2 text-sm font-medium bg-secondary text-white rounded-xl hover:bg-secondary-dark transition-all shadow-lg shadow-secondary/20 disabled:opacity-50 disabled:cursor-not-allowed">{t('Save Prescription')}</button>
           </>
         }
       >
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('Medication *')}</label>
-            <input type="text" value={preForm.medication} onChange={e => setPreForm(p => ({ ...p, medication: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder={t('Medication name')} />
+            <label className="block text-sm font-medium text-gray-700  mb-1">{t('Medication *')}</label>
+            <input type="text" value={preForm.medication} onChange={e => setPreForm(p => ({ ...p, medication: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50  border border-gray-200  text-gray-900  placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder={t('Medication name')} />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('Dosage *')}</label>
-              <input type="text" value={preForm.dosage} onChange={e => setPreForm(p => ({ ...p, dosage: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder={t('e.g. 500mg')} />
+              <label className="block text-sm font-medium text-gray-700  mb-1">{t('Dosage *')}</label>
+              <input type="text" value={preForm.dosage} onChange={e => setPreForm(p => ({ ...p, dosage: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50  border border-gray-200  text-gray-900  placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder={t('e.g. 500mg')} />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('Frequency')}</label>
-              <select value={preForm.frequency} onChange={e => setPreForm(p => ({ ...p, frequency: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
+              <label className="block text-sm font-medium text-gray-700  mb-1">{t('Frequency')}</label>
+              <select value={preForm.frequency} onChange={e => setPreForm(p => ({ ...p, frequency: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50  border border-gray-200  text-gray-900  focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
                 <option value="">{t('Select')}</option>
                 <option value="Once daily">{t('Once daily')}</option>
                 <option value="Twice daily">{t('Twice daily')}</option>
@@ -384,12 +384,12 @@ export default function PatientDetailPage() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('Start Date')}</label>
-              <input type="date" value={preForm.startDate} onChange={e => setPreForm(p => ({ ...p, startDate: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
+              <label className="block text-sm font-medium text-gray-700  mb-1">{t('Start Date')}</label>
+              <input type="date" value={preForm.startDate} onChange={e => setPreForm(p => ({ ...p, startDate: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50  border border-gray-200  text-gray-900  focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('End Date')}</label>
-              <input type="date" value={preForm.endDate} onChange={e => setPreForm(p => ({ ...p, endDate: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
+              <label className="block text-sm font-medium text-gray-700  mb-1">{t('End Date')}</label>
+              <input type="date" value={preForm.endDate} onChange={e => setPreForm(p => ({ ...p, endDate: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50  border border-gray-200  text-gray-900  focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
             </div>
           </div>
         </div>
@@ -398,19 +398,19 @@ export default function PatientDetailPage() {
       <Modal isOpen={documentModal} onClose={() => setDocumentModal(false)} title="Hujjat Yuklash" size="md"
         footer={
           <>
-            <button onClick={() => setDocumentModal(false)} className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-all">{t('Cancel')}</button>
+            <button onClick={() => setDocumentModal(false)} className="px-4 py-2 text-sm font-medium text-gray-600  hover:bg-gray-100  rounded-xl transition-all">{t('Cancel')}</button>
             <button onClick={handleAddDocument} disabled={!docForm.name.trim()} className="px-4 py-2 text-sm font-medium bg-primary text-white rounded-xl hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed">{t('Upload')}</button>
           </>
         }
       >
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('Document Name')} *</label>
-            <input type="text" value={docForm.name} onChange={e => setDocForm(p => ({ ...p, name: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder={t('e.g. Blood Test Results')} />
+            <label className="block text-sm font-medium text-gray-700  mb-1">{t('Document Name')} *</label>
+            <input type="text" value={docForm.name} onChange={e => setDocForm(p => ({ ...p, name: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50  border border-gray-200  text-gray-900  placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder={t('e.g. Blood Test Results')} />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('Document Type')}</label>
-            <select value={docForm.type} onChange={e => setDocForm(p => ({ ...p, type: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
+            <label className="block text-sm font-medium text-gray-700  mb-1">{t('Document Type')}</label>
+            <select value={docForm.type} onChange={e => setDocForm(p => ({ ...p, type: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50  border border-gray-200  text-gray-900  focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
               <option value="Lab Report">{t('Lab Report')}</option>
               <option value="MRI">{t('MRI')}</option>
               <option value="CT">{t('CT')}</option>
@@ -421,8 +421,8 @@ export default function PatientDetailPage() {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('File Size')}</label>
-            <input type="text" value={docForm.size} readOnly className="w-full px-4 py-2.5 rounded-xl bg-gray-100 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700/50 text-gray-500 dark:text-gray-400 cursor-not-allowed" />
+            <label className="block text-sm font-medium text-gray-700  mb-1">{t('File Size')}</label>
+            <input type="text" value={docForm.size} readOnly className="w-full px-4 py-2.5 rounded-xl bg-gray-100  border border-gray-200  text-gray-500  cursor-not-allowed" />
           </div>
         </div>
       </Modal>
@@ -430,12 +430,12 @@ export default function PatientDetailPage() {
       <Modal isOpen={accessConfirmModal} onClose={() => setAccessConfirmModal(false)} title="To'liq Kirish So'rash" size="sm"
         footer={
           <>
-            <button onClick={() => setAccessConfirmModal(false)} className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-all">{t('Cancel')}</button>
+            <button onClick={() => setAccessConfirmModal(false)} className="px-4 py-2 text-sm font-medium text-gray-600  hover:bg-gray-100  rounded-xl transition-all">{t('Cancel')}</button>
             <button onClick={() => { setAccessPending(true); setAccessConfirmModal(false); }} className="px-4 py-2 text-sm font-medium bg-primary text-white rounded-xl hover:bg-primary-dark transition-all shadow-lg shadow-primary/20">{t('Confirm')}</button>
           </>
         }
       >
-        <p className="text-sm text-gray-600 dark:text-gray-400">
+        <p className="text-sm text-gray-600 ">
           To&apos;liq kirish so&apos;rovi bemorga yuboriladi va uning tasdig&apos;idan so&apos;ng barcha ma&apos;lumotlarga kirish huquqiga ega bo&apos;lasiz.
         </p>
       </Modal>

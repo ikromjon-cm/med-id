@@ -28,12 +28,12 @@ export default function DoctorCard({ doctor, onView, delay = 0 }: DoctorCardProp
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2">
             <div>
-              <h3 className="text-base font-semibold text-gray-900 dark:text-white truncate">{doctor.name}</h3>
+              <h3 className="text-base font-semibold text-gray-900  truncate">{doctor.name}</h3>
               <p className="text-xs font-medium text-primary mt-0.5">{doctor.specialization}</p>
             </div>
             <StatusBadge status={doctor.status} />
           </div>
-          <div className="mt-3 flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400">
+          <div className="mt-3 flex items-center gap-3 text-xs text-gray-500 ">
             <span className="flex items-center gap-1">
               <MapPin className="w-3.5 h-3.5" />
               {doctor.clinic}
@@ -45,8 +45,8 @@ export default function DoctorCard({ doctor, onView, delay = 0 }: DoctorCardProp
           </div>
         </div>
       </div>
-      <div className="mt-4 pt-3 border-t border-gray-100 dark:border-gray-800/30">
-        <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+      <div className="mt-4 pt-3 border-t border-gray-100 ">
+        <div className="flex items-center justify-between text-xs text-gray-500 ">
           <span className="flex items-center gap-1">
             <Calendar className="w-3.5 h-3.5" />
             {t('ID')}: {doctor.id}

@@ -99,7 +99,7 @@ const pageFeatures = [
 
 export default function FeaturesPage() {
   return (
-    <div className="pt-20 bg-bg-main dark:bg-[#0F0F15]">
+    <div className="pt-20 bg-bg-main ">
       {/* HERO */}
       <section className="py-16 lg:py-24 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
@@ -111,11 +111,11 @@ export default function FeaturesPage() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/10 text-primary text-sm font-medium mb-6">
               <Sparkles className="w-4 h-4" /> {t('All Features')}
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900  leading-tight">
               {t('Powerful Features for')}{' '}
               <span className="text-primary">{t('Better Healthcare')}</span>
             </h1>
-            <p className="mt-6 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            <p className="mt-6 text-lg text-gray-600  max-w-2xl mx-auto leading-relaxed">
               {t('Discover how MED-ID transforms medical identity management with cutting-edge technology designed to protect, inform, and empower.')}
             </p>
           </motion.div>
@@ -126,7 +126,7 @@ export default function FeaturesPage() {
       {pageFeatures.map((f, i) => (
         <section
           key={f.title}
-          className={`py-16 lg:py-20 ${i % 2 === 1 ? 'bg-white/50 dark:bg-white/[0.02]' : ''}`}
+          className={`py-16 lg:py-20 ${i % 2 === 1 ? 'bg-white/50 .02]' : ''}`}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className={`grid lg:grid-cols-2 gap-12 lg:gap-16 items-center ${i % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
@@ -139,11 +139,11 @@ export default function FeaturesPage() {
                 <div className="w-16 h-16 rounded-2xl bg-gradient-to-br ${f.gradient} flex items-center justify-center text-primary mb-5">
                   {f.icon}
                 </div>
-                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">{f.title}</h2>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">{f.desc}</p>
+                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900  mb-4">{f.title}</h2>
+                <p className="text-gray-600  leading-relaxed mb-6">{f.desc}</p>
                 <ul className="space-y-3">
                   {f.details.map((detail, j) => (
-                    <li key={j} className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-400">
+                    <li key={j} className="flex items-start gap-3 text-sm text-gray-600 ">
                       <CheckCircle className="w-4 h-4 text-primary mt-0.5 shrink-0" />
                       {detail}
                     </li>
@@ -157,12 +157,12 @@ export default function FeaturesPage() {
                 transition={{ duration: 0.6 }}
                 className="flex justify-center"
               >
-                <div className={`w-72 h-80 sm:w-80 sm:h-96 rounded-3xl bg-gradient-to-br ${f.gradient} flex items-center justify-center border border-gray-200/50 dark:border-white/10 shadow-xl`}>
+                <div className={`w-72 h-80 sm:w-80 sm:h-96 rounded-3xl bg-gradient-to-br ${f.gradient} flex items-center justify-center border border-gray-200/50  shadow-xl`}>
                   <div className="text-center p-8">
                     <div className="text-6xl opacity-20 mb-4">
                       {f.icon}
                     </div>
-                    <div className="text-lg font-semibold text-gray-900 dark:text-white">{f.title}</div>
+                    <div className="text-lg font-semibold text-gray-900 ">{f.title}</div>
                     <div className="mt-3 flex flex-wrap justify-center gap-2">
                       <Shield className="w-5 h-5 text-primary/40" />
                       <Lock className="w-5 h-5 text-secondary/40" />
@@ -181,10 +181,10 @@ export default function FeaturesPage() {
       <section className="py-16 lg:py-20 bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div {...fadeUp}>
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900  mb-4">
               {t('Experience the Power of MED-ID')}
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
+            <p className="text-lg text-gray-600  mb-8">
               {t('Join millions who already trust MED-ID with their medical identity.')}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
@@ -196,7 +196,7 @@ export default function FeaturesPage() {
               </Link>
               <Link
                 href="/security"
-                className="inline-flex items-center gap-2 px-6 py-3 glass text-gray-700 dark:text-gray-300 font-semibold rounded-xl hover:bg-white/50 dark:hover:bg-white/10 transition-all"
+                className="inline-flex items-center gap-2 px-6 py-3 glass text-gray-700  font-semibold rounded-xl hover:bg-white/50  transition-all"
               >
                 {t('Learn About Security')}
               </Link>

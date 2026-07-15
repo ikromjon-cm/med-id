@@ -74,15 +74,15 @@ export default function DocumentsPage() {
     return (
       <div className="space-y-6">
         <div className="flex items-center justify-between">
-          <div className="h-6 w-40 bg-gray-200 dark:bg-gray-700/50 rounded animate-pulse" />
-          <div className="h-10 w-32 bg-gray-200 dark:bg-gray-700/50 rounded-xl animate-pulse" />
+          <div className="h-6 w-40 bg-gray-200  rounded animate-pulse" />
+          <div className="h-10 w-32 bg-gray-200  rounded-xl animate-pulse" />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {[1, 2, 3, 4, 5, 6].map(i => (
             <div key={i} className="glass-card rounded-2xl p-5 animate-pulse">
-              <div className="h-10 w-10 rounded-xl bg-gray-200 dark:bg-gray-700/50 mb-3" />
-              <div className="h-4 w-32 bg-gray-200 dark:bg-gray-700/50 rounded mb-2" />
-              <div className="h-3 w-24 bg-gray-200 dark:bg-gray-700/50 rounded" />
+              <div className="h-10 w-10 rounded-xl bg-gray-200  mb-3" />
+              <div className="h-4 w-32 bg-gray-200  rounded mb-2" />
+              <div className="h-3 w-24 bg-gray-200  rounded" />
             </div>
           ))}
         </div>
@@ -98,8 +98,8 @@ export default function DocumentsPage() {
         className="flex flex-col sm:flex-row sm:items-center justify-between gap-4"
       >
         <div>
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white">{t('My Documents')}</h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+          <h2 className="text-xl font-bold text-gray-900 ">{t('My Documents')}</h2>
+          <p className="text-sm text-gray-500 ">
             {documents.length} {t('document')} {t('stored securely')}
           </p>
         </div>
@@ -126,7 +126,7 @@ export default function DocumentsPage() {
               'px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-all duration-200',
               filter === dt
                 ? 'bg-primary text-white shadow-md shadow-primary/20'
-                : 'bg-white/70 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50 hover:border-primary/30'
+                : 'bg-white/70  text-gray-600  border border-gray-200  hover:border-primary/30'
             )}
           >
             {dt === 'All' ? t('All Types') : t(dt)} {dt !== 'All' && `(${documents.filter(d => d.type === dt).length})`}
@@ -141,13 +141,13 @@ export default function DocumentsPage() {
           className="glass-card rounded-2xl"
         >
           <div className="flex flex-col items-center justify-center py-16">
-            <div className="w-20 h-20 rounded-2xl bg-gray-100 dark:bg-gray-800/50 flex items-center justify-center mb-4">
-              <FileText className="w-10 h-10 text-gray-400 dark:text-gray-500" />
+            <div className="w-20 h-20 rounded-2xl bg-gray-100  flex items-center justify-center mb-4">
+              <FileText className="w-10 h-10 text-gray-400 " />
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+            <h3 className="text-lg font-semibold text-gray-900  mb-1">
               {filter === 'All' ? t('No documents yet') : `${t('No documents of type')} ${t(filter)}`}
             </h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 text-center max-w-sm mb-6">
+            <p className="text-sm text-gray-500  text-center max-w-sm mb-6">
               {filter === 'All'
                 ? t('Upload your medical documents to keep them organized and accessible.')
                 : `${t('No documents of type')} "${t(filter)}" ${t('found')}.`}
@@ -183,14 +183,14 @@ export default function DocumentsPage() {
             >
               <div className={cn(viewMode === 'list' ? 'flex items-center gap-4 w-full' : '')}>
                 <div className={cn(
-                  'w-12 h-12 rounded-xl bg-gray-50 dark:bg-gray-800/50 flex items-center justify-center mb-3',
+                  'w-12 h-12 rounded-xl bg-gray-50  flex items-center justify-center mb-3',
                   viewMode === 'list' && 'mb-0'
                 )}>
                   {documentIcons[doc.type] || <File className="w-5 h-5 text-gray-400" />}
                 </div>
                 <div className={cn('flex-1', viewMode === 'list' && 'flex items-center justify-between')}>
                   <div>
-                    <p className="text-sm font-semibold text-gray-900 dark:text-white truncate max-w-[200px]">
+                    <p className="text-sm font-semibold text-gray-900  truncate max-w-[200px]">
                       {doc.name}
                     </p>
                     <div className={cn(
@@ -242,19 +242,19 @@ export default function DocumentsPage() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-md bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800 p-6"
+              className="relative w-full max-w-md bg-white  rounded-2xl shadow-2xl border border-gray-200  p-6"
             >
               <div className="w-14 h-14 rounded-2xl bg-emergency/10 flex items-center justify-center mx-auto mb-4">
                 <AlertTriangle className="w-7 h-7 text-emergency" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white text-center mb-2">{t('Delete Document')}</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400 text-center mb-6">
+              <h3 className="text-lg font-semibold text-gray-900  text-center mb-2">{t('Delete Document')}</h3>
+              <p className="text-sm text-gray-500  text-center mb-6">
                 {t('Are you sure you want to delete this document? This action cannot be undone.')}
               </p>
               <div className="flex gap-3">
                 <button
                   onClick={() => setDeleteModal(null)}
-                  className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                  className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium border border-gray-200  text-gray-700  hover:bg-gray-50  transition-colors"
                 >
                   {t('Cancel')}
                 </button>
@@ -284,20 +284,20 @@ export default function DocumentsPage() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-lg bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800 p-6"
+              className="relative w-full max-w-lg bg-white  rounded-2xl shadow-2xl border border-gray-200  p-6"
             >
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('Upload Document')}</h3>
+                <h3 className="text-lg font-semibold text-gray-900 ">{t('Upload Document')}</h3>
                 <button
                   onClick={() => setShowUpload(false)}
-                  className="w-8 h-8 rounded-xl flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  className="w-8 h-8 rounded-xl flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100  transition-colors"
                 >
                   <X className="w-4 h-4" />
                 </button>
               </div>
               <div className="space-y-4">
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                    <label className="block text-sm font-medium text-gray-700  mb-1.5">
                       {t('Document Name')}
                     </label>
                     <input
@@ -305,17 +305,17 @@ export default function DocumentsPage() {
                       value={uploadData.name}
                       onChange={(e) => setUploadData({ ...uploadData, name: e.target.value })}
                       placeholder={t('e.g. Blood Test Results')}
-                    className="w-full px-4 py-2.5 rounded-xl text-sm bg-white/80 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                    className="w-full px-4 py-2.5 rounded-xl text-sm bg-white/80  border border-gray-200  text-gray-900  placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                   />
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                    <label className="block text-sm font-medium text-gray-700  mb-1.5">
                       {t('Document Type')}
                     </label>
                   <select
                     value={uploadData.type}
                     onChange={(e) => setUploadData({ ...uploadData, type: e.target.value as PatientDocument['type'] })}
-                    className="w-full px-4 py-2.5 rounded-xl text-sm bg-white/80 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                    className="w-full px-4 py-2.5 rounded-xl text-sm bg-white/80  border border-gray-200  text-gray-900  focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                   >
                     {docTypes.filter(dt => dt !== 'All').map(dt => (
                       <option key={dt} value={dt}>{t(dt)}</option>
@@ -323,7 +323,7 @@ export default function DocumentsPage() {
                   </select>
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                    <label className="block text-sm font-medium text-gray-700  mb-1.5">
                       {t('File Size')}
                     </label>
                     <input
@@ -331,14 +331,14 @@ export default function DocumentsPage() {
                       value={uploadData.size}
                       onChange={(e) => setUploadData({ ...uploadData, size: e.target.value })}
                       placeholder={t('e.g. 2.4 MB')}
-                    className="w-full px-4 py-2.5 rounded-xl text-sm bg-white/80 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                    className="w-full px-4 py-2.5 rounded-xl text-sm bg-white/80  border border-gray-200  text-gray-900  placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                   />
                 </div>
               </div>
               <div className="flex gap-3 mt-6">
                 <button
                   onClick={() => setShowUpload(false)}
-                  className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                  className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium border border-gray-200  text-gray-700  hover:bg-gray-50  transition-colors"
                 >
                   {t('Cancel')}
                 </button>

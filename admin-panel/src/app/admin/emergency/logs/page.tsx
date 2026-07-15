@@ -59,12 +59,12 @@ export default function EmergencyLogsPage() {
       <div className="flex items-center justify-between">
         <div>
           <div className="flex items-center gap-3">
-            <Link href="/emergency" className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+            <Link href="/emergency" className="text-gray-400 hover:text-gray-600  transition-colors">
               <ArrowLeft className="w-5 h-5" />
             </Link>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('Emergency Access Logs')}</h2>
+            <h2 className="text-2xl font-bold text-gray-900 ">{t('Emergency Access Logs')}</h2>
           </div>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 ml-9">{t('Track all emergency access to patient records')}</p>
+          <p className="text-sm text-gray-500  mt-1 ml-9">{t('Track all emergency access to patient records')}</p>
         </div>
       </div>
 
@@ -77,7 +77,7 @@ export default function EmergencyLogsPage() {
               placeholder={t('Search patient or staff...')}
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 text-sm rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+              className="w-full pl-10 pr-4 py-2 text-sm rounded-xl bg-gray-50  border border-gray-200  text-gray-900  placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
             />
           </div>
           <div className="flex items-center gap-2 flex-wrap">
@@ -88,7 +88,7 @@ export default function EmergencyLogsPage() {
                 className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
                   statusFilter === s
                     ? 'bg-primary text-white shadow-sm'
-                    : 'bg-gray-100 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700/50'
+                    : 'bg-gray-100  text-gray-600  hover:bg-gray-200 '
                 }`}
               >
                 {s}
@@ -97,7 +97,7 @@ export default function EmergencyLogsPage() {
           </div>
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className={`p-2 rounded-xl transition-all ${showFilters ? 'bg-primary/10 text-primary' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800/50'}`}
+            className={`p-2 rounded-xl transition-all ${showFilters ? 'bg-primary/10 text-primary' : 'text-gray-400 hover:text-gray-600  hover:bg-gray-100 '}`}
           >
             <Filter className="w-4 h-4" />
           </button>
@@ -107,21 +107,21 @@ export default function EmergencyLogsPage() {
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
-            className="flex flex-col sm:flex-row gap-4 mt-4 pt-4 border-t border-gray-100 dark:border-gray-800/50"
+            className="flex flex-col sm:flex-row gap-4 mt-4 pt-4 border-t border-gray-100 "
           >
             <div className="flex-1">
-              <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">{t('Start Date')}</label>
+              <label className="block text-xs font-medium text-gray-500  mb-1">{t('Start Date')}</label>
               <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)}
-                className="w-full px-3 py-2 text-sm rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
+                className="w-full px-3 py-2 text-sm rounded-xl bg-gray-50  border border-gray-200  text-gray-900  focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
             </div>
             <div className="flex-1">
-              <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">{t('End Date')}</label>
+              <label className="block text-xs font-medium text-gray-500  mb-1">{t('End Date')}</label>
               <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)}
-                className="w-full px-3 py-2 text-sm rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
+                className="w-full px-3 py-2 text-sm rounded-xl bg-gray-50  border border-gray-200  text-gray-900  focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
             </div>
             <div className="flex items-end">
               <button onClick={() => { setStartDate(''); setEndDate(''); }}
-                className="px-4 py-2 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors">{t('Clear')}</button>
+                className="px-4 py-2 text-sm text-gray-500  hover:text-gray-700  transition-colors">{t('Clear')}</button>
             </div>
           </motion.div>
         )}
@@ -139,30 +139,30 @@ export default function EmergencyLogsPage() {
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-gray-100 dark:border-gray-800/50">
+                <tr className="border-b border-gray-100 ">
                   {[t('Patient'), t('Accessed By'), t('Access Type'), t('Timestamp'), t('Status')].map(h => (
-                    <th key={h} className="px-6 py-3.5 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">{h}</th>
+                    <th key={h} className="px-6 py-3.5 text-left text-xs font-semibold text-gray-500  uppercase tracking-wider">{h}</th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-50 dark:divide-gray-800/30">
+              <tbody className="divide-y divide-gray-50 ">
                 {logs.map((log, idx) => (
                   <motion.tr
                     key={log.id}
                     initial={{ opacity: 0, y: 4 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.15, delay: idx * 0.02 }}
-                    className="group hover:bg-gray-50/50 dark:hover:bg-gray-800/20 transition-colors"
+                    className="group hover:bg-gray-50/50  transition-colors"
                   >
-                    <td className="px-6 py-3.5 text-sm font-medium text-gray-900 dark:text-white">{log.patientName}</td>
-                    <td className="px-6 py-3.5 text-sm text-gray-700 dark:text-gray-300">{log.accessedBy}</td>
-                    <td className="px-6 py-3.5 text-sm text-gray-700 dark:text-gray-300">{log.accessType}</td>
-                    <td className="px-6 py-3.5 text-sm text-gray-500 dark:text-gray-400">{formatDateTime(log.timestamp)}</td>
+                    <td className="px-6 py-3.5 text-sm font-medium text-gray-900 ">{log.patientName}</td>
+                    <td className="px-6 py-3.5 text-sm text-gray-700 ">{log.accessedBy}</td>
+                    <td className="px-6 py-3.5 text-sm text-gray-700 ">{log.accessType}</td>
+                    <td className="px-6 py-3.5 text-sm text-gray-500 ">{formatDateTime(log.timestamp)}</td>
                     <td className="px-6 py-3.5">
                       <span className={`inline-flex items-center px-2.5 py-0.5 text-xs font-medium rounded-full ${
                         log.status === 'GRANTED' ? 'bg-[#00C896]/10 text-[#00C896]' :
                         log.status === 'DENIED' ? 'bg-emergency/10 text-emergency' :
-                        'bg-amber-50 dark:bg-amber-500/10 text-amber-500'
+                        'bg-amber-50  text-amber-500'
                       }`}>{log.status}</span>
                     </td>
                   </motion.tr>
@@ -170,7 +170,7 @@ export default function EmergencyLogsPage() {
               </tbody>
             </table>
           </div>
-          <div className="px-6 py-3 border-t border-gray-100 dark:border-gray-800/50 text-sm text-gray-500 dark:text-gray-400">
+          <div className="px-6 py-3 border-t border-gray-100  text-sm text-gray-500 ">
             {logs.length} {logs.length === 1 ? t('result') : t('results')}
           </div>
         </div>

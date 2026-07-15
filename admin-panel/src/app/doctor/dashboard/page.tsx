@@ -20,9 +20,9 @@ const DOCTOR_ID = 'DOC-001';
 
 const statusStyles: Record<string, string> = {
   scheduled: 'bg-primary/10 text-primary',
-  'in-progress': 'bg-amber-50 dark:bg-amber-500/10 text-amber-500',
+  'in-progress': 'bg-amber-50  text-amber-500',
   completed: 'bg-[#00C896]/10 text-[#00C896]',
-  cancelled: 'bg-gray-100 dark:bg-gray-800/50 text-gray-400',
+  cancelled: 'bg-gray-100  text-gray-400',
 };
 
 export default function DoctorDashboardPage() {
@@ -55,8 +55,8 @@ export default function DoctorDashboardPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('Doctor Dashboard')}</h2>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('Welcome back, Doctor')}</p>
+        <h2 className="text-2xl font-bold text-gray-900 ">{t('Doctor Dashboard')}</h2>
+        <p className="text-sm text-gray-500  mt-1">{t('Welcome back, Doctor')}</p>
       </div>
 
       {loading ? (
@@ -84,16 +84,16 @@ export default function DoctorDashboardPage() {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.05 }}
-                  className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors"
+                  className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50  transition-colors"
                 >
                   <div className="text-center flex-shrink-0 w-12">
-                    <p className="text-lg font-bold text-gray-900 dark:text-white leading-tight">{apt.time.split(':')[0]}</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">{apt.time.split(':')[1]}</p>
+                    <p className="text-lg font-bold text-gray-900  leading-tight">{apt.time.split(':')[0]}</p>
+                    <p className="text-xs text-gray-500 ">{apt.time.split(':')[1]}</p>
                   </div>
-                  <div className="w-px h-10 bg-gray-200 dark:bg-gray-700/50 flex-shrink-0" />
+                  <div className="w-px h-10 bg-gray-200  flex-shrink-0" />
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-900 dark:text-white">{apt.patientName}</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">{apt.type} • {apt.date}</p>
+                    <p className="text-sm font-medium text-gray-900 ">{apt.patientName}</p>
+                    <p className="text-xs text-gray-500 ">{apt.type} • {apt.date}</p>
                   </div>
                   <span className={cn('px-2 py-0.5 text-[10px] font-medium rounded-full capitalize', statusStyles[apt.status])}>
                     {apt.status}

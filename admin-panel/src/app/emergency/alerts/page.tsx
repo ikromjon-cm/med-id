@@ -50,8 +50,8 @@ export default function AlertsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('Emergency Alerts')}</h2>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('All emergency access alerts')}</p>
+        <h2 className="text-2xl font-bold text-gray-900 ">{t('Emergency Alerts')}</h2>
+        <p className="text-sm text-gray-500  mt-1">{t('All emergency access alerts')}</p>
       </div>
 
       <div className="flex items-center gap-2 flex-wrap">
@@ -65,7 +65,7 @@ export default function AlertsPage() {
                 ? s === 'ACTIVE' ? 'bg-emergency text-white shadow-lg shadow-emergency/30' :
                   s === 'RESOLVED' ? 'bg-[#00C896] text-white shadow-lg shadow-[#00C896]/20' :
                   'bg-primary text-white shadow-lg shadow-primary/20'
-                : 'bg-white/70 dark:bg-gray-900/70 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800/50'
+                : 'bg-white/70  text-gray-600  hover:bg-gray-100 '
             )}
           >
             {s === 'ALL' ? t('All') : s === 'ACTIVE' ? t('Active') : t('Resolved')}
@@ -112,8 +112,8 @@ export default function AlertsPage() {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between gap-2">
                     <div>
-                      <h4 className="text-base font-bold text-gray-900 dark:text-white">{alert.patientName}</h4>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">{t('Triggered by')}: {alert.triggeredBy}</p>
+                      <h4 className="text-base font-bold text-gray-900 ">{alert.patientName}</h4>
+                      <p className="text-xs text-gray-500 ">{t('Triggered by')}: {alert.triggeredBy}</p>
                     </div>
                     <span className={cn(
                       'px-3 py-1 text-[10px] font-bold rounded-full uppercase whitespace-nowrap',
@@ -124,7 +124,7 @@ export default function AlertsPage() {
                       {alert.status === 'ACTIVE' ? t('Active') : t('Resolved')}
                     </span>
                   </div>
-                  <div className="flex items-center gap-4 mt-3 text-xs text-gray-500 dark:text-gray-400 flex-wrap">
+                  <div className="flex items-center gap-4 mt-3 text-xs text-gray-500  flex-wrap">
                     <span className="flex items-center gap-1"><Zap className="w-3.5 h-3.5 text-emergency" /> {t('Blood')}: <strong>{alert.bloodType}</strong></span>
                     {alert.allergies.length > 0 && (
                       <span className="flex items-center gap-1"><ShieldAlert className="w-3.5 h-3.5 text-amber-500" /> {t('Allergies')}: {alert.allergies.join(', ')}</span>
@@ -132,7 +132,7 @@ export default function AlertsPage() {
                     <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> {formatDateTime(alert.accessedAt)}</span>
                   </div>
                   {alert.resolvedAt && (
-                    <p className="text-[10px] text-gray-400 dark:text-gray-500 mt-2">{t('Resolved at')}: {formatDateTime(alert.resolvedAt)}</p>
+                    <p className="text-[10px] text-gray-400  mt-2">{t('Resolved at')}: {formatDateTime(alert.resolvedAt)}</p>
                   )}
                 </div>
                 <div className="flex items-center gap-2 flex-shrink-0">

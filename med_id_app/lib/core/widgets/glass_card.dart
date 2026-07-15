@@ -30,9 +30,10 @@ class GlassCard extends StatelessWidget {
     final effectiveTint = tint ?? (isDark ? ColorConstants.glassDark : ColorConstants.glassLight);
     final effectiveShadow = boxShadow ?? [
       BoxShadow(
-        color: isDark ? Colors.black26 : Colors.black.withValues(alpha: 0.08),
-        blurRadius: 20,
-        offset: const Offset(0, 4),
+        color: isDark ? Colors.black.withValues(alpha: 0.3) : ColorConstants.primary.withValues(alpha: 0.08),
+        blurRadius: 30,
+        spreadRadius: 2,
+        offset: const Offset(0, 8),
       ),
     ];
 
@@ -52,8 +53,15 @@ class GlassCard extends StatelessWidget {
               color: effectiveTint,
               borderRadius: BorderRadius.circular(borderRadius),
               border: Border.all(
-                color: isDark ? Colors.white12 : Colors.white60,
-                width: 1,
+                color: isDark ? Colors.white.withValues(alpha: 0.08) : Colors.white.withValues(alpha: 0.6),
+                width: 1.5,
+              ),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: isDark 
+                  ? [Colors.white.withValues(alpha: 0.05), Colors.white.withValues(alpha: 0.01)]
+                  : [Colors.white.withValues(alpha: 0.6), Colors.white.withValues(alpha: 0.2)],
               ),
             ),
             child: InkWell(

@@ -77,7 +77,7 @@ export default function SecurityPage() {
   );
 
   return (
-    <div className="pt-20 bg-bg-main dark:bg-[#0F0F15]">
+    <div className="pt-20 bg-bg-main ">
       {/* HERO */}
       <section className="py-16 lg:py-24 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
@@ -89,11 +89,11 @@ export default function SecurityPage() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/10 text-primary text-sm font-medium mb-6">
               <Shield className="w-4 h-4" /> {t('Enterprise-Grade Security')}
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900  leading-tight">
               {t('Your Security Is Our')}{' '}
               <span className="text-primary">{t('Top Priority')}</span>
             </h1>
-            <p className="mt-6 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            <p className="mt-6 text-lg text-gray-600  max-w-2xl mx-auto leading-relaxed">
               {t('We employ the highest standards of data protection, encryption, and security practices to ensure your medical information remains private, secure, and under your control.')}
             </p>
           </motion.div>
@@ -104,11 +104,11 @@ export default function SecurityPage() {
       <section className="py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center max-w-2xl mx-auto mb-14">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 ">
               {t('How We Protect')}{' '}
               <span className="text-primary">{t('Your Data')}</span>
             </h2>
-            <p className="mt-4 text-gray-600 dark:text-gray-400">
+            <p className="mt-4 text-gray-600 ">
               {t('Multiple layers of security working together to keep your medical information safe.')}
             </p>
           </motion.div>
@@ -125,8 +125,8 @@ export default function SecurityPage() {
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-4">
                   {f.icon}
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{f.title}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{f.desc}</p>
+                <h3 className="text-lg font-semibold text-gray-900  mb-2">{f.title}</h3>
+                <p className="text-sm text-gray-600  leading-relaxed">{f.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -134,14 +134,14 @@ export default function SecurityPage() {
       </section>
 
       {/* COMPLIANCE BADGES */}
-      <section className="py-16 lg:py-20 bg-white/50 dark:bg-white/[0.02]">
+      <section className="py-16 lg:py-20 bg-white/50 .02]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center max-w-2xl mx-auto mb-14">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 ">
               {t('Certifications &')}{' '}
               <span className="text-primary">{t('Compliance')}</span>
             </h2>
-            <p className="mt-4 text-gray-600 dark:text-gray-400">
+            <p className="mt-4 text-gray-600 ">
               {t('We meet and exceed global healthcare data protection standards.')}
             </p>
           </motion.div>
@@ -159,9 +159,9 @@ export default function SecurityPage() {
                   <FileCheck className="w-6 h-6" />
                 </div>
                 <div>
-                  <div className="text-lg font-bold text-gray-900 dark:text-white">{s.name}</div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">{s.full}</div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">{s.desc}</p>
+                  <div className="text-lg font-bold text-gray-900 ">{s.name}</div>
+                  <div className="text-xs text-gray-500  mb-1">{s.full}</div>
+                  <p className="text-sm text-gray-600 ">{s.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -179,11 +179,11 @@ export default function SecurityPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900  mb-4">
                 {t('Military-Grade')}{' '}
                 <span className="text-primary">{t('Encryption')}</span>
               </h2>
-              <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
+              <p className="text-gray-600  leading-relaxed mb-6">
                 {t('MED-ID uses AES-256 encryption, the same standard trusted by banks, governments, and military organizations worldwide. Your medical data is encrypted before it leaves your device and remains encrypted until you or an authorized healthcare provider accesses it.')}
               </p>
               <div className="space-y-4">
@@ -204,8 +204,8 @@ export default function SecurityPage() {
                       {item.icon}
                     </div>
                     <div>
-                      <h4 className="font-semibold text-gray-900 dark:text-white">{item.title}</h4>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">{item.desc}</p>
+                      <h4 className="font-semibold text-gray-900 ">{item.title}</h4>
+                      <p className="text-sm text-gray-500 ">{item.desc}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -218,13 +218,13 @@ export default function SecurityPage() {
               transition={{ duration: 0.6 }}
               className="flex justify-center"
             >
-              <div className="w-72 h-80 sm:w-80 sm:h-96 rounded-3xl bg-gradient-to-br from-primary/20 via-secondary/10 to-primary/20 flex items-center justify-center border border-gray-200/50 dark:border-white/10 shadow-xl">
+              <div className="w-72 h-80 sm:w-80 sm:h-96 rounded-3xl bg-gradient-to-br from-primary/20 via-secondary/10 to-primary/20 flex items-center justify-center border border-gray-200/50  shadow-xl">
                 <div className="text-center">
-                  <div className="w-20 h-20 rounded-2xl bg-white/80 dark:bg-white/10 flex items-center justify-center mx-auto mb-4 shadow-lg">
+                  <div className="w-20 h-20 rounded-2xl bg-white/80  flex items-center justify-center mx-auto mb-4 shadow-lg">
                     <Shield className="w-10 h-10 text-primary" />
                   </div>
-                  <div className="text-lg font-bold text-gray-900 dark:text-white mb-2">{t('AES-256 Encrypted')}</div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">{t('Military-grade protection')}</div>
+                  <div className="text-lg font-bold text-gray-900  mb-2">{t('AES-256 Encrypted')}</div>
+                  <div className="text-xs text-gray-500 ">{t('Military-grade protection')}</div>
                   <div className="mt-4 flex justify-center gap-3">
                     <Globe className="w-5 h-5 text-primary/40" />
                     <Lock className="w-5 h-5 text-secondary/40" />
@@ -238,10 +238,10 @@ export default function SecurityPage() {
       </section>
 
       {/* SECURITY FAQ */}
-      <section className="py-16 lg:py-20 bg-white/50 dark:bg-white/[0.02]">
+      <section className="py-16 lg:py-20 bg-white/50 .02]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center max-w-2xl mx-auto mb-10">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 ">
               {t('Security')}{' '}
               <span className="text-primary">{t('FAQs')}</span>
             </h2>
@@ -253,7 +253,7 @@ export default function SecurityPage() {
               placeholder={t('Search security questions...')}
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 glass rounded-xl text-sm text-gray-900 dark:text-white placeholder-gray-400 outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+              className="w-full pl-12 pr-4 py-3 glass rounded-xl text-sm text-gray-900  placeholder-gray-400 outline-none focus:ring-2 focus:ring-primary/20 transition-all"
             />
           </div>
           <div className="space-y-3">
@@ -269,7 +269,7 @@ export default function SecurityPage() {
                   onClick={() => setOpenFaq(openFaq === item.id ? null : item.id)}
                   className="w-full flex items-center justify-between p-5 text-left"
                 >
-                  <span className="font-medium text-gray-900 dark:text-white text-sm pr-4">{item.question}</span>
+                  <span className="font-medium text-gray-900  text-sm pr-4">{item.question}</span>
                   <ChevronDown
                     className={cn(
                       'w-5 h-5 text-gray-400 shrink-0 transition-transform duration-200',
@@ -281,7 +281,7 @@ export default function SecurityPage() {
                   'overflow-hidden transition-all duration-300',
                   openFaq === item.id ? 'max-h-96' : 'max-h-0'
                 )}>
-                  <div className="px-5 pb-5 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                  <div className="px-5 pb-5 text-sm text-gray-600  leading-relaxed">
                     {item.answer}
                   </div>
                 </div>
@@ -295,10 +295,10 @@ export default function SecurityPage() {
       <section className="py-16 lg:py-20 bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div {...fadeUp}>
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900  mb-4">
               {t('Ready to Experience True Security?')}
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
+            <p className="text-lg text-gray-600  mb-8">
               {t('Your medical data deserves the best protection. Get started with MED-ID today.')}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
@@ -310,7 +310,7 @@ export default function SecurityPage() {
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 px-6 py-3 glass text-gray-700 dark:text-gray-300 font-semibold rounded-xl hover:bg-white/50 dark:hover:bg-white/10 transition-all"
+                className="inline-flex items-center gap-2 px-6 py-3 glass text-gray-700  font-semibold rounded-xl hover:bg-white/50  transition-all"
               >
                 {t('Contact Security Team')}
               </Link>

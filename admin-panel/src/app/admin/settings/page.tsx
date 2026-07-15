@@ -9,10 +9,10 @@ import { t } from '@/lib/i18n';
 
 const ToggleSwitch = ({ checked, onChange, label }: { checked: boolean; onChange: (v: boolean) => void; label?: string }) => (
   <div className="flex items-center gap-3">
-    {label && <span className="text-sm text-gray-700 dark:text-gray-300">{label}</span>}
+    {label && <span className="text-sm text-gray-700 ">{label}</span>}
     <button
       onClick={() => onChange(!checked)}
-      className={`relative w-11 h-6 rounded-full transition-all duration-200 ${checked ? 'bg-primary' : 'bg-gray-200 dark:bg-gray-700'}`}
+      className={`relative w-11 h-6 rounded-full transition-all duration-200 ${checked ? 'bg-primary' : 'bg-gray-200 '}`}
     >
       <span className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow-sm transition-transform duration-200 ${checked ? 'translate-x-5' : ''}`} />
     </button>
@@ -25,13 +25,13 @@ const SectionCard = ({ icon, title, description, children }: { icon: React.React
     animate={{ opacity: 1, y: 0 }}
     className="glass-card rounded-2xl p-6"
   >
-    <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-100 dark:border-gray-800/50">
+    <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-100 ">
       <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
         {icon}
       </div>
       <div>
-        <h3 className="text-base font-semibold text-gray-900 dark:text-white">{title}</h3>
-        <p className="text-xs text-gray-500 dark:text-gray-400">{description}</p>
+        <h3 className="text-base font-semibold text-gray-900 ">{title}</h3>
+        <p className="text-xs text-gray-500 ">{description}</p>
       </div>
     </div>
     {children}
@@ -76,8 +76,8 @@ export default function SettingsPage() {
     <div className="space-y-6 max-w-4xl">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('Settings')}</h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('Configure platform settings and preferences')}</p>
+          <h2 className="text-2xl font-bold text-gray-900 ">{t('Settings')}</h2>
+          <p className="text-sm text-gray-500  mt-1">{t('Configure platform settings and preferences')}</p>
         </div>
         <motion.button
           whileHover={{ scale: 1.02 }}
@@ -111,8 +111,8 @@ export default function SettingsPage() {
           <FormInput label={t('Version')} value={system.version} onChange={e => setSystem({ ...system, version: e.target.value })} />
           <div className="flex items-center justify-between py-2">
             <div>
-              <p className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('Maintenance Mode')}</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">{t('Disable user access during maintenance')}</p>
+              <p className="text-sm font-medium text-gray-700 ">{t('Maintenance Mode')}</p>
+              <p className="text-xs text-gray-500 ">{t('Disable user access during maintenance')}</p>
             </div>
             <ToggleSwitch checked={system.maintenanceMode} onChange={v => setSystem({ ...system, maintenanceMode: v })} />
           </div>
@@ -126,8 +126,8 @@ export default function SettingsPage() {
           <FormInput label={t('Minimum Password Length')} type="number" value={security.passwordMinLength} onChange={e => setSecurity({ ...security, passwordMinLength: e.target.value })} />
           <div className="flex items-center justify-between py-2">
             <div>
-              <p className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('Two-Factor Authentication')}</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">{t('Require 2FA for admin accounts')}</p>
+              <p className="text-sm font-medium text-gray-700 ">{t('Two-Factor Authentication')}</p>
+              <p className="text-xs text-gray-500 ">{t('Require 2FA for admin accounts')}</p>
             </div>
             <ToggleSwitch checked={security.twoFactorAuth} onChange={v => setSecurity({ ...security, twoFactorAuth: v })} />
           </div>
@@ -142,8 +142,8 @@ export default function SettingsPage() {
                 <Monitor className="w-4 h-4" />
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('Email Notifications')}</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">{t('Receive notifications via email')}</p>
+                <p className="text-sm font-medium text-gray-700 ">{t('Email Notifications')}</p>
+                <p className="text-xs text-gray-500 ">{t('Receive notifications via email')}</p>
               </div>
             </div>
             <ToggleSwitch checked={notifications.email} onChange={v => setNotifications({ ...notifications, email: v })} />
@@ -154,20 +154,20 @@ export default function SettingsPage() {
                 <Smartphone className="w-4 h-4" />
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('Push Notifications')}</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">{t('Receive push notifications in-app')}</p>
+                <p className="text-sm font-medium text-gray-700 ">{t('Push Notifications')}</p>
+                <p className="text-xs text-gray-500 ">{t('Receive push notifications in-app')}</p>
               </div>
             </div>
             <ToggleSwitch checked={notifications.push} onChange={v => setNotifications({ ...notifications, push: v })} />
           </div>
           <div className="flex items-center justify-between py-2">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-lg bg-amber-50 dark:bg-amber-500/10 flex items-center justify-center text-amber-500">
+              <div className="w-9 h-9 rounded-lg bg-amber-50  flex items-center justify-center text-amber-500">
                 <Bell className="w-4 h-4" />
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('SMS Notifications')}</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">{t('Receive critical alerts via SMS')}</p>
+                <p className="text-sm font-medium text-gray-700 ">{t('SMS Notifications')}</p>
+                <p className="text-xs text-gray-500 ">{t('Receive critical alerts via SMS')}</p>
               </div>
             </div>
             <ToggleSwitch checked={notifications.sms} onChange={v => setNotifications({ ...notifications, sms: v })} />
@@ -178,8 +178,8 @@ export default function SettingsPage() {
                 <Eye className="w-4 h-4" />
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('Emergency Alerts')}</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">{t('Immediate alerts for critical events')}</p>
+                <p className="text-sm font-medium text-gray-700 ">{t('Emergency Alerts')}</p>
+                <p className="text-xs text-gray-500 ">{t('Immediate alerts for critical events')}</p>
               </div>
             </div>
             <ToggleSwitch checked={notifications.emergencyAlerts} onChange={v => setNotifications({ ...notifications, emergencyAlerts: v })} />
@@ -190,8 +190,8 @@ export default function SettingsPage() {
       <SectionCard icon={<Monitor className="w-5 h-5" />} title={t('Theme Settings')} description={t('Customize your display preferences')}>
         <div className="flex items-center justify-between py-2">
           <div>
-            <p className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('Dark Mode')}</p>
-            <p className="text-xs text-gray-500 dark:text-gray-400">{t('Toggle between light and dark themes')}</p>
+            <p className="text-sm font-medium text-gray-700 ">{t('Dark Mode')}</p>
+            <p className="text-xs text-gray-500 ">{t('Toggle between light and dark themes')}</p>
           </div>
           <ToggleSwitch checked={theme === 'dark'} onChange={toggleTheme} />
         </div>
@@ -202,10 +202,10 @@ export default function SettingsPage() {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-100 dark:border-gray-800/50">
-                <th className="text-left py-3 pr-4 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{t('Role')}</th>
+              <tr className="border-b border-gray-100 ">
+                <th className="text-left py-3 pr-4 text-xs font-medium text-gray-500  uppercase tracking-wider">{t('Role')}</th>
                 {['View Patients', 'Edit Records', 'Emergency Access', 'Manage Users', 'Manage Clinic', 'View Analytics'].map(perm => (
-                  <th key={perm} className="text-center py-3 px-2 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{t(perm)}</th>
+                  <th key={perm} className="text-center py-3 px-2 text-xs font-medium text-gray-500  uppercase tracking-wider">{t(perm)}</th>
                 ))}
               </tr>
             </thead>
@@ -217,11 +217,11 @@ export default function SettingsPage() {
                 { role: 'Receptionist', perms: [true, false, false, false, false, false] },
                 { role: 'Patient', perms: [true, false, false, false, false, false] },
               ].map((row) => (
-                <tr key={row.role} className="border-b border-gray-50 dark:border-gray-800/30 hover:bg-gray-50 dark:hover:bg-gray-800/20 transition-colors">
-                  <td className="py-3 pr-4 font-medium text-gray-900 dark:text-white">{t(row.role)}</td>
+                <tr key={row.role} className="border-b border-gray-50  hover:bg-gray-50  transition-colors">
+                  <td className="py-3 pr-4 font-medium text-gray-900 ">{t(row.role)}</td>
                   {row.perms.map((perm, ci) => (
                     <td key={ci} className="text-center py-3 px-2">
-                      {perm ? <Check className="w-4 h-4 text-[#00C896] mx-auto" /> : <span className="w-4 h-4 block mx-auto text-gray-300 dark:text-gray-600">—</span>}
+                      {perm ? <Check className="w-4 h-4 text-[#00C896] mx-auto" /> : <span className="w-4 h-4 block mx-auto text-gray-300 ">—</span>}
                     </td>
                   ))}
                 </tr>
@@ -251,14 +251,14 @@ export default function SettingsPage() {
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.05 }}
-              className="flex items-center justify-between p-4 rounded-xl bg-gray-50 dark:bg-gray-800/30 border border-gray-100 dark:border-gray-800/50"
+              className="flex items-center justify-between p-4 rounded-xl bg-gray-50  border border-gray-100 "
             >
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-gray-900 dark:text-white">{apiKey.name}</p>
+                <p className="text-sm font-medium text-gray-900 ">{apiKey.name}</p>
                 <div className="flex items-center gap-3 mt-1">
-                  <code className="text-xs font-mono text-gray-500 dark:text-gray-400">{apiKey.key}</code>
+                  <code className="text-xs font-mono text-gray-500 ">{apiKey.key}</code>
                   <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
-                    apiKey.status === 'Active' ? 'bg-[#00C896]/10 text-[#00C896]' : 'bg-gray-100 dark:bg-gray-700 text-gray-500'
+                    apiKey.status === 'Active' ? 'bg-[#00C896]/10 text-[#00C896]' : 'bg-gray-100  text-gray-500'
                   }`}>{apiKey.status === 'Active' ? t('Active') : t('Inactive')}</span>
                 </div>
                 <p className="text-xs text-gray-400 mt-1">{t('Created')}: {apiKey.created}</p>

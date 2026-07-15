@@ -34,7 +34,7 @@ export default function EmergencyStats({ activeAlerts, resolvedToday, avgRespons
       value: avgResponseTime,
       icon: Clock,
       color: 'text-amber-500',
-      bg: 'bg-amber-50 dark:bg-amber-500/10',
+      bg: 'bg-amber-50 ',
     },
     {
       label: t('Total Alerts'),
@@ -64,7 +64,7 @@ export default function EmergencyStats({ activeAlerts, resolvedToday, avgRespons
             </div>
           </div>
           <p className={cn('text-2xl font-bold', s.color)}>{s.value}</p>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{s.label}</p>
+          <p className="text-xs text-gray-500  mt-0.5">{s.label}</p>
         </motion.div>
       ))}
     </div>

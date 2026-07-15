@@ -39,20 +39,20 @@ export default function PatientDashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {[1, 2, 3].map(i => (
             <div key={i} className="glass-card rounded-2xl p-6 animate-pulse">
-              <div className="h-10 w-10 rounded-xl bg-gray-200 dark:bg-gray-700/50 mb-4" />
-              <div className="h-7 w-24 bg-gray-200 dark:bg-gray-700/50 rounded mb-2" />
-              <div className="h-4 w-32 bg-gray-200 dark:bg-gray-700/50 rounded" />
+              <div className="h-10 w-10 rounded-xl bg-gray-200  mb-4" />
+              <div className="h-7 w-24 bg-gray-200  rounded mb-2" />
+              <div className="h-4 w-32 bg-gray-200  rounded" />
             </div>
           ))}
         </div>
         <div className="glass-card rounded-2xl p-6 animate-pulse">
-          <div className="h-6 w-48 bg-gray-200 dark:bg-gray-700/50 rounded mb-6" />
+          <div className="h-6 w-48 bg-gray-200  rounded mb-6" />
           {[1, 2, 3].map(i => (
-            <div key={i} className="flex items-center gap-4 py-3 border-b border-gray-100 dark:border-gray-800/30 last:border-0">
-              <div className="h-10 w-10 rounded-xl bg-gray-200 dark:bg-gray-700/50" />
+            <div key={i} className="flex items-center gap-4 py-3 border-b border-gray-100  last:border-0">
+              <div className="h-10 w-10 rounded-xl bg-gray-200 " />
               <div className="flex-1">
-                <div className="h-4 w-40 bg-gray-200 dark:bg-gray-700/50 rounded mb-2" />
-                <div className="h-3 w-24 bg-gray-200 dark:bg-gray-700/50 rounded" />
+                <div className="h-4 w-40 bg-gray-200  rounded mb-2" />
+                <div className="h-3 w-24 bg-gray-200  rounded" />
               </div>
             </div>
           ))}
@@ -146,10 +146,10 @@ export default function PatientDashboard() {
               )}>
                 <stat.icon className="w-5 h-5 text-white" />
               </div>
-              <ArrowUpRight className="w-4 h-4 text-gray-300 dark:text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <ArrowUpRight className="w-4 h-4 text-gray-300  opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
-            <p className="text-2xl font-bold text-gray-900 dark:text-white">{stat.value}</p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{stat.label}</p>
+            <p className="text-2xl font-bold text-gray-900 ">{stat.value}</p>
+            <p className="text-xs text-gray-500  mt-0.5">{stat.label}</p>
           </motion.button>
         ))}
       </div>
@@ -161,7 +161,7 @@ export default function PatientDashboard() {
           transition={{ delay: 0.3 }}
           className="glass-card rounded-2xl p-6"
         >
-          <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+          <h3 className="text-base font-semibold text-gray-900  mb-4 flex items-center gap-2">
             <Activity className="w-4 h-4 text-primary" />
             {t('Quick Actions')}
           </h3>
@@ -175,12 +175,12 @@ export default function PatientDashboard() {
               <button
                 key={action.label}
                 onClick={() => router.push(action.path)}
-                className="flex flex-col items-center gap-2 p-4 rounded-xl bg-gray-50 dark:bg-gray-800/30 border border-gray-100 dark:border-gray-800/50 hover:border-primary/20 hover:bg-primary/5 transition-all duration-200 group"
+                className="flex flex-col items-center gap-2 p-4 rounded-xl bg-gray-50  border border-gray-100  hover:border-primary/20 hover:bg-primary/5 transition-all duration-200 group"
               >
-                <div className="w-10 h-10 rounded-xl bg-white dark:bg-gray-800/50 shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div className="w-10 h-10 rounded-xl bg-white  shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform">
                   <action.icon className={cn('w-5 h-5', action.color)} />
                 </div>
-                <span className="text-xs font-medium text-gray-600 dark:text-gray-400">{action.label}</span>
+                <span className="text-xs font-medium text-gray-600 ">{action.label}</span>
               </button>
             ))}
           </div>
@@ -193,7 +193,7 @@ export default function PatientDashboard() {
           className="glass-card rounded-2xl p-6"
         >
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-base font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+            <h3 className="text-base font-semibold text-gray-900  flex items-center gap-2">
               <Calendar className="w-4 h-4 text-primary" />
               {t('Upcoming Appointments')}
             </h3>
@@ -207,9 +207,9 @@ export default function PatientDashboard() {
 
           {upcomingAppts.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-8 text-center">
-              <Calendar className="w-10 h-10 text-gray-300 dark:text-gray-600 mb-3" />
-              <p className="text-sm text-gray-500 dark:text-gray-400">{t('No upcoming appointments')}</p>
-              <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">{t('Your schedule is clear')}</p>
+              <Calendar className="w-10 h-10 text-gray-300  mb-3" />
+              <p className="text-sm text-gray-500 ">{t('No upcoming appointments')}</p>
+              <p className="text-xs text-gray-400  mt-1">{t('Your schedule is clear')}</p>
             </div>
           ) : (
             <div className="space-y-3">
@@ -219,31 +219,31 @@ export default function PatientDashboard() {
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.5 + i * 0.1 }}
-                  className="flex items-start gap-3 p-3 rounded-xl bg-gray-50 dark:bg-gray-800/30 border border-gray-100 dark:border-gray-800/50"
+                  className="flex items-start gap-3 p-3 rounded-xl bg-gray-50  border border-gray-100 "
                 >
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary/70 flex items-center justify-center text-white flex-shrink-0">
                     <Calendar className="w-5 h-5" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-gray-900 dark:text-white truncate">
+                    <p className="text-sm font-semibold text-gray-900  truncate">
                       {appt.doctorName}
                     </p>
                     <div className="flex items-center gap-3 mt-1">
-                      <span className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
+                      <span className="flex items-center gap-1 text-xs text-gray-500 ">
                         <Calendar className="w-3 h-3" />
                         {formatDate(appt.date)}
                       </span>
-                      <span className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
+                      <span className="flex items-center gap-1 text-xs text-gray-500 ">
                         <Clock className="w-3 h-3" />
                         {appt.time}
                       </span>
                     </div>
                     <div className="flex items-center gap-2 mt-1.5">
-                      <span className="flex items-center gap-1 text-[10px] text-gray-400 dark:text-gray-500">
+                      <span className="flex items-center gap-1 text-[10px] text-gray-400 ">
                         <Stethoscope className="w-3 h-3" />
                         {appt.type}
                       </span>
-                      <span className="flex items-center gap-1 text-[10px] text-gray-400 dark:text-gray-500">
+                      <span className="flex items-center gap-1 text-[10px] text-gray-400 ">
                         <MapPin className="w-3 h-3" />
                         {appt.clinicName}
                       </span>
@@ -251,7 +251,7 @@ export default function PatientDashboard() {
                   </div>
                   <span className={cn(
                     'px-2 py-0.5 rounded-full text-[10px] font-medium',
-                    appt.status === 'scheduled' ? 'bg-primary/10 text-primary' : 'bg-amber-50 text-amber-600 dark:bg-amber-500/10 dark:text-amber-400'
+                    appt.status === 'scheduled' ? 'bg-primary/10 text-primary' : 'bg-amber-50 text-amber-600  '
                   )}>
                     {appt.status === 'scheduled' ? t('Scheduled') : t('In Progress')}
                   </span>
@@ -268,7 +268,7 @@ export default function PatientDashboard() {
         transition={{ delay: 0.5 }}
         className="glass-card rounded-2xl p-6"
       >
-        <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+        <h3 className="text-base font-semibold text-gray-900  mb-4 flex items-center gap-2">
           <Heart className="w-4 h-4 text-rose-500" />
           {t('Health Summary')}
         </h3>
@@ -279,11 +279,11 @@ export default function PatientDashboard() {
             { label: t('Weight'), value: profile.weight, icon: Activity, color: 'text-secondary' },
             { label: t('Biometric'), value: profile.biometricEnabled ? t('Enabled') : t('Disabled'), icon: ShieldCheck, color: profile.biometricEnabled ? 'text-secondary' : 'text-gray-400' },
           ].map((item) => (
-            <div key={item.label} className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-gray-800/30 border border-gray-100 dark:border-gray-800/50">
+            <div key={item.label} className="flex items-center gap-3 p-3 rounded-xl bg-gray-50  border border-gray-100 ">
               <item.icon className={cn('w-5 h-5', item.color)} />
               <div>
-                <p className="text-xs text-gray-500 dark:text-gray-400">{item.label}</p>
-                <p className="text-sm font-semibold text-gray-900 dark:text-white">{item.value}</p>
+                <p className="text-xs text-gray-500 ">{item.label}</p>
+                <p className="text-sm font-semibold text-gray-900 ">{item.value}</p>
               </div>
             </div>
           ))}

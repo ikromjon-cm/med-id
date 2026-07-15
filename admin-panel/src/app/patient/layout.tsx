@@ -29,19 +29,19 @@ export default function PatientLayout({ children }: { children: React.ReactNode 
 
   const sidebarContent = (
     <div className="flex flex-col h-full">
-      <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100 dark:border-gray-800/50">
+      <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100 ">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/20">
             <Activity className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h1 className="text-base font-bold text-gray-900 dark:text-white tracking-tight">{t('MED-ID')}</h1>
-            <p className="text-[10px] text-gray-500 dark:text-gray-400 font-medium tracking-wider uppercase">{t('Patient Cabinet')}</p>
+            <h1 className="text-base font-bold text-gray-900  tracking-tight">{t('MED-ID')}</h1>
+            <p className="text-[10px] text-gray-500  font-medium tracking-wider uppercase">{t('Patient Cabinet')}</p>
           </div>
         </div>
         <button
           onClick={() => setSidebarOpen(false)}
-          className="lg:hidden w-8 h-8 rounded-xl flex items-center justify-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+          className="lg:hidden w-8 h-8 rounded-xl flex items-center justify-center text-gray-400 hover:text-gray-600  hover:bg-gray-100  transition-colors"
         >
           <X className="w-4 h-4" />
         </button>
@@ -60,12 +60,12 @@ export default function PatientLayout({ children }: { children: React.ReactNode 
                   'w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 group',
                   isActive
                     ? 'bg-gradient-to-r from-primary/10 to-secondary/10 text-primary shadow-sm border border-primary/10'
-                    : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-white'
+                    : 'text-gray-600  hover:bg-gray-50  hover:text-gray-900 '
                 )}
               >
                 <div className={cn(
                   'w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200',
-                  isActive ? 'bg-primary text-white shadow-md shadow-primary/20' : 'bg-gray-100 dark:bg-gray-800/50 text-gray-500 dark:text-gray-400 group-hover:bg-gray-200 dark:group-hover:bg-gray-700/50'
+                  isActive ? 'bg-primary text-white shadow-md shadow-primary/20' : 'bg-gray-100  text-gray-500  group-hover:bg-gray-200 '
                 )}>
                   <Icon className="w-4 h-4" />
                 </div>
@@ -79,10 +79,10 @@ export default function PatientLayout({ children }: { children: React.ReactNode 
         </div>
       </nav>
 
-      <div className="px-3 py-4 border-t border-gray-100 dark:border-gray-800/50">
+      <div className="px-3 py-4 border-t border-gray-100 ">
         <button
           onClick={() => router.push('/')}
-          className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-emergency/10 hover:text-emergency transition-all duration-200"
+          className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-gray-600  hover:bg-emergency/10 hover:text-emergency transition-all duration-200"
         >
           <LogOut className="w-5 h-5" />
           <span>{t('Logout')}</span>
@@ -94,9 +94,9 @@ export default function PatientLayout({ children }: { children: React.ReactNode 
   const pageTitle = navItems.find(i => pathname.startsWith(i.path))?.label || 'Dashboard';
 
   return (
-    <div className="min-h-screen bg-bg-main dark:bg-[#0F0F15]">
+    <div className="min-h-screen bg-bg-main ">
       <aside className="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 z-30">
-        <div className="flex-1 flex flex-col min-h-0 glass-card rounded-none border-r border-gray-200/50 dark:border-gray-800/50">
+        <div className="flex-1 flex flex-col min-h-0 glass-card rounded-none border-r border-gray-200/50 ">
           {sidebarContent}
         </div>
       </aside>
@@ -118,7 +118,7 @@ export default function PatientLayout({ children }: { children: React.ReactNode 
               transition={{ type: 'spring', damping: 25, stiffness: 250 }}
               className="fixed inset-y-0 left-0 z-50 w-64 lg:hidden"
             >
-              <div className="flex-1 flex flex-col min-h-0 h-full glass-card rounded-none border-r border-gray-200/50 dark:border-gray-800/50">
+              <div className="flex-1 flex flex-col min-h-0 h-full glass-card rounded-none border-r border-gray-200/50 ">
                 {sidebarContent}
               </div>
             </motion.aside>
@@ -127,18 +127,18 @@ export default function PatientLayout({ children }: { children: React.ReactNode 
       </AnimatePresence>
 
       <div className="lg:pl-64 flex flex-col min-h-screen">
-        <header className="sticky top-0 z-20 glass-card rounded-none border-b border-gray-200/50 dark:border-gray-800/50">
+        <header className="sticky top-0 z-20 glass-card rounded-none border-b border-gray-200/50 ">
           <div className="flex items-center justify-between px-4 sm:px-6 py-3">
             <div className="flex items-center gap-4">
               <button
                 onClick={() => setSidebarOpen(true)}
-                className="lg:hidden w-10 h-10 rounded-xl flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800/50 hover:text-gray-700 dark:hover:text-gray-300 transition-all"
+                className="lg:hidden w-10 h-10 rounded-xl flex items-center justify-center text-gray-500  hover:bg-gray-100  hover:text-gray-700  transition-all"
               >
                 <Menu className="w-5 h-5" />
               </button>
               <div>
-                <h1 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">{pageTitle}</h1>
-                <p className="text-xs text-gray-500 dark:text-gray-400 hidden sm:block">
+                <h1 className="text-lg sm:text-xl font-bold text-gray-900 ">{pageTitle}</h1>
+                <p className="text-xs text-gray-500  hidden sm:block">
                   {t('MED-ID Biometric Medical Platform')}
                 </p>
               </div>
@@ -150,8 +150,8 @@ export default function PatientLayout({ children }: { children: React.ReactNode 
                   JA
                 </div>
                 <div className="hidden sm:block">
-                  <p className="text-sm font-semibold text-gray-900 dark:text-white leading-tight">John Anderson</p>
-                  <p className="text-[10px] text-gray-500 dark:text-gray-400">PAT-001</p>
+                  <p className="text-sm font-semibold text-gray-900  leading-tight">John Anderson</p>
+                  <p className="text-[10px] text-gray-500 ">PAT-001</p>
                 </div>
               </div>
             </div>

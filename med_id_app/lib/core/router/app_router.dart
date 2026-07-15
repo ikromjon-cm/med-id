@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../providers/auth_provider.dart';
 import '../providers/role_provider.dart';
 import '../models/role_model.dart';
+import '../widgets/exit_confirmation_wrapper.dart';
 import '../../features/splash/splash_screen.dart';
 import '../../features/onboarding/onboarding_screen.dart';
 import '../../features/auth/otp_screen.dart';
@@ -214,30 +215,32 @@ class PatientShell extends ConsumerWidget {
     else if (location.startsWith('/patient/notifications')) currentIndex = 3;
     else if (location.startsWith('/patient/qr') || location.startsWith('/patient/access') || location.startsWith('/patient/medical') || location.startsWith('/settings')) currentIndex = 4;
 
-    return Scaffold(
-      body: child,
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10, offset: const Offset(0, -2))],
-        ),
-        child: BottomNavigationBar(
-          currentIndex: currentIndex,
-          onTap: (i) {
-            switch (i) {
-              case 0: context.go('/patient/dashboard');
-              case 1: context.go('/patient/documents');
-              case 2: context.go('/patient/emergency-profile');
-              case 3: context.go('/patient/notifications');
-              case 4: context.go('/patient/qr-code');
-            }
-          },
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.dashboard_outlined), activeIcon: Icon(Icons.dashboard), label: 'Dashboard'),
-            BottomNavigationBarItem(icon: Icon(Icons.description_outlined), activeIcon: Icon(Icons.description), label: 'Documents'),
-            BottomNavigationBarItem(icon: Icon(Icons.warning_amber_outlined), activeIcon: Icon(Icons.warning_amber), label: 'Emergency'),
-            BottomNavigationBarItem(icon: Icon(Icons.notifications_outlined), activeIcon: Icon(Icons.notifications), label: 'Alerts'),
-            BottomNavigationBarItem(icon: Icon(Icons.more_horiz), activeIcon: Icon(Icons.more_horiz), label: 'More'),
-          ],
+    return ExitConfirmationWrapper(
+      child: Scaffold(
+        body: child,
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10, offset: const Offset(0, -2))],
+          ),
+          child: BottomNavigationBar(
+            currentIndex: currentIndex,
+            onTap: (i) {
+              switch (i) {
+                case 0: context.go('/patient/dashboard');
+                case 1: context.go('/patient/documents');
+                case 2: context.go('/patient/emergency-profile');
+                case 3: context.go('/patient/notifications');
+                case 4: context.go('/patient/qr-code');
+              }
+            },
+            items: const [
+              BottomNavigationBarItem(icon: Icon(Icons.dashboard_outlined), activeIcon: Icon(Icons.dashboard), label: 'Dashboard'),
+              BottomNavigationBarItem(icon: Icon(Icons.description_outlined), activeIcon: Icon(Icons.description), label: 'Documents'),
+              BottomNavigationBarItem(icon: Icon(Icons.warning_amber_outlined), activeIcon: Icon(Icons.warning_amber), label: 'Emergency'),
+              BottomNavigationBarItem(icon: Icon(Icons.notifications_outlined), activeIcon: Icon(Icons.notifications), label: 'Alerts'),
+              BottomNavigationBarItem(icon: Icon(Icons.more_horiz), activeIcon: Icon(Icons.more_horiz), label: 'More'),
+            ],
+          ),
         ),
       ),
     );
@@ -257,30 +260,32 @@ class AdminShell extends ConsumerWidget {
     else if (location.startsWith('/admin/access-logs')) currentIndex = 3;
     else if (location.startsWith('/admin/notifications') || location.startsWith('/admin/settings')) currentIndex = 4;
 
-    return Scaffold(
-      body: child,
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10, offset: const Offset(0, -2))],
-        ),
-        child: BottomNavigationBar(
-          currentIndex: currentIndex,
-          onTap: (i) {
-            switch (i) {
-              case 0: context.go('/admin/dashboard');
-              case 1: context.go('/admin/users');
-              case 2: context.go('/admin/analytics');
-              case 3: context.go('/admin/access-logs');
-              case 4: context.go('/admin/notifications');
-            }
-          },
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.dashboard_outlined), activeIcon: Icon(Icons.dashboard), label: 'Dashboard'),
-            BottomNavigationBarItem(icon: Icon(Icons.people_outline), activeIcon: Icon(Icons.people), label: 'Users'),
-            BottomNavigationBarItem(icon: Icon(Icons.analytics_outlined), activeIcon: Icon(Icons.analytics), label: 'Analytics'),
-            BottomNavigationBarItem(icon: Icon(Icons.security_outlined), activeIcon: Icon(Icons.security), label: 'Logs'),
-            BottomNavigationBarItem(icon: Icon(Icons.settings_outlined), activeIcon: Icon(Icons.settings), label: 'More'),
-          ],
+    return ExitConfirmationWrapper(
+      child: Scaffold(
+        body: child,
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10, offset: const Offset(0, -2))],
+          ),
+          child: BottomNavigationBar(
+            currentIndex: currentIndex,
+            onTap: (i) {
+              switch (i) {
+                case 0: context.go('/admin/dashboard');
+                case 1: context.go('/admin/users');
+                case 2: context.go('/admin/analytics');
+                case 3: context.go('/admin/access-logs');
+                case 4: context.go('/admin/notifications');
+              }
+            },
+            items: const [
+              BottomNavigationBarItem(icon: Icon(Icons.dashboard_outlined), activeIcon: Icon(Icons.dashboard), label: 'Dashboard'),
+              BottomNavigationBarItem(icon: Icon(Icons.people_outline), activeIcon: Icon(Icons.people), label: 'Users'),
+              BottomNavigationBarItem(icon: Icon(Icons.analytics_outlined), activeIcon: Icon(Icons.analytics), label: 'Analytics'),
+              BottomNavigationBarItem(icon: Icon(Icons.security_outlined), activeIcon: Icon(Icons.security), label: 'Logs'),
+              BottomNavigationBarItem(icon: Icon(Icons.settings_outlined), activeIcon: Icon(Icons.settings), label: 'More'),
+            ],
+          ),
         ),
       ),
     );
@@ -299,28 +304,30 @@ class DoctorShell extends ConsumerWidget {
     else if (location.startsWith('/doctor/appointments')) currentIndex = 2;
     else if (location.startsWith('/settings')) currentIndex = 3;
 
-    return Scaffold(
-      body: child,
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10, offset: const Offset(0, -2))],
-        ),
-        child: BottomNavigationBar(
-          currentIndex: currentIndex,
-          onTap: (i) {
-            switch (i) {
-              case 0: context.go('/doctor/dashboard');
-              case 1: context.go('/doctor/patient-search');
-              case 2: context.go('/doctor/appointments');
-              case 3: context.go('/settings');
-            }
-          },
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.dashboard_outlined), activeIcon: Icon(Icons.dashboard), label: 'Dashboard'),
-            BottomNavigationBarItem(icon: Icon(Icons.people_outline), activeIcon: Icon(Icons.people), label: 'Patients'),
-            BottomNavigationBarItem(icon: Icon(Icons.calendar_month_outlined), activeIcon: Icon(Icons.calendar_month), label: 'Appointments'),
-            BottomNavigationBarItem(icon: Icon(Icons.more_horiz), activeIcon: Icon(Icons.more_horiz), label: 'More'),
-          ],
+    return ExitConfirmationWrapper(
+      child: Scaffold(
+        body: child,
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10, offset: const Offset(0, -2))],
+          ),
+          child: BottomNavigationBar(
+            currentIndex: currentIndex,
+            onTap: (i) {
+              switch (i) {
+                case 0: context.go('/doctor/dashboard');
+                case 1: context.go('/doctor/patient-search');
+                case 2: context.go('/doctor/appointments');
+                case 3: context.go('/settings');
+              }
+            },
+            items: const [
+              BottomNavigationBarItem(icon: Icon(Icons.dashboard_outlined), activeIcon: Icon(Icons.dashboard), label: 'Dashboard'),
+              BottomNavigationBarItem(icon: Icon(Icons.people_outline), activeIcon: Icon(Icons.people), label: 'Patients'),
+              BottomNavigationBarItem(icon: Icon(Icons.calendar_month_outlined), activeIcon: Icon(Icons.calendar_month), label: 'Appointments'),
+              BottomNavigationBarItem(icon: Icon(Icons.more_horiz), activeIcon: Icon(Icons.more_horiz), label: 'More'),
+            ],
+          ),
         ),
       ),
     );
@@ -340,30 +347,32 @@ class ClinicShell extends ConsumerWidget {
     else if (location.startsWith('/clinic/finance')) currentIndex = 3;
     else if (location.startsWith('/settings')) currentIndex = 4;
 
-    return Scaffold(
-      body: child,
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10, offset: const Offset(0, -2))],
-        ),
-        child: BottomNavigationBar(
-          currentIndex: currentIndex,
-          onTap: (i) {
-            switch (i) {
-              case 0: context.go('/clinic/dashboard');
-              case 1: context.go('/clinic/queue');
-              case 2: context.go('/clinic/doctor-schedule');
-              case 3: context.go('/clinic/finance');
-              case 4: context.go('/settings');
-            }
-          },
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.dashboard_outlined), activeIcon: Icon(Icons.dashboard), label: 'Dashboard'),
-            BottomNavigationBarItem(icon: Icon(Icons.queue_outlined), activeIcon: Icon(Icons.queue), label: 'Queue'),
-            BottomNavigationBarItem(icon: Icon(Icons.schedule_outlined), activeIcon: Icon(Icons.schedule), label: 'Schedule'),
-            BottomNavigationBarItem(icon: Icon(Icons.account_balance_outlined), activeIcon: Icon(Icons.account_balance), label: 'Finance'),
-            BottomNavigationBarItem(icon: Icon(Icons.more_horiz), activeIcon: Icon(Icons.more_horiz), label: 'More'),
-          ],
+    return ExitConfirmationWrapper(
+      child: Scaffold(
+        body: child,
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10, offset: const Offset(0, -2))],
+          ),
+          child: BottomNavigationBar(
+            currentIndex: currentIndex,
+            onTap: (i) {
+              switch (i) {
+                case 0: context.go('/clinic/dashboard');
+                case 1: context.go('/clinic/queue');
+                case 2: context.go('/clinic/doctor-schedule');
+                case 3: context.go('/clinic/finance');
+                case 4: context.go('/settings');
+              }
+            },
+            items: const [
+              BottomNavigationBarItem(icon: Icon(Icons.dashboard_outlined), activeIcon: Icon(Icons.dashboard), label: 'Dashboard'),
+              BottomNavigationBarItem(icon: Icon(Icons.queue_outlined), activeIcon: Icon(Icons.queue), label: 'Queue'),
+              BottomNavigationBarItem(icon: Icon(Icons.schedule_outlined), activeIcon: Icon(Icons.schedule), label: 'Schedule'),
+              BottomNavigationBarItem(icon: Icon(Icons.account_balance_outlined), activeIcon: Icon(Icons.account_balance), label: 'Finance'),
+              BottomNavigationBarItem(icon: Icon(Icons.more_horiz), activeIcon: Icon(Icons.more_horiz), label: 'More'),
+            ],
+          ),
         ),
       ),
     );
@@ -382,28 +391,30 @@ class EmergencyShell extends ConsumerWidget {
     else if (location.startsWith('/emergency/biometric') || location.startsWith('/emergency/profile')) currentIndex = 2;
     else if (location.startsWith('/patient/notifications') || location.startsWith('/settings')) currentIndex = 3;
 
-    return Scaffold(
-      body: child,
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10, offset: const Offset(0, -2))],
-        ),
-        child: BottomNavigationBar(
-          currentIndex: currentIndex,
-          onTap: (i) {
-            switch (i) {
-              case 0: context.go('/emergency/dashboard');
-              case 1: context.go('/emergency/active');
-              case 2: context.go('/emergency/biometric');
-              case 3: context.go('/settings');
-            }
-          },
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.dashboard_outlined), activeIcon: Icon(Icons.dashboard), label: 'Dashboard'),
-            BottomNavigationBarItem(icon: Icon(Icons.emergency_outlined), activeIcon: Icon(Icons.emergency), label: 'Active'),
-            BottomNavigationBarItem(icon: Icon(Icons.fingerprint), activeIcon: Icon(Icons.fingerprint), label: 'Biometric'),
-            BottomNavigationBarItem(icon: Icon(Icons.more_horiz), activeIcon: Icon(Icons.more_horiz), label: 'More'),
-          ],
+    return ExitConfirmationWrapper(
+      child: Scaffold(
+        body: child,
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10, offset: const Offset(0, -2))],
+          ),
+          child: BottomNavigationBar(
+            currentIndex: currentIndex,
+            onTap: (i) {
+              switch (i) {
+                case 0: context.go('/emergency/dashboard');
+                case 1: context.go('/emergency/active');
+                case 2: context.go('/emergency/biometric');
+                case 3: context.go('/settings');
+              }
+            },
+            items: const [
+              BottomNavigationBarItem(icon: Icon(Icons.dashboard_outlined), activeIcon: Icon(Icons.dashboard), label: 'Dashboard'),
+              BottomNavigationBarItem(icon: Icon(Icons.emergency_outlined), activeIcon: Icon(Icons.emergency), label: 'Active'),
+              BottomNavigationBarItem(icon: Icon(Icons.fingerprint), activeIcon: Icon(Icons.fingerprint), label: 'Biometric'),
+              BottomNavigationBarItem(icon: Icon(Icons.more_horiz), activeIcon: Icon(Icons.more_horiz), label: 'More'),
+            ],
+          ),
         ),
       ),
     );

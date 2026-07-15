@@ -20,7 +20,7 @@ import { t } from '@/lib/i18n';
 const statusVariants: Record<string, string> = {
   available: 'bg-[#00C896]/10 text-[#00C896]',
   on_duty: 'bg-primary/10 text-primary',
-  off_duty: 'bg-gray-100 dark:bg-gray-800 text-gray-500',
+  off_duty: 'bg-gray-100  text-gray-500',
 };
 
 const roleUzLabels: Record<string, string> = {
@@ -78,10 +78,10 @@ export default function EmergencyDashboardPage() {
       <div className="flex items-center justify-between">
         <div>
           <div className="flex items-center gap-3">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('Emergency Management')}</h2>
+            <h2 className="text-2xl font-bold text-gray-900 ">{t('Emergency Management')}</h2>
             <EmergencyBadge count={activeAlerts.length} />
           </div>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('Monitor and manage emergency alerts and access')}</p>
+          <p className="text-sm text-gray-500  mt-1">{t('Monitor and manage emergency alerts and access')}</p>
         </div>
         <div className="flex items-center gap-2">
           <motion.button
@@ -124,8 +124,8 @@ export default function EmergencyDashboardPage() {
       >
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h3 className="text-base font-semibold text-gray-900 dark:text-white">{t('Favqulodda Xodimlar')}</h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">{t('Emergency staff management')}</p>
+            <h3 className="text-base font-semibold text-gray-900 ">{t('Favqulodda Xodimlar')}</h3>
+            <p className="text-sm text-gray-500  mt-0.5">{t('Emergency staff management')}</p>
           </div>
           <motion.button
             whileHover={{ scale: 1.02 }}
@@ -143,14 +143,14 @@ export default function EmergencyDashboardPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-gray-100 dark:border-gray-800/50">
-                  <th className="text-left py-3 px-2 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{t('Name')}</th>
-                  <th className="text-left py-3 px-2 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{t('Email')}</th>
-                  <th className="text-left py-3 px-2 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{t('Phone')}</th>
-                  <th className="text-left py-3 px-2 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{t('Role')}</th>
-                  <th className="text-left py-3 px-2 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{t('Status')}</th>
-                  <th className="text-left py-3 px-2 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{t('Clinic')}</th>
-                  <th className="text-right py-3 px-2 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{t('Actions')}</th>
+                <tr className="border-b border-gray-100 ">
+                  <th className="text-left py-3 px-2 text-xs font-medium text-gray-500  uppercase tracking-wider">{t('Name')}</th>
+                  <th className="text-left py-3 px-2 text-xs font-medium text-gray-500  uppercase tracking-wider">{t('Email')}</th>
+                  <th className="text-left py-3 px-2 text-xs font-medium text-gray-500  uppercase tracking-wider">{t('Phone')}</th>
+                  <th className="text-left py-3 px-2 text-xs font-medium text-gray-500  uppercase tracking-wider">{t('Role')}</th>
+                  <th className="text-left py-3 px-2 text-xs font-medium text-gray-500  uppercase tracking-wider">{t('Status')}</th>
+                  <th className="text-left py-3 px-2 text-xs font-medium text-gray-500  uppercase tracking-wider">{t('Clinic')}</th>
+                  <th className="text-right py-3 px-2 text-xs font-medium text-gray-500  uppercase tracking-wider">{t('Actions')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -160,11 +160,11 @@ export default function EmergencyDashboardPage() {
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.03 }}
-                    className="border-b border-gray-50 dark:border-gray-800/30 hover:bg-gray-50 dark:hover:bg-gray-800/20 transition-colors"
+                    className="border-b border-gray-50  hover:bg-gray-50  transition-colors"
                   >
-                    <td className="py-3 px-2 font-medium text-gray-900 dark:text-white">{staff.name}</td>
-                    <td className="py-3 px-2 text-gray-600 dark:text-gray-400">{staff.email}</td>
-                    <td className="py-3 px-2 text-gray-600 dark:text-gray-400">{staff.phone}</td>
+                    <td className="py-3 px-2 font-medium text-gray-900 ">{staff.name}</td>
+                    <td className="py-3 px-2 text-gray-600 ">{staff.email}</td>
+                    <td className="py-3 px-2 text-gray-600 ">{staff.phone}</td>
                     <td className="py-3 px-2">
                       <span className="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary font-medium">
                         {t(roleUzLabels[staff.role] || staff.role)}
@@ -175,7 +175,7 @@ export default function EmergencyDashboardPage() {
                         {t(statusUzLabels[staff.status] || staff.status)}
                       </span>
                     </td>
-                    <td className="py-3 px-2 text-gray-600 dark:text-gray-400">{staff.clinic}</td>
+                    <td className="py-3 px-2 text-gray-600 ">{staff.clinic}</td>
                     <td className="py-3 px-2 text-right">
                       <button
                         onClick={() => setStaffList(prev => prev.filter(s => s.id !== staff.id))}
@@ -226,17 +226,17 @@ export default function EmergencyDashboardPage() {
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.03 }}
-                  className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors text-sm"
+                  className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-gray-50  transition-colors text-sm"
                 >
                   <div className="w-2 h-2 rounded-full bg-emergency flex-shrink-0" />
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{log.patientName}</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">by {log.accessedBy} · {log.accessType}</p>
+                    <p className="text-sm font-medium text-gray-900  truncate">{log.patientName}</p>
+                    <p className="text-xs text-gray-500 ">by {log.accessedBy} · {log.accessType}</p>
                   </div>
                   <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
                     log.status === 'GRANTED' ? 'bg-[#00C896]/10 text-[#00C896]' :
                     log.status === 'DENIED' ? 'bg-emergency/10 text-emergency' :
-                    'bg-amber-50 dark:bg-amber-500/10 text-amber-500'
+                    'bg-amber-50  text-amber-500'
                   }`}>{log.status}</span>
                 </motion.div>
               ))}
@@ -248,8 +248,8 @@ export default function EmergencyDashboardPage() {
       <div className="glass-card rounded-2xl p-6">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h3 className="text-base font-semibold text-gray-900 dark:text-white">{t('Quick Actions')}</h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">{t('Emergency management tools')}</p>
+            <h3 className="text-base font-semibold text-gray-900 ">{t('Quick Actions')}</h3>
+            <p className="text-sm text-gray-500  mt-0.5">{t('Emergency management tools')}</p>
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -260,8 +260,8 @@ export default function EmergencyDashboardPage() {
             className="emergency-card rounded-2xl p-4 text-left hover:shadow-lg transition-all"
           >
             <Bell className="w-6 h-6 text-emergency mb-2" />
-            <p className="text-sm font-semibold text-gray-900 dark:text-white">{t('View All Emergencies')}</p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{t('See all active emergency alerts')}</p>
+            <p className="text-sm font-semibold text-gray-900 ">{t('View All Emergencies')}</p>
+            <p className="text-xs text-gray-500  mt-0.5">{t('See all active emergency alerts')}</p>
           </motion.button>
           <motion.button
             whileHover={{ scale: 1.02 }}
@@ -270,8 +270,8 @@ export default function EmergencyDashboardPage() {
             className="glass-card rounded-2xl p-4 text-left hover:shadow-lg transition-all"
           >
             <List className="w-6 h-6 text-primary mb-2" />
-            <p className="text-sm font-semibold text-gray-900 dark:text-white">{t('Access Logs')}</p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{t('Review emergency access history')}</p>
+            <p className="text-sm font-semibold text-gray-900 ">{t('Access Logs')}</p>
+            <p className="text-xs text-gray-500  mt-0.5">{t('Review emergency access history')}</p>
           </motion.button>
           <motion.button
             whileHover={{ scale: 1.02 }}
@@ -279,8 +279,8 @@ export default function EmergencyDashboardPage() {
             className="glass-card rounded-2xl p-4 text-left hover:shadow-lg transition-all"
           >
             <AlertTriangle className="w-6 h-6 text-amber-500 mb-2" />
-            <p className="text-sm font-semibold text-gray-900 dark:text-white">{t('Emergency Protocols')}</p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{t('View standard operating procedures')}</p>
+            <p className="text-sm font-semibold text-gray-900 ">{t('Emergency Protocols')}</p>
+            <p className="text-xs text-gray-500  mt-0.5">{t('View standard operating procedures')}</p>
           </motion.button>
           <motion.button
             whileHover={{ scale: 1.02 }}
@@ -288,8 +288,8 @@ export default function EmergencyDashboardPage() {
             className="glass-card rounded-2xl p-4 text-left hover:shadow-lg transition-all"
           >
             <ExternalLink className="w-6 h-6 text-[#00C896] mb-2" />
-            <p className="text-sm font-semibold text-gray-900 dark:text-white">{t('System Health')}</p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{t('Check system and service status')}</p>
+            <p className="text-sm font-semibold text-gray-900 ">{t('System Health')}</p>
+            <p className="text-xs text-gray-500  mt-0.5">{t('Check system and service status')}</p>
           </motion.button>
         </div>
       </div>
@@ -304,7 +304,7 @@ export default function EmergencyDashboardPage() {
           <>
             <button
               onClick={() => setShowStaffModal(false)}
-              className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-colors"
+              className="px-4 py-2 text-sm font-medium text-gray-600  hover:bg-gray-100  rounded-xl transition-colors"
             >
               {t('Cancel')}
             </button>

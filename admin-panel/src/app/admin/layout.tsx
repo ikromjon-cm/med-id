@@ -8,7 +8,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-bg-main dark:bg-[#0F0F15]">
+    <div className="min-h-screen bg-bg-main ">
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <div className="lg:pl-64 flex flex-col min-h-screen">
         <Header onMenuToggle={() => setSidebarOpen(true)} />

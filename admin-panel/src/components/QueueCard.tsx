@@ -13,7 +13,7 @@ interface QueueCardProps {
 
 const priorityColors: Record<string, { bg: string; text: string; dot: string; label: string }> = {
   LOW: { bg: 'bg-[#00C896]/10', text: 'text-[#00C896]', dot: 'bg-[#00C896]', label: t('Low') },
-  MEDIUM: { bg: 'bg-amber-50 dark:bg-amber-500/10', text: 'text-amber-500', dot: 'bg-amber-500', label: t('Medium') },
+  MEDIUM: { bg: 'bg-amber-50 ', text: 'text-amber-500', dot: 'bg-amber-500', label: t('Medium') },
   HIGH: { bg: 'bg-emergency/10', text: 'text-emergency', dot: 'bg-emergency', label: t('High') },
   CRITICAL: { bg: 'bg-emergency/10', text: 'text-emergency', dot: 'bg-emergency pulse-dot', label: t('Critical') },
 };
@@ -34,17 +34,17 @@ export default function QueueCard({ entry, delay = 0 }: QueueCardProps) {
       className={cn(
         'flex items-center gap-4 p-3 rounded-xl transition-colors',
         `queue-priority-${entry.priority.toLowerCase()}`,
-        'bg-white/50 dark:bg-gray-800/20 hover:bg-gray-50 dark:hover:bg-gray-800/40'
+        'bg-white/50  hover:bg-gray-50 '
       )}
     >
       <div className={cn('w-3 h-3 rounded-full flex-shrink-0', pc.dot)} />
       <div className="flex items-center gap-3 flex-1 min-w-0">
-        <div className="w-9 h-9 rounded-lg bg-gray-100 dark:bg-gray-800/50 flex items-center justify-center flex-shrink-0">
-          <User className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+        <div className="w-9 h-9 rounded-lg bg-gray-100  flex items-center justify-center flex-shrink-0">
+          <User className="w-4 h-4 text-gray-500 " />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{entry.patientName}</p>
-          <div className="flex items-center gap-2 mt-0.5 text-xs text-gray-500 dark:text-gray-400">
+          <p className="text-sm font-medium text-gray-900  truncate">{entry.patientName}</p>
+          <div className="flex items-center gap-2 mt-0.5 text-xs text-gray-500 ">
             <span className={cn('capitalize font-medium', statusStyles[entry.status])}>{entry.status.replace('_', ' ')}</span>
             <span className="flex items-center gap-1">
               <Clock className="w-3 h-3" />

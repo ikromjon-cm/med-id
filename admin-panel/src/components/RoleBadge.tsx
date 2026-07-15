@@ -10,8 +10,8 @@ interface RoleBadgeProps {
 
 const roleConfig: Record<string, { color: string; bg: string; icon: React.ReactNode }> = {
   admin: {
-    color: 'text-purple-600 dark:text-purple-400',
-    bg: 'bg-purple-50 dark:bg-purple-500/10',
+    color: 'text-purple-600 ',
+    bg: 'bg-purple-50 ',
     icon: <Shield className="w-3.5 h-3.5" />,
   },
   doctor: {
@@ -25,13 +25,13 @@ const roleConfig: Record<string, { color: string; bg: string; icon: React.ReactN
     icon: <Heart className="w-3.5 h-3.5" />,
   },
   receptionist: {
-    color: 'text-amber-600 dark:text-amber-400',
-    bg: 'bg-amber-50 dark:bg-amber-500/10',
+    color: 'text-amber-600 ',
+    bg: 'bg-amber-50 ',
     icon: <Users className="w-3.5 h-3.5" />,
   },
   patient: {
     color: 'text-blue-500',
-    bg: 'bg-blue-50 dark:bg-blue-500/10',
+    bg: 'bg-blue-50 ',
     icon: <User className="w-3.5 h-3.5" />,
   },
 };
@@ -39,7 +39,7 @@ const roleConfig: Record<string, { color: string; bg: string; icon: React.ReactN
 export default function RoleBadge({ role }: RoleBadgeProps) {
   const config = roleConfig[role.toLowerCase()] || {
     color: 'text-gray-500',
-    bg: 'bg-gray-100 dark:bg-gray-800/50',
+    bg: 'bg-gray-100 ',
     icon: <User className="w-3.5 h-3.5" />,
   };
 

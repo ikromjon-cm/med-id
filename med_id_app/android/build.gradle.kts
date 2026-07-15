@@ -17,7 +17,14 @@ subprojects {
 }
 subprojects {
     project.evaluationDependsOn(":app")
-
+    
+    project.configurations.configureEach {
+        resolutionStrategy.eachDependency {
+            if (requested.group == "androidx.test.espresso") {
+                useVersion("3.5.1")
+            }
+        }
+    }
 }
 
 tasks.register<Delete>("clean") {

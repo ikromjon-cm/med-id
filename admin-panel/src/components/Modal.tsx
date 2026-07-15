@@ -47,13 +47,13 @@ export default function Modal({ isOpen, onClose, title, children, footer, size =
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className={`relative w-full ${sizeClasses[size]} bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800 max-h-[90vh] flex flex-col`}
+            className={`relative w-full ${sizeClasses[size]} bg-white  rounded-2xl shadow-2xl border border-gray-200  max-h-[90vh] flex flex-col`}
           >
-            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-800">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{title}</h2>
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 ">
+              <h2 className="text-lg font-semibold text-gray-900 ">{title}</h2>
               <button
                 onClick={onClose}
-                className="w-8 h-8 rounded-xl flex items-center justify-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                className="w-8 h-8 rounded-xl flex items-center justify-center text-gray-400 hover:text-gray-600  hover:bg-gray-100  transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -62,7 +62,7 @@ export default function Modal({ isOpen, onClose, title, children, footer, size =
               {children}
             </div>
             {footer && (
-              <div className="px-6 py-4 border-t border-gray-100 dark:border-gray-800 flex items-center justify-end gap-3">
+              <div className="px-6 py-4 border-t border-gray-100  flex items-center justify-end gap-3">
                 {footer}
               </div>
             )}

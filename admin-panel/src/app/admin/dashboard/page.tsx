@@ -67,8 +67,8 @@ export default function DashboardPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('Dashboard Overview')}</h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('Real-time platform statistics and metrics')}</p>
+          <h2 className="text-2xl font-bold text-gray-900 ">{t('Dashboard Overview')}</h2>
+          <p className="text-sm text-gray-500  mt-1">{t('Real-time platform statistics and metrics')}</p>
         </div>
         <motion.button
           whileHover={{ scale: 1.02 }}
@@ -134,7 +134,7 @@ export default function DashboardPage() {
             <ChartCard title={t('Users Growth')} subtitle={t('Monthly platform user growth')}>
               <ResponsiveContainer width="100%" height={300}>
                 <LineChart data={userGrowth}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:opacity-20" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="" />
                   <XAxis dataKey="name" tick={{ fontSize: 12 }} stroke="#9ca3af" />
                   <YAxis tick={{ fontSize: 12 }} stroke="#9ca3af" />
                   <Tooltip
@@ -166,7 +166,7 @@ export default function DashboardPage() {
                       <stop offset="100%" stopColor="#0F6FFF" stopOpacity={0} />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:opacity-20" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="" />
                   <XAxis dataKey="name" tick={{ fontSize: 12 }} stroke="#9ca3af" />
                   <YAxis tick={{ fontSize: 12 }} stroke="#9ca3af" />
                   <Tooltip
@@ -197,7 +197,7 @@ export default function DashboardPage() {
             <ChartCard title={t('Documents by Type')} subtitle={t('Distribution of medical documents')} className="lg:col-span-2">
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={documentStats}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:opacity-20" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="" />
                   <XAxis dataKey="name" tick={{ fontSize: 11 }} stroke="#9ca3af" angle={-20} textAnchor="end" height={60} />
                   <YAxis tick={{ fontSize: 12 }} stroke="#9ca3af" />
                   <Tooltip
@@ -260,19 +260,19 @@ export default function DashboardPage() {
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: i * 0.05 }}
-                className="flex items-center gap-4 py-3 border-b last:border-b-0 border-gray-50 dark:border-gray-800/30"
+                className="flex items-center gap-4 py-3 border-b last:border-b-0 border-gray-50 "
               >
                 <div className={cn(
                   'w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0',
-                  i < 3 ? 'bg-primary/10 text-primary' : i < 6 ? 'bg-[#00C896]/10 text-[#00C896]' : 'bg-amber-50 dark:bg-amber-500/10 text-amber-500'
+                  i < 3 ? 'bg-primary/10 text-primary' : i < 6 ? 'bg-[#00C896]/10 text-[#00C896]' : 'bg-amber-50  text-amber-500'
                 )}>
                   {i < 3 ? <UserPlus className="w-4 h-4" /> : i < 6 ? <Activity className="w-4 h-4" /> : <Clock className="w-4 h-4" />}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm text-gray-900 dark:text-white truncate">{item.action}</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">{t('by')} {item.user}</p>
+                  <p className="text-sm text-gray-900  truncate">{item.action}</p>
+                  <p className="text-xs text-gray-500 ">{t('by')} {item.user}</p>
                 </div>
-                <span className="text-xs text-gray-400 dark:text-gray-500 whitespace-nowrap">{item.time}</span>
+                <span className="text-xs text-gray-400  whitespace-nowrap">{item.time}</span>
               </motion.div>
             ))}
           </div>

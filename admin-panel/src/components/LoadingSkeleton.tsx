@@ -17,11 +17,11 @@ export default function LoadingSkeleton({ className, count = 1, type = 'text' }:
         {skeletons.map(i => (
           <div key={i} className="glass-card rounded-2xl p-6 animate-pulse">
             <div className="flex items-center justify-between mb-4">
-              <div className="h-10 w-10 rounded-xl bg-gray-200 dark:bg-gray-700/50" />
-              <div className="h-4 w-16 rounded bg-gray-200 dark:bg-gray-700/50" />
+              <div className="h-10 w-10 rounded-xl bg-gray-200 " />
+              <div className="h-4 w-16 rounded bg-gray-200 " />
             </div>
-            <div className="h-8 w-24 rounded bg-gray-200 dark:bg-gray-700/50 mb-2" />
-            <div className="h-4 w-32 rounded bg-gray-200 dark:bg-gray-700/50" />
+            <div className="h-8 w-24 rounded bg-gray-200  mb-2" />
+            <div className="h-4 w-32 rounded bg-gray-200 " />
           </div>
         ))}
       </div>
@@ -31,8 +31,8 @@ export default function LoadingSkeleton({ className, count = 1, type = 'text' }:
   if (type === 'chart') {
     return (
       <div className={cn('glass-card rounded-2xl p-6 animate-pulse', className)}>
-        <div className="h-5 w-40 rounded bg-gray-200 dark:bg-gray-700/50 mb-6" />
-        <div className="h-64 rounded-xl bg-gray-100 dark:bg-gray-800/30" />
+        <div className="h-5 w-40 rounded bg-gray-200  mb-6" />
+        <div className="h-64 rounded-xl bg-gray-100 " />
       </div>
     );
   }
@@ -41,17 +41,17 @@ export default function LoadingSkeleton({ className, count = 1, type = 'text' }:
     return (
       <div className={cn('glass-card rounded-2xl p-6 animate-pulse', className)}>
         <div className="flex items-center justify-between mb-6">
-          <div className="h-5 w-40 rounded bg-gray-200 dark:bg-gray-700/50" />
-          <div className="h-9 w-32 rounded-lg bg-gray-200 dark:bg-gray-700/50" />
+          <div className="h-5 w-40 rounded bg-gray-200 " />
+          <div className="h-9 w-32 rounded-lg bg-gray-200 " />
         </div>
         {skeletons.map(i => (
-          <div key={i} className="flex items-center gap-4 py-3 border-b border-gray-100 dark:border-gray-800/30">
-            <div className="h-4 w-16 rounded bg-gray-200 dark:bg-gray-700/50" />
-            <div className="h-4 w-36 rounded bg-gray-200 dark:bg-gray-700/50" />
-            <div className="h-4 w-48 rounded bg-gray-200 dark:bg-gray-700/50" />
-            <div className="h-4 w-24 rounded bg-gray-200 dark:bg-gray-700/50" />
-            <div className="h-6 w-20 rounded-full bg-gray-200 dark:bg-gray-700/50" />
-            <div className="h-4 w-24 rounded bg-gray-200 dark:bg-gray-700/50" />
+          <div key={i} className="flex items-center gap-4 py-3 border-b border-gray-100 ">
+            <div className="h-4 w-16 rounded bg-gray-200 " />
+            <div className="h-4 w-36 rounded bg-gray-200 " />
+            <div className="h-4 w-48 rounded bg-gray-200 " />
+            <div className="h-4 w-24 rounded bg-gray-200 " />
+            <div className="h-6 w-20 rounded-full bg-gray-200 " />
+            <div className="h-4 w-24 rounded bg-gray-200 " />
           </div>
         ))}
       </div>
@@ -61,7 +61,7 @@ export default function LoadingSkeleton({ className, count = 1, type = 'text' }:
   return (
     <div className={cn('animate-pulse', className)}>
       {skeletons.map(i => (
-        <div key={i} className="h-4 bg-gray-200 dark:bg-gray-700/50 rounded w-full mb-2" />
+        <div key={i} className="h-4 bg-gray-200  rounded w-full mb-2" />
       ))}
     </div>
   );

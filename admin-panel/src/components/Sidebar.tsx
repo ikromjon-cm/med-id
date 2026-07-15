@@ -59,17 +59,17 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
   const sidebarContent = (
     <div className="flex flex-col h-full">
-      <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100 dark:border-gray-800/50">
+      <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100 ">
         <div className="flex items-center gap-3">
           <Image src="/logo.jpg" alt="MED-ID" width={36} height={36} className="rounded-xl" />
           <div>
-            <h1 className="text-base font-bold text-gray-900 dark:text-white tracking-tight">{t('MED-ID')}</h1>
-            <p className="text-[10px] text-gray-500 dark:text-gray-400 font-medium tracking-wider uppercase">{t('Admin Panel')}</p>
+            <h1 className="text-base font-bold text-gray-900  tracking-tight">{t('MED-ID')}</h1>
+            <p className="text-[10px] text-gray-500  font-medium tracking-wider uppercase">{t('Admin Panel')}</p>
           </div>
         </div>
         <button
           onClick={onClose}
-          className="lg:hidden w-8 h-8 rounded-xl flex items-center justify-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+          className="lg:hidden w-8 h-8 rounded-xl flex items-center justify-center text-gray-400 hover:text-gray-600  hover:bg-gray-100  transition-colors"
         >
           <X className="w-4 h-4" />
         </button>
@@ -78,7 +78,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       <nav className="flex-1 px-3 py-4 overflow-y-auto">
         {navSections.map((section) => (
           <div key={section.title} className="mb-4 last:mb-0">
-            <p className="px-4 mb-1 text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
+            <p className="px-4 mb-1 text-[10px] font-semibold text-gray-400  uppercase tracking-widest">
               {section.title}
             </p>
             <div className="space-y-0.5">
@@ -93,7 +93,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                       'w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200',
                       isActive
                         ? 'bg-primary text-white shadow-lg shadow-primary/20'
-                        : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-white'
+                        : 'text-gray-600  hover:bg-gray-100  hover:text-gray-900 '
                     )}
                   >
                     <Icon className="w-5 h-5 flex-shrink-0" />
@@ -112,10 +112,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         ))}
       </nav>
 
-      <div className="px-3 py-4 border-t border-gray-100 dark:border-gray-800/50">
+      <div className="px-3 py-4 border-t border-gray-100 ">
         <button
-          onClick={() => router.push('/login')}
-          className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-emergency/10 hover:text-emergency transition-all duration-200"
+          onClick={() => { document.cookie = 'medid_role=; path=/; max-age=0'; window.location.href = '/login'; }}
+          className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-gray-600  hover:bg-emergency/10 hover:text-emergency transition-all duration-200"
         >
           <LogOut className="w-5 h-5" />
           <span>{t('Logout')}</span>
@@ -127,7 +127,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   return (
     <>
       <aside className="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 z-30">
-        <div className="flex-1 flex flex-col min-h-0 glass-card rounded-none border-r border-gray-200/50 dark:border-gray-800/50">
+        <div className="flex-1 flex flex-col min-h-0 glass-card rounded-none border-r border-gray-200/50 ">
           {sidebarContent}
         </div>
       </aside>
@@ -149,7 +149,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               transition={{ type: 'spring', damping: 25, stiffness: 250 }}
               className="fixed inset-y-0 left-0 z-50 w-64 lg:hidden"
             >
-              <div className="flex-1 flex flex-col min-h-0 h-full glass-card rounded-none border-r border-gray-200/50 dark:border-gray-800/50">
+              <div className="flex-1 flex flex-col min-h-0 h-full glass-card rounded-none border-r border-gray-200/50 ">
                 {sidebarContent}
               </div>
             </motion.aside>

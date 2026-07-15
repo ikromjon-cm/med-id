@@ -83,12 +83,12 @@ export default function ProfilePage() {
       <div className="space-y-6">
         {[1, 2, 3, 4].map(i => (
           <div key={i} className="glass-card rounded-2xl p-6 animate-pulse">
-            <div className="h-5 w-40 bg-gray-200 dark:bg-gray-700/50 rounded mb-4" />
+            <div className="h-5 w-40 bg-gray-200  rounded mb-4" />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[1, 2, 3, 4].map(j => (
                 <div key={j}>
-                  <div className="h-3 w-20 bg-gray-200 dark:bg-gray-700/50 rounded mb-2" />
-                  <div className="h-10 w-full bg-gray-200 dark:bg-gray-700/50 rounded-xl" />
+                  <div className="h-3 w-20 bg-gray-200  rounded mb-2" />
+                  <div className="h-10 w-full bg-gray-200  rounded-xl" />
                 </div>
               ))}
             </div>
@@ -116,8 +116,8 @@ export default function ProfilePage() {
               {profile.name.split(' ').map(n => n[0]).join('')}
             </div>
             <div>
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white">{profile.name}</h2>
-              <p className="text-sm text-gray-500 dark:text-gray-400">{t('Patient ID')}: {profile.id}</p>
+              <h2 className="text-xl font-bold text-gray-900 ">{profile.name}</h2>
+              <p className="text-sm text-gray-500 ">{t('Patient ID')}: {profile.id}</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -136,7 +136,7 @@ export default function ProfilePage() {
               'px-3 py-1 rounded-full text-xs font-medium',
               profile.biometricEnabled
                 ? 'bg-secondary/10 text-secondary'
-                : 'bg-gray-100 dark:bg-gray-800/50 text-gray-500'
+                : 'bg-gray-100  text-gray-500'
             )}>
               {profile.biometricEnabled ? t('Biometric ON') : t('Biometric OFF')}
             </span>
@@ -152,7 +152,7 @@ export default function ProfilePage() {
       >
         <div className="flex items-center gap-2 mb-5">
           <User className="w-4 h-4 text-primary" />
-          <h3 className="text-base font-semibold text-gray-900 dark:text-white">{t('Personal Information')}</h3>
+          <h3 className="text-base font-semibold text-gray-900 ">{t('Personal Information')}</h3>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {[
@@ -163,7 +163,7 @@ export default function ProfilePage() {
             { label: t('Gender'), value: form.gender, key: 'gender', icon: VenusAndMars, as: 'select', options: [t('Male'), t('Female')] },
           ].map((field) => (
             <div key={field.key}>
-              <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5 flex items-center gap-1.5">
+              <label className="block text-xs font-medium text-gray-500  mb-1.5 flex items-center gap-1.5">
                 <field.icon className="w-3 h-3" />
                 {field.label}
               </label>
@@ -171,7 +171,7 @@ export default function ProfilePage() {
                 <select
                   value={form[field.key as keyof typeof form] as string || ''}
                   onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl text-sm bg-white/80 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                  className="w-full px-4 py-2.5 rounded-xl text-sm bg-white/80  border border-gray-200  text-gray-900  focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                 >
                   {field.options?.map(o => <option key={o} value={o}>{o}</option>)}
                 </select>
@@ -180,7 +180,7 @@ export default function ProfilePage() {
                   type={field.type || 'text'}
                   value={field.value || ''}
                   onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl text-sm bg-white/80 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                  className="w-full px-4 py-2.5 rounded-xl text-sm bg-white/80  border border-gray-200  text-gray-900  placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                 />
               )}
             </div>
@@ -196,7 +196,7 @@ export default function ProfilePage() {
       >
         <div className="flex items-center gap-2 mb-5">
           <Heart className="w-4 h-4 text-rose-500" />
-          <h3 className="text-base font-semibold text-gray-900 dark:text-white">{t('Medical Information')}</h3>
+          <h3 className="text-base font-semibold text-gray-900 ">{t('Medical Information')}</h3>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {[
@@ -204,15 +204,15 @@ export default function ProfilePage() {
             { label: t('Height'), value: profile.height, icon: Ruler, color: 'text-primary' },
             { label: t('Weight'), value: profile.weight, icon: Weight, color: 'text-secondary' },
           ].map((item) => (
-            <div key={item.label} className="p-4 rounded-xl bg-gray-50 dark:bg-gray-800/30 border border-gray-100 dark:border-gray-800/50">
+            <div key={item.label} className="p-4 rounded-xl bg-gray-50  border border-gray-100 ">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
                   <item.icon className={cn('w-4 h-4', item.color)} />
-                  <span className="text-xs text-gray-500 dark:text-gray-400">{item.label}</span>
+                  <span className="text-xs text-gray-500 ">{item.label}</span>
                 </div>
                 <CheckCircle2 className="w-4 h-4 text-secondary" />
               </div>
-              <p className="text-lg font-bold text-gray-900 dark:text-white">{item.value}</p>
+              <p className="text-lg font-bold text-gray-900 ">{item.value}</p>
               <p className="text-[10px] text-gray-400 flex items-center gap-1 mt-1">
                 <ShieldCheck className="w-3 h-3" />
                 {t('Verified by MED-ID')}
@@ -241,21 +241,21 @@ export default function ProfilePage() {
           >
             <div className="flex items-center gap-2 mb-4">
               <Icon className={cn('w-4 h-4', colors[field])} />
-              <h3 className="text-base font-semibold text-gray-900 dark:text-white">{labels[field]}</h3>
+              <h3 className="text-base font-semibold text-gray-900 ">{labels[field]}</h3>
             </div>
             <div className="flex flex-wrap gap-2 mb-3">
               {items.length === 0 ? (
-                <p className="text-sm text-gray-400 dark:text-gray-500 italic">{field === 'medications' ? t('No medications listed') : field === 'allergies' ? t('No allergies listed') : t('No chronicDiseases listed')}</p>
+                <p className="text-sm text-gray-400  italic">{field === 'medications' ? t('No medications listed') : field === 'allergies' ? t('No allergies listed') : t('No chronicDiseases listed')}</p>
               ) : (
                 items.map((item, i) => (
                   <span
                     key={i}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 dark:bg-gray-800/50 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700/50"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100  text-gray-700  border border-gray-200 "
                   >
                     {item}
                     <button
                       onClick={() => removeTag(field, i)}
-                      className="w-4 h-4 rounded-full flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                      className="w-4 h-4 rounded-full flex items-center justify-center hover:bg-gray-200  transition-colors"
                     >
                       <X className="w-3 h-3" />
                     </button>
@@ -274,7 +274,7 @@ export default function ProfilePage() {
                   }
                 }}
                 placeholder={t('Add') + '...'}
-                className="flex-1 px-4 py-2 rounded-xl text-sm bg-white/80 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                className="flex-1 px-4 py-2 rounded-xl text-sm bg-white/80  border border-gray-200  text-gray-900  placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
               />
               <button
                 onClick={() => addTag(field, states[field], setters[field])}
@@ -296,12 +296,12 @@ export default function ProfilePage() {
       >
         <div className="flex items-center gap-2 mb-5">
           <Fingerprint className="w-4 h-4 text-secondary" />
-          <h3 className="text-base font-semibold text-gray-900 dark:text-white">{t('Biometric Status')}</h3>
+          <h3 className="text-base font-semibold text-gray-900 ">{t('Biometric Status')}</h3>
         </div>
-        <div className="flex items-center justify-between p-4 rounded-xl bg-gray-50 dark:bg-gray-800/30 border border-gray-100 dark:border-gray-800/50">
+        <div className="flex items-center justify-between p-4 rounded-xl bg-gray-50  border border-gray-100 ">
           <div>
-            <p className="text-sm font-medium text-gray-900 dark:text-white">{t('Biometric Authentication')}</p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+            <p className="text-sm font-medium text-gray-900 ">{t('Biometric Authentication')}</p>
+            <p className="text-xs text-gray-500  mt-0.5">
               {profile.biometricEnabled
                 ? t('Your fingerprint / face ID is active')
                 : t('Enable for faster and secure access')}
@@ -311,7 +311,7 @@ export default function ProfilePage() {
             onClick={toggleBiometric}
             className={cn(
               'relative w-14 h-7 rounded-full transition-colors duration-300',
-              profile.biometricEnabled ? 'bg-secondary' : 'bg-gray-300 dark:bg-gray-700'
+              profile.biometricEnabled ? 'bg-secondary' : 'bg-gray-300 '
             )}
           >
             <motion.div

@@ -34,7 +34,7 @@ export default function PartnersPage() {
   );
 
   return (
-    <div className="pt-20 bg-bg-main dark:bg-[#0F0F15]">
+    <div className="pt-20 bg-bg-main ">
       {/* HERO */}
       <section className="py-16 lg:py-24 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
@@ -46,11 +46,11 @@ export default function PartnersPage() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/10 text-primary text-sm font-medium mb-6">
               <Building2 className="w-4 h-4" /> {t('Our Network')}
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900  leading-tight">
               {t('Our Partner')}{' '}
               <span className="text-primary">{t('Clinics & Hospitals')}</span>
             </h1>
-            <p className="mt-6 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            <p className="mt-6 text-lg text-gray-600  max-w-2xl mx-auto leading-relaxed">
               {t('MED-ID is trusted by leading healthcare institutions worldwide. Find a partner clinic near you and experience the future of medical identity management.')}
             </p>
           </motion.div>
@@ -67,7 +67,7 @@ export default function PartnersPage() {
               placeholder={t('Search clinics or locations...')}
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="w-full pl-12 pr-4 py-3.5 glass rounded-xl text-sm text-gray-900 dark:text-white placeholder-gray-400 outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+              className="w-full pl-12 pr-4 py-3.5 glass rounded-xl text-sm text-gray-900  placeholder-gray-400 outline-none focus:ring-2 focus:ring-primary/20 transition-all"
             />
           </div>
         </div>
@@ -92,26 +92,26 @@ export default function PartnersPage() {
                   </div>
                   <div className="flex items-center gap-1 text-sm">
                     <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                    <span className="font-medium text-gray-900 dark:text-white">{clinic.rating}</span>
+                    <span className="font-medium text-gray-900 ">{clinic.rating}</span>
                   </div>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{clinic.name}</h3>
+                <h3 className="text-lg font-semibold text-gray-900  mb-2">{clinic.name}</h3>
                 <div className="space-y-2 mb-4">
-                  <div className="flex items-start gap-2 text-sm text-gray-500 dark:text-gray-400">
+                  <div className="flex items-start gap-2 text-sm text-gray-500 ">
                     <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
                     {clinic.address}
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                  <div className="flex items-center gap-2 text-sm text-gray-500 ">
                     <Phone className="w-4 h-4 shrink-0" />
                     {clinic.phone}
                   </div>
                 </div>
-                <div className="flex items-center gap-4 pt-3 border-t border-gray-100 dark:border-white/5">
-                  <div className="flex items-center gap-1.5 text-sm text-gray-600 dark:text-gray-300">
+                <div className="flex items-center gap-4 pt-3 border-t border-gray-100 ">
+                  <div className="flex items-center gap-1.5 text-sm text-gray-600 ">
                     <Users className="w-4 h-4" />
                     {clinic.doctors} {t('doctors')}
                   </div>
-                  <div className="flex items-center gap-1.5 text-sm text-gray-600 dark:text-gray-300">
+                  <div className="flex items-center gap-1.5 text-sm text-gray-600 ">
                     <Users className="w-4 h-4" />
                     {clinic.patients.toLocaleString()} {t('patients')}
                   </div>
@@ -121,8 +121,8 @@ export default function PartnersPage() {
           </div>
           {filtered.length === 0 && (
             <div className="text-center py-16">
-              <Building2 className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
-              <p className="text-gray-500 dark:text-gray-400">{t('No clinics found matching your search.')}</p>
+              <Building2 className="w-12 h-12 text-gray-300  mx-auto mb-4" />
+              <p className="text-gray-500 ">{t('No clinics found matching your search.')}</p>
             </div>
           )}
         </div>
@@ -141,11 +141,11 @@ export default function PartnersPage() {
               <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-5">
                 <Handshake className="w-8 h-8 text-primary" />
               </div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900  mb-4">
                 {t('Become a')}{' '}
                 <span className="text-primary">{t('Partner')}</span>
               </h2>
-              <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
+              <p className="text-gray-600  leading-relaxed mb-6">
                 {t('Join our growing network of clinics, hospitals, and healthcare providers. Integrate MED-ID into your practice and offer your patients the gold standard in medical identity management.')}
               </p>
               <ul className="space-y-3 mb-8">
@@ -156,7 +156,7 @@ export default function PartnersPage() {
                   t('Priority access to new features and updates'),
                   t('Volume-based pricing for healthcare networks'),
                 ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-400">
+                  <li key={i} className="flex items-start gap-3 text-sm text-gray-600 ">
                     <ChevronRight className="w-4 h-4 text-primary mt-0.5 shrink-0" />
                     {item}
                   </li>
@@ -176,11 +176,11 @@ export default function PartnersPage() {
               transition={{ duration: 0.6 }}
               className="flex justify-center"
             >
-              <div className="w-72 h-80 sm:w-80 sm:h-96 rounded-3xl bg-gradient-to-br from-secondary/20 via-primary/10 to-secondary/20 flex items-center justify-center border border-gray-200/50 dark:border-white/10 shadow-xl">
+              <div className="w-72 h-80 sm:w-80 sm:h-96 rounded-3xl bg-gradient-to-br from-secondary/20 via-primary/10 to-secondary/20 flex items-center justify-center border border-gray-200/50  shadow-xl">
                 <div className="text-center p-8">
                   <Handshake className="w-16 h-16 text-primary/30 mx-auto mb-4" />
-                  <div className="text-lg font-semibold text-gray-900 dark:text-white">{t('Join 3,200+ Partners')}</div>
-                  <div className="text-sm text-gray-500 dark:text-gray-400 mt-2">{t('Grow with MED-ID')}</div>
+                  <div className="text-lg font-semibold text-gray-900 ">{t('Join 3,200+ Partners')}</div>
+                  <div className="text-sm text-gray-500  mt-2">{t('Grow with MED-ID')}</div>
                 </div>
               </div>
             </motion.div>

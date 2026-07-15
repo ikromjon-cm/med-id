@@ -14,9 +14,9 @@ import { t } from '@/lib/i18n';
 
 const statusConfig = {
   scheduled: { label: t('Scheduled'), color: 'text-primary', bg: 'bg-primary/10', icon: Clock },
-  'in-progress': { label: t('In Progress'), color: 'text-amber-500', bg: 'bg-amber-50 dark:bg-amber-500/10', icon: ArrowRight },
+  'in-progress': { label: t('In Progress'), color: 'text-amber-500', bg: 'bg-amber-50 ', icon: ArrowRight },
   completed: { label: t('Completed'), color: 'text-secondary', bg: 'bg-secondary/10', icon: CheckCircle2 },
-  cancelled: { label: t('Cancelled'), color: 'text-gray-400', bg: 'bg-gray-100 dark:bg-gray-800/50', icon: XCircle },
+  cancelled: { label: t('Cancelled'), color: 'text-gray-400', bg: 'bg-gray-100 ', icon: XCircle },
 };
 
 const tabs = [
@@ -49,19 +49,19 @@ export default function AppointmentsPage() {
   if (loading) {
     return (
       <div className="space-y-6">
-        <div className="h-6 w-40 bg-gray-200 dark:bg-gray-700/50 rounded animate-pulse" />
+        <div className="h-6 w-40 bg-gray-200  rounded animate-pulse" />
         <div className="flex gap-2">
           {[1, 2, 3, 4].map(i => (
-            <div key={i} className="h-9 w-24 bg-gray-200 dark:bg-gray-700/50 rounded-xl animate-pulse" />
+            <div key={i} className="h-9 w-24 bg-gray-200  rounded-xl animate-pulse" />
           ))}
         </div>
         {[1, 2, 3].map(i => (
           <div key={i} className="glass-card rounded-2xl p-5 animate-pulse">
             <div className="flex items-center gap-4">
-              <div className="h-12 w-12 rounded-xl bg-gray-200 dark:bg-gray-700/50" />
+              <div className="h-12 w-12 rounded-xl bg-gray-200 " />
               <div className="flex-1">
-                <div className="h-4 w-40 bg-gray-200 dark:bg-gray-700/50 rounded mb-2" />
-                <div className="h-3 w-24 bg-gray-200 dark:bg-gray-700/50 rounded" />
+                <div className="h-4 w-40 bg-gray-200  rounded mb-2" />
+                <div className="h-3 w-24 bg-gray-200  rounded" />
               </div>
             </div>
           </div>
@@ -76,8 +76,8 @@ export default function AppointmentsPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white">{t('My Appointments')}</h2>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+        <h2 className="text-xl font-bold text-gray-900 ">{t('My Appointments')}</h2>
+        <p className="text-sm text-gray-500  mt-1">
           {allAppts.filter(a => a.status === 'scheduled').length} {t('upcoming appointment')}
         </p>
       </motion.div>
@@ -96,7 +96,7 @@ export default function AppointmentsPage() {
               'px-5 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-all duration-200',
               activeTab === tab.key
                 ? 'bg-primary text-white shadow-md shadow-primary/20'
-                : 'bg-white/70 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50 hover:border-primary/30'
+                : 'bg-white/70  text-gray-600  border border-gray-200  hover:border-primary/30'
             )}
           >
             {tab.label} ({allAppts.filter(tab.filter).length})
@@ -111,13 +111,13 @@ export default function AppointmentsPage() {
           className="glass-card rounded-2xl"
         >
           <div className="flex flex-col items-center justify-center py-16">
-            <div className="w-20 h-20 rounded-2xl bg-gray-100 dark:bg-gray-800/50 flex items-center justify-center mb-4">
-              <Calendar className="w-10 h-10 text-gray-400 dark:text-gray-500" />
+            <div className="w-20 h-20 rounded-2xl bg-gray-100  flex items-center justify-center mb-4">
+              <Calendar className="w-10 h-10 text-gray-400 " />
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+            <h3 className="text-lg font-semibold text-gray-900  mb-1">
               {t('No')} {currentTab.label.toLowerCase()} {t('appointments').toLowerCase()}
             </h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 text-center max-w-sm">
+            <p className="text-sm text-gray-500  text-center max-w-sm">
               {activeTab === 'upcoming'
                 ? t('No upcoming appointments found. Schedule one with your doctor.')
                 : activeTab === 'past'
@@ -145,7 +145,7 @@ export default function AppointmentsPage() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-                      <h3 className="text-base font-semibold text-gray-900 dark:text-white">
+                      <h3 className="text-base font-semibold text-gray-900 ">
                         {appt.doctorName}
                       </h3>
                       <span className={cn(
@@ -158,19 +158,19 @@ export default function AppointmentsPage() {
                       </span>
                     </div>
                     <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 mt-2">
-                      <span className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400">
+                      <span className="flex items-center gap-1.5 text-sm text-gray-500 ">
                         <Calendar className="w-3.5 h-3.5" />
                         {formatDate(appt.date)}
                       </span>
-                      <span className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400">
+                      <span className="flex items-center gap-1.5 text-sm text-gray-500 ">
                         <Clock className="w-3.5 h-3.5" />
                         {appt.time}
                       </span>
-                      <span className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400">
+                      <span className="flex items-center gap-1.5 text-sm text-gray-500 ">
                         <Stethoscope className="w-3.5 h-3.5" />
                         {appt.type}
                       </span>
-                      <span className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400">
+                      <span className="flex items-center gap-1.5 text-sm text-gray-500 ">
                         <MapPin className="w-3.5 h-3.5" />
                         {appt.clinicName}
                       </span>

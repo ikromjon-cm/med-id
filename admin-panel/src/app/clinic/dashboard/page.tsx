@@ -62,8 +62,8 @@ export default function ClinicDashboardPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('Clinic Dashboard')}</h2>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('Overview of your clinic operations')}</p>
+        <h2 className="text-2xl font-bold text-gray-900 ">{t('Clinic Dashboard')}</h2>
+        <p className="text-sm text-gray-500  mt-1">{t('Overview of your clinic operations')}</p>
       </div>
 
       {loading ? (
@@ -107,8 +107,8 @@ export default function ClinicDashboardPage() {
                     <div key={item.name} className="flex items-center gap-3">
                       <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[i] }} />
                       <div>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">{item.name}</p>
-                        <p className="text-lg font-bold text-gray-900 dark:text-white">{item.value}</p>
+                        <p className="text-sm text-gray-500 ">{item.name}</p>
+                        <p className="text-lg font-bold text-gray-900 ">{item.value}</p>
                       </div>
                     </div>
                   ))}
@@ -119,7 +119,7 @@ export default function ClinicDashboardPage() {
             <ChartCard title={t('Appointments Trend')} subtitle={t('Monthly appointments count')}>
               <ResponsiveContainer width="100%" height={280}>
                 <BarChart data={appointTrend}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:opacity-20" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="" />
                   <XAxis dataKey="name" tick={{ fontSize: 11 }} stroke="#9ca3af" />
                   <YAxis tick={{ fontSize: 12 }} stroke="#9ca3af" />
                   <Tooltip
@@ -145,15 +145,15 @@ export default function ClinicDashboardPage() {
           <>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="glass-card rounded-2xl p-6">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-500/10 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-amber-50  flex items-center justify-center">
                   <Clock className="w-5 h-5 text-amber-500" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats?.queueStatus.waiting || 0}</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">{t('Waiting')}</p>
+                  <p className="text-2xl font-bold text-gray-900 ">{stats?.queueStatus.waiting || 0}</p>
+                  <p className="text-xs text-gray-500 ">{t('Waiting')}</p>
                 </div>
               </div>
-              <div className="w-full bg-gray-100 dark:bg-gray-800/50 rounded-full h-2">
+              <div className="w-full bg-gray-100  rounded-full h-2">
                 <motion.div initial={{ width: 0 }} animate={{ width: `${Math.min(100, ((stats?.queueStatus.waiting || 0) / Math.max(1, (stats?.queueStatus.waiting || 0) + (stats?.queueStatus.withDoctor || 0) + (stats?.queueStatus.completed || 0))) * 100)}%` }} className="h-2 rounded-full bg-amber-500" />
               </div>
             </motion.div>
@@ -163,11 +163,11 @@ export default function ClinicDashboardPage() {
                   <UserCheck className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats?.queueStatus.withDoctor || 0}</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">{t('With Doctor')}</p>
+                  <p className="text-2xl font-bold text-gray-900 ">{stats?.queueStatus.withDoctor || 0}</p>
+                  <p className="text-xs text-gray-500 ">{t('With Doctor')}</p>
                 </div>
               </div>
-              <div className="w-full bg-gray-100 dark:bg-gray-800/50 rounded-full h-2">
+              <div className="w-full bg-gray-100  rounded-full h-2">
                 <motion.div initial={{ width: 0 }} animate={{ width: `${Math.min(100, ((stats?.queueStatus.withDoctor || 0) / Math.max(1, (stats?.queueStatus.waiting || 0) + (stats?.queueStatus.withDoctor || 0) + (stats?.queueStatus.completed || 0))) * 100)}%` }} className="h-2 rounded-full bg-primary" />
               </div>
             </motion.div>
@@ -177,11 +177,11 @@ export default function ClinicDashboardPage() {
                   <CheckCircle2 className="w-5 h-5 text-[#00C896]" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats?.queueStatus.completed || 0}</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">{t('Completed')}</p>
+                  <p className="text-2xl font-bold text-gray-900 ">{stats?.queueStatus.completed || 0}</p>
+                  <p className="text-xs text-gray-500 ">{t('Completed')}</p>
                 </div>
               </div>
-              <div className="w-full bg-gray-100 dark:bg-gray-800/50 rounded-full h-2">
+              <div className="w-full bg-gray-100  rounded-full h-2">
                 <motion.div initial={{ width: 0 }} animate={{ width: `${Math.min(100, ((stats?.queueStatus.completed || 0) / Math.max(1, (stats?.queueStatus.waiting || 0) + (stats?.queueStatus.withDoctor || 0) + (stats?.queueStatus.completed || 0))) * 100)}%` }} className="h-2 rounded-full bg-[#00C896]" />
               </div>
             </motion.div>

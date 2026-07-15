@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 
 class ColorConstants {
-  static const Color primary = Color(0xFF0F6FFF);
-  static const Color secondary = Color(0xFF00C896);
-  static const Color background = Color(0xFFF8FAFC);
-  static const Color emergency = Color(0xFFFF4D4F);
-  static const Color surface = Color(0xFFFFFFFF);
-  static const Color textPrimary = Color(0xFF1A1D21);
-  static const Color textSecondary = Color(0xFF6B7280);
-  static const Color border = Color(0xFFE5E7EB);
-  static const Color success = Color(0xFF00C896);
-  static const Color warning = Color(0xFFFFB020);
-  static const Color error = Color(0xFFFF4D4F);
-  static const Color shimmerBase = Color(0xFFE0E0E0);
-  static const Color shimmerHighlight = Color(0xFFF5F5F5);
-  static const Color glassLight = Color(0x33FFFFFF);
-  static const Color glassDark = Color(0x33000000);
-  static const Color darkBackground = Color(0xFF0D1117);
-  static const Color darkSurface = Color(0xFF161B22);
-  static const Color darkCard = Color(0xFF21262D);
+  static const Color primary = Color(0xFF38BDF8); // Light blue
+  static const Color secondary = Color(0xFFEF4444); // Red
+  static const Color background = Color(0xFFFFFFFF); // White
+  static const Color emergency = Color(0xFFEF4444); // Red
+  static const Color surface = Color(0xFFFFFFFF); // White
+  static const Color textPrimary = Color(0xFF0F172A);
+  static const Color textSecondary = Color(0xFF64748B);
+  static const Color border = Color(0xFFE2E8F0);
+  static const Color success = Color(0xFF10B981);
+  static const Color warning = Color(0xFFF59E0B);
+  static const Color error = Color(0xFFEF4444);
+  static const Color shimmerBase = Color(0xFFE2E8F0);
+  static const Color shimmerHighlight = Color(0xFFFFFFFF);
+  static const Color glassLight = Color(0x73FFFFFF); // ~45% white
+  static const Color glassDark = Color(0x730F172A); // ~45% navy
+  static const Color darkBackground = Color(0xFF0F172A); // Deep navy
+  static const Color darkSurface = Color(0xFF1E293B); // Slate
+  static const Color darkCard = Color(0xFF1E293B);
+  static const Color darkTextPrimary = Color(0xFFF8FAFC);
+  static const Color darkTextSecondary = Color(0xFF94A3B8);
 }

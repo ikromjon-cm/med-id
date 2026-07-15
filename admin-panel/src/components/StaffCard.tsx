@@ -26,19 +26,19 @@ export default function StaffCard({ name, role, status, delay = 0 }: StaffCardPr
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.2, delay }}
-      className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors"
+      className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50  transition-colors"
     >
       <div className={cn(
         'w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0',
         role === 'doctor' ? 'bg-primary/10 text-primary' :
         role === 'nurse' ? 'bg-[#00C896]/10 text-[#00C896]' :
-        'bg-amber-50 dark:bg-amber-500/10 text-amber-500'
+        'bg-amber-50  text-amber-500'
       )}>
         {Icon}
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{name}</p>
-        <p className="text-xs text-gray-500 dark:text-gray-400 capitalize">{t(role)}</p>
+        <p className="text-sm font-medium text-gray-900  truncate">{name}</p>
+        <p className="text-xs text-gray-500  capitalize">{t(role)}</p>
       </div>
       <StatusBadge status={status} />
     </motion.div>

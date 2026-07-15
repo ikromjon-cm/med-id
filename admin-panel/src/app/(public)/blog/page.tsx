@@ -37,7 +37,7 @@ export default function BlogPage() {
   });
 
   return (
-    <div className="pt-20 bg-bg-main dark:bg-[#0F0F15]">
+    <div className="pt-20 bg-bg-main ">
       {/* HERO */}
       <section className="py-16 lg:py-24 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
@@ -46,11 +46,11 @@ export default function BlogPage() {
         </div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900  leading-tight">
               {t('MED-ID')}{' '}
               <span className="text-primary">{t('Blog')}</span>
             </h1>
-            <p className="mt-6 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            <p className="mt-6 text-lg text-gray-600  max-w-2xl mx-auto leading-relaxed">
               {t('Insights, updates, and stories from the intersection of healthcare, technology, and medical identity management.')}
             </p>
           </motion.div>
@@ -68,7 +68,7 @@ export default function BlogPage() {
                 placeholder={t('Search articles...')}
                 value={search}
                 onChange={e => setSearch(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 glass rounded-xl text-sm text-gray-900 dark:text-white placeholder-gray-400 outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                className="w-full pl-12 pr-4 py-3 glass rounded-xl text-sm text-gray-900  placeholder-gray-400 outline-none focus:ring-2 focus:ring-primary/20 transition-all"
               />
             </div>
             <div className="flex gap-2 overflow-x-auto pb-2 w-full sm:w-auto">
@@ -79,7 +79,7 @@ export default function BlogPage() {
                   className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
                     category === cat
                       ? 'bg-primary text-white shadow-md'
-                      : 'glass text-gray-600 dark:text-gray-300 hover:bg-white/50 dark:hover:bg-white/5'
+                      : 'glass text-gray-600  hover:bg-white/50 '
                   }`}
                 >
                   {cat}
@@ -95,8 +95,8 @@ export default function BlogPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {filtered.length === 0 ? (
             <div className="text-center py-16">
-              <FileText className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
-              <p className="text-gray-500 dark:text-gray-400">{t('No articles found.')}</p>
+              <FileText className="w-12 h-12 text-gray-300  mx-auto mb-4" />
+              <p className="text-gray-500 ">{t('No articles found.')}</p>
             </div>
           ) : (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -127,10 +127,10 @@ export default function BlogPage() {
                           <Clock className="w-3 h-3" /> {post.readTime}
                         </span>
                       </div>
-                      <h3 className="font-semibold text-gray-900 dark:text-white mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                      <h3 className="font-semibold text-gray-900  mb-2 line-clamp-2 group-hover:text-primary transition-colors">
                         {post.title}
                       </h3>
-                      <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-3">{post.excerpt}</p>
+                      <p className="text-sm text-gray-500  line-clamp-3">{post.excerpt}</p>
                       <div className="mt-4 flex items-center gap-1 text-xs font-medium text-primary group-hover:gap-2 transition-all">
                         {t('Read More')} <ArrowRight className="w-3 h-3" />
                       </div>

@@ -27,7 +27,7 @@ const item = {
 
 export default function RoleSelectionPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-bg-main dark:bg-[#0F0F15] p-4 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-bg-main  p-4 relative overflow-hidden">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-primary/10 blur-3xl" />
         <div className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-secondary/10 blur-3xl" />
@@ -42,8 +42,8 @@ export default function RoleSelectionPage() {
         <div className="glass-card rounded-3xl p-8 sm:p-10">
           <div className="flex flex-col items-center mb-8">
             <Image src="/logo.jpg" alt="MED-ID" width={64} height={64} className="rounded-2xl mb-4 shadow-xl" />
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{t('Select Your Role')}</h1>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('Choose the interface that suits you')}</p>
+            <h1 className="text-2xl font-bold text-gray-900 ">{t('Select Your Role')}</h1>
+            <p className="text-sm text-gray-500  mt-1">{t('Choose the interface that suits you')}</p>
           </div>
 
           <motion.div variants={container} initial="hidden" animate="show" className="space-y-3">
@@ -51,16 +51,16 @@ export default function RoleSelectionPage() {
               <motion.div key={role.key} variants={item}>
                 <a
                   href={role.route}
-                  className="w-full flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-gray-800/40 border border-gray-100 dark:border-gray-700/30 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-200 group text-left"
+                  className="w-full flex items-center gap-4 p-4 rounded-2xl bg-white  border border-gray-100  hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-200 group text-left"
                 >
                   <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary/20 transition-colors">
                     {role.icon}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="text-base font-semibold text-gray-900 dark:text-white">{role.title}</div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">{role.subtitle}</div>
+                    <div className="text-base font-semibold text-gray-900 ">{role.title}</div>
+                    <div className="text-sm text-gray-500 ">{role.subtitle}</div>
                   </div>
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700/50 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-100  flex items-center justify-center group-hover:bg-primary/10 transition-colors">
                     <svg className="w-4 h-4 text-gray-400 group-hover:text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                   </div>
                 </a>

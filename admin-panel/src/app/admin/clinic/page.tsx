@@ -113,8 +113,8 @@ export default function ClinicDashboardPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('Clinic Management')}</h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('Manage and monitor all clinics and their operations')}</p>
+          <h2 className="text-2xl font-bold text-gray-900 ">{t('Clinic Management')}</h2>
+          <p className="text-sm text-gray-500  mt-1">{t('Manage and monitor all clinics and their operations')}</p>
         </div>
         <motion.button
           whileHover={{ scale: 1.02 }}
@@ -156,7 +156,7 @@ export default function ClinicDashboardPage() {
         title={editing ? t('Edit Clinic') : t('Add Clinic')}
         footer={
           <>
-            <button onClick={() => setModalOpen(false)} className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-colors">{t('Cancel')}</button>
+            <button onClick={() => setModalOpen(false)} className="px-4 py-2 text-sm font-medium text-gray-600  hover:bg-gray-100  rounded-xl transition-colors">{t('Cancel')}</button>
             <button onClick={handleSave} disabled={saving} className="px-5 py-2 text-sm font-medium bg-primary text-white rounded-xl hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 disabled:opacity-60 flex items-center gap-2">
               {saving && <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />}
               {editing ? t('Update') : t('Create')}
@@ -179,7 +179,7 @@ export default function ClinicDashboardPage() {
         size="sm"
         footer={
           <>
-            <button onClick={() => setDeleteModalOpen(false)} className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-colors">{t('Cancel')}</button>
+            <button onClick={() => setDeleteModalOpen(false)} className="px-4 py-2 text-sm font-medium text-gray-600  hover:bg-gray-100  rounded-xl transition-colors">{t('Cancel')}</button>
             <button onClick={handleDelete} disabled={saving} className="px-5 py-2 text-sm font-medium bg-emergency text-white rounded-xl hover:bg-emergency-dark transition-all shadow-lg shadow-emergency/20 disabled:opacity-60 flex items-center gap-2">
               {saving && <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />}
               {t('Delete')}
@@ -187,8 +187,8 @@ export default function ClinicDashboardPage() {
           </>
         }
       >
-        <p className="text-sm text-gray-600 dark:text-gray-400">
-          {t('Are you sure you want to delete')} <strong className="text-gray-900 dark:text-white">{deleting?.name}</strong>? {t('This action cannot be undone.')}
+        <p className="text-sm text-gray-600 ">
+          {t('Are you sure you want to delete')} <strong className="text-gray-900 ">{deleting?.name}</strong>? {t('This action cannot be undone.')}
         </p>
       </Modal>
     </div>

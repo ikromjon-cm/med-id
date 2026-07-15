@@ -109,7 +109,7 @@ export default function HomePage() {
   return (
     <>
       <PublicNavbar />
-      <div className="bg-bg-main dark:bg-[#0F0F15]">
+      <div className="bg-bg-main ">
       {/* HERO */}
       <section className="relative min-h-screen flex items-center pt-20 pb-16 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -131,11 +131,11 @@ export default function HomePage() {
                 <HeartPulse className="w-4 h-4" />
                 {t('Trusted by 8,600+ Medical Professionals')}
               </motion.div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-gray-900 ">
                 {t('Your Medical Identity,')}{' '}
                 <span className="text-primary">{t('Secured by Biometrics')}</span>
               </h1>
-              <p className="mt-6 text-lg text-gray-600 dark:text-gray-400 leading-relaxed max-w-xl">
+              <p className="mt-6 text-lg text-gray-600  leading-relaxed max-w-xl">
                 {t('MED-ID gives you instant, secure access to your complete medical history. One identity that works everywhere — from your local clinic to emergency rooms worldwide.')}
               </p>
               <div className="flex flex-wrap gap-4 mt-8">
@@ -147,7 +147,7 @@ export default function HomePage() {
                 </Link>
                 <a
                   href="#demo-video"
-                  className="inline-flex items-center gap-2 px-6 py-3 border border-gray-200 dark:border-white/10 text-gray-700 dark:text-gray-300 font-semibold rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all glass"
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-gray-200  text-gray-700  font-semibold rounded-xl hover:bg-gray-50  transition-all glass"
                 >
                   <Play className="w-4 h-4" /> {t('Watch Demo')}
                 </a>
@@ -160,18 +160,18 @@ export default function HomePage() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="relative flex justify-center"
             >
-              <div className="relative w-72 h-[500px] sm:w-80 sm:h-[560px] rounded-[2.5rem] border-4 border-gray-800 dark:border-gray-600 bg-gradient-to-b from-primary/10 via-secondary/5 to-primary/10 shadow-2xl overflow-hidden">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-6 bg-gray-800 dark:bg-gray-600 rounded-b-xl" />
+              <div className="relative w-72 h-[500px] sm:w-80 sm:h-[560px] rounded-[2.5rem] border-4 border-gray-800  bg-gradient-to-b from-primary/10 via-secondary/5 to-primary/10 shadow-2xl overflow-hidden">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-6 bg-gray-800  rounded-b-xl" />
                 <div className="absolute top-8 left-4 right-4">
                   <div className="glass rounded-2xl p-4 space-y-3">
                     <div className="flex items-center gap-2">
                       <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
                         <Fingerprint className="w-4 h-4 text-primary" />
                       </div>
-                      <div className="text-xs font-semibold text-gray-800 dark:text-white">{t('Biometric Auth')}</div>
+                      <div className="text-xs font-semibold text-gray-800 ">{t('Biometric Auth')}</div>
                     </div>
-                    <div className="h-2 bg-gray-200 dark:bg-white/10 rounded-full w-3/4" />
-                    <div className="h-2 bg-gray-200 dark:bg-white/10 rounded-full w-1/2" />
+                    <div className="h-2 bg-gray-200  rounded-full w-3/4" />
+                    <div className="h-2 bg-gray-200  rounded-full w-1/2" />
                     <div className="flex gap-1">
                       {[...Array(5)].map((_, i) => (
                         <ScanLine key={i} className="w-4 h-4 text-primary" />
@@ -184,7 +184,7 @@ export default function HomePage() {
                         <HeartPulse className="w-5 h-5 text-emergency" />
                       </div>
                       <div>
-                        <div className="text-xs font-semibold text-gray-800 dark:text-white">{t('Emergency Ready')}</div>
+                        <div className="text-xs font-semibold text-gray-800 ">{t('Emergency Ready')}</div>
                         <div className="text-[10px] text-gray-500">{t('QR accessible')}</div>
                       </div>
                     </div>
@@ -192,7 +192,7 @@ export default function HomePage() {
                 </div>
                 <div className="absolute bottom-8 left-4 right-4 glass rounded-2xl p-3">
                   <div className="flex items-center justify-between mb-2">
-                    <div className="text-xs font-medium text-gray-800 dark:text-white">{t('Medical ID')}</div>
+                    <div className="text-xs font-medium text-gray-800 ">{t('Medical ID')}</div>
                     <QrCode className="w-5 h-5 text-primary" />
                   </div>
                   <div className="flex gap-1">
@@ -215,10 +215,10 @@ export default function HomePage() {
       <section id="demo-video" className="py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center max-w-2xl mx-auto mb-10">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 ">
               {t("Platformani Demo Videosini Ko'ring")}
             </h2>
-            <p className="mt-3 text-gray-600 dark:text-gray-400">
+            <p className="mt-3 text-gray-600 ">
               {t('See how MED-ID works in 2 minutes')}
             </p>
           </motion.div>
@@ -268,10 +268,10 @@ export default function HomePage() {
                 <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-3 text-primary">
                   {stat.icon}
                 </div>
-                <div className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
+                <div className="text-2xl sm:text-3xl font-bold text-gray-900 ">
                   {counts[stat.key] !== undefined ? formatCount(stat.key, counts[stat.key]) : '0'}
                 </div>
-                <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">{stat.label}</div>
+                <div className="text-sm text-gray-500  mt-1">{stat.label}</div>
               </motion.div>
             ))}
           </div>
@@ -279,14 +279,14 @@ export default function HomePage() {
       </section>
 
       {/* FEATURES */}
-      <section className="py-16 lg:py-20 bg-white/50 dark:bg-white/[0.02]">
+      <section className="py-16 lg:py-20 bg-white/50 .02]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center max-w-2xl mx-auto mb-14">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 ">
               {t('Everything You Need for')}{' '}
               <span className="text-primary">{t('Medical Identity')}</span>
             </h2>
-            <p className="mt-4 text-gray-600 dark:text-gray-400">
+            <p className="mt-4 text-gray-600 ">
               {t('Secure, fast, and universally accessible medical identity management.')}
             </p>
           </motion.div>
@@ -300,8 +300,8 @@ export default function HomePage() {
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-all duration-300">
                   {featureIcons[feature.icon]}
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{feature.title}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{feature.description}</p>
+                <h3 className="text-lg font-semibold text-gray-900  mb-2">{feature.title}</h3>
+                <p className="text-sm text-gray-600  leading-relaxed">{feature.description}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -315,10 +315,10 @@ export default function HomePage() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emergency/5 border border-emergency/10 text-emergency text-sm font-medium mb-4">
               <AlertTriangle className="w-4 h-4" /> {t('Emergency Protocol')}
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 ">
               {t('How Emergency Access Works')}
             </h2>
-            <p className="mt-4 text-gray-600 dark:text-gray-400">
+            <p className="mt-4 text-gray-600 ">
               {t('When every second counts, MED-ID provides instant access to critical medical information.')}
             </p>
           </motion.div>
@@ -344,8 +344,8 @@ export default function HomePage() {
                   <div className="w-8 h-8 rounded-full bg-emergency text-white text-sm font-bold flex items-center justify-center mx-auto mb-3">
                     {item.step}
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{item.title}</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">{item.desc}</p>
+                  <h3 className="text-lg font-semibold text-gray-900  mb-2">{item.title}</h3>
+                  <p className="text-sm text-gray-500 ">{item.desc}</p>
                 </div>
                 {i < 3 && (
                   <div className="hidden lg:block absolute top-1/2 -right-4 text-primary/30">
@@ -359,7 +359,7 @@ export default function HomePage() {
       </section>
 
       {/* MOBILE PREVIEW */}
-      <section className="py-16 lg:py-20 bg-white/50 dark:bg-white/[0.02]">
+      <section className="py-16 lg:py-20 bg-white/50 .02]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -368,11 +368,11 @@ export default function HomePage() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 ">
                 {t('Your Medical Profile,')}{' '}
                 <span className="text-primary">{t('Always in Your Pocket')}</span>
               </h2>
-              <p className="mt-4 text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p className="mt-4 text-gray-600  leading-relaxed">
                 {t('Access your complete medical profile from your smartphone. Manage documents, share with healthcare providers, and stay in control of your health data.')}
               </p>
               <div className="mt-8 space-y-5">
@@ -394,8 +394,8 @@ export default function HomePage() {
                       {item.icon}
                     </div>
                     <div>
-                      <h4 className="font-semibold text-gray-900 dark:text-white">{item.title}</h4>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">{item.desc}</p>
+                      <h4 className="font-semibold text-gray-900 ">{item.title}</h4>
+                      <p className="text-sm text-gray-500 ">{item.desc}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -409,8 +409,8 @@ export default function HomePage() {
               className="flex justify-center"
             >
               <div className="relative">
-                <div className="w-64 h-[480px] sm:w-72 sm:h-[520px] rounded-[2.5rem] border-4 border-gray-300 dark:border-gray-600 bg-gradient-to-b from-primary/5 via-secondary/5 to-primary/5 shadow-2xl overflow-hidden">
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-5 bg-gray-300 dark:bg-gray-600 rounded-b-xl" />
+                <div className="w-64 h-[480px] sm:w-72 sm:h-[520px] rounded-[2.5rem] border-4 border-gray-300  bg-gradient-to-b from-primary/5 via-secondary/5 to-primary/5 shadow-2xl overflow-hidden">
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-5 bg-gray-300  rounded-b-xl" />
                   <div className="absolute top-8 left-3 right-3 space-y-3">
                     <div className="glass rounded-xl p-3">
                       <div className="flex items-center gap-2 mb-2">
@@ -420,16 +420,16 @@ export default function HomePage() {
                       <div className="grid grid-cols-2 gap-1 text-[10px]">
                         <span className="px-2 py-1 rounded bg-primary/10 text-primary">O+</span>
                         <span className="px-2 py-1 rounded bg-secondary/10 text-secondary">68 kg</span>
-                        <span className="px-2 py-1 rounded bg-gray-100 dark:bg-white/10">{t('Male')}</span>
-                        <span className="px-2 py-1 rounded bg-gray-100 dark:bg-white/10">180 cm</span>
+                        <span className="px-2 py-1 rounded bg-gray-100 ">{t('Male')}</span>
+                        <span className="px-2 py-1 rounded bg-gray-100 ">180 cm</span>
                       </div>
                     </div>
                     <div className="glass rounded-xl p-3">
                       <div className="text-[10px] font-semibold mb-2">{t('Documents')}</div>
                       <div className="space-y-1">
-                        <div className="h-1.5 bg-gray-200 dark:bg-white/10 rounded-full w-full" />
-                        <div className="h-1.5 bg-gray-200 dark:bg-white/10 rounded-full w-3/4" />
-                        <div className="h-1.5 bg-gray-200 dark:bg-white/10 rounded-full w-5/6" />
+                        <div className="h-1.5 bg-gray-200  rounded-full w-full" />
+                        <div className="h-1.5 bg-gray-200  rounded-full w-3/4" />
+                        <div className="h-1.5 bg-gray-200  rounded-full w-5/6" />
                       </div>
                     </div>
                     <div className="glass rounded-xl p-3">
@@ -449,11 +449,11 @@ export default function HomePage() {
       <section className="py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center max-w-2xl mx-auto mb-14">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 ">
               {t('Trusted by')}{' '}
               <span className="text-primary">{t('Healthcare Professionals')}</span>
             </h2>
-            <p className="mt-4 text-gray-600 dark:text-gray-400">
+            <p className="mt-4 text-gray-600 ">
               {t('See what medical professionals and patients say about MED-ID.')}
             </p>
           </motion.div>
@@ -474,22 +474,22 @@ export default function HomePage() {
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
-                      className={cn('w-5 h-5', i < testimonials[testimonialIdx].rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-200 dark:text-gray-600')}
+                      className={cn('w-5 h-5', i < testimonials[testimonialIdx].rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-200 ')}
                     />
                   ))}
                 </div>
-                <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed italic mb-6">
+                <p className="text-lg text-gray-700  leading-relaxed italic mb-6">
                   &ldquo;{testimonials[testimonialIdx].content}&rdquo;
                 </p>
                 <div>
-                  <div className="font-semibold text-gray-900 dark:text-white">{testimonials[testimonialIdx].name}</div>
-                  <div className="text-sm text-gray-500 dark:text-gray-400">{testimonials[testimonialIdx].role}</div>
+                  <div className="font-semibold text-gray-900 ">{testimonials[testimonialIdx].name}</div>
+                  <div className="text-sm text-gray-500 ">{testimonials[testimonialIdx].role}</div>
                 </div>
               </motion.div>
               <div className="flex justify-center gap-3 mt-6">
                 <button
                   onClick={() => setTestimonialIdx(prev => (prev === 0 ? testimonials.length - 1 : prev - 1))}
-                  className="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors"
+                  className="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-600  hover:bg-gray-100  transition-colors"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
@@ -499,13 +499,13 @@ export default function HomePage() {
                     onClick={() => setTestimonialIdx(i)}
                     className={cn(
                       'w-2.5 h-2.5 rounded-full transition-all',
-                      i === testimonialIdx ? 'bg-primary w-8' : 'bg-gray-300 dark:bg-gray-600'
+                      i === testimonialIdx ? 'bg-primary w-8' : 'bg-gray-300 '
                     )}
                   />
                 ))}
                 <button
                   onClick={() => setTestimonialIdx(prev => (prev === testimonials.length - 1 ? 0 : prev + 1))}
-                  className="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors"
+                  className="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-600  hover:bg-gray-100  transition-colors"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </button>
@@ -516,13 +516,13 @@ export default function HomePage() {
       </section>
 
       {/* PARTNERS */}
-      <section className="py-16 lg:py-20 bg-white/50 dark:bg-white/[0.02] overflow-hidden">
+      <section className="py-16 lg:py-20 bg-white/50 .02] overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center max-w-2xl mx-auto mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 ">
               {t('Our')} <span className="text-primary">{t('Partner Network')}</span>
             </h2>
-            <p className="mt-4 text-gray-600 dark:text-gray-400">
+            <p className="mt-4 text-gray-600 ">
               {t('Trusted by leading healthcare institutions worldwide.')}
             </p>
           </motion.div>
@@ -536,7 +536,7 @@ export default function HomePage() {
                   <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-sm font-bold text-primary">
                     {partner.logo.slice(0, 2)}
                   </div>
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300 whitespace-nowrap">{partner.name}</span>
+                  <span className="text-sm font-medium text-gray-700  whitespace-nowrap">{partner.name}</span>
                 </div>
               ))}
             </div>
@@ -550,10 +550,10 @@ export default function HomePage() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div {...fadeUp} className="text-center max-w-2xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900  mb-4">
               {t('Ready to Get Started?')}
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
+            <p className="text-lg text-gray-600  mb-8">
               {t('Join millions of users who trust MED-ID with their medical identity.')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -561,7 +561,7 @@ export default function HomePage() {
                 <input
                   type="email"
                   placeholder={t('Enter your email')}
-                  className="flex-1 px-4 py-2.5 bg-transparent border-none outline-none text-sm text-gray-900 dark:text-white placeholder-gray-400"
+                  className="flex-1 px-4 py-2.5 bg-transparent border-none outline-none text-sm text-gray-900  placeholder-gray-400"
                 />
                 <button className="px-5 py-2.5 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-primary-dark transition-colors shrink-0">
                   {t('Get Started Free')}
@@ -585,11 +585,11 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="flex items-end justify-between mb-10">
             <div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 ">
                 {t('Latest from')}{' '}
                 <span className="text-primary">{t('Our Blog')}</span>
               </h2>
-              <p className="mt-2 text-gray-600 dark:text-gray-400">{t('Insights and updates from the MED-ID team.')}</p>
+              <p className="mt-2 text-gray-600 ">{t('Insights and updates from the MED-ID team.')}</p>
             </div>
             <Link href="/blog" className="hidden sm:inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-primary-dark transition-colors">
               {t('View All')} <ArrowRight className="w-4 h-4" />
@@ -615,10 +615,10 @@ export default function HomePage() {
                       <span className="text-xs text-gray-400">·</span>
                       <span className="text-xs text-gray-400">{post.readTime}</span>
                     </div>
-                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                    <h3 className="font-semibold text-gray-900  mb-2 group-hover:text-primary transition-colors line-clamp-2">
                       {post.title}
                     </h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">{post.excerpt}</p>
+                    <p className="text-sm text-gray-500  line-clamp-2">{post.excerpt}</p>
                     <span className="inline-flex items-center gap-1 text-xs font-medium text-primary mt-3 group-hover:gap-2 transition-all">
                       {t('Read More')} <ArrowRight className="w-3 h-3" />
                     </span>

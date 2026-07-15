@@ -20,9 +20,9 @@ const typeIcons: Record<string, React.ReactNode> = {
 };
 
 const typeColors: Record<string, string> = {
-  Alert: 'bg-amber-50 dark:bg-amber-500/10 border-amber-200 dark:border-amber-500/20',
-  Reminder: 'bg-blue-50 dark:bg-blue-500/10 border-blue-200 dark:border-blue-500/20',
-  Update: 'bg-blue-50 dark:bg-blue-500/10 border-blue-200 dark:border-blue-500/20',
+  Alert: 'bg-amber-50  border-amber-200 ',
+  Reminder: 'bg-blue-50  border-blue-200 ',
+  Update: 'bg-blue-50  border-blue-200 ',
   Emergency: 'bg-emergency/5 border-emergency/20',
 };
 
@@ -51,10 +51,10 @@ export default function NotificationsPage() {
         {[1, 2, 3, 4, 5].map(i => (
           <div key={i} className="glass-card rounded-2xl p-5 animate-pulse">
             <div className="flex items-center gap-4">
-              <div className="h-10 w-10 rounded-xl bg-gray-200 dark:bg-gray-700/50" />
+              <div className="h-10 w-10 rounded-xl bg-gray-200 " />
               <div className="flex-1">
-                <div className="h-4 w-40 bg-gray-200 dark:bg-gray-700/50 rounded mb-2" />
-                <div className="h-3 w-full bg-gray-200 dark:bg-gray-700/50 rounded" />
+                <div className="h-4 w-40 bg-gray-200  rounded mb-2" />
+                <div className="h-3 w-full bg-gray-200  rounded" />
               </div>
             </div>
           </div>
@@ -74,8 +74,8 @@ export default function NotificationsPage() {
       >
         <div className="flex items-center gap-3">
           <div>
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white">{t('Notifications')}</h2>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
+            <h2 className="text-xl font-bold text-gray-900 ">{t('Notifications')}</h2>
+            <p className="text-sm text-gray-500 ">
               {unreadCount} {t('unread notification')}
             </p>
           </div>
@@ -89,7 +89,7 @@ export default function NotificationsPage() {
                 'px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-all duration-200',
                 filter === nt
                   ? 'bg-primary text-white shadow-md shadow-primary/20'
-                  : 'bg-white/70 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50 hover:border-primary/30'
+                  : 'bg-white/70  text-gray-600  border border-gray-200  hover:border-primary/30'
               )}
             >
               {nt === 'All' ? t('All') : t(nt)}{nt !== 'All' ? ` (${allNotifs.filter(n => n.type === nt).length})` : ` (${allNotifs.length})`}
@@ -105,11 +105,11 @@ export default function NotificationsPage() {
           className="glass-card rounded-2xl"
         >
           <div className="flex flex-col items-center justify-center py-16">
-            <div className="w-20 h-20 rounded-2xl bg-gray-100 dark:bg-gray-800/50 flex items-center justify-center mb-4">
-              <Bell className="w-10 h-10 text-gray-400 dark:text-gray-500" />
+            <div className="w-20 h-20 rounded-2xl bg-gray-100  flex items-center justify-center mb-4">
+              <Bell className="w-10 h-10 text-gray-400 " />
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">{t('No notifications')}</h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 text-center max-w-sm">
+            <h3 className="text-lg font-semibold text-gray-900  mb-1">{t('No notifications')}</h3>
+            <p className="text-sm text-gray-500  text-center max-w-sm">
               {filter === 'All' ? t('You have no notifications at this time.') : `${t('No')} ${filter.toLowerCase()} ${t('Notifications').toLowerCase()}.`}
             </p>
           </div>
@@ -135,7 +135,7 @@ export default function NotificationsPage() {
                   <div className={cn(
                     'w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0',
                     notif.type === 'Emergency' ? 'bg-emergency/10' :
-                    notif.type === 'Alert' ? 'bg-amber-50 dark:bg-amber-500/10' :
+                    notif.type === 'Alert' ? 'bg-amber-50 ' :
                     'bg-primary/5'
                   )}>
                     {typeIcons[notif.type]}
@@ -144,7 +144,7 @@ export default function NotificationsPage() {
                     <div className="flex items-center gap-2 mb-1">
                       <h3 className={cn(
                         'text-sm',
-                        isRead ? 'font-medium text-gray-600 dark:text-gray-400' : 'font-semibold text-gray-900 dark:text-white'
+                        isRead ? 'font-medium text-gray-600 ' : 'font-semibold text-gray-900 '
                       )}>
                         {notif.title}
                       </h3>
@@ -152,18 +152,18 @@ export default function NotificationsPage() {
                     </div>
                     <p className={cn(
                       'text-sm leading-relaxed',
-                      isRead ? 'text-gray-500 dark:text-gray-400' : 'text-gray-700 dark:text-gray-300'
+                      isRead ? 'text-gray-500 ' : 'text-gray-700 '
                     )}>
                       {notif.message}
                     </p>
                     <div className="flex items-center gap-3 mt-2">
-                      <span className="text-xs text-gray-400 dark:text-gray-500">
+                      <span className="text-xs text-gray-400 ">
                         {formatDateTime(notif.createdAt)}
                       </span>
                       <span className={cn(
                         'px-2 py-0.5 rounded-full text-[10px] font-medium',
                         notif.status === 'Sent' ? 'bg-secondary/10 text-secondary' :
-                        notif.status === 'Pending' ? 'bg-amber-50 text-amber-600 dark:bg-amber-500/10 dark:text-amber-400' :
+                        notif.status === 'Pending' ? 'bg-amber-50 text-amber-600  ' :
                         'bg-emergency/10 text-emergency'
                       )}>
                         {notif.status === 'Sent' ? t('Sent') : t('Pending')}
@@ -171,9 +171,9 @@ export default function NotificationsPage() {
                       <span className={cn(
                         'px-2 py-0.5 rounded-full text-[10px] font-medium',
                         notif.type === 'Emergency' ? 'bg-emergency/10 text-emergency' :
-                        notif.type === 'Alert' ? 'bg-amber-50 text-amber-600 dark:bg-amber-500/10 dark:text-amber-400' :
+                        notif.type === 'Alert' ? 'bg-amber-50 text-amber-600  ' :
                         notif.type === 'Reminder' ? 'bg-primary/10 text-primary' :
-                        'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400'
+                        'bg-blue-50 text-blue-600  '
                       )}>
                         {notif.type}
                       </span>

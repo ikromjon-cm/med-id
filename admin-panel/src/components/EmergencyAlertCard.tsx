@@ -36,8 +36,8 @@ export default function EmergencyAlertCard({ alert, onResolve, onViewProfile, de
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2">
             <div>
-              <h4 className="text-sm font-semibold text-gray-900 dark:text-white">{alert.patientName}</h4>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{t('Triggered by')} {alert.triggeredBy}</p>
+              <h4 className="text-sm font-semibold text-gray-900 ">{alert.patientName}</h4>
+              <p className="text-xs text-gray-500  mt-0.5">{t('Triggered by')} {alert.triggeredBy}</p>
             </div>
             <span className={cn(
               'px-2 py-0.5 text-[10px] font-semibold rounded-full whitespace-nowrap',
@@ -46,7 +46,7 @@ export default function EmergencyAlertCard({ alert, onResolve, onViewProfile, de
               {t(alert.status)}
             </span>
           </div>
-          <div className="mt-2 flex flex-wrap gap-3 text-xs text-gray-500 dark:text-gray-400">
+          <div className="mt-2 flex flex-wrap gap-3 text-xs text-gray-500 ">
             <span className="flex items-center gap-1">
               <Droplets className="w-3.5 h-3.5" />
               {alert.bloodType}
@@ -63,7 +63,7 @@ export default function EmergencyAlertCard({ alert, onResolve, onViewProfile, de
           {alert.allergies.length > 0 && (
             <div className="mt-2 flex flex-wrap gap-1">
               {alert.allergies.map(a => (
-                <span key={a} className="px-2 py-0.5 text-[10px] font-medium rounded-full bg-amber-50 dark:bg-amber-500/10 text-amber-500">{a}</span>
+                <span key={a} className="px-2 py-0.5 text-[10px] font-medium rounded-full bg-amber-50  text-amber-500">{a}</span>
               ))}
             </div>
           )}

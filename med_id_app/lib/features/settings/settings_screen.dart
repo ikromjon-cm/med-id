@@ -216,7 +216,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   child: OutlinedButton.icon(
                     onPressed: () async {
                       await ref.read(authProvider.notifier).logout();
-                      if (context.mounted) context.go('/splash');
                     },
                     icon: const Icon(Icons.logout, color: ColorConstants.emergency),
                     label: Text('Chiqish', style: GoogleFonts.inter(fontSize: 16, color: ColorConstants.emergency)),

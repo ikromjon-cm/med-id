@@ -121,7 +121,7 @@ export default function UsersPage() {
       key: 'createdAt',
       header: t('Created'),
       sortable: true,
-      render: (u: User) => <span className="text-gray-500 dark:text-gray-400 text-xs">{formatDate(u.createdAt)}</span>,
+      render: (u: User) => <span className="text-gray-500  text-xs">{formatDate(u.createdAt)}</span>,
     },
   ];
 
@@ -129,8 +129,8 @@ export default function UsersPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('Users Management')}</h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('Manage all platform users')}</p>
+          <h2 className="text-2xl font-bold text-gray-900 ">{t('Users Management')}</h2>
+          <p className="text-sm text-gray-500  mt-1">{t('Manage all platform users')}</p>
         </div>
         <motion.button
           whileHover={{ scale: 1.02 }}
@@ -163,7 +163,7 @@ export default function UsersPage() {
         size="md"
         footer={
           <>
-            <button onClick={() => setModalOpen(false)} className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-colors">{t('Cancel')}</button>
+            <button onClick={() => setModalOpen(false)} className="px-4 py-2 text-sm font-medium text-gray-600  hover:bg-gray-100  rounded-xl transition-colors">{t('Cancel')}</button>
             <button onClick={handleSave} disabled={saving} className="px-5 py-2 text-sm font-medium bg-primary text-white rounded-xl hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 disabled:opacity-60 flex items-center gap-2">
               {saving && <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />}
               {editingUser ? t('Update') : t('Create')}
@@ -186,7 +186,7 @@ export default function UsersPage() {
         size="sm"
         footer={
           <>
-            <button onClick={() => setDeleteModalOpen(false)} className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-colors">{t('Cancel')}</button>
+            <button onClick={() => setDeleteModalOpen(false)} className="px-4 py-2 text-sm font-medium text-gray-600  hover:bg-gray-100  rounded-xl transition-colors">{t('Cancel')}</button>
             <button onClick={handleDelete} disabled={saving} className="px-5 py-2 text-sm font-medium bg-emergency text-white rounded-xl hover:bg-emergency-dark transition-all shadow-lg shadow-emergency/20 disabled:opacity-60 flex items-center gap-2">
               {saving && <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />}
               {t('Delete')}
@@ -194,8 +194,8 @@ export default function UsersPage() {
           </>
         }
       >
-        <p className="text-sm text-gray-600 dark:text-gray-400">
-          {t('Are you sure you want to delete')} <strong className="text-gray-900 dark:text-white">{deletingUser?.name}</strong>? {t('This action cannot be undone.')}
+        <p className="text-sm text-gray-600 ">
+          {t('Are you sure you want to delete')} <strong className="text-gray-900 ">{deletingUser?.name}</strong>? {t('This action cannot be undone.')}
         </p>
       </Modal>
     </div>

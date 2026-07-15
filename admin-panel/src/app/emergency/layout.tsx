@@ -37,17 +37,17 @@ export default function EmergencyLayout({ children }: { children: React.ReactNod
 
   const sidebarContent = (
     <div className="flex flex-col h-full">
-      <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100 dark:border-gray-800/50">
+      <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100 ">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-xl bg-emergency flex items-center justify-center shadow-lg shadow-emergency/20">
             <Activity className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h1 className="text-base font-bold text-gray-900 dark:text-white tracking-tight">{t('MED-ID')}</h1>
-            <p className="text-[10px] text-gray-500 dark:text-gray-400 font-medium tracking-wider uppercase">{t('Emergency')}</p>
+            <h1 className="text-base font-bold text-gray-900  tracking-tight">{t('MED-ID')}</h1>
+            <p className="text-[10px] text-gray-500  font-medium tracking-wider uppercase">{t('Emergency')}</p>
           </div>
         </div>
-        <button onClick={() => setSidebarOpen(false)} className="lg:hidden w-8 h-8 rounded-xl flex items-center justify-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+        <button onClick={() => setSidebarOpen(false)} className="lg:hidden w-8 h-8 rounded-xl flex items-center justify-center text-gray-400 hover:text-gray-600  hover:bg-gray-100  transition-colors">
           <X className="w-4 h-4" />
         </button>
       </div>
@@ -64,7 +64,7 @@ export default function EmergencyLayout({ children }: { children: React.ReactNod
                   'w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200',
                   isActive
                     ? 'bg-emergency text-white shadow-lg shadow-emergency/30'
-                    : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-white'
+                    : 'text-gray-600  hover:bg-gray-100  hover:text-gray-900 '
                 )}
               >
                 <Icon className="w-5 h-5 flex-shrink-0" />
@@ -75,8 +75,8 @@ export default function EmergencyLayout({ children }: { children: React.ReactNod
           })}
         </div>
       </nav>
-      <div className="px-3 py-4 border-t border-gray-100 dark:border-gray-800/50">
-        <button onClick={() => router.push('/login')} className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-emergency/10 hover:text-emergency transition-all duration-200">
+      <div className="px-3 py-4 border-t border-gray-100 ">
+        <button onClick={() => window.location.href='/login'} className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-gray-600  hover:bg-emergency/10 hover:text-emergency transition-all duration-200">
           <LogOut className="w-5 h-5" />
           <span>{t('Logout')}</span>
         </button>
@@ -85,9 +85,9 @@ export default function EmergencyLayout({ children }: { children: React.ReactNod
   );
 
   return (
-    <div className="min-h-screen bg-bg-main dark:bg-[#0F0F15]">
+    <div className="min-h-screen bg-bg-main ">
       <aside className="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 z-30">
-        <div className="flex-1 flex flex-col min-h-0 glass-card rounded-none border-r border-emergency/10 dark:border-emergency/10">
+        <div className="flex-1 flex flex-col min-h-0 glass-card rounded-none border-r border-emergency/10 ">
           {sidebarContent}
         </div>
       </aside>
@@ -104,19 +104,19 @@ export default function EmergencyLayout({ children }: { children: React.ReactNod
         )}
       </AnimatePresence>
       <div className="lg:pl-64 flex flex-col min-h-screen">
-        <header className="sticky top-0 z-20 glass-card rounded-none border-b border-emergency/10 dark:border-emergency/10">
+        <header className="sticky top-0 z-20 glass-card rounded-none border-b border-emergency/10 ">
           <div className="flex items-center justify-between px-4 sm:px-6 py-3">
             <div className="flex items-center gap-4">
-              <button onClick={() => setSidebarOpen(true)} className="lg:hidden w-10 h-10 rounded-xl flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800/50 hover:text-gray-700 dark:hover:text-gray-300 transition-all">
+              <button onClick={() => setSidebarOpen(true)} className="lg:hidden w-10 h-10 rounded-xl flex items-center justify-center text-gray-500  hover:bg-gray-100  hover:text-gray-700  transition-all">
                 <Menu className="w-5 h-5" />
               </button>
               <div>
-                <h1 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">{title}</h1>
-                <p className="text-xs text-gray-500 dark:text-gray-400 hidden sm:block">{t('MED-ID Emergency Response')}</p>
+                <h1 className="text-lg sm:text-xl font-bold text-gray-900 ">{title}</h1>
+                <p className="text-xs text-gray-500  hidden sm:block">{t('MED-ID Emergency Response')}</p>
               </div>
             </div>
             <div className="flex items-center gap-2 sm:gap-3">
-              <button onClick={toggleTheme} className="w-10 h-10 rounded-xl flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800/50 hover:text-gray-700 dark:hover:text-gray-300 transition-all">
+              <button onClick={toggleTheme} className="w-10 h-10 rounded-xl flex items-center justify-center text-gray-500  hover:bg-gray-100  hover:text-gray-700  transition-all">
                 {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
               </button>
               <NotificationBell />

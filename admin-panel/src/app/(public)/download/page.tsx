@@ -23,7 +23,7 @@ const features = [
 
 export default function DownloadPage() {
   return (
-    <div className="pt-20 bg-bg-main dark:bg-[#0F0F15]">
+    <div className="pt-20 bg-bg-main ">
       {/* HERO */}
       <section className="py-16 lg:py-24 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
@@ -33,22 +33,22 @@ export default function DownloadPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900  leading-tight">
                 {t('Download')}{' '}
                 <span className="text-primary">{t('MED-ID')}</span>
               </h1>
-              <p className="mt-6 text-lg text-gray-600 dark:text-gray-400 leading-relaxed max-w-xl">
+              <p className="mt-6 text-lg text-gray-600  leading-relaxed max-w-xl">
                 {t('Get the MED-ID app and secure your medical identity today. Available on iOS, Android, and coming soon to desktop.')}
               </p>
               <div className="flex flex-wrap gap-4 mt-8">
-                <button className="inline-flex items-center gap-3 px-6 py-3.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-semibold rounded-xl hover:bg-gray-800 dark:hover:bg-gray-100 transition-all shadow-lg">
+                <button className="inline-flex items-center gap-3 px-6 py-3.5 bg-gray-900  text-white  font-semibold rounded-xl hover:bg-gray-800  transition-all shadow-lg">
                   <Apple className="w-6 h-6" />
                   <div className="text-left">
                     <div className="text-[10px] opacity-70">{t('Download on the')}</div>
                     <div className="text-sm -mt-0.5">{t('App Store')}</div>
                   </div>
                 </button>
-                <button className="inline-flex items-center gap-3 px-6 py-3.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-semibold rounded-xl hover:bg-gray-800 dark:hover:bg-gray-100 transition-all shadow-lg">
+                <button className="inline-flex items-center gap-3 px-6 py-3.5 bg-gray-900  text-white  font-semibold rounded-xl hover:bg-gray-800  transition-all shadow-lg">
                   <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M1.5 3.75c-.297 0-.583.11-.801.308a1.125 1.125 0 00-.342.924l1.416 8.204c.101.586.607 1.002 1.202 1.002h1.714a2.25 2.25 0 01-2.25 2.25H3a.75.75 0 000 1.5h.439a3.75 3.75 0 003.697-3h11.228a3.75 3.75 0 003.697 3h.439a.75.75 0 000-1.5h-.439a2.25 2.25 0 01-2.25-2.25h1.714c.595 0 1.101-.416 1.202-1.002l1.416-8.204a1.125 1.125 0 00-.342-.924A1.125 1.125 0 0022.5 3.75H1.5zm0 1.5h21l-1.354 7.848a.375.375 0 01-.371.312H3.225a.375.375 0 01-.371-.312L1.5 5.25zM6 18a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm12 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
                   </svg>
@@ -58,7 +58,7 @@ export default function DownloadPage() {
                   </div>
                 </button>
               </div>
-              <div className="flex items-center gap-4 mt-6 text-sm text-gray-500 dark:text-gray-400">
+              <div className="flex items-center gap-4 mt-6 text-sm text-gray-500 ">
                 <div className="flex items-center gap-1">
                   <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
                   <span>4.8</span>
@@ -75,10 +75,10 @@ export default function DownloadPage() {
               transition={{ duration: 0.6 }}
               className="flex flex-col items-center gap-6"
             >
-              <div className="w-56 h-56 sm:w-64 sm:h-64 rounded-3xl bg-gradient-to-br from-primary/20 via-secondary/10 to-primary/20 flex items-center justify-center border border-gray-200/50 dark:border-white/10 shadow-xl">
+              <div className="w-56 h-56 sm:w-64 sm:h-64 rounded-3xl bg-gradient-to-br from-primary/20 via-secondary/10 to-primary/20 flex items-center justify-center border border-gray-200/50  shadow-xl">
                 <div className="text-center">
                   <QrCode className="w-24 h-24 text-primary/40 mx-auto mb-3" />
-                  <div className="text-sm font-semibold text-gray-900 dark:text-white">{t('Scan to Download')}</div>
+                  <div className="text-sm font-semibold text-gray-900 ">{t('Scan to Download')}</div>
                   <div className="text-xs text-gray-400 mt-1">{t('Available on iOS & Android')}</div>
                 </div>
               </div>
@@ -99,14 +99,14 @@ export default function DownloadPage() {
       </section>
 
       {/* AVAILABLE ON ALL PLATFORMS */}
-      <section className="py-16 lg:py-20 bg-white/50 dark:bg-white/[0.02]">
+      <section className="py-16 lg:py-20 bg-white/50 .02]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center max-w-2xl mx-auto mb-14">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 ">
               {t('Available on')}{' '}
               <span className="text-primary">{t('All Platforms')}</span>
             </h2>
-            <p className="mt-4 text-gray-600 dark:text-gray-400">
+            <p className="mt-4 text-gray-600 ">
               {t('MED-ID works seamlessly across all your devices. Your medical identity travels with you.')}
             </p>
           </motion.div>
@@ -142,8 +142,8 @@ export default function DownloadPage() {
                 <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center mx-auto mb-4 text-primary">
                   {platform.icon}
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{platform.title}</h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">{platform.desc}</p>
+                <h3 className="text-lg font-semibold text-gray-900  mb-2">{platform.title}</h3>
+                <p className="text-sm text-gray-500  mb-4">{platform.desc}</p>
                 <span className="inline-block text-xs px-3 py-1 rounded-full bg-primary/10 text-primary font-medium">
                   {platform.badge}
                 </span>
@@ -157,7 +157,7 @@ export default function DownloadPage() {
       <section className="py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center max-w-2xl mx-auto mb-14">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 ">
               {t('Everything in the')}{' '}
               <span className="text-primary">{t('App')}</span>
             </h2>
@@ -175,8 +175,8 @@ export default function DownloadPage() {
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-3 text-primary">
                   {f.icon}
                 </div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-1">{f.title}</h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400">{f.desc}</p>
+                <h3 className="font-semibold text-gray-900  mb-1">{f.title}</h3>
+                <p className="text-sm text-gray-500 ">{f.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -187,17 +187,17 @@ export default function DownloadPage() {
       <section className="py-16 lg:py-20 bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div {...fadeUp}>
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900  mb-4">
               {t('Ready to Take Control of Your Medical Identity?')}
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
+            <p className="text-lg text-gray-600  mb-8">
               {t('Download MED-ID today and join millions who trust us with their medical data.')}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <button className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-semibold rounded-xl hover:bg-primary-dark transition-all shadow-lg shadow-primary/25">
                 <Apple className="w-5 h-5" /> {t('App Store')}
               </button>
-              <button className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-semibold rounded-xl hover:bg-gray-800 dark:hover:bg-gray-100 transition-all shadow-lg">
+              <button className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900  text-white  font-semibold rounded-xl hover:bg-gray-800  transition-all shadow-lg">
                 <Download className="w-5 h-5" /> {t('Google Play')}
               </button>
             </div>

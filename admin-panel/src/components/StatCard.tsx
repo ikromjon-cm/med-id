@@ -19,7 +19,7 @@ const colorMap = {
   primary: { bg: 'bg-primary/10', text: 'text-primary', glow: 'shadow-primary/15' },
   secondary: { bg: 'bg-[#00C896]/10', text: 'text-[#00C896]', glow: 'shadow-[#00C896]/15' },
   emergency: { bg: 'bg-emergency/10', text: 'text-emergency', glow: 'shadow-emergency/15' },
-  amber: { bg: 'bg-amber-50 dark:bg-amber-500/10', text: 'text-amber-500', glow: 'shadow-amber-500/15' },
+  amber: { bg: 'bg-amber-50 ', text: 'text-amber-500', glow: 'shadow-amber-500/15' },
 };
 
 export default function StatCard({ title, value, icon, trend, subtitle, color = 'primary', delay = 0 }: StatCardProps) {
@@ -50,9 +50,9 @@ export default function StatCard({ title, value, icon, trend, subtitle, color = 
         )}
       </div>
       <div className="space-y-1">
-        <h3 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">{value}</h3>
-        <p className="text-sm text-gray-500 dark:text-gray-400">{title}</p>
-        {subtitle && <p className="text-xs text-gray-400 dark:text-gray-500">{subtitle}</p>}
+        <h3 className="text-2xl font-bold text-gray-900  tracking-tight">{value}</h3>
+        <p className="text-sm text-gray-500 ">{title}</p>
+        {subtitle && <p className="text-xs text-gray-400 ">{subtitle}</p>}
       </div>
     </motion.div>
   );

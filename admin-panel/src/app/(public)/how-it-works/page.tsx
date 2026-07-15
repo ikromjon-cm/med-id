@@ -65,7 +65,7 @@ const steps = [
 
 export default function HowItWorksPage() {
   return (
-    <div className="pt-20 bg-bg-main dark:bg-[#0F0F15]">
+    <div className="pt-20 bg-bg-main ">
       {/* HERO */}
       <section className="py-16 lg:py-24 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
@@ -74,11 +74,11 @@ export default function HowItWorksPage() {
         </div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900  leading-tight">
               {t('How')}{' '}
               <span className="text-primary">MED-ID</span> {t('Works')}
             </h1>
-            <p className="mt-6 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            <p className="mt-6 text-lg text-gray-600  max-w-2xl mx-auto leading-relaxed">
               {t('Three simple steps to secure your medical identity. Get started in minutes and gain peace of mind knowing your medical information is always available when needed.')}
             </p>
           </motion.div>
@@ -89,7 +89,7 @@ export default function HowItWorksPage() {
       {steps.map((step, i) => (
         <section
           key={step.step}
-          className={`py-16 lg:py-20 ${i % 2 === 1 ? 'bg-white/50 dark:bg-white/[0.02]' : ''}`}
+          className={`py-16 lg:py-20 ${i % 2 === 1 ? 'bg-white/50 .02]' : ''}`}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className={`grid lg:grid-cols-2 gap-12 lg:gap-16 items-center ${i % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
@@ -106,12 +106,12 @@ export default function HowItWorksPage() {
                 <div className="w-16 h-16 rounded-2xl bg-gradient-to-br ${step.gradient} flex items-center justify-center text-primary mb-6">
                   {step.icon}
                 </div>
-                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-2">{step.title}</h2>
+                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900  mb-2">{step.title}</h2>
                 <p className="text-primary font-medium text-sm mb-4">{step.subtitle}</p>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">{step.desc}</p>
+                <p className="text-gray-600  leading-relaxed mb-6">{step.desc}</p>
                 <ul className="space-y-3">
                   {step.details.map((detail, j) => (
-                    <li key={j} className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-400">
+                    <li key={j} className="flex items-start gap-3 text-sm text-gray-600 ">
                       <CheckCircle className="w-4 h-4 text-primary mt-0.5 shrink-0" />
                       {detail}
                     </li>
@@ -125,10 +125,10 @@ export default function HowItWorksPage() {
                 transition={{ duration: 0.6 }}
                 className={`flex justify-center ${i % 2 === 1 ? 'lg:order-1' : ''}`}
               >
-                <div className={`w-72 h-80 sm:w-80 sm:h-96 rounded-3xl bg-gradient-to-br ${step.gradient} flex items-center justify-center border border-gray-200/50 dark:border-white/10 shadow-xl`}>
+                <div className={`w-72 h-80 sm:w-80 sm:h-96 rounded-3xl bg-gradient-to-br ${step.gradient} flex items-center justify-center border border-gray-200/50  shadow-xl`}>
                   <div className="text-center p-8">
                     <div className="text-6xl font-bold text-primary/20 mb-2">0{step.step}</div>
-                    <div className="text-lg font-semibold text-gray-900 dark:text-white">{step.title}</div>
+                    <div className="text-lg font-semibold text-gray-900 ">{step.title}</div>
                     <div className="mt-4 space-y-2">
                       <Smartphone className="w-8 h-8 text-primary/40 mx-auto" />
                       <Shield className="w-8 h-8 text-secondary/40 mx-auto" />
@@ -146,10 +146,10 @@ export default function HowItWorksPage() {
       <section className="py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center max-w-2xl mx-auto mb-14">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 ">
               {t('Why Choose')} <span className="text-primary">MED-ID</span>
             </h2>
-            <p className="mt-4 text-gray-600 dark:text-gray-400">{t('Benefits that make a difference in your healthcare journey.')}</p>
+            <p className="mt-4 text-gray-600 ">{t('Benefits that make a difference in your healthcare journey.')}</p>
           </motion.div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
@@ -171,8 +171,8 @@ export default function HowItWorksPage() {
                 <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-3">
                   {b.icon}
                 </div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">{b.title}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{b.desc}</p>
+                <h3 className="font-semibold text-gray-900  mb-2">{b.title}</h3>
+                <p className="text-sm text-gray-600 ">{b.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -183,10 +183,10 @@ export default function HowItWorksPage() {
       <section className="py-16 lg:py-20 bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div {...fadeUp}>
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900  mb-4">
               {t('Ready to Secure Your Medical Identity?')}
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
+            <p className="text-lg text-gray-600  mb-8">
               {t('Join 1.2 million+ users who trust MED-ID. Get started in under 5 minutes.')}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
@@ -198,7 +198,7 @@ export default function HowItWorksPage() {
               </Link>
               <Link
                 href="/faq"
-                className="inline-flex items-center gap-2 px-6 py-3 glass text-gray-700 dark:text-gray-300 font-semibold rounded-xl hover:bg-white/50 dark:hover:bg-white/10 transition-all"
+                className="inline-flex items-center gap-2 px-6 py-3 glass text-gray-700  font-semibold rounded-xl hover:bg-white/50  transition-all"
               >
                 {t('View FAQ')}
               </Link>

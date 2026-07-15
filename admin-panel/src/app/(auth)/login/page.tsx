@@ -18,7 +18,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-bg-main dark:bg-[#0F0F15] p-4 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-bg-main  p-4 relative overflow-hidden">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-primary/10 blur-3xl" />
         <div className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-secondary/10 blur-3xl" />
@@ -33,8 +33,8 @@ export default function LoginPage() {
         <div className="glass-card rounded-3xl p-8 sm:p-10">
           <div className="flex flex-col items-center mb-8">
             <Image src="/logo.jpg" alt="MED-ID" width={80} height={80} className="rounded-2xl mb-4 shadow-xl" />
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{t('MED-ID')}</h1>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('Biometric Medical Platform')}</p>
+            <h1 className="text-2xl font-bold text-gray-900 ">{t('MED-ID')}</h1>
+            <p className="text-sm text-gray-500  mt-1">{t('Biometric Medical Platform')}</p>
           </div>
 
           <button
@@ -54,7 +54,7 @@ export default function LoginPage() {
           </button>
 
           <div className="mt-6 text-center">
-            <p className="text-xs text-gray-400 dark:text-gray-500">
+            <p className="text-xs text-gray-400 ">
               {t('Bir tugma bilan tezkor kirish')}
             </p>
           </div>

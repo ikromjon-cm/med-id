@@ -17,7 +17,7 @@ const statusConfig: Record<string, { color: string; bg: string; icon: React.Reac
   },
   inactive: {
     color: 'text-gray-400',
-    bg: 'bg-gray-100 dark:bg-gray-800/50',
+    bg: 'bg-gray-100 ',
     icon: <Minus className="w-3 h-3" />,
   },
   suspended: {
@@ -27,7 +27,7 @@ const statusConfig: Record<string, { color: string; bg: string; icon: React.Reac
   },
   'on-leave': {
     color: 'text-amber-500',
-    bg: 'bg-amber-50 dark:bg-amber-500/10',
+    bg: 'bg-amber-50 ',
     icon: <Clock className="w-3 h-3" />,
   },
   sent: {
@@ -37,7 +37,7 @@ const statusConfig: Record<string, { color: string; bg: string; icon: React.Reac
   },
   pending: {
     color: 'text-amber-500',
-    bg: 'bg-amber-50 dark:bg-amber-500/10',
+    bg: 'bg-amber-50 ',
     icon: <Clock className="w-3 h-3" />,
   },
   failed: {

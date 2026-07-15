@@ -52,7 +52,7 @@ export default function DoctorDetailPage() {
   if (!data) {
     return (
       <div className="space-y-6">
-        <Link href="/doctor" className="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-primary transition-colors">
+        <Link href="/doctor" className="inline-flex items-center gap-1.5 text-sm text-gray-500  hover:text-primary transition-colors">
           <ArrowLeft className="w-4 h-4" /> {t('Back to Doctors')}
         </Link>
         <EmptyState title={t('Doctor not found')} description={t('The requested doctor profile could not be found.')} />
@@ -72,7 +72,7 @@ export default function DoctorDetailPage() {
 
   return (
     <div className="space-y-6">
-      <Link href="/doctor" className="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-primary transition-colors">
+      <Link href="/doctor" className="inline-flex items-center gap-1.5 text-sm text-gray-500  hover:text-primary transition-colors">
         <ArrowLeft className="w-4 h-4" /> {t('Back to Doctors')}
       </Link>
 
@@ -90,13 +90,13 @@ export default function DoctorDetailPage() {
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <h2 className="text-xl font-bold text-gray-900 dark:text-white">{data.name}</h2>
+                    <h2 className="text-xl font-bold text-gray-900 ">{data.name}</h2>
                     <p className="text-sm text-primary font-medium mt-0.5">{data.specialization}</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{data.clinic} · {data.id}</p>
+                    <p className="text-xs text-gray-500  mt-1">{data.clinic} · {data.id}</p>
                   </div>
                   <StatusBadge status={data.status} size="md" />
                 </div>
-                <div className="mt-4 flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+                <div className="mt-4 flex items-center gap-4 text-sm text-gray-500 ">
                   <span className="flex items-center gap-1.5"><Users className="w-4 h-4" /> {data.patients.length} {t('Patients')}</span>
                   <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4" /> {activeAppointments.length} {t('Upcoming')}</span>
                   <span className="flex items-center gap-1.5"><Activity className="w-4 h-4" /> {completedAppointments.length} {t('Completed')}</span>
@@ -119,9 +119,9 @@ export default function DoctorDetailPage() {
           transition={{ delay: 0.1 }}
           className="glass-card rounded-2xl p-5"
         >
-          <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-4">{t('Upcoming Appointments')}</h3>
+          <h3 className="text-sm font-semibold text-gray-900  mb-4">{t('Upcoming Appointments')}</h3>
           {activeAppointments.length === 0 ? (
-            <p className="text-xs text-gray-500 dark:text-gray-400 text-center py-6">{t('No upcoming appointments')}</p>
+            <p className="text-xs text-gray-500  text-center py-6">{t('No upcoming appointments')}</p>
           ) : (
             <div className="space-y-2">
               {activeAppointments.slice(0, 5).map((a, i) => (
@@ -141,7 +141,7 @@ export default function DoctorDetailPage() {
         transition={{ delay: 0.2 }}
         className="glass-card rounded-2xl overflow-hidden"
       >
-        <div className="flex border-b border-gray-100 dark:border-gray-800/50">
+        <div className="flex border-b border-gray-100 ">
           {tabs.map(tab => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.key;
@@ -150,13 +150,13 @@ export default function DoctorDetailPage() {
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
                 className={`flex items-center gap-2 px-5 py-3.5 text-sm font-medium transition-all relative ${
-                  isActive ? 'text-primary' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                  isActive ? 'text-primary' : 'text-gray-500  hover:text-gray-700 '
                 }`}
               >
                 <Icon className="w-4 h-4" />
                 {tab.label}
                 <span className={`px-1.5 py-0.5 text-[10px] rounded-full font-semibold ${
-                  isActive ? 'bg-primary/10 text-primary' : 'bg-gray-100 dark:bg-gray-800/50 text-gray-500'
+                  isActive ? 'bg-primary/10 text-primary' : 'bg-gray-100  text-gray-500'
                 }`}>{tab.count}</span>
                 {isActive && <motion.div layoutId="doctorTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />}
               </button>
@@ -200,15 +200,15 @@ export default function DoctorDetailPage() {
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.03 }}
-                    className="flex items-start gap-3 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors"
+                    className="flex items-start gap-3 p-3 rounded-xl hover:bg-gray-50  transition-colors"
                   >
-                    <div className="w-9 h-9 rounded-lg bg-amber-50 dark:bg-amber-500/10 flex items-center justify-center flex-shrink-0">
+                    <div className="w-9 h-9 rounded-lg bg-amber-50  flex items-center justify-center flex-shrink-0">
                       <AlertCircle className="w-4 h-4 text-amber-500" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-900 dark:text-white">{d.condition}</p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{d.patientName} · {formatDate(d.date)}</p>
-                      <p className="text-xs text-gray-400 dark:text-gray-500 mt-1 line-clamp-2">{d.notes}</p>
+                      <p className="text-sm font-medium text-gray-900 ">{d.condition}</p>
+                      <p className="text-xs text-gray-500  mt-0.5">{d.patientName} · {formatDate(d.date)}</p>
+                      <p className="text-xs text-gray-400  mt-1 line-clamp-2">{d.notes}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -227,18 +227,18 @@ export default function DoctorDetailPage() {
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.03 }}
-                    className="flex items-start gap-3 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors"
+                    className="flex items-start gap-3 p-3 rounded-xl hover:bg-gray-50  transition-colors"
                   >
                     <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                       <Pill className="w-4 h-4 text-primary" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <p className="text-sm font-medium text-gray-900 dark:text-white">{p.medication}</p>
+                        <p className="text-sm font-medium text-gray-900 ">{p.medication}</p>
                         <StatusBadge status={p.status} />
                       </div>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{p.patientName} · {p.dosage} · {p.frequency}</p>
-                      <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{formatDate(p.startDate)} - {formatDate(p.endDate)}</p>
+                      <p className="text-xs text-gray-500  mt-0.5">{p.patientName} · {p.dosage} · {p.frequency}</p>
+                      <p className="text-xs text-gray-400  mt-0.5">{formatDate(p.startDate)} - {formatDate(p.endDate)}</p>
                     </div>
                   </motion.div>
                 ))}

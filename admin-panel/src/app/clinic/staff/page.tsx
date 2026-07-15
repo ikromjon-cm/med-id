@@ -65,8 +65,8 @@ export default function StaffPage() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('Staff Management')}</h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('Manage clinic employees')}</p>
+          <h2 className="text-2xl font-bold text-gray-900 ">{t('Staff Management')}</h2>
+          <p className="text-sm text-gray-500  mt-1">{t('Manage clinic employees')}</p>
         </div>
         <motion.button
           whileHover={{ scale: 1.02 }}
@@ -85,34 +85,34 @@ export default function StaffPage() {
         <EmptyState title={t('No staff members')} description={t('Add staff to manage your clinic operations.')} action={{ label: t('Add Staff'), onClick: () => setAddModal(true) }} />
       ) : (
         <div className="glass-card rounded-2xl overflow-hidden">
-          <div className="divide-y divide-gray-100 dark:divide-gray-800/30">
+          <div className="divide-y divide-gray-100 ">
             {staff.map((emp, idx) => (
               <motion.div
                 key={emp.id}
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.03 }}
-                className="flex items-center gap-4 p-4 hover:bg-gray-50 dark:hover:bg-gray-800/20 transition-colors"
+                className="flex items-center gap-4 p-4 hover:bg-gray-50  transition-colors"
               >
                 <div className={cn(
                   'w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0',
                   emp.role === 'nurse' ? 'bg-[#00C896]/10 text-[#00C896]' :
                   emp.role === 'administrator' ? 'bg-primary/10 text-primary' :
-                  emp.role === 'technician' ? 'bg-purple-50 dark:bg-purple-500/10 text-purple-500' :
-                  'bg-amber-50 dark:bg-amber-500/10 text-amber-500'
+                  emp.role === 'technician' ? 'bg-purple-50  text-purple-500' :
+                  'bg-amber-50  text-amber-500'
                 )}>
                   <Users className="w-5 h-5" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-gray-900 dark:text-white">{emp.name}</p>
-                  <div className="flex items-center gap-3 mt-1 text-xs text-gray-500 dark:text-gray-400">
+                  <p className="text-sm font-semibold text-gray-900 ">{emp.name}</p>
+                  <div className="flex items-center gap-3 mt-1 text-xs text-gray-500 ">
                     <RoleBadge role={emp.role} />
                     <span className="flex items-center gap-1"><Mail className="w-3 h-3" />{emp.email}</span>
                     {emp.phone && <span className="flex items-center gap-1"><Phone className="w-3 h-3" />{emp.phone}</span>}
                   </div>
                 </div>
                 <StatusBadge status={emp.status} />
-                <span className="text-xs text-gray-400 dark:text-gray-500 flex items-center gap-1 whitespace-nowrap">
+                <span className="text-xs text-gray-400  flex items-center gap-1 whitespace-nowrap">
                   <Calendar className="w-3 h-3" />
                   {formatDate(emp.createdAt)}
                 </span>
@@ -132,27 +132,27 @@ export default function StaffPage() {
       <Modal isOpen={addModal} onClose={() => setAddModal(false)} title={t('Add Staff Member')} size="md"
         footer={
           <>
-            <button onClick={() => setAddModal(false)} className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-all">{t('Cancel')}</button>
+            <button onClick={() => setAddModal(false)} className="px-4 py-2 text-sm font-medium text-gray-600  hover:bg-gray-100  rounded-xl transition-all">{t('Cancel')}</button>
             <button onClick={handleAdd} className="px-4 py-2 text-sm font-medium bg-primary text-white rounded-xl hover:bg-primary-dark transition-all shadow-lg shadow-primary/20">{t('Add Staff')}</button>
           </>
         }
       >
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('Name *')}</label>
-            <input type="text" value={formData.name} onChange={e => setFormData(p => ({ ...p, name: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder={t('Full name')} />
+            <label className="block text-sm font-medium text-gray-700  mb-1">{t('Name *')}</label>
+            <input type="text" value={formData.name} onChange={e => setFormData(p => ({ ...p, name: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50  border border-gray-200  text-gray-900  placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder={t('Full name')} />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('Email *')}</label>
-            <input type="email" value={formData.email} onChange={e => setFormData(p => ({ ...p, email: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder={t('email@clinic.com')} />
+            <label className="block text-sm font-medium text-gray-700  mb-1">{t('Email *')}</label>
+            <input type="email" value={formData.email} onChange={e => setFormData(p => ({ ...p, email: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50  border border-gray-200  text-gray-900  placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder={t('email@clinic.com')} />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('Phone')}</label>
-            <input type="tel" value={formData.phone} onChange={e => setFormData(p => ({ ...p, phone: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder={t('+1 (555) 000-0000')} />
+            <label className="block text-sm font-medium text-gray-700  mb-1">{t('Phone')}</label>
+            <input type="tel" value={formData.phone} onChange={e => setFormData(p => ({ ...p, phone: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50  border border-gray-200  text-gray-900  placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder={t('+1 (555) 000-0000')} />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('Role')}</label>
-            <select value={formData.role} onChange={e => setFormData(p => ({ ...p, role: e.target.value as ClinicEmployee['role'] }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
+            <label className="block text-sm font-medium text-gray-700  mb-1">{t('Role')}</label>
+            <select value={formData.role} onChange={e => setFormData(p => ({ ...p, role: e.target.value as ClinicEmployee['role'] }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50  border border-gray-200  text-gray-900  focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
               <option value="receptionist">{t('Receptionist')}</option>
               <option value="nurse">{t('Nurse')}</option>
               <option value="administrator">{t('Administrator')}</option>

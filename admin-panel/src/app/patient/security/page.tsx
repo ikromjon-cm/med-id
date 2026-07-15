@@ -51,20 +51,20 @@ export default function SecurityPage() {
     return (
       <div className="space-y-6">
         <div className="glass-card rounded-2xl p-6 animate-pulse">
-          <div className="h-5 w-40 bg-gray-200 dark:bg-gray-700/50 rounded mb-4" />
+          <div className="h-5 w-40 bg-gray-200  rounded mb-4" />
           {[1, 2, 3].map(i => (
-            <div key={i} className="flex items-center gap-4 py-3 border-b border-gray-100 dark:border-gray-800/30 last:border-0">
-              <div className="h-10 w-10 rounded-xl bg-gray-200 dark:bg-gray-700/50" />
+            <div key={i} className="flex items-center gap-4 py-3 border-b border-gray-100  last:border-0">
+              <div className="h-10 w-10 rounded-xl bg-gray-200 " />
               <div className="flex-1">
-                <div className="h-4 w-32 bg-gray-200 dark:bg-gray-700/50 rounded mb-2" />
-                <div className="h-3 w-48 bg-gray-200 dark:bg-gray-700/50 rounded" />
+                <div className="h-4 w-32 bg-gray-200  rounded mb-2" />
+                <div className="h-3 w-48 bg-gray-200  rounded" />
               </div>
             </div>
           ))}
         </div>
         <div className="glass-card rounded-2xl p-6 animate-pulse">
-          <div className="h-5 w-40 bg-gray-200 dark:bg-gray-700/50 rounded mb-4" />
-          <div className="h-16 w-full bg-gray-200 dark:bg-gray-700/50 rounded-xl" />
+          <div className="h-5 w-40 bg-gray-200  rounded mb-4" />
+          <div className="h-16 w-full bg-gray-200  rounded-xl" />
         </div>
       </div>
     );
@@ -79,15 +79,15 @@ export default function SecurityPage() {
       >
         <div className="flex items-center gap-2 mb-5">
           <Monitor className="w-4 h-4 text-primary" />
-          <h3 className="text-base font-semibold text-gray-900 dark:text-white">{t('Active Sessions')}</h3>
+          <h3 className="text-base font-semibold text-gray-900 ">{t('Active Sessions')}</h3>
           <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-primary/10 text-primary ml-2">
             {sessions.length} {t('active')}
           </span>
         </div>
         {sessions.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-8">
-            <Monitor className="w-10 h-10 text-gray-300 dark:text-gray-600 mb-3" />
-            <p className="text-sm text-gray-500 dark:text-gray-400">{t('No active sessions')}</p>
+            <Monitor className="w-10 h-10 text-gray-300  mb-3" />
+            <p className="text-sm text-gray-500 ">{t('No active sessions')}</p>
           </div>
         ) : (
           <div className="space-y-3">
@@ -101,14 +101,14 @@ export default function SecurityPage() {
                   'flex items-start gap-4 p-4 rounded-xl transition-all duration-200',
                   session.isCurrent
                     ? 'bg-gradient-to-r from-primary/5 to-secondary/5 border border-primary/10'
-                    : 'bg-gray-50 dark:bg-gray-800/30 border border-gray-100 dark:border-gray-800/50'
+                    : 'bg-gray-50  border border-gray-100 '
                 )}
               >
                 <div className={cn(
                   'w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0',
                   session.isCurrent
                     ? 'bg-primary text-white'
-                    : 'bg-gray-100 dark:bg-gray-800/50 text-gray-500 dark:text-gray-400'
+                    : 'bg-gray-100  text-gray-500 '
                 )}>
                   {session.device.toLowerCase().includes('iphone') || session.device.toLowerCase().includes('galaxy') || session.device.toLowerCase().includes('pixel')
                     ? <Smartphone className="w-5 h-5" />
@@ -118,7 +118,7 @@ export default function SecurityPage() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <p className="text-sm font-semibold text-gray-900 dark:text-white">{session.device}</p>
+                    <p className="text-sm font-semibold text-gray-900 ">{session.device}</p>
                     {session.isCurrent && (
                       <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-secondary/10 text-secondary border border-secondary/20">
                         {t('Current Session')}
@@ -126,20 +126,20 @@ export default function SecurityPage() {
                     )}
                   </div>
                   <div className="flex flex-wrap gap-x-4 gap-y-1 mt-1">
-                    <span className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
+                    <span className="flex items-center gap-1 text-xs text-gray-500 ">
                       <Globe className="w-3 h-3" />
                       {session.browser}
                     </span>
-                    <span className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
+                    <span className="flex items-center gap-1 text-xs text-gray-500 ">
                       <MapPin className="w-3 h-3" />
                       {session.location}
                     </span>
-                    <span className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
+                    <span className="flex items-center gap-1 text-xs text-gray-500 ">
                       <Clock className="w-3 h-3" />
                       {session.lastActive}
                     </span>
                   </div>
-                  <p className="text-[10px] text-gray-400 dark:text-gray-500 mt-1 font-mono">{t('IP')}: {session.ip}</p>
+                  <p className="text-[10px] text-gray-400  mt-1 font-mono">{t('IP')}: {session.ip}</p>
                 </div>
                 {!session.isCurrent && (
                   <button
@@ -164,19 +164,19 @@ export default function SecurityPage() {
       >
         <div className="flex items-center gap-2 mb-5">
           <Fingerprint className="w-4 h-4 text-secondary" />
-          <h3 className="text-base font-semibold text-gray-900 dark:text-white">{t('Biometric Authentication')}</h3>
+          <h3 className="text-base font-semibold text-gray-900 ">{t('Biometric Authentication')}</h3>
         </div>
-        <div className="flex items-center justify-between p-5 rounded-xl bg-gray-50 dark:bg-gray-800/30 border border-gray-100 dark:border-gray-800/50">
+        <div className="flex items-center justify-between p-5 rounded-xl bg-gray-50  border border-gray-100 ">
           <div className="flex items-start gap-3">
             <div className={cn(
               'w-12 h-12 rounded-xl flex items-center justify-center',
-              biometricEnabled ? 'bg-secondary/10' : 'bg-gray-100 dark:bg-gray-800/50'
+              biometricEnabled ? 'bg-secondary/10' : 'bg-gray-100 '
             )}>
               <Fingerprint className={cn('w-6 h-6', biometricEnabled ? 'text-secondary' : 'text-gray-400')} />
             </div>
             <div>
-              <p className="text-sm font-semibold text-gray-900 dark:text-white">{t('Biometric Login')}</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+              <p className="text-sm font-semibold text-gray-900 ">{t('Biometric Login')}</p>
+              <p className="text-xs text-gray-500  mt-0.5">
                 {biometricEnabled
                   ? t('Use your fingerprint or face ID to securely access your account')
                   : t('Enable for faster and more secure access to your medical profile')}
@@ -187,7 +187,7 @@ export default function SecurityPage() {
             onClick={toggleBiometric}
             className={cn(
               'relative w-14 h-7 rounded-full transition-colors duration-300 flex-shrink-0',
-              biometricEnabled ? 'bg-secondary' : 'bg-gray-300 dark:bg-gray-700'
+              biometricEnabled ? 'bg-secondary' : 'bg-gray-300 '
             )}
           >
             <motion.div
@@ -213,19 +213,19 @@ export default function SecurityPage() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-md bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800 p-6"
+              className="relative w-full max-w-md bg-white  rounded-2xl shadow-2xl border border-gray-200  p-6"
             >
               <div className="w-14 h-14 rounded-2xl bg-emergency/10 flex items-center justify-center mx-auto mb-4">
                 <AlertTriangle className="w-7 h-7 text-emergency" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white text-center mb-2">{t('Revoke Session')}</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400 text-center mb-6">
+              <h3 className="text-lg font-semibold text-gray-900  text-center mb-2">{t('Revoke Session')}</h3>
+              <p className="text-sm text-gray-500  text-center mb-6">
                 {t('This will sign out the device from your account. The user will need to re-authenticate.')}
               </p>
               <div className="flex gap-3">
                 <button
                   onClick={() => setRevokeId(null)}
-                  className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                  className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium border border-gray-200  text-gray-700  hover:bg-gray-50  transition-colors"
                 >
                   {t('Cancel')}
                 </button>

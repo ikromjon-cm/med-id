@@ -127,12 +127,12 @@ export default function ClinicAppointmentsPage() {
     { key: 'doctorName', header: t('Doctor'), sortable: true },
     {
       key: 'date', header: t('Date'), sortable: true,
-      render: (a: Appointment) => <span className="text-gray-900 dark:text-white">{formatDate(a.date)}</span>,
+      render: (a: Appointment) => <span className="text-gray-900 ">{formatDate(a.date)}</span>,
     },
     {
       key: 'time', header: t('Time'), sortable: true,
       render: (a: Appointment) => (
-        <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+        <span className="flex items-center gap-1 text-gray-600 ">
           <Clock className="w-3.5 h-3.5" /> {a.time}
         </span>
       ),
@@ -147,7 +147,7 @@ export default function ClinicAppointmentsPage() {
       render: (a: Appointment) => (
         <button
           onClick={(e) => { e.stopPropagation(); handleOpenReschedule(a); }}
-          className="px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-gray-800 text-xs font-medium text-gray-600 dark:text-gray-400 hover:bg-primary/10 hover:text-primary transition-all"
+          className="px-3 py-1.5 rounded-lg bg-gray-100  text-xs font-medium text-gray-600  hover:bg-primary/10 hover:text-primary transition-all"
         >
           {t('Reschedule')}
         </button>
@@ -161,8 +161,8 @@ export default function ClinicAppointmentsPage() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('Appointments')}</h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('Manage clinic appointments')}</p>
+          <h2 className="text-2xl font-bold text-gray-900 ">{t('Appointments')}</h2>
+          <p className="text-sm text-gray-500  mt-1">{t('Manage clinic appointments')}</p>
         </div>
         <motion.button
           whileHover={{ scale: 1.02 }}
@@ -182,7 +182,7 @@ export default function ClinicAppointmentsPage() {
             'px-4 py-2 rounded-xl text-sm font-medium transition-all',
             viewMode === 'list'
               ? 'bg-primary text-white shadow-lg shadow-primary/20'
-              : 'bg-white/70 dark:bg-gray-900/70 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800/50'
+              : 'bg-white/70  text-gray-600  hover:bg-gray-100 '
           )}
         >
           {t('List')}
@@ -193,12 +193,12 @@ export default function ClinicAppointmentsPage() {
             'px-4 py-2 rounded-xl text-sm font-medium transition-all',
             viewMode === 'calendar'
               ? 'bg-primary text-white shadow-lg shadow-primary/20'
-              : 'bg-white/70 dark:bg-gray-900/70 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800/50'
+              : 'bg-white/70  text-gray-600  hover:bg-gray-100 '
           )}
         >
           {t('Calendar')}
         </button>
-        <div className="w-px h-6 bg-gray-200 dark:bg-gray-700 mx-1" />
+        <div className="w-px h-6 bg-gray-200  mx-1" />
         {['ALL', 'scheduled', 'in-progress', 'completed', 'cancelled'].map(status => (
           <button
             key={status}
@@ -207,7 +207,7 @@ export default function ClinicAppointmentsPage() {
               'px-4 py-2 rounded-xl text-sm font-medium transition-all capitalize',
               statusFilter === status
                 ? 'bg-primary text-white shadow-lg shadow-primary/20'
-                : 'bg-white/70 dark:bg-gray-900/70 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800/50'
+                : 'bg-white/70  text-gray-600  hover:bg-gray-100 '
             )}
           >
             {status === 'ALL' ? t('All') : t(status)}
@@ -222,18 +222,18 @@ export default function ClinicAppointmentsPage() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={prevMonth}
-              className="w-8 h-8 rounded-xl flex items-center justify-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              className="w-8 h-8 rounded-xl flex items-center justify-center text-gray-400 hover:text-gray-600  hover:bg-gray-100  transition-colors"
             >
               <ChevronLeft className="w-4 h-4" />
             </motion.button>
-            <h3 className="text-base font-semibold text-gray-900 dark:text-white">
+            <h3 className="text-base font-semibold text-gray-900 ">
               {MONTHS[currentMonth]} {currentYear}
             </h3>
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={nextMonth}
-              className="w-8 h-8 rounded-xl flex items-center justify-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              className="w-8 h-8 rounded-xl flex items-center justify-center text-gray-400 hover:text-gray-600  hover:bg-gray-100  transition-colors"
             >
               <ChevronRight className="w-4 h-4" />
             </motion.button>
@@ -241,7 +241,7 @@ export default function ClinicAppointmentsPage() {
 
           <div className="grid grid-cols-7 gap-1">
             {DAY_LABELS.map(d => (
-              <div key={d} className="text-center text-xs font-semibold text-gray-500 dark:text-gray-400 py-2 uppercase tracking-wide">
+              <div key={d} className="text-center text-xs font-semibold text-gray-500  py-2 uppercase tracking-wide">
                 {d}
               </div>
             ))}
@@ -266,7 +266,7 @@ export default function ClinicAppointmentsPage() {
                       ? 'bg-primary text-white shadow-md shadow-primary/20'
                       : isToday
                         ? 'bg-primary/10 text-primary font-semibold'
-                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800/50'
+                        : 'text-gray-700  hover:bg-gray-100 '
                   )}
                 >
                   <span>{day}</span>
@@ -293,7 +293,7 @@ export default function ClinicAppointmentsPage() {
         <>
           {selectedDate && (
             <div className="flex items-center gap-2">
-              <span className="text-sm text-gray-500 dark:text-gray-400">
+              <span className="text-sm text-gray-500 ">
                 {t('Showing appointments for')} {formatDate(selectedDate)}
               </span>
               <button
@@ -322,33 +322,33 @@ export default function ClinicAppointmentsPage() {
       <Modal isOpen={createModal} onClose={() => setCreateModal(false)} title={t('New Appointment')} size="md"
         footer={
           <>
-            <button onClick={() => setCreateModal(false)} className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-all">{t('Cancel')}</button>
+            <button onClick={() => setCreateModal(false)} className="px-4 py-2 text-sm font-medium text-gray-600  hover:bg-gray-100  rounded-xl transition-all">{t('Cancel')}</button>
             <button onClick={() => { setCreateModal(false); setFormData({ patientName: '', doctorName: '', date: '', time: '', type: '' }); }} className="px-4 py-2 text-sm font-medium bg-primary text-white rounded-xl hover:bg-primary-dark transition-all shadow-lg shadow-primary/20">{t('Create')}</button>
           </>
         }
       >
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('Patient Name *')}</label>
-            <input type="text" value={formData.patientName} onChange={e => setFormData(p => ({ ...p, patientName: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder={t('Enter patient name')} />
+            <label className="block text-sm font-medium text-gray-700  mb-1">{t('Patient Name *')}</label>
+            <input type="text" value={formData.patientName} onChange={e => setFormData(p => ({ ...p, patientName: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50  border border-gray-200  text-gray-900  placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder={t('Enter patient name')} />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('Doctor')}</label>
-            <input type="text" value={formData.doctorName} onChange={e => setFormData(p => ({ ...p, doctorName: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder={t('Doctor name')} />
+            <label className="block text-sm font-medium text-gray-700  mb-1">{t('Doctor')}</label>
+            <input type="text" value={formData.doctorName} onChange={e => setFormData(p => ({ ...p, doctorName: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50  border border-gray-200  text-gray-900  placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder={t('Doctor name')} />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('Date *')}</label>
-              <input type="date" value={formData.date} onChange={e => setFormData(p => ({ ...p, date: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
+              <label className="block text-sm font-medium text-gray-700  mb-1">{t('Date *')}</label>
+              <input type="date" value={formData.date} onChange={e => setFormData(p => ({ ...p, date: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50  border border-gray-200  text-gray-900  focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('Time *')}</label>
-              <input type="time" value={formData.time} onChange={e => setFormData(p => ({ ...p, time: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
+              <label className="block text-sm font-medium text-gray-700  mb-1">{t('Time *')}</label>
+              <input type="time" value={formData.time} onChange={e => setFormData(p => ({ ...p, time: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50  border border-gray-200  text-gray-900  focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('Type')}</label>
-            <select value={formData.type} onChange={e => setFormData(p => ({ ...p, type: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
+            <label className="block text-sm font-medium text-gray-700  mb-1">{t('Type')}</label>
+            <select value={formData.type} onChange={e => setFormData(p => ({ ...p, type: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50  border border-gray-200  text-gray-900  focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
               <option value="">{t('Select type')}</option>
               <option value="Checkup">{t('Checkup')}</option>
               <option value="Follow-up">{t('Follow-up')}</option>
@@ -364,7 +364,7 @@ export default function ClinicAppointmentsPage() {
         footer={
           rescheduleSuccess ? undefined : (
             <>
-              <button onClick={() => setRescheduleModal(false)} className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-all">{t('Cancel')}</button>
+              <button onClick={() => setRescheduleModal(false)} className="px-4 py-2 text-sm font-medium text-gray-600  hover:bg-gray-100  rounded-xl transition-all">{t('Cancel')}</button>
               <button onClick={handleConfirmReschedule} disabled={!newDate || !newTime} className="px-4 py-2 text-sm font-medium bg-primary text-white rounded-xl hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed">{t('Confirm')}</button>
             </>
           )
@@ -375,29 +375,29 @@ export default function ClinicAppointmentsPage() {
             <div className="w-14 h-14 rounded-2xl bg-success/10 flex items-center justify-center">
               <CheckCircle className="w-7 h-7 text-success" />
             </div>
-            <p className="text-sm font-medium text-gray-900 dark:text-white">{t('Rescheduled successfully!')}</p>
+            <p className="text-sm font-medium text-gray-900 ">{t('Rescheduled successfully!')}</p>
           </div>
         ) : (
           <div className="space-y-4">
             {selectedAppt && (
-              <div className="rounded-xl bg-gray-50 dark:bg-gray-800/50 p-4 space-y-2">
+              <div className="rounded-xl bg-gray-50  p-4 space-y-2">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-500 dark:text-gray-400">{t('Patient')}</span>
-                  <span className="font-medium text-gray-900 dark:text-white">{selectedAppt.patientName}</span>
+                  <span className="text-gray-500 ">{t('Patient')}</span>
+                  <span className="font-medium text-gray-900 ">{selectedAppt.patientName}</span>
                 </div>
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-500 dark:text-gray-400">{t('Current Date')}</span>
-                  <span className="font-medium text-gray-900 dark:text-white">{formatDate(selectedAppt.date)} | {selectedAppt.time}</span>
+                  <span className="text-gray-500 ">{t('Current Date')}</span>
+                  <span className="font-medium text-gray-900 ">{formatDate(selectedAppt.date)} | {selectedAppt.time}</span>
                 </div>
               </div>
             )}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('New Date')}</label>
-              <input type="date" value={newDate} onChange={e => setNewDate(e.target.value)} className="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
+              <label className="block text-sm font-medium text-gray-700  mb-1">{t('New Date')}</label>
+              <input type="date" value={newDate} onChange={e => setNewDate(e.target.value)} className="w-full px-4 py-2.5 rounded-xl bg-gray-50  border border-gray-200  text-gray-900  focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('New Time')}</label>
-              <input type="time" value={newTime} onChange={e => setNewTime(e.target.value)} className="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
+              <label className="block text-sm font-medium text-gray-700  mb-1">{t('New Time')}</label>
+              <input type="time" value={newTime} onChange={e => setNewTime(e.target.value)} className="w-full px-4 py-2.5 rounded-xl bg-gray-50  border border-gray-200  text-gray-900  focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
             </div>
           </div>
         )}

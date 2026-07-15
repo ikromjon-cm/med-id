@@ -80,7 +80,7 @@ export default function AboutPage() {
   };
 
   return (
-    <div className="pt-20 bg-bg-main dark:bg-[#0F0F15]">
+    <div className="pt-20 bg-bg-main ">
       {/* HERO */}
       <section className="py-16 lg:py-24 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
@@ -92,11 +92,11 @@ export default function AboutPage() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/10 text-primary text-sm font-medium mb-6">
               <Quote className="w-4 h-4" /> {t('Our Story')}
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900  leading-tight">
               {t('Transforming Healthcare Through')}{' '}
               <span className="text-primary">{t('Medical Identity')}</span>
             </h1>
-            <p className="mt-6 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            <p className="mt-6 text-lg text-gray-600  max-w-2xl mx-auto leading-relaxed">
               {t("MED-ID was born from a simple yet powerful idea: no one should ever be denied timely medical care because their medical history is inaccessible. We are building a world where your complete medical identity is always available, always secure, and always under your control.")}
             </p>
           </motion.div>
@@ -104,20 +104,20 @@ export default function AboutPage() {
       </section>
 
       {/* MISSION */}
-      <section className="py-16 bg-white/50 dark:bg-white/[0.02]">
+      <section className="py-16 bg-white/50 .02]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-8">
             <motion.div {...fadeUp} className="glass-card rounded-2xl p-8">
               <Target className="w-8 h-8 text-primary mb-4" />
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">{t('Our Mission')}</h2>
-              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+              <h2 className="text-2xl font-bold text-gray-900  mb-3">{t('Our Mission')}</h2>
+              <p className="text-gray-600  leading-relaxed">
               {t('To empower every individual with a secure, universal medical identity that ensures the right care at the right time — anywhere in the world. We believe that access to medical information should never be a barrier to receiving quality healthcare.')}
               </p>
             </motion.div>
             <motion.div {...fadeUp} className="glass-card rounded-2xl p-8" transition={{ duration: 0.5, delay: 0.1 }}>
               <Eye className="w-8 h-8 text-primary mb-4" />
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">{t('Our Vision')}</h2>
-              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+              <h2 className="text-2xl font-bold text-gray-900  mb-3">{t('Our Vision')}</h2>
+              <p className="text-gray-600  leading-relaxed">
               {t('A world where every healthcare provider has instant, secure access to patient medical histories, eliminating misdiagnosis, reducing medical errors, and saving lives through informed emergency care — all powered by a unified medical identity system.')}
               </p>
             </motion.div>
@@ -145,7 +145,7 @@ export default function AboutPage() {
                 <div className="text-3xl sm:text-4xl font-bold text-primary mb-1">
                   {counts[stat.key] !== undefined ? fmt(stat.key, counts[stat.key]) : '0'}
                 </div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">{stat.label}</div>
+                <div className="text-sm text-gray-500 ">{stat.label}</div>
               </motion.div>
             ))}
           </div>
@@ -153,13 +153,13 @@ export default function AboutPage() {
       </section>
 
       {/* VALUES */}
-      <section className="py-16 lg:py-20 bg-white/50 dark:bg-white/[0.02]">
+      <section className="py-16 lg:py-20 bg-white/50 .02]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center max-w-2xl mx-auto mb-14">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 ">
               {t('Our')} <span className="text-primary">{t('Core Values')}</span>
             </h2>
-            <p className="mt-4 text-gray-600 dark:text-gray-400">{t('The principles that guide every decision we make.')}</p>
+            <p className="mt-4 text-gray-600 ">{t('The principles that guide every decision we make.')}</p>
           </motion.div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((v, i) => (
@@ -174,8 +174,8 @@ export default function AboutPage() {
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4 text-primary">
                   {v.icon}
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{v.title}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{v.desc}</p>
+                <h3 className="text-lg font-semibold text-gray-900  mb-2">{v.title}</h3>
+                <p className="text-sm text-gray-600 ">{v.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -186,10 +186,10 @@ export default function AboutPage() {
       <section className="py-16 lg:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center max-w-2xl mx-auto mb-14">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 ">
               {t('Our')} <span className="text-primary">{t('Journey')}</span>
             </h2>
-            <p className="mt-4 text-gray-600 dark:text-gray-400">{t('From a bold idea to a global healthcare platform.')}</p>
+            <p className="mt-4 text-gray-600 ">{t('From a bold idea to a global healthcare platform.')}</p>
           </motion.div>
           <div className="relative">
             <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-secondary to-primary md:-translate-x-px" />
@@ -205,19 +205,19 @@ export default function AboutPage() {
                 <div className="hidden md:flex w-1/2 items-center">
                   <div className={i % 2 === 0 ? 'text-right pr-8' : 'text-left pl-8 w-full'}>
                     <span className="text-xs font-bold text-primary uppercase tracking-wider">{item.year}</span>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mt-1">{item.title}</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{item.desc}</p>
+                    <h3 className="text-lg font-semibold text-gray-900  mt-1">{item.title}</h3>
+                    <p className="text-sm text-gray-600  mt-1">{item.desc}</p>
                   </div>
                 </div>
                 <div className="flex items-center justify-center">
-                  <div className="w-8 h-8 rounded-full bg-primary border-4 border-white dark:border-[#0F0F15] shadow z-10 flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-full bg-primary border-4 border-white  shadow z-10 flex items-center justify-center">
                     <CheckCircle className="w-4 h-4 text-white" />
                   </div>
                 </div>
                 <div className="md:hidden flex-1">
                   <span className="text-xs font-bold text-primary uppercase tracking-wider">{item.year}</span>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mt-1">{item.title}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{item.desc}</p>
+                  <h3 className="text-lg font-semibold text-gray-900  mt-1">{item.title}</h3>
+                  <p className="text-sm text-gray-600  mt-1">{item.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -229,10 +229,10 @@ export default function AboutPage() {
       <section className="py-16 lg:py-20 bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div {...fadeUp}>
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900  mb-4">
               {t('Be Part of Our Story')}
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
+            <p className="text-lg text-gray-600  mb-8">
               {t('Join us in building the future of medical identity management.')}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
@@ -244,7 +244,7 @@ export default function AboutPage() {
               </Link>
               <Link
                 href="/download"
-                className="inline-flex items-center gap-2 px-6 py-3 glass text-gray-700 dark:text-gray-300 font-semibold rounded-xl hover:bg-white/50 dark:hover:bg-white/10 transition-all"
+                className="inline-flex items-center gap-2 px-6 py-3 glass text-gray-700  font-semibold rounded-xl hover:bg-white/50  transition-all"
               >
                 {t('Get Started')}
               </Link>

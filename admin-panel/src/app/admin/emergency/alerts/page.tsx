@@ -49,13 +49,13 @@ export default function EmergencyAlertsPage() {
       <div className="flex items-center justify-between">
         <div>
           <div className="flex items-center gap-3">
-            <Link href="/emergency" className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+            <Link href="/emergency" className="text-gray-400 hover:text-gray-600  transition-colors">
               <ArrowLeft className="w-5 h-5" />
             </Link>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('Active Alerts')}</h2>
+            <h2 className="text-2xl font-bold text-gray-900 ">{t('Active Alerts')}</h2>
             <EmergencyBadge count={activeCount} />
           </div>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 ml-9">{t('Monitor and manage emergency alerts')}</p>
+          <p className="text-sm text-gray-500  mt-1 ml-9">{t('Monitor and manage emergency alerts')}</p>
         </div>
         <div className="flex items-center gap-2">
           <motion.button
@@ -74,7 +74,7 @@ export default function EmergencyAlertsPage() {
         <button
           onClick={() => setShowResolved(false)}
           className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-            !showResolved ? 'bg-emergency text-white shadow-lg shadow-emergency/20' : 'bg-gray-100 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700/50'
+            !showResolved ? 'bg-emergency text-white shadow-lg shadow-emergency/20' : 'bg-gray-100  text-gray-600  hover:bg-gray-200 '
           }`}
         >
           <span className="flex items-center gap-1.5"><AlertTriangle className="w-4 h-4" /> {t('Active')} ({activeCount})</span>
@@ -82,7 +82,7 @@ export default function EmergencyAlertsPage() {
         <button
           onClick={() => setShowResolved(true)}
           className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-            showResolved ? 'bg-emergency text-white shadow-lg shadow-emergency/20' : 'bg-gray-100 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700/50'
+            showResolved ? 'bg-emergency text-white shadow-lg shadow-emergency/20' : 'bg-gray-100  text-gray-600  hover:bg-gray-200 '
           }`}
         >
           {t('All Alerts')} ({alerts.length})

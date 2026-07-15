@@ -50,7 +50,7 @@ export default function FAQPage() {
   });
 
   return (
-    <div className="pt-20 bg-bg-main dark:bg-[#0F0F15]">
+    <div className="pt-20 bg-bg-main ">
       {/* HERO */}
       <section className="py-16 lg:py-24 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
@@ -62,11 +62,11 @@ export default function FAQPage() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/10 text-primary text-sm font-medium mb-6">
               <HelpCircle className="w-4 h-4" /> {t('FAQ')}
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900  leading-tight">
               {t('Frequently Asked')}{' '}
               <span className="text-primary">{t('Questions')}</span>
             </h1>
-            <p className="mt-6 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            <p className="mt-6 text-lg text-gray-600  max-w-2xl mx-auto leading-relaxed">
               {t("Everything you need to know about MED-ID. Can't find what you're looking for? Feel free to contact our support team.")}
             </p>
           </motion.div>
@@ -83,7 +83,7 @@ export default function FAQPage() {
               placeholder={t('Search questions...')}
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="w-full pl-12 pr-4 py-3.5 glass rounded-xl text-sm text-gray-900 dark:text-white placeholder-gray-400 outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+              className="w-full pl-12 pr-4 py-3.5 glass rounded-xl text-sm text-gray-900  placeholder-gray-400 outline-none focus:ring-2 focus:ring-primary/20 transition-all"
             />
           </div>
           <div className="flex gap-2 overflow-x-auto pb-2">
@@ -95,7 +95,7 @@ export default function FAQPage() {
                   'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all',
                   activeCat === cat
                     ? 'bg-primary text-white shadow-md'
-                    : 'glass text-gray-600 dark:text-gray-300 hover:bg-white/50 dark:hover:bg-white/5'
+                    : 'glass text-gray-600  hover:bg-white/50 '
                 )}
               >
                 {cat !== t('All') && categoryIcons[cat]}
@@ -111,8 +111,8 @@ export default function FAQPage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           {filtered.length === 0 ? (
             <div className="text-center py-16">
-              <HelpCircle className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
-              <p className="text-gray-500 dark:text-gray-400">{t('No questions found.')}</p>
+              <HelpCircle className="w-12 h-12 text-gray-300  mx-auto mb-4" />
+              <p className="text-gray-500 ">{t('No questions found.')}</p>
             </div>
           ) : (
             <div className="space-y-3">
@@ -136,7 +136,7 @@ export default function FAQPage() {
                       )}>
                         {categoryIcons[item.category] || <FileText className="w-4 h-4" />}
                       </span>
-                      <span className="font-medium text-gray-900 dark:text-white text-sm">{item.question}</span>
+                      <span className="font-medium text-gray-900  text-sm">{item.question}</span>
                     </div>
                     <ChevronDown
                       className={cn(
@@ -149,7 +149,7 @@ export default function FAQPage() {
                     'overflow-hidden transition-all duration-300',
                     openId === item.id ? 'max-h-96' : 'max-h-0'
                   )}>
-                    <div className="px-5 pb-5 pl-16 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                    <div className="px-5 pb-5 pl-16 text-sm text-gray-600  leading-relaxed">
                       {item.answer}
                     </div>
                   </div>
@@ -167,10 +167,10 @@ export default function FAQPage() {
             <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
               <MessageCircle className="w-8 h-8 text-primary" />
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900  mb-4">
               {t('Still Have Questions?')}
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
+            <p className="text-lg text-gray-600  mb-8">
               {t('Our support team is ready to help you with any questions you may have.')}
             </p>
             <Link

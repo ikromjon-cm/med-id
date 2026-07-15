@@ -20,27 +20,27 @@ export default function ClinicFinanceChart({ data, className }: ClinicFinanceCha
     <div className={cn('space-y-4', className)}>
       <div className="grid grid-cols-3 gap-3">
         <div className="rounded-xl bg-primary/10 p-3 text-center">
-          <p className="text-xs text-gray-500 dark:text-gray-400">{t('Revenue')}</p>
+          <p className="text-xs text-gray-500 ">{t('Revenue')}</p>
           <p className="text-lg font-bold text-primary">${(totalRevenue / 1000).toFixed(1)}k</p>
         </div>
         <div className="rounded-xl bg-emergency/10 p-3 text-center">
-          <p className="text-xs text-gray-500 dark:text-gray-400">{t('Expenses')}</p>
+          <p className="text-xs text-gray-500 ">{t('Expenses')}</p>
           <p className="text-lg font-bold text-emergency">${(totalExpenses / 1000).toFixed(1)}k</p>
         </div>
         <div className={cn('rounded-xl p-3 text-center', profit >= 0 ? 'bg-[#00C896]/10' : 'bg-emergency/10')}>
-          <p className="text-xs text-gray-500 dark:text-gray-400">{t('Profit')}</p>
+          <p className="text-xs text-gray-500 ">{t('Profit')}</p>
           <p className={cn('text-lg font-bold', profit >= 0 ? 'text-[#00C896]' : 'text-emergency')}>
             ${(profit / 1000).toFixed(1)}k
           </p>
         </div>
       </div>
       <div className="text-center">
-        <p className="text-xs text-gray-500 dark:text-gray-400">{t('Total Appointments')}</p>
-        <p className="text-sm font-semibold text-gray-900 dark:text-white">{totalAppointments.toLocaleString()}</p>
+        <p className="text-xs text-gray-500 ">{t('Total Appointments')}</p>
+        <p className="text-sm font-semibold text-gray-900 ">{totalAppointments.toLocaleString()}</p>
       </div>
       <ResponsiveContainer width="100%" height={250}>
         <BarChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:opacity-20" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="" />
           <XAxis dataKey="date" tick={{ fontSize: 10 }} stroke="#9ca3af" tickFormatter={(v) => {
             const parts = v.split('-');
             return `${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][parseInt(parts[1]) - 1]}`;

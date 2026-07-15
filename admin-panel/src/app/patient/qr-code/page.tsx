@@ -134,13 +134,13 @@ export default function QRCodePage() {
       <div className="max-w-2xl mx-auto space-y-6">
         <div className="glass-card rounded-2xl p-8 animate-pulse">
           <div className="flex justify-center mb-6">
-            <div className="w-64 h-64 bg-gray-200 dark:bg-gray-700/50 rounded-2xl" />
+            <div className="w-64 h-64 bg-gray-200  rounded-2xl" />
           </div>
-          <div className="h-5 w-32 bg-gray-200 dark:bg-gray-700/50 rounded mx-auto mb-2" />
-          <div className="h-4 w-48 bg-gray-200 dark:bg-gray-700/50 rounded mx-auto mb-6" />
+          <div className="h-5 w-32 bg-gray-200  rounded mx-auto mb-2" />
+          <div className="h-4 w-48 bg-gray-200  rounded mx-auto mb-6" />
           <div className="flex justify-center gap-3">
-            <div className="h-10 w-28 bg-gray-200 dark:bg-gray-700/50 rounded-xl" />
-            <div className="h-10 w-28 bg-gray-200 dark:bg-gray-700/50 rounded-xl" />
+            <div className="h-10 w-28 bg-gray-200  rounded-xl" />
+            <div className="h-10 w-28 bg-gray-200  rounded-xl" />
           </div>
         </div>
       </div>
@@ -159,14 +159,14 @@ export default function QRCodePage() {
             <QrCode className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h2 className="text-lg font-bold text-gray-900 dark:text-white">{t('My QR Code')}</h2>
-            <p className="text-xs text-gray-500 dark:text-gray-400">{t('Your medical identity card')}</p>
+            <h2 className="text-lg font-bold text-gray-900 ">{t('My QR Code')}</h2>
+            <p className="text-xs text-gray-500 ">{t('Your medical identity card')}</p>
           </div>
         </div>
 
         <div className="flex justify-center mb-6">
           <div className="relative">
-            <div className="w-64 h-64 rounded-2xl bg-white dark:bg-gray-800 shadow-xl border border-gray-200 dark:border-gray-700 flex items-center justify-center p-4">
+            <div className="w-64 h-64 rounded-2xl bg-white  shadow-xl border border-gray-200  flex items-center justify-center p-4">
               <div className="w-full h-full rounded-xl bg-gradient-to-br from-primary/5 to-secondary/5 border-2 border-dashed border-primary/20 flex flex-col items-center justify-center">
                 <div className="grid grid-cols-7 gap-1 mb-4">
                   {Array.from({ length: 49 }).map((_, i) => (
@@ -192,8 +192,8 @@ export default function QRCodePage() {
           </div>
         </div>
 
-        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">{profile?.name}</h3>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">{t('Patient ID')}: {patientId}</p>
+        <h3 className="text-xl font-bold text-gray-900  mb-1">{profile?.name}</h3>
+        <p className="text-sm text-gray-500  mb-2">{t('Patient ID')}: {patientId}</p>
         <div className="flex items-center justify-center gap-2 mb-6">
           <span className="px-3 py-1 rounded-full text-xs font-medium bg-primary/5 text-primary border border-primary/10">
             <Droplets className="w-3 h-3 inline mr-1" />
@@ -203,7 +203,7 @@ export default function QRCodePage() {
             'px-3 py-1 rounded-full text-xs font-medium',
             profile?.biometricEnabled
               ? 'bg-secondary/10 text-secondary border border-secondary/20'
-              : 'bg-gray-100 dark:bg-gray-800/50 text-gray-500 border border-gray-200 dark:border-gray-700/50'
+              : 'bg-gray-100  text-gray-500 border border-gray-200 '
           )}>
             <Shield className="w-3 h-3 inline mr-1" />
             {profile?.biometricEnabled ? t('Biometric ON') : t('Biometric OFF')}
@@ -220,7 +220,7 @@ export default function QRCodePage() {
           </button>
           <button
             onClick={handleShare}
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-xl text-sm font-medium border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-all duration-200"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-white  text-gray-700  rounded-xl text-sm font-medium border border-gray-200  hover:bg-gray-50  transition-all duration-200"
           >
             {copied ? (
               <>
@@ -245,7 +245,7 @@ export default function QRCodePage() {
       >
         <div className="flex items-center gap-2 mb-4">
           <Info className="w-4 h-4 text-primary" />
-          <h3 className="text-base font-semibold text-gray-900 dark:text-white">{t('Emergency Access Info')}</h3>
+          <h3 className="text-base font-semibold text-gray-900 ">{t('Emergency Access Info')}</h3>
         </div>
         <div className="space-y-3">
           {[
@@ -254,23 +254,23 @@ export default function QRCodePage() {
             { icon: Activity, label: t('Chronic Conditions'), desc: t('Pre-existing conditions for informed treatment') },
             { icon: Shield, label: t('Current Medications'), desc: t('Active prescriptions to prevent drug interactions') },
           ].map((item, i) => (
-            <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-gray-50 dark:bg-gray-800/30 border border-gray-100 dark:border-gray-800/50">
+            <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-gray-50  border border-gray-100 ">
               <div className="w-8 h-8 rounded-lg bg-primary/5 flex items-center justify-center flex-shrink-0">
                 <item.icon className="w-4 h-4 text-primary" />
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-900 dark:text-white">{item.label}</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">{item.desc}</p>
+                <p className="text-sm font-medium text-gray-900 ">{item.label}</p>
+                <p className="text-xs text-gray-500 ">{item.desc}</p>
               </div>
             </div>
           ))}
         </div>
-        <div className="mt-4 p-4 rounded-xl bg-amber-50 dark:bg-amber-500/5 border border-amber-200 dark:border-amber-500/20">
+        <div className="mt-4 p-4 rounded-xl bg-amber-50  border border-amber-200 ">
           <div className="flex items-start gap-3">
             <Shield className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
             <div>
-              <p className="text-sm font-medium text-amber-800 dark:text-amber-300">{t('Your Privacy is Protected')}</p>
-              <p className="text-xs text-amber-600 dark:text-amber-400 mt-1">
+              <p className="text-sm font-medium text-amber-800 ">{t('Your Privacy is Protected')}</p>
+              <p className="text-xs text-amber-600  mt-1">
                 {t('Only vital medical information is shared during emergency scans. Full medical history access requires your explicit consent and biometric verification. All accesses are logged and you receive instant notifications.')}
               </p>
             </div>

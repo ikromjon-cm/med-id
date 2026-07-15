@@ -54,8 +54,8 @@ export default function EmergencyDashboardPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('Emergency Dashboard')}</h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('Real-time emergency response overview')}</p>
+          <h2 className="text-2xl font-bold text-gray-900 ">{t('Emergency Dashboard')}</h2>
+          <p className="text-sm text-gray-500  mt-1">{t('Real-time emergency response overview')}</p>
         </div>
         {stats && stats.activeAlerts > 0 && (
           <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-emergency/10 text-emergency text-sm font-medium emergency-glow">
@@ -73,11 +73,11 @@ export default function EmergencyDashboardPage() {
       >
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className={cn('w-10 h-10 rounded-xl flex items-center justify-center', emergencyMode ? 'bg-emergency/20' : 'bg-gray-100 dark:bg-gray-800/50')}>
+            <div className={cn('w-10 h-10 rounded-xl flex items-center justify-center', emergencyMode ? 'bg-emergency/20' : 'bg-gray-100 ')}>
               <Zap className={cn('w-5 h-5', emergencyMode ? 'text-emergency' : 'text-gray-400')} />
             </div>
             <div>
-              <h3 className="text-base font-semibold text-gray-900 dark:text-white">Favqulodda Rejim</h3>
+              <h3 className="text-base font-semibold text-gray-900 ">Favqulodda Rejim</h3>
               <div className="flex items-center gap-2 mt-0.5">
                 {emergencyMode ? (
                   <span className="flex items-center gap-1.5 text-xs font-bold text-emergency">
@@ -99,20 +99,20 @@ export default function EmergencyDashboardPage() {
                 time: new Date().toLocaleTimeString(),
               }, ...prev]);
             }}
-            className={cn('relative w-14 h-7 rounded-full transition-colors', emergencyMode ? 'bg-emergency' : 'bg-gray-300 dark:bg-gray-600')}
+            className={cn('relative w-14 h-7 rounded-full transition-colors', emergencyMode ? 'bg-emergency' : 'bg-gray-300 ')}
           >
             <div className={cn('absolute top-0.5 left-0.5 w-6 h-6 rounded-full bg-white shadow-md transition-transform', emergencyMode ? 'translate-x-7' : 'translate-x-0')} />
           </button>
         </div>
         {emergencyLog.length > 0 && (
-          <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-800/30">
-            <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-2 flex items-center gap-1.5">
+          <div className="mt-4 pt-4 border-t border-gray-100 ">
+            <p className="text-xs font-medium text-gray-500  mb-2 flex items-center gap-1.5">
               <Activity className="w-3 h-3" /> Faoliyat Jurnali
             </p>
             <div className="space-y-1">
               {emergencyLog.slice(0, 5).map((entry, i) => (
                 <div key={i} className="flex items-center justify-between text-xs py-1">
-                  <span className="text-gray-700 dark:text-gray-300">{entry.action}</span>
+                  <span className="text-gray-700 ">{entry.action}</span>
                   <span className="text-gray-400">{entry.time}</span>
                 </div>
               ))}
@@ -134,7 +134,7 @@ export default function EmergencyDashboardPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div>
-          <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+          <h3 className="text-base font-semibold text-gray-900  mb-4 flex items-center gap-2">
             <AlertTriangle className="w-4 h-4 text-emergency" />
             {t('Active Alerts')}
             {activeAlerts.length > 0 && (
@@ -148,8 +148,8 @@ export default function EmergencyDashboardPage() {
               <div className="w-16 h-16 rounded-2xl bg-[#00C896]/10 flex items-center justify-center mx-auto mb-3">
                 <CheckCircle2 className="w-8 h-8 text-[#00C896]" />
               </div>
-              <p className="text-sm font-medium text-gray-900 dark:text-white">{t('No Active Alerts')}</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{t('All emergencies are currently resolved.')}</p>
+              <p className="text-sm font-medium text-gray-900 ">{t('No Active Alerts')}</p>
+              <p className="text-xs text-gray-500  mt-1">{t('All emergencies are currently resolved.')}</p>
             </div>
           ) : (
             <div className="space-y-3">
@@ -168,17 +168,17 @@ export default function EmergencyDashboardPage() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between">
-                        <p className="text-sm font-bold text-gray-900 dark:text-white">{alert.patientName}</p>
+                        <p className="text-sm font-bold text-gray-900 ">{alert.patientName}</p>
                         <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-emergency text-white uppercase blink-alert">{t('Active')}</span>
                       </div>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{t('Triggered by')}: {alert.triggeredBy}</p>
-                      <div className="flex items-center gap-3 mt-2 text-xs text-gray-500 dark:text-gray-400">
+                      <p className="text-xs text-gray-500  mt-1">{t('Triggered by')}: {alert.triggeredBy}</p>
+                      <div className="flex items-center gap-3 mt-2 text-xs text-gray-500 ">
                         <span className="flex items-center gap-1"><Zap className="w-3 h-3 text-emergency" /> {t('Blood')}: {alert.bloodType}</span>
                         {alert.allergies.length > 0 && (
                           <span className="flex items-center gap-1"><ShieldAlert className="w-3 h-3 text-amber-500" /> {t('Allergies')}: {alert.allergies.join(', ')}</span>
                         )}
                       </div>
-                      <p className="text-[10px] text-gray-400 dark:text-gray-500 mt-2">{formatDateTime(alert.accessedAt)}</p>
+                      <p className="text-[10px] text-gray-400  mt-2">{formatDateTime(alert.accessedAt)}</p>
                     </div>
                     <ArrowRight className="w-4 h-4 text-emergency flex-shrink-0" />
                   </div>
@@ -189,7 +189,7 @@ export default function EmergencyDashboardPage() {
         </div>
 
         <div>
-          <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+          <h3 className="text-base font-semibold text-gray-900  mb-4 flex items-center gap-2">
             <Activity className="w-4 h-4 text-primary" />
             {t('Recent Activity')}
           </h3>
@@ -204,19 +204,19 @@ export default function EmergencyDashboardPage() {
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.04 }}
-                    className="flex items-center gap-3 py-2.5 border-b last:border-b-0 border-gray-50 dark:border-gray-800/30"
+                    className="flex items-center gap-3 py-2.5 border-b last:border-b-0 border-gray-50 "
                   >
                     <div className={cn(
                       'w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0',
-                      i < 3 ? 'bg-emergency/10 text-emergency' : 'bg-gray-100 dark:bg-gray-800/50 text-gray-400'
+                      i < 3 ? 'bg-emergency/10 text-emergency' : 'bg-gray-100  text-gray-400'
                     )}>
                       {i < 3 ? <Zap className="w-3.5 h-3.5" /> : <Clock className="w-3.5 h-3.5" />}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-xs text-gray-900 dark:text-white truncate">{item.action}</p>
-                      <p className="text-[10px] text-gray-500 dark:text-gray-400">{item.user}</p>
+                      <p className="text-xs text-gray-900  truncate">{item.action}</p>
+                      <p className="text-[10px] text-gray-500 ">{item.user}</p>
                     </div>
-                    <span className="text-[10px] text-gray-400 dark:text-gray-500 whitespace-nowrap">{item.time}</span>
+                    <span className="text-[10px] text-gray-400  whitespace-nowrap">{item.time}</span>
                   </motion.div>
                 ))}
               </div>

@@ -58,13 +58,13 @@ export default function PrescriptionsPage() {
     { key: 'medication', header: t('Medication'), sortable: true },
     {
       key: 'dosage', header: t('Dosage'), sortable: true,
-      render: (p: Prescription) => <span className="font-medium text-gray-900 dark:text-white">{p.dosage}</span>,
+      render: (p: Prescription) => <span className="font-medium text-gray-900 ">{p.dosage}</span>,
     },
     { key: 'frequency', header: t('Frequency'), sortable: true },
     { key: 'patientName', header: t('Patient'), sortable: true },
     {
       key: 'startDate', header: t('Start'), sortable: true,
-      render: (p: Prescription) => <span className="text-gray-500 dark:text-gray-400">{formatDate(p.startDate)}</span>,
+      render: (p: Prescription) => <span className="text-gray-500 ">{formatDate(p.startDate)}</span>,
     },
     {
       key: 'status', header: t('Status'), sortable: true,
@@ -78,8 +78,8 @@ export default function PrescriptionsPage() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('Prescriptions')}</h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('Manage your prescriptions')}</p>
+          <h2 className="text-2xl font-bold text-gray-900 ">{t('Prescriptions')}</h2>
+          <p className="text-sm text-gray-500  mt-1">{t('Manage your prescriptions')}</p>
         </div>
         <motion.button
           whileHover={{ scale: 1.02 }}
@@ -107,29 +107,29 @@ export default function PrescriptionsPage() {
       <Modal isOpen={createModal} onClose={() => setCreateModal(false)} title={t('New Prescription')} size="md"
         footer={
           <>
-            <button onClick={() => setCreateModal(false)} className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-all">{t('Cancel')}</button>
+            <button onClick={() => setCreateModal(false)} className="px-4 py-2 text-sm font-medium text-gray-600  hover:bg-gray-100  rounded-xl transition-all">{t('Cancel')}</button>
             <button onClick={handleCreate} disabled={!formData.medication.trim() || !formData.dosage.trim() || !formData.patientName.trim()} className="px-4 py-2 text-sm font-medium bg-secondary text-white rounded-xl hover:bg-secondary-dark transition-all shadow-lg shadow-secondary/20 disabled:opacity-50 disabled:cursor-not-allowed">{t('Save')}</button>
           </>
         }
       >
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('Patient Name *')}</label>
-            <input type="text" value={formData.patientName} onChange={e => setFormData(p => ({ ...p, patientName: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder={t('Patient name')} />
+            <label className="block text-sm font-medium text-gray-700  mb-1">{t('Patient Name *')}</label>
+            <input type="text" value={formData.patientName} onChange={e => setFormData(p => ({ ...p, patientName: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50  border border-gray-200  text-gray-900  placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder={t('Patient name')} />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('Medication *')}</label>
-              <input type="text" value={formData.medication} onChange={e => setFormData(p => ({ ...p, medication: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder={t('Medication name')} />
+              <label className="block text-sm font-medium text-gray-700  mb-1">{t('Medication *')}</label>
+              <input type="text" value={formData.medication} onChange={e => setFormData(p => ({ ...p, medication: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50  border border-gray-200  text-gray-900  placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder={t('Medication name')} />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('Dosage *')}</label>
-              <input type="text" value={formData.dosage} onChange={e => setFormData(p => ({ ...p, dosage: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder={t('e.g. 500mg')} />
+              <label className="block text-sm font-medium text-gray-700  mb-1">{t('Dosage *')}</label>
+              <input type="text" value={formData.dosage} onChange={e => setFormData(p => ({ ...p, dosage: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50  border border-gray-200  text-gray-900  placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder={t('e.g. 500mg')} />
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('Frequency')}</label>
-            <select value={formData.frequency} onChange={e => setFormData(p => ({ ...p, frequency: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
+            <label className="block text-sm font-medium text-gray-700  mb-1">{t('Frequency')}</label>
+            <select value={formData.frequency} onChange={e => setFormData(p => ({ ...p, frequency: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50  border border-gray-200  text-gray-900  focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
               <option value="">{t('Select')}</option>
               <option value="Once daily">{t('Once daily')}</option>
               <option value="Twice daily">{t('Twice daily')}</option>
@@ -140,12 +140,12 @@ export default function PrescriptionsPage() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('Start Date')}</label>
-              <input type="date" value={formData.startDate} onChange={e => setFormData(p => ({ ...p, startDate: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
+              <label className="block text-sm font-medium text-gray-700  mb-1">{t('Start Date')}</label>
+              <input type="date" value={formData.startDate} onChange={e => setFormData(p => ({ ...p, startDate: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50  border border-gray-200  text-gray-900  focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('End Date')}</label>
-              <input type="date" value={formData.endDate} onChange={e => setFormData(p => ({ ...p, endDate: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
+              <label className="block text-sm font-medium text-gray-700  mb-1">{t('End Date')}</label>
+              <input type="date" value={formData.endDate} onChange={e => setFormData(p => ({ ...p, endDate: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl bg-gray-50  border border-gray-200  text-gray-900  focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
             </div>
           </div>
         </div>

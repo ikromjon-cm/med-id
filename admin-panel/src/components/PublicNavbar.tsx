@@ -73,7 +73,7 @@ export default function PublicNavbar() {
                       'px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200',
                       isActive
                         ? 'text-primary bg-primary/5'
-                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100/50 dark:text-gray-300 dark:hover:text-white dark:hover:bg-white/5'
+                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100/50   '
                     )}
                   >
                     {link.label}
@@ -92,7 +92,7 @@ export default function PublicNavbar() {
               </Link>
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="lg:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-white/5"
+                className="lg:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100  "
               >
                 {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
@@ -111,7 +111,7 @@ export default function PublicNavbar() {
             className="fixed inset-0 top-16 lg:top-20 z-40 lg:hidden"
           >
             <div className="absolute inset-0 bg-black/20" onClick={() => setMobileOpen(false)} />
-            <div className="relative glass border-t border-gray-200/50 dark:border-white/10 shadow-xl max-h-[calc(100vh-4rem)] overflow-y-auto">
+            <div className="relative glass border-t border-gray-200/50  shadow-xl max-h-[calc(100vh-4rem)] overflow-y-auto">
               <div className="px-4 py-4 space-y-1">
                 {navLinks.map(link => {
                   const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
@@ -123,7 +123,7 @@ export default function PublicNavbar() {
                         'block px-4 py-3 rounded-xl text-sm font-medium transition-all',
                         isActive
                           ? 'text-primary bg-primary/5'
-                          : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-white dark:hover:bg-white/5'
+                          : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100   '
                       )}
                     >
                       {link.label}

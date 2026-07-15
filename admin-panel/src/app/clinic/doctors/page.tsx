@@ -42,8 +42,8 @@ export default function ClinicDoctorsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('Doctors')}</h2>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('Manage clinic doctors and schedules')}</p>
+        <h2 className="text-2xl font-bold text-gray-900 ">{t('Doctors')}</h2>
+        <p className="text-sm text-gray-500  mt-1">{t('Manage clinic doctors and schedules')}</p>
       </div>
 
       <div className="relative max-w-md">
@@ -53,7 +53,7 @@ export default function ClinicDoctorsPage() {
           placeholder={t('Search doctors...')}
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="w-full pl-10 pr-4 py-2.5 text-sm rounded-xl bg-white/70 dark:bg-gray-900/70 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+          className="w-full pl-10 pr-4 py-2.5 text-sm rounded-xl bg-white/70  border border-gray-200  text-gray-900  placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
         />
       </div>
 
@@ -62,14 +62,14 @@ export default function ClinicDoctorsPage() {
           {Array.from({ length: 6 }).map((_, i) => (
             <div key={i} className="glass-card rounded-2xl p-5 animate-pulse">
               <div className="flex items-start gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-gray-200 dark:bg-gray-700/50" />
+                <div className="w-14 h-14 rounded-2xl bg-gray-200 " />
                 <div className="flex-1 space-y-2">
-                  <div className="h-4 w-32 bg-gray-200 dark:bg-gray-700/50 rounded" />
-                  <div className="h-3 w-24 bg-gray-200 dark:bg-gray-700/50 rounded" />
+                  <div className="h-4 w-32 bg-gray-200  rounded" />
+                  <div className="h-3 w-24 bg-gray-200  rounded" />
                 </div>
               </div>
-              <div className="mt-4 pt-3 border-t border-gray-100 dark:border-gray-800/30">
-                <div className="h-3 w-40 bg-gray-200 dark:bg-gray-700/50 rounded" />
+              <div className="mt-4 pt-3 border-t border-gray-100 ">
+                <div className="h-3 w-40 bg-gray-200  rounded" />
               </div>
             </div>
           ))}

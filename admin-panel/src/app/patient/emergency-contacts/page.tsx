@@ -103,10 +103,10 @@ export default function EmergencyContactsPage() {
         {[1, 2, 3].map(i => (
           <div key={i} className="glass-card rounded-2xl p-5 animate-pulse">
             <div className="flex items-center gap-4">
-              <div className="h-12 w-12 rounded-xl bg-gray-200 dark:bg-gray-700/50" />
+              <div className="h-12 w-12 rounded-xl bg-gray-200 " />
               <div className="flex-1">
-                <div className="h-4 w-32 bg-gray-200 dark:bg-gray-700/50 rounded mb-2" />
-                <div className="h-3 w-24 bg-gray-200 dark:bg-gray-700/50 rounded" />
+                <div className="h-4 w-32 bg-gray-200  rounded mb-2" />
+                <div className="h-3 w-24 bg-gray-200  rounded" />
               </div>
             </div>
           </div>
@@ -123,8 +123,8 @@ export default function EmergencyContactsPage() {
         className="flex flex-col sm:flex-row sm:items-center justify-between gap-4"
       >
         <div>
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white">{t('Emergency Contacts')}</h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+          <h2 className="text-xl font-bold text-gray-900 ">{t('Emergency Contacts')}</h2>
+          <p className="text-sm text-gray-500 ">
             {contacts.length} {t('contact')} - {t('contacts - these people will be notified in an emergency')}
           </p>
         </div>
@@ -144,11 +144,11 @@ export default function EmergencyContactsPage() {
           className="glass-card rounded-2xl"
         >
           <div className="flex flex-col items-center justify-center py-16">
-            <div className="w-20 h-20 rounded-2xl bg-gray-100 dark:bg-gray-800/50 flex items-center justify-center mb-4">
-              <Heart className="w-10 h-10 text-gray-400 dark:text-gray-500" />
+            <div className="w-20 h-20 rounded-2xl bg-gray-100  flex items-center justify-center mb-4">
+              <Heart className="w-10 h-10 text-gray-400 " />
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">{t('No emergency contacts')}</h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 text-center max-w-sm mb-6">
+            <h3 className="text-lg font-semibold text-gray-900  mb-1">{t('No emergency contacts')}</h3>
+            <p className="text-sm text-gray-500  text-center max-w-sm mb-6">
               {t('Add at least one emergency contact so that we can reach your loved ones in case of an emergency.')}
             </p>
             <button
@@ -177,13 +177,13 @@ export default function EmergencyContactsPage() {
                   'w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0',
                   contact.isPrimary
                     ? 'bg-gradient-to-br from-emergency to-rose-500 text-white shadow-md shadow-emergency/20'
-                    : 'bg-gray-100 dark:bg-gray-800/50 text-gray-500 dark:text-gray-400'
+                    : 'bg-gray-100  text-gray-500 '
                 )}>
                   <User className="w-6 h-6" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <h3 className="text-base font-semibold text-gray-900 dark:text-white">
+                    <h3 className="text-base font-semibold text-gray-900 ">
                       {contact.name}
                     </h3>
                     {contact.isPrimary && (
@@ -194,15 +194,15 @@ export default function EmergencyContactsPage() {
                     )}
                   </div>
                   <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1.5">
-                    <span className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400">
+                    <span className="flex items-center gap-1.5 text-sm text-gray-500 ">
                       <Phone className="w-3.5 h-3.5" />
                       {contact.phone}
                     </span>
-                    <span className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400">
+                    <span className="flex items-center gap-1.5 text-sm text-gray-500 ">
                       <Mail className="w-3.5 h-3.5" />
                       {contact.email || t('No email')}
                     </span>
-                    <span className="flex items-center gap-1.5 text-sm text-gray-400 dark:text-gray-500">
+                    <span className="flex items-center gap-1.5 text-sm text-gray-400 ">
                       <Shield className="w-3.5 h-3.5" />
                       {contact.relationship}
                     </span>
@@ -212,7 +212,7 @@ export default function EmergencyContactsPage() {
                   {!contact.isPrimary && (
                     <button
                       onClick={() => handleMarkPrimary(contact.id)}
-                      className="px-3 py-1.5 rounded-lg text-xs font-medium text-amber-600 bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 hover:bg-amber-100 dark:hover:bg-amber-500/20 transition-colors"
+                      className="px-3 py-1.5 rounded-lg text-xs font-medium text-amber-600 bg-amber-50  border border-amber-200  hover:bg-amber-100  transition-colors"
                     >
                       <Star className="w-3 h-3 inline mr-1" />
                       {t('Set Primary')}
@@ -251,71 +251,71 @@ export default function EmergencyContactsPage() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-lg bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800 p-6"
+              className="relative w-full max-w-lg bg-white  rounded-2xl shadow-2xl border border-gray-200  p-6"
             >
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                <h3 className="text-lg font-semibold text-gray-900 ">
                   {editId ? t('Edit Contact') : t('Add Emergency Contact')}
                 </h3>
                 <button
                   onClick={closeModal}
-                  className="w-8 h-8 rounded-xl flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  className="w-8 h-8 rounded-xl flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100  transition-colors"
                 >
                   <X className="w-4 h-4" />
                 </button>
               </div>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{t('Full Name')}</label>
+                  <label className="block text-sm font-medium text-gray-700  mb-1.5">{t('Full Name')}</label>
                   <input
                     type="text"
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     className={cn(
-                      'w-full px-4 py-2.5 rounded-xl text-sm bg-white/80 dark:bg-gray-800/50 border text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary',
-                      errors.name ? 'border-emergency focus:ring-emergency/20 focus:border-emergency' : 'border-gray-200 dark:border-gray-700/50'
+                      'w-full px-4 py-2.5 rounded-xl text-sm bg-white/80  border text-gray-900  placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary',
+                      errors.name ? 'border-emergency focus:ring-emergency/20 focus:border-emergency' : 'border-gray-200 '
                     )}
                     placeholder={t('Enter full name')}
                   />
                   {errors.name && <p className="text-xs text-emergency mt-1">{errors.name}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{t('Relationship')}</label>
+                  <label className="block text-sm font-medium text-gray-700  mb-1.5">{t('Relationship')}</label>
                   <input
                     type="text"
                     value={form.relationship}
                     onChange={(e) => setForm({ ...form, relationship: e.target.value })}
                     className={cn(
-                      'w-full px-4 py-2.5 rounded-xl text-sm bg-white/80 dark:bg-gray-800/50 border text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary',
-                      errors.relationship ? 'border-emergency focus:ring-emergency/20 focus:border-emergency' : 'border-gray-200 dark:border-gray-700/50'
+                      'w-full px-4 py-2.5 rounded-xl text-sm bg-white/80  border text-gray-900  placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary',
+                      errors.relationship ? 'border-emergency focus:ring-emergency/20 focus:border-emergency' : 'border-gray-200 '
                     )}
                     placeholder={t('e.g. Spouse, Brother, Parent')}
                   />
                   {errors.relationship && <p className="text-xs text-emergency mt-1">{errors.relationship}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{t('Phone Number')}</label>
+                  <label className="block text-sm font-medium text-gray-700  mb-1.5">{t('Phone Number')}</label>
                   <input
                     type="tel"
                     value={form.phone}
                     onChange={(e) => setForm({ ...form, phone: e.target.value })}
                     className={cn(
-                      'w-full px-4 py-2.5 rounded-xl text-sm bg-white/80 dark:bg-gray-800/50 border text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary',
-                      errors.phone ? 'border-emergency focus:ring-emergency/20 focus:border-emergency' : 'border-gray-200 dark:border-gray-700/50'
+                      'w-full px-4 py-2.5 rounded-xl text-sm bg-white/80  border text-gray-900  placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary',
+                      errors.phone ? 'border-emergency focus:ring-emergency/20 focus:border-emergency' : 'border-gray-200 '
                     )}
                     placeholder={t('+1 (555) 000-0000')}
                   />
                   {errors.phone && <p className="text-xs text-emergency mt-1">{errors.phone}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{t('Email (optional)')}</label>
+                  <label className="block text-sm font-medium text-gray-700  mb-1.5">{t('Email (optional)')}</label>
                   <input
                     type="email"
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     className={cn(
-                      'w-full px-4 py-2.5 rounded-xl text-sm bg-white/80 dark:bg-gray-800/50 border text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary',
-                      errors.email ? 'border-emergency focus:ring-emergency/20 focus:border-emergency' : 'border-gray-200 dark:border-gray-700/50'
+                      'w-full px-4 py-2.5 rounded-xl text-sm bg-white/80  border text-gray-900  placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary',
+                      errors.email ? 'border-emergency focus:ring-emergency/20 focus:border-emergency' : 'border-gray-200 '
                     )}
                     placeholder={t('email@example.com')}
                   />
@@ -328,13 +328,13 @@ export default function EmergencyContactsPage() {
                     onChange={(e) => setForm({ ...form, isPrimary: e.target.checked })}
                     className="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary"
                   />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">{t('Set as primary emergency contact')}</span>
+                  <span className="text-sm text-gray-700 ">{t('Set as primary emergency contact')}</span>
                 </label>
               </div>
               <div className="flex gap-3 mt-6">
                 <button
                   onClick={closeModal}
-                  className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                  className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium border border-gray-200  text-gray-700  hover:bg-gray-50  transition-colors"
                 >
                   {t('Cancel')}
                 </button>
@@ -364,19 +364,19 @@ export default function EmergencyContactsPage() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-md bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800 p-6"
+              className="relative w-full max-w-md bg-white  rounded-2xl shadow-2xl border border-gray-200  p-6"
             >
               <div className="w-14 h-14 rounded-2xl bg-emergency/10 flex items-center justify-center mx-auto mb-4">
                 <AlertTriangle className="w-7 h-7 text-emergency" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white text-center mb-2">{t('Delete Contact')}</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400 text-center mb-6">
+              <h3 className="text-lg font-semibold text-gray-900  text-center mb-2">{t('Delete Contact')}</h3>
+              <p className="text-sm text-gray-500  text-center mb-6">
                 {t('Are you sure you want to remove this emergency contact?')}
               </p>
               <div className="flex gap-3">
                 <button
                   onClick={() => setDeleteId(null)}
-                  className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                  className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium border border-gray-200  text-gray-700  hover:bg-gray-50  transition-colors"
                 >
                   {t('Cancel')}
                 </button>

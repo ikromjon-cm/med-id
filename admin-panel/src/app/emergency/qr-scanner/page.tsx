@@ -40,8 +40,8 @@ export default function QRScannerPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('QR Scanner')}</h2>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{t('Scan patient MED-ID QR code for emergency access')}</p>
+        <h2 className="text-2xl font-bold text-gray-900 ">{t('QR Scanner')}</h2>
+        <p className="text-sm text-gray-500  mt-1">{t('Scan patient MED-ID QR code for emergency access')}</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -50,7 +50,7 @@ export default function QRScannerPage() {
           animate={{ opacity: 1, y: 0 }}
           className="glass-card rounded-2xl p-8 flex flex-col items-center justify-center"
         >
-          <div className="relative w-64 h-64 rounded-2xl bg-gray-100 dark:bg-gray-800/50 flex items-center justify-center mb-6 overflow-hidden">
+          <div className="relative w-64 h-64 rounded-2xl bg-gray-100  flex items-center justify-center mb-6 overflow-hidden">
             <div className="absolute inset-0 border-2 border-dashed border-primary/30 rounded-2xl" />
             <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-primary rounded-tl-2xl" />
             <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-primary rounded-tr-2xl" />
@@ -60,7 +60,7 @@ export default function QRScannerPage() {
               <Camera className="w-16 h-16 text-primary/30" />
             </div>
           </div>
-          <p className="text-sm text-gray-500 dark:text-gray-400 text-center">{t('Position the QR code within the frame to scan. The camera will auto-detect MED-ID codes.')}</p>
+          <p className="text-sm text-gray-500  text-center">{t('Position the QR code within the frame to scan. The camera will auto-detect MED-ID codes.')}</p>
           <div className="mt-4 flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-xs font-medium">
             <div className="w-2 h-2 rounded-full bg-primary pulse-dot" />
             {t('Camera Ready')}
@@ -73,8 +73,8 @@ export default function QRScannerPage() {
           transition={{ delay: 0.1 }}
           className="glass-card rounded-2xl p-6"
         >
-          <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-2">{t('Manual Entry')}</h3>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">{t("Enter the patient's MED-ID number manually")}</p>
+          <h3 className="text-base font-semibold text-gray-900  mb-2">{t('Manual Entry')}</h3>
+          <p className="text-sm text-gray-500  mb-6">{t("Enter the patient's MED-ID number manually")}</p>
 
           <div className="flex items-center gap-3 mb-6">
             <div className="relative flex-1">
@@ -85,7 +85,7 @@ export default function QRScannerPage() {
                 value={manualId}
                 onChange={e => setManualId(e.target.value)}
                 onKeyDown={e => e.key === 'Enter' && handleLookup()}
-                className="w-full pl-10 pr-4 py-3 text-sm rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                className="w-full pl-10 pr-4 py-3 text-sm rounded-xl bg-gray-50  border border-gray-200  text-gray-900  placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
               />
             </div>
             <motion.button
@@ -122,8 +122,8 @@ export default function QRScannerPage() {
                   <User className="w-7 h-7 text-emergency" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-base font-bold text-gray-900 dark:text-white">{patient.name}</p>
-                  <div className="flex items-center gap-3 mt-1 text-xs text-gray-500 dark:text-gray-400">
+                  <p className="text-base font-bold text-gray-900 ">{patient.name}</p>
+                  <div className="flex items-center gap-3 mt-1 text-xs text-gray-500 ">
                     <span>{patient.age} {t('yrs')}, {patient.gender}</span>
                     <span className="flex items-center gap-1"><Zap className="w-3 h-3 text-emergency" />{patient.bloodType}</span>
                     <span>{patient.id}</span>
